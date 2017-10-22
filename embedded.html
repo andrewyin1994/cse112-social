@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>embedded content</title>
+    <meta charset="utf-8">
+
+</head>
+<body>
+    <img src="http://assets.academy.com/mgen/75/10644675.jpg" alt="soccer ball" height="100">
+    <img src="not_available" alt="not available">
+
+    <p>inline <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/240/facebook/65/soccer-ball_26bd.png" alt="soccer ball" height="12"> time</p>
+
+    <img src="https://www.thesun.co.uk/wp-content/uploads/2017/08/nintchdbpict0003469611372.jpg?strip=all&w=960" height="200" usemap="#jersey">
+    <map name="jersey">
+        <area shape="poly" coords="78,124,124,10,189,29,173,93,168,132,136,151,110,130"
+         href="jersey.jpg" alt="gg">
+    </map>
+    <img src="http://soccerpro.scene7.com/is/image/soccerpro/main/776846_481mes_nike_lionel_messi_barca_match_home_jsy_01.jpg" height="200">
+
+    <img src="soccer_ball.png" height="420">
+    
+    <iframe src="https://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element">
+        <p>doesn't work soccer</p>
+    </iframe>
+    <!--gg
+    <embed src="soccer_headbutt.gif">
+    <object data="soccer_headbutt.gif" height="120" width="210"></object>
+    -->
+    <object data="soccer_headbutt.gif">
+        <param name="fake_attribute" value="false">
+    </object>
+
+    <video height="180" width="320" controls>
+        <source src="soccervid.mp4">
+    </video>
+
+    <audio controls> 
+        <source src="gol_espanol.mp3">
+    </audio>
+
+    <!--track, come back to later-->
+    <video height="180" width="320" controls>
+        <source src="soccervid.mp4">
+            <track kind=subtitles src=headbutt.vtt srclang=en label="eng">
+    </video>
+</body>
+</html>
