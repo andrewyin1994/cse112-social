@@ -1,0 +1,29 @@
+body {
+  font-family: 'Droid Sans', sans-serif;
+  background-color: #DD3D22;
+  color: #fafafa;
+}
+
+a {
+  color: #fafafa;
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+#team-info p {
+  margin: 0;
+}
+
+/* this will clear the floats after the columns */
+#team-info::after {
+  content: "";
+  display: table;
+  clear: both;
+}
