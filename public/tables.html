@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        tables
+    </title>
+</head>
+<body>
+    <header>
+        <h1>Table Borders</h1>
+    </header>
+    <table border="1">
+        <tr> <td>Brazil</td> <td>Italy</td> <td>Germany</td> </tr>
+        <tr> <td>Urugua</td> <td>Argentina</td> <td>Mexico</td> </tr>
+    </table><br>
+
+    <header>
+        <h1>Description Outside Caption</h1>
+    </header>
+    <p>Players on the USMNT organized by position.</p>
+    <table>
+        <caption>USMNT Roster</caption>
+        <thead>
+            <tr>
+                <th>Forward</th>
+                <th>Defender</th>
+                <th>Midfielder</th>
+                <th>Goalkeeper</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>Juan Agudelo</td>
+            <td>Kellyn Acosta</td>
+            <td>Paul Arriola</td>
+            <td>Brad Guzan</td>                
+        </tr>
+    </table>
+
+    <header>
+        <h1>Description Inside Caption</h1>
+    </header>
+    <table>
+        <caption>
+            <p>Players on the USMNT organized by position.</p>                    
+            <strong>USMNT Roster</strong>
+        </caption>
+        <thead>
+            <tr>
+                <th>Forward</th>
+                <th>Defender</th>
+                <th>Midfielder</th>
+                <th>Goalkeeper</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>Juan Agudelo</td>
+            <td>Kellyn Acosta</td>
+            <td>Paul Arriola</td>
+            <td>Brad Guzan</td>                
+        </tr>
+    </table>
+
+    <header>
+        <h1>Description in Figure</h1>
+    </header>
+    <figure>
+        <figcaption>
+            <strong>USMNT Roster</strong>
+        </figcaption>
+        <p>Players on the USMNT organized by position</p>            
+        
+        <table>
+            <caption>USMNT Roster</caption>
+            <thead>
+                <tr>
+                    <th>Forward</th>
+                    <th>Defender</th>
+                    <th>Midfielder</th>
+                    <th>Goalkeeper</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Juan Agudelo</td>
+                <td>Kellyn Acosta</td>
+                <td>Paul Arriola</td>
+                <td>Brad Guzan</td>                
+            </tr>
+        </table>
+    </figure>
+
+    <header>
+        <h1>Description in Figcaption</h1>
+    </header>
+    <figure>
+        <figcaption>
+            <strong>USMNT Roster</strong>
+            <p>Players on the USMNT organized by position</p>                
+        </figcaption>
+
+        <table>
+            <caption>USMNT Roster</caption>
+            <thead>
+                <tr>
+                    <th>Forward</th>
+                    <th>Defender</th>
+                    <th>Midfielder</th>
+                    <th>Goalkeeper</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Juan Agudelo</td>
+                <td>Kellyn Acosta</td>
+                <td>Paul Arriola</td>
+                <td>Brad Guzan</td>                
+            </tr>
+        </table>
+    </figure>
+
+    <header>
+        <h1>Colgroups and Cols</h1>
+    </header>
+    <table>
+        <caption>USMNT Roster</caption>
+        <!-- span attribute indicates number of columns -->
+        <colgroup>
+            <col style="background-color:lightblue">
+            <col style="background-color:lightcoral">
+            <col style="background-color:lightgreen">
+            <col style="background-color:lightgray">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Forward</th>
+                <th>Defender</th>
+                <th>Midfielder</th>
+                <th>Goalkeeper</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>Juan Agudelo</td>
+            <td>Kellyn Acosta</td>
+            <td>Paul Arriola</td>
+            <td>Brad Guzan</td>                
+        </tr>
+    </table>
+
+</body>
+</html>
