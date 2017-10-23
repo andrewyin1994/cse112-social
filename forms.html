@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Forms
+    </title>
+</head>
+<body>
+    <header>
+        <h1>
+            New Users
+        </h1>
+    </header>
+    <form>
+        <fieldset>
+            <label for="firstname">First Name</label><br>
+            <input type="text" name="firstname" id="firstname" required><br>
+            <label for="lastname">Last Name</label><br>
+            <input type="text" name="lastname" id="lastname" required><br>
+            <label for="playernumber">Player Number</label><br>
+            <input type="number" name="playernumber" id="playernumber"><br>
+            <label for="dob">Date of Birth</label><br>
+            <input type="date" name="dob" id="dob"><br>
+            <label for="email">Email Address</label><br>
+            <input type="email" id="email" required placeholder="email@email.com"><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" required minlength="8" placeholder="password"><br>
+
+            <input type="radio" name="user" id="player" value="Player">
+            <label for="player">Player</label>
+            <input type="radio" name="user" id="coach" value="Coach">
+            <label for="coach">Coach</label>
+            <input type="radio" name="user" id="other" value="Other">
+            <label for="other">Other</label><br>
+
+            <label>
+                Sex:<br>
+                <input name=sex list=sexes>
+                <datalist id=sexes>
+                    <option value="Female">
+                    <option value="Male">
+                </datalist>
+            </label>
+        </fieldset>
+        <input type="submit" value="Submit">
+        <input type="reset" value="reset">
+    </form>
+    <a href="/forms2.html">Existing Users</a>
+
+
+</body>
+</html>

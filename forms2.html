@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Forms2
+    </title>
+</head>
+<body>
+    <header>
+        <h1>
+            Existing Users
+        </h1>
+    </header>
+    <form>
+        <fieldset>
+            <label>Email<br>
+                <input type="email" required placeholder="email@email.com"><br>
+            </label>
+            <label>Password<br>
+                <input type="password" required minlength="8" placeholder="password"><br>
+            </label>
+            
+            <input type="checkbox" name="saveemail" id="saveemail" >
+            <label for="saveemail">Remember Email?</label><br>
+            <input type="checkbox" name="savepw" id="savepw" value="savepw" >
+            <label for="savepw">Remember Password?</label><br>
+        </fieldset>
+        <input type="submit" value="Submit">
+        <input type="reset" value="reset">
+    </form>
+    <a href="/forms.html">New Users</a>
+</body>
+</html>
