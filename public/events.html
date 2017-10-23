@@ -4,24 +4,144 @@
     <title>
         Event Attributes
     </title>
+    <style>
+        div {
+            border: 1px solid black;
+            width: 200px;
+            height: 100px;
+            overflow: scroll;
+        }
+    </style>
 </head>
-<body>
-    <input type="text" id="in" onblur="onLeave()" placeholder="onblur">
+<body onload="onLoad()">
 
-    <select id="select" onchange="changeText()">
+    <input type="text" id="le" onblur="onLeave()" placeholder="onblur">
 
+    <select id="select" onchange="onChange()">
+        <option value=""> </option>
+        <option value="Messi">Messi</option>
+        <option value="Ronaldo">Ronaldo</option>
     </select>
-    <p id="para"></p>
+    <p id="p1">Who is the best soccer player?</p>
+
+    <button onclick="onClick()">button</button>
+    <p id="p2"> </p>
+
+    <p ondblclick="onDoubleClick()" id="dbl">Double click this</p>
+
+    <img src="soccerball.png" onerror="onError()">
+
+    <input type="text" id="fo" onfocus="onFocus()" placeholder="onfocus">
+    <input type="text" id="in" oninput="onInput()" placeholder="oninput">
+    <input type="text" id="se" onfocus="onSelect()" placeholder="onselect">
+    
+    <form onreset="onReset()" onsubmit="onSubmit()">
+    <input type="text" id="fo" oninvalid="onInvalid()" placeholder="oninvalid" required>
+    <input type="submit"><input type="reset">
+    </form>
+    
+    <div onscroll="onScroll()">Here is some text to scroll
+        Here is some text to scroll
+        Here is some text to scroll
+        Here is some text to scroll
+        Here is some text to scroll</div>
+
+    <input type="text" onkeydown="onKeyDown()">
+    <input type="text" onkeypress="onKeyPress()">
+    <input type="text" onkeyup="onKeyUp()">
+
+    <p id="md" onmousedown="mouseDown()" onmouseup="mouseUp()" onmouseenter="mouseEnter()"
+        onmouseleave="mouseLeave()" onmousemove="mouseMove()" onmouseout=mouseOut()
+        onmouseover="mouseOver()" onmousewheel="mouseWheel()">MOUSE TEXT</p>
 
     <script>
     function onLeave() {
-        var x = document.getElementById("in");
-        x.value = "¯\\_(ツ)_/¯"
+        console.log("onLeave fired");
     }
 
-    function changeText() {
-
+    function onChange() {
+        console.log("onChange fired");
     }
-    </script>
+
+    function onClick() {
+        console.log("onClick fired");
+    }
+    function onDoubleClick() {
+        console.log("onDoubleClick fired");
+    }
+
+    function onError() {
+        console.log("onError fired");
+    }
+
+    function onFocus() {
+        console.log("onFocus fired");
+    }
+
+    function onInput(){
+        console.log("onInput fired");
+    }
+
+    function onInvalid() {
+        console.log("onInvalid fired");
+    }
+
+    function onKeyDown() {
+        console.log("onKeyDown fired");
+    }
+    function onKeyPress() {
+        console.log("onKeyPress fired");
+    }
+    function onKeyUp() {
+        console.log("onKeyUp fired");
+    }
+
+    function onLoad() {
+        console.log("onLoad fired");
+    }
+
+    function mouseDown() {
+        console.log("mouseDown fired");
+    }
+    function mouseEnter() {
+        console.log("mouseEnter fired");
+    }
+    function mouseLeave() {
+        console.log("mouseLeave fired");
+    }
+    function mouseMove() {
+        console.log("mouseMove fired");
+    }
+    function mouseOut() {
+        console.log("mouseOut fired");
+    }
+    function mouseOver() {
+        console.log("mouseOver fired");
+    }
+    function mouseWheel() {
+        console.log("mouseWheel fired");
+    }
+
+    function onReset() {
+        console.log("onReset fired");
+    }
+    function onScroll() {
+        console.log("onScroll fired");
+    }
+    function onSelect() {
+        console.log("onSelect fired");
+    }
+    function onSubmit() {
+        console.log("onSubmit fired");
+    }
+
+</script>
+
+    <p>
+        <a href="https://validator.w3.org/check?uri=referer"><img
+            src="http://www.w3.org/Icons/valid-xhtml10"
+            alt="Valid XHTML 1.0!" height="31" width="88" /></a>
+    </p>
+  
 </body>
 </html>
