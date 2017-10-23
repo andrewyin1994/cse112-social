@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Event Attributes
+    </title>
+</head>
+<body>
+    <input type="text" id="in" onblur="onLeave()" placeholder="onblur">
+
+    <select id="select" onchange="changeText()">
+
+    </select>
+    <p id="para"></p>
+
+    <script>
+    function onLeave() {
+        var x = document.getElementById("in");
+        x.value = "¯\\_(ツ)_/¯"
+    }
+
+    function changeText() {
+
+    }
+    </script>
+</body>
+</html>
