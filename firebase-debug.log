@@ -1,0 +1,28 @@
+[debug] [2017-10-23T03:20:35.971Z] ----------------------------------------------------------------------
+[debug] [2017-10-23T03:20:35.976Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Aspidiske\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2017-10-23T03:20:35.977Z] CLI Version:   3.13.1
+[debug] [2017-10-23T03:20:35.977Z] Platform:      win32
+[debug] [2017-10-23T03:20:35.977Z] Node Version:  v6.11.4
+[debug] [2017-10-23T03:20:35.978Z] Time:          Sun Oct 22 2017 20:20:35 GMT-0700 (Pacific Daylight Time)
+[debug] [2017-10-23T03:20:35.978Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-23T03:20:35.989Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-23T03:20:35.989Z] > authorizing via signed-in user
+[debug] [2017-10-23T03:20:35.991Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/cse134gahuyi  
+ Sun Oct 22 2017 20:20:35 GMT-0700 (Pacific Daylight Time)
+[debug] [2017-10-23T03:20:36.993Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-23T03:20:36.993Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/cse134gahuyi/tokens  
+ Sun Oct 22 2017 20:20:36 GMT-0700 (Pacific Daylight Time)
+[debug] [2017-10-23T03:20:37.603Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Aspidiske\Documents\cse134b\cse134b_yay'...
+[info] 
+[debug] [2017-10-23T03:20:37.618Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/cse134gahuyi  
+ Sun Oct 22 2017 20:20:37 GMT-0700 (Pacific Daylight Time)
+[debug] [2017-10-23T03:20:38.165Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-23T03:20:38.165Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/741715887321/clients/_:getWebAppConfig  
+ Sun Oct 22 2017 20:20:38 GMT-0700 (Pacific Daylight Time)
+[debug] [2017-10-23T03:20:38.618Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+
