@@ -1,0 +1,15 @@
+[debug] [2017-10-23T02:58:16.690Z] ----------------------------------------------------------------------
+[debug] [2017-10-23T02:58:16.690Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Aspidiske\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2017-10-23T02:58:16.690Z] CLI Version:   3.13.1
+[debug] [2017-10-23T02:58:16.690Z] Platform:      win32
+[debug] [2017-10-23T02:58:16.690Z] Node Version:  v6.11.4
+[debug] [2017-10-23T02:58:16.690Z] Time:          Sun Oct 22 2017 19:58:16 GMT-0700 (Pacific Daylight Time)
+[debug] [2017-10-23T02:58:16.690Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-23T02:58:16.690Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-23T02:58:16.690Z] > authorizing via signed-in user
+[debug] [2017-10-23T02:58:16.690Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/cse134gahuyi  
+ Sun Oct 22 2017 19:58:16 GMT-0700 (Pacific Daylight Time)
+[debug] [2017-10-23T02:58:17.488Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-23T02:58:17.503Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/cse134gahuyi/tokens  
+ Sun Oct 22 2017 19:58:17 GMT-0700 (Pacific Daylight Time)
