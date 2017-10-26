@@ -41,22 +41,25 @@ main {
     border-image: url(border.gif) 100 100 100 100 repeat;
 }
 header {
+    width: 200px;
+    height: 100px;
+    background-color: magenta;
+    border-radius: 50%;
+    box-shadow: 5px 5px 3px #000000;
+    text-align: center;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
 }
 header .logo {
     font-family: 'Monoton', cursive;
     color: black;
-    font-size: 7rem;
+    font-size: 4rem;
     text-decoration: none;
-    /* background for css */
-      width: 200px;
-      height: 100px;
-      background: magenta;
-      border-radius: 50%;
+
 }
 header .fun {
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+
   font-size: 100px;
   color: white;
   text-shadow: -2px 0 red, 0 2px red, 2px 0 red, 0 -2px red;
