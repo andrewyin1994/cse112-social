@@ -1,28 +1,70 @@
 /* Hint: use relative measurements you'll find them useful! */
 /* I may have removed a selector or two */
 
-@import url();  /* Set this for Monton a Google Font ...figure out their syntax */
+@import url('https://fonts.googleapis.com/css?family=Monoton');  /* Set this for Monton a Google Font ...figure out their syntax */
 
 * {
     box-sizing: border-box;
 }
 
 body {
+    /* turned it into a flex container */
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     background-image: url(background.png);
-    background-size: 100% 70%; /* change this, maybe look at example 10 */
-    background-position: center;
+    /* adjust this */
+    /*background-size: 100% 70%; /* change this, maybe look at example 10 */
+    /*background-position: center;
     /*background-repeat: repeat-y; /* image will repeat vertically */
     background-attachment: fixed; /* image will stay in place as you scroll */
-    
+
 }
 main {
-    background-color:white;
+    /* nested flex container */
+    display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background:white;
     /* -moz-border-image: url(border.gif) 50 50 50 50 repeat;
     -webkit-border-image: url(border.gif) 50 50 50 50 repeat; */
     border: 10rem solid transparent;
-    border-image: url(border.gif) 100 100 100 100 repeat; 
+    border-image: url(border.gif) 100 100 100 100 repeat;
 }
 header {
+    width: 200px;
+    height: 100px;
+    background-color: magenta;
+    border-radius: 50%;
+    box-shadow: 5px 5px 3px #000000;
+    text-align: center;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+header .logo {
+    font-family: 'Monoton', cursive;
+    color: black;
+    font-size: 4rem;
+    text-decoration: none;
+
+}
+header .fun {
+
+  font-size: 100px;
+  color: white;
+  text-shadow: -2px 0 red, 0 2px red, 2px 0 red, 0 -2px red;
+  text-transform: uppercase;
+  text-align: left;
 }
 section {
 	/* color rgb(243,234,95) is used */
