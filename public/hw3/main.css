@@ -8,13 +8,19 @@
 }
 
 body {
-  background-image: url(background.png);
-  background-size: 100% 70%; /* change this, maybe look at example 10 */
-  background-position: center;
-  /*background-repeat: repeat-y; /* image will repeat vertically */
-  background-attachment: fixed; /* image will stay in place as you scroll */
+    background-image: url(background.png);
+    background-size: 100% 70%; /* change this, maybe look at example 10 */
+    background-position: center;
+    /*background-repeat: repeat-y; /* image will repeat vertically */
+    background-attachment: fixed; /* image will stay in place as you scroll */
+    
 }
 main {
+    background:white;
+    /* -moz-border-image: url(border.gif) 50 50 50 50 repeat;
+    -webkit-border-image: url(border.gif) 50 50 50 50 repeat; */
+    border: 10rem solid transparent;
+    border-image: url(border.gif) 100 100 100 100 repeat; 
 }
 header {
 }
