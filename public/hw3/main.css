@@ -16,7 +16,7 @@ body {
     
 }
 main {
-    background:white;
+    background-color:white;
     /* -moz-border-image: url(border.gif) 50 50 50 50 repeat;
     -webkit-border-image: url(border.gif) 50 50 50 50 repeat; */
     border: 10rem solid transparent;
