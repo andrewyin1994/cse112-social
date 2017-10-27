@@ -8,20 +8,12 @@
 }
 
 body {
-    /* turned it into a flex container */
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
     background-image: url(background.png);
     /* adjust this */
     /*background-size: 100% 70%; /* change this, maybe look at example 10 */
     /*background-position: center;
     /*background-repeat: repeat-y; /* image will repeat vertically */
-    background-attachment: fixed; /* image will stay in place as you scroll */
-
+    background-attachment: fixed; /* image will stay in place as you scroll*/
 }
 main {
     /* nested flex container */
@@ -34,11 +26,13 @@ main {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    justify-content: center;
     background:white;
+    margin-left: auto;
     /* -moz-border-image: url(border.gif) 50 50 50 50 repeat;
     -webkit-border-image: url(border.gif) 50 50 50 50 repeat; */
-    border: 10rem solid transparent;
-    border-image: url(border.gif) 100 100 100 100 repeat;
+    border: 3rem solid transparent;
+    border-image: url(border.gif)  50 50 50 50 repeat;
 }
 header {
     -webkit-align-self: stretch;
@@ -210,3 +204,6 @@ footer div span:after {
 /* Solution given should
    be below 250 lines, the solution we had was
    below 200 easily formatted */
+@media only screen and (max-width: 720px) {
+
+}
