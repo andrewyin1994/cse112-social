@@ -41,9 +41,9 @@ main {
     border-image: url(border.gif) 100 100 100 100 repeat;
 }
 header {
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+    -webkit-align-self: stretch;
+	-ms-flex-item-align: stretch;
+	align-self: stretch;
 }
 header .wrapper {
     width: 10rem;
@@ -63,6 +63,7 @@ header .logo {
 }
 header .fun {
   font-size: 5rem;
+  font-family: Courier;
   color: white;
   /*fix shadow on this */
   text-shadow: -2px 0 red, 0 2px red, 2px 0 red, 0 -2px red;
@@ -77,13 +78,14 @@ section {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+    text-align: center;
 }
 section > div {
     /* font is 'Comic Sans MS, text is automatically adjusted to lowercase do not mod the HTML */
     font-family: 'Comic Sans MS';
     color: white;
     text-transform: lowercase;
-
+    font-size: 2rem;
 }
 section > div:nth-child(2){
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
