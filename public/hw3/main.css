@@ -8,20 +8,12 @@
 }
 
 body {
-    /* turned it into a flex container */
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
     background-image: url(background.png);
     /* adjust this */
     /*background-size: 100% 70%; /* change this, maybe look at example 10 */
     /*background-position: center;
     /*background-repeat: repeat-y; /* image will repeat vertically */
-    background-attachment: fixed; /* image will stay in place as you scroll */
-
+    background-attachment: fixed; /* image will stay in place as you scroll*/
 }
 main {
     /* nested flex container */
@@ -34,16 +26,18 @@ main {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    justify-content: center;
     background:white;
+    margin-left: auto;
     /* -moz-border-image: url(border.gif) 50 50 50 50 repeat;
     -webkit-border-image: url(border.gif) 50 50 50 50 repeat; */
-    border: 10rem solid transparent;
-    border-image: url(border.gif) 100 100 100 100 repeat;
+    border: 3rem solid transparent;
+    border-image: url(border.gif)  50 50 50 50 repeat;
 }
 header {
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+    -webkit-align-self: stretch;
+	-ms-flex-item-align: stretch;
+	align-self: stretch;
 }
 header .wrapper {
     width: 10rem;
@@ -63,6 +57,7 @@ header .logo {
 }
 header .fun {
   font-size: 5rem;
+  font-family: Courier;
   color: white;
   /*fix shadow on this */
   text-shadow: -2px 0 red, 0 2px red, 2px 0 red, 0 -2px red;
@@ -77,13 +72,14 @@ section {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+    text-align: center;
 }
 section > div {
     /* font is 'Comic Sans MS, text is automatically adjusted to lowercase do not mod the HTML */
     font-family: 'Comic Sans MS';
     color: white;
     text-transform: lowercase;
-
+    font-size: 2rem;
 }
 section > div:nth-child(2){
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
@@ -155,9 +151,47 @@ svg{
     border-radius: .25rem;
 }
 footer {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     background-color: #fd4fc2;
     width: 100%;
     height: 100%;
+}
+footer > span {
+    font-family: 'Zapf Chancery', cursive;
+}
+footer div img:hover + span {
+    opacity: 1;
+    transition: all 1s ease 1s;
+}
+footer div span {
+    opacity: 0;
+    position: relative;
+    background-color: white;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    border: .625rem solid black;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .5rem;
+}
+footer div span:after {
+    content:"";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 1rem solid transparent;
+    border-right-color: black;
+    border-left: 0;
+    margin-top: -1rem;
+    margin-left: -2rem;
 }
 /* adjusts margin for page */
 #spritesheet {
@@ -170,3 +204,6 @@ footer {
 /* Solution given should
    be below 250 lines, the solution we had was
    below 200 easily formatted */
+@media only screen and (max-width: 720px) {
+
+}
