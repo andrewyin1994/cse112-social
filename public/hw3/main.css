@@ -45,49 +45,83 @@ header {
     -ms-flex-align: start;
     align-items: flex-start;
 }
-header .logo {
-    font-family: 'Monoton', cursive;
-    color: black;
-    font-size: 2rem;
-    text-decoration: none;
-    width: 200px;
-    height: 100px;
+header .wrapper {
+    width: 10rem;
+    height: 6rem;
     background-color: magenta;
     border-radius: 50%;
     box-shadow: 5px 5px 3px #000000;
     text-align: center;
+    margin-bottom: 15rem;
+}
+header .logo {
+    font-family: 'Monoton', cursive;
+    color: black;
+    font-size: 4rem;
+    text-decoration: none;
+
 }
 header .fun {
-
-  font-size: 100px;
+  font-size: 5rem;
   color: white;
+  /*fix shadow on this */
   text-shadow: -2px 0 red, 0 2px red, 2px 0 red, 0 -2px red;
   text-transform: uppercase;
   text-align: left;
 }
 section {
 	/* color rgb(243,234,95) is used */
-
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 section > div {
     /* font is 'Comic Sans MS, text is automatically adjusted to lowercase do not mod the HTML */
-
+    font-family: 'Comic Sans MS';
+    color: white;
+    text-transform: lowercase;
 
 }
-section > aNastyNthChildSelectorToWrite {
+section > div:nth-child(2){
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
 	/* background color is  rgb(192,77,249) */
-
-
+    background-color: rgb(43,209,252);
+    -webkit-order: 3;
+    -ms-flex-order: 3;
+    order: 3;
 }
-section > aNastyNthChildSelectorToWrite {
+section > div:nth-child(4){
+	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
+	/* background color is  rgb(192,77,249) */
+    background-color: rgb(43, 209, 252);
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+}
+section > div:nth-child(3) {
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
     /* background color is  rgb(43,209,252) */
+    background-color: rgb(192,77,249);
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
 
+}
+section > div:nth-child(1) {
+	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
+    /* background color is  rgb(43,209,252) */
+    background-color: rgb(192,77,249);
+    -webkit-order: 4;
+    -ms-flex-order: 4;
+    order: 4;
 }
 section > div:nth-child(3):after {
 	/* gave you the nth child after selector for free to inspire you */
 	/* generated content in here ... a property can do that */
+    content: " \2665 \2665 \2665";
 	}
 
 	/* some free rules for fun */
@@ -96,12 +130,19 @@ aside {
     color: white;
     border: 1rem solid black;
     border-top-left-radius: 1rem;
+    border-top-right-radius: 2rem;
+
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 2rem;
     /* rem units are your friend use them often */
 
     font-family: sans-serif;
 
 
     text-align: center;
+}
+#spritesheet {
+    height: 4rem;;
 }
 
 
