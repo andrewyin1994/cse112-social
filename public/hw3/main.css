@@ -3,6 +3,11 @@
 
 @import url('https://fonts.googleapis.com/css?family=Monoton');  /* Set this for Monton a Google Font ...figure out their syntax */
 
+@font-face {
+    font-family: "Apple Chancery";
+    src: url('Apple Chancery.ttf') format('truetype');
+}
+
 * {
     box-sizing: border-box;
 }
@@ -178,7 +183,7 @@ footer {
     border: 2rem solid #fd4fc2;
     margin-top: 3rem;
     text-align: center;
-    font-family: 'Zapf Chancery', cursive;
+    font-family: 'Apple Chancery', cursive;
 }
 footer > span {
     text-align: center;
@@ -205,11 +210,7 @@ footer div span {
     height: 4rem;
     width: 6rem;
     margin-left: 1.5rem;
-<<<<<<< HEAD
     box-shadow: 0 0.4em 1em -0.2em #000000;
-=======
-
->>>>>>> 2fd72146f9864b70b45688d32b904cbd85e631d0
 }
 footer div span:after {
     content:"";
