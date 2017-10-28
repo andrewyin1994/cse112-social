@@ -95,6 +95,8 @@ section > div {
     color: white;
     text-transform: lowercase;
     font-size: 2rem;
+    height: 4rem;
+    line-height: 3.5rem;
 }
 section > div:nth-child(2){
 	/* ANastNthChildSelectorToWrite means what it says it isn't an indetifier */
