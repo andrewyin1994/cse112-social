@@ -158,11 +158,11 @@ svg{
     font-size: 2rem;
     color: white;
     background-color: #f3e96a;
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 1px .5px 1px black;
     border:.25rem solid white;
     border-style: double;
     border-radius: .25rem;
-    
+
 }
 footer {
     display: -webkit-flex;
@@ -205,7 +205,11 @@ footer div span {
     height: 4rem;
     width: 6rem;
     margin-left: 1.5rem;
+<<<<<<< HEAD
     box-shadow: 0 0.4em 1em -0.2em #000000;
+=======
+
+>>>>>>> 2fd72146f9864b70b45688d32b904cbd85e631d0
 }
 footer div span:after {
     content:"";
