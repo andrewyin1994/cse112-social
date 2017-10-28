@@ -183,7 +183,9 @@ footer {
     border: 2rem solid #fd4fc2;
     margin-top: 3rem;
     text-align: center;
-    font-family: 'Apple Chancery', cursive;
+    font-family: 'Apple Chancery';
+    font-size: 1.5rem;
+    font-weight:bold;
 }
 footer > span {
     text-align: center;
@@ -205,7 +207,7 @@ footer div span {
     border: .4rem solid black;
     border-radius: .75rem;
     text-align: center;
-    line-height: 2.7rem;
+    line-height: 3.5rem;
     vertical-align: middle;
     height: 4rem;
     width: 6rem;
