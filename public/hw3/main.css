@@ -41,7 +41,7 @@ header {
 	-ms-flex-item-align: stretch;
 	align-self: stretch;
     padding-top: 1.625rem;
-    padding-left: 1.625rem;
+    padding-left: 5%;
     padding-bottom: 1rem;
 }
 header .wrapper {
@@ -179,8 +179,8 @@ footer > span {
 footer div img {
     display: block;
     margin: auto;
-    max-height:30%;
-    max-width:30%
+    max-height:10rem;
+    max-width:10rem;
 }
 footer div img:hover + span {
     opacity: 1;
