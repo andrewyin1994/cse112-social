@@ -6,34 +6,34 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-    <h1>Team Page</h1>
-    <button type="button" class="btn btn-default btn-lg">
-        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings
-    </button>
-    <section>
-        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-    </section>
-    <section>
-        <h2>Team Name</h2>
-        <h5>Wins: 2; Losses: 3</h5>
-        <pre>Goals For: 12          Goals Against: 12</pre>
-
-    </section>
-    <hr>
-    <section>
-        <h2>Live Game</h2>
-        <!-- <input type="button" value="M/D  Team1 vs. Team2"> -->
-        <!-- <button>M/D  Team1 vs. Team2</button> -->
-        <button type="button" class="btn btn-primary">M/D  Team1 vs. Team2</button>
-    </section>
-    <hr>
-    <section>
-        <a href="schedule.html" class="btn btn-info">Schedule</a>
-        <button type="button" class="btn btn-info">Players</button>
-    </section>
-    <footer>
-        <a href="home.html">&lt;&lt;Back</a>
-        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-    </footer>
+    <div class="container">
+        <h1>Team Page</h1>
+        <div class="row">
+            <button type="button" class="btn btn-default btn-lg pull-right">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 
+            </button>
+        </div>
+        <section class="text-center">
+            <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+        </section>
+        <section class="text-center">
+            <h2>Team Name</h2>
+            <h5>Wins: 2; Losses: 3</h5>
+            <h5>Goals For: 12 &nbsp;&nbsp;Goals Against: 12</h5>
+            <hr>
+            <h2>Live Game</h2>
+            <!-- <input type="button" value="M/D  Team1 vs. Team2"> -->
+            <!-- <button>M/D  Team1 vs. Team2</button> -->
+            <a href="game.html" class="btn btn-primary">M/D  Team1 vs. Team2</a>
+            <hr>
+        <section class="text-center">
+            <a href="schedule.html" class="btn btn-info">Schedule</a>
+            <button type="button" class="btn btn-info">Players</button>
+        </section>
+        <footer>
+            <a href="home.html">&lt;&lt;Back</a>
+            <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+        </footer>
+    </div>
 </body>
 </html>
