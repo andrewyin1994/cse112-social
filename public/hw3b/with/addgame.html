@@ -6,13 +6,25 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-    <h1>Add Game</h1>
-    <section>
-        <select>
+    <div class="container">
+        <header class="page-header">
+            <h1>Add Game</h1>
+        </header>
+    </div>
+    <section class="container">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select Opponent<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Team1</a></li>
+                <li><a href="#">Team2</a></li>
+                <li><a href="#">Team3</a></li>
+            </ul>
+        <!-- <select>
             <option value="team1">Team 1</option>
             <option value="team2" selected>Team 2</option>
             <option value="team3">Team 3</option>
-        </select>
+        </select> -->
+        </div>
     </section>
     <section>
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
