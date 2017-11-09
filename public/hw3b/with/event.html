@@ -6,26 +6,57 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-    <p>Add Event</p>
-    <form>
-        <input list="event_types" name="event">
-        <datalist id="event_types">
-            <option value="Goal">
-            <option value="Foul">
-            <option value="Red Card">
-            <option value="Yellow Card">
-            <option value="Shots on Goal">
-            <option value="Corner Kick">
-            <option value="Goal Kick">
-        </datalist><br>
-        <label for="name">Player Name:</label>
-        <input type="text" id="name" name="player">
-        <br>
-        <input type="submit" id="add" value="Add Event">
-    </form>
-    <p>Event Feed</p>
-    <ul>
-        <li>Little Jim Bob scored a goal.</li>
-    </ul>
+    <section class="container text-center">
+        <h1>Add Event</h1>
+    </section><hr>
+    <section class="container">
+        <form action="" name="event-type">
+            <div class="form-group">
+                <label for="event">Event: </label>
+                <input list="event_types" name="event" id="event" class="form-control">
+                <datalist id="event_types">
+                    <option value="Goal"></option>
+                    <option value="Foul"></option>
+                    <option value="Red Card"></option>
+                    <option value="Yellow Card"></option>
+                    <option value="Shots on Goal"></option>
+                    <option value="Corner Kick"></option>
+                    <option value="Goal Kick"></option>
+                </datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Player Name:</label>
+                <input type="text" id="name" name="player" class="form-control">
+            </div>
+            <input type="submit" id="add" value="Add Event">
+        </form>
+    </section>
+
+    <section class="container text-center">
+        <p>Event Feed</p>     
+        <div class="btn-group-vertical btn-block" role="button group">
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+            <button class="btn btn-primary">Little Jim Bob scored a goal!</button>
+        </div>
+        <footer>
+            <a href="home.html">&lt;&lt;Back</a>
+            <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+        </footer> 
+    </section>
 </body>
 </html>

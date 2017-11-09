@@ -6,33 +6,56 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-    <h1>Players</h1>
-    <div class="row pull-right">
-        <a href="addplayer.html" class="btn btn-default btn-lg">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
-        </a>
-    </div>
-    <select name="role">
-        <option value="position">All</option>
-        <option value="goalkeeper">Goalkeeper</option>
-        <option value="forward">Forward</option>
-        <option value="midfielder">Midfielder</option>
-        <option value="defender">Defender</option>
-    </select><br>
-    <select name="goalkeeperstats">
-        <option value="stats" disabled selected>Sort By: Stat</option>
-        <option value="sog">Sort By: SOG Against</option>
-        <option value="shots">Sort By: Shots Against</option>
-        <option value="saves">Sort By: Saves</option>
-        <option value="starter">Sort By: Games as Starter</option>
-        <option value="wins">Sort By: Wins</option>
-        <option value="losses">Sort By: Losses</option>
-        <option value="draws">Sort By: Draws</option>
-    </select>
+    <section class="container text-center">
+        <header class="page-header">
+            <h1>Players</h1>
+        </header>
+        <div class="row pull-right">
+            <a href="addplayer.html" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+            </a>
+        </div>
+    </section>
 
-    <ul>
-        <li><a href="player.html">Little Jim Bob - Forward - Goals: 9999</a></li>
-        <li>Johnny Boy - Goalkeeper - Saves: 9999</li>
-    </ul>
+    <section class="container">
+
+        <select name="role" class="form-control">
+            <option value="position">All</option>
+            <option value="goalkeeper">Goalkeeper</option>
+            <option value="forward">Forward</option>
+            <option value="midfielder">Midfielder</option>
+            <option value="defender">Defender</option>
+        </select>
+        <br>
+        <select name="goalkeeperstats" class="form-control">
+            <option value="stats" disabled selected>Sort By: Stat</option>
+            <option value="sog">Sort By: SOG Against</option>
+            <option value="shots">Sort By: Shots Against</option>
+            <option value="saves">Sort By: Saves</option>
+            <option value="starter">Sort By: Games as Starter</option>
+            <option value="wins">Sort By: Wins</option>
+            <option value="losses">Sort By: Losses</option>
+            <option value="draws">Sort By: Draws</option>
+        </select>
+    </section>
+    <hr>
+    <section class="container text-center">
+        <div class="btn-group-vertical btn-block" role="button group">
+            <a href="player.html" class="btn btn-primary" role="playerinfo">Little Jim Bob - Forward - Goals: 9999</a>
+            <a href="player.html" class="btn btn-primary" role="playerinfo">Little Jim Bob - Forward - Goals: 9999</a>
+            <a href="player.html" class="btn btn-primary" role="playerinfo">Little Jim Bob - Forward - Goals: 9999</a>
+            <a href="player.html" class="btn btn-primary" role="playerinfo">Little Jim Bob - Forward - Goals: 9999</a>
+            <a href="player.html" class="btn btn-primary" role="playerinfo">Little Jim Bob - Forward - Goals: 9999</a>
+            <a href="player.html" class="btn btn-primary" role="playerinfo">Little Jim Bob - Forward - Goals: 9999</a>
+            <a href="player.html" class="btn btn-primary" role="playerinfo">Little Jim Bob - Forward - Goals: 9999</a>
+
+        </div>
+        <hr>
+        <footer>
+            <a href="home.html">&lt;&lt;Back</a>
+            <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+        </footer>
+    </section>
+
 </body>
 </html>
