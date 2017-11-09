@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Team Watch Add Player Page</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <h1>Add Player</h1>
+    <p>Upload Profile Picture</p>
+    <img src="img/default-pic.png" alt="Profile Picture" height="100rem">
+    <form action="" method="get" name="newplayer">
+        <input type="text" name="name" id="name" placeholder="Name"><br>
+        <input type="number" name="pnum" id="pnum"
+            placeholder="Player Number"><br>
+        <input list="position" placeholder="Position"><br>
+        <datalist id="position">
+            <option value="Forward"></option>
+            <option value="Midfielder"></option>
+            <option value="Defender"></option>
+            <option value="Goalkeeper"></option>
+        </datalist>
+        <input type="submit" value="Add Player">
+    </form>
+
+</body>
+</html>
