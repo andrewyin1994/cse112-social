@@ -3,15 +3,99 @@
 <head>
     <meta charset="utf-8">
     <title>Team Watch Home Page</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="css/create-profile.css"> -->
+
+    <style>
+
+        body{
+            /* same padding and margins as other */
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto; 
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+            font-size: 14px;
+        }
+        .heading {
+            font-weight: 500;
+            line-height: 1.1;
+            font-size: 36px;
+        }
+
+        /* forms style */
+        .inputform .form-group input{
+            width: 100%;
+            padding: .5rem .625rem; /*vertical then horiz*/
+            margin: .4rem 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: .85rem;
+        }
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: .1rem;
+            font-weight: bold;
+        }
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #eeeeee;
+            margin: 1em 0;
+            padding: 0;
+        }
+        .btn-group button {
+            color: white;
+            background-color: #2C6FAE;
+            font-size: 1rem;
+            display: block;
+            padding: 10px 24px;
+            width: 100%;
+            margin: .25rem 0;
+            cursor: pointer;
+        }
+
+        .btn-group button:hover {
+            background-color: #235585;
+        }
+
+        a{
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+
+        input[type="submit"] {
+            padding: .1rem .5rem;
+        }
+
+        .img-center {
+            /* nested flex container */
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            justify-content: center;
+
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-    <h1>TeamWatch</h1>
-    <section class="row text-center">
+    <div>
+    <h1 class="heading">TeamWatch</h1>
+    <section class="img-center">
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </section>
-    <section class="forms">
+    <section class="inputform">
         <form name="loginForm" method="get" action="team.html">
             <div class="form-group">
                 <label for="user">Username</label>
