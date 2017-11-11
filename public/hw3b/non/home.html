@@ -8,8 +8,8 @@
     <style>
         body{
             /* same padding and margins as other */
-            padding-right: 15px;
-            padding-left: 15px;
+            padding-right: 1rem;
+            padding-left: 1rem;
             margin-right: auto;
             margin-left: auto; 
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
@@ -19,20 +19,23 @@
             font-weight: 500;
             line-height: 1.1;
             font-size: 36px;
+            margin-bottom: .75rem;
+            margin-top: 1.25rem;
         }
 
         /* forms style */
-        .inputform .form-group input{
+        .form-group input{
             width: 100%;
             padding: .5rem .625rem; /*vertical then horiz*/
-            margin: .4rem 0;
+            margin-top: .4rem;
+            margin-bottom: 1rem;
             display: inline-block;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
             font-size: .85rem;
         }
-        label {
+        .form-group label {
             display: inline-block;
             max-width: 100%;
             margin-bottom: .1rem;
@@ -47,8 +50,9 @@
             padding: 0;
         }
         
-        a{
+        a {
             text-decoration: none;
+            color: #337ab7;
         }
         a:hover{
             text-decoration: underline;
@@ -70,18 +74,18 @@
             -ms-flex-align: center;
             align-items: center;
             justify-content: center;
-
+        }
+        .footer p{
+            margin: 0 0 .75rem;
         }
     </style>
 </head>
 <body>
-    <div>
     <h1 class="heading">TeamWatch</h1>
-    <section class="img-center">
+    <header class="center">
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-    </section>
-    <section class="inputform">
-        <form name="loginForm" method="get" action="team.html">
+    </header>
+    <form name="loginForm" method="get" action="team.html">
             <div class="form-group">
                 <label for="user">Username</label>
                 <input type="text" name="user" id="user" placeholder="username" class="form-control">
@@ -90,19 +94,14 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="password" class="form-control">
             </div>
-            <!-- <a href="team.html" class="btn btn-info">log in</a> -->
             <input type="submit" value="log in">
-        </form>
-        <a href="create-prompt.html"><p>New User</p></a>
-    </section>
-    </div>
-    <div class="container">
-            <!-- FOOTER -->
-      <footer>
-      <a href="about.html">About TeamWatch</a>
+        
+        <footer><a href="create-prompt.html"><p>New User</p></a></footer>
+    </form>
+    <footer class="footer">
+        <a href="about.html">About TeamWatch</a>
         <p>&copy;Team VL</p>
-        <!--<a href="#">Back to top</a>-->
-      </footer>
-    </div>
+    </footer>
+    
 </body>
 </html>
