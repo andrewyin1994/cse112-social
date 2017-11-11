@@ -12,21 +12,19 @@
         <hr>
         <h3>Upload Player Picture:</h3>
         <img src="img/default-pic.png" class="img-circle" alt="Default Pic" height=60>
-        <section>
-            <form name="createPlayer" method="get" action="">
-                <div class="inputform">
-                    <label for="invitecode">Invite Code:</label>
-                    <input type="number" name="code" id="code" placeholder="Enter invite code">
-                    <label for="user">Username:</label>
-                    <input type="text" name="user" id="user" placeholder="Enter username">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="user" placeholder="Enter email">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" placeholder="Enter password">
-                </div>
-                <input type="submit" value="Submit">
-            </form>
-        </section>
+        <form name="createPlayer" method="get" action="create-player.html">
+            <div class="inputform">
+                <label for="invitecode">Invite Code:</label>
+                <input type="number" name="code" id="invitecode" placeholder="Enter invite code">
+                <label for="user">Username:</label>
+                <input type="text" name="user" id="user" placeholder="Enter username">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" placeholder="Enter email">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" placeholder="Enter password">
+            </div>
+            <input type="submit" value="Submit">
+        </form>
         <a href="create-prompt.html">&lt;&lt;Back</a>
     </body>
 </html>

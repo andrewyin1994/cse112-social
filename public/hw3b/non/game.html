@@ -6,40 +6,38 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="container">
         <h1>Game Page</h1>
 
-        <header class="flex">
-            <button type="button" class="btn align-right">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </button>
-            <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-        </header>
-    </div>
+    <header class="flex centered column">
+        <button type="button" class="btn align-right">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </button>
+        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+    </header>
     <div class="center">
-        <section class="flex">
+        <section class="flex column">
             <h2>November 12, 2017</h2>
             
             <h3>Camp Nou</h3>
-            <div class="row">
-                <div class="half">
+            <div class="flex row">
+                <div class="split">
                     <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
                     <h2>FC Barcelona</h2>
     
                 </div>
-                <div class="half">
+                <div class="split">
                     <h3>vs</h3>
                     <a href="event.html" class="btn btn-info">Play by Play</a>
                 </div>
-                <div class="half">
+                <div class="split">
                     <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
                     <h2>Real Madrid</h2>
                 </div>
             </div>
         </section>
         <hr>
-        <div class="row" style="text-align:left">
-            <section class="half" style="border-right:1px solid black">
+        <div class="flex row" style="text-align:left">
+            <div class="split" style="border-right:1px solid black">
                 <p>Goals: 2</p>
                 <ul>
                     <li>Shots on goal: 4</li>
@@ -52,8 +50,8 @@
                     <li>Yellow: 2</li>
                     <li>Red: 1</li>
                 </ul>
-            </section>
-            <section class="half" style="margin-left:1rem">
+            </div>
+            <div class="split" style="margin-left:1rem">
                 <p>Goals: 1</p>
                 <ul>
                     <li>Shots on goal: 7</li>
@@ -67,21 +65,21 @@
                     <li>Yellow: 3</li>
                     <li>Red: 2</li>
                 </ul>
-            </section>
+            </div>
         </div>
         <hr>
-        <div class="center">
-            <section>
-                <a href="schedule.html" class="btn btn-info">Schedule</a>
-                <a type="button" class="btn btn-info">Players</button>
-            </section>
-            
-        </div>
-        <footer class="flex row">
-            <a href="home.html">&lt;&lt;Back</a>
-            <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-        </footer>
-    </div>
 
+        <footer>
+            <a href="schedule.html" class="btn btn-info">Schedule</a>
+            <a class="btn btn-info">Players</a>
+        </footer>
+            
+
+        
+    </div>
+    <footer class="flex centered row">
+        <a href="home.html">&lt;&lt;Back</a>
+        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+    </footer>
 </body>
 </html>

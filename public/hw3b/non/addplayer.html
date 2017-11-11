@@ -7,31 +7,28 @@
 </head>
 <body>
     <h1>Add Player</h1>
-    <section class="center">
-        <p>Upload Profile Picture</p>
-        <img src="img/default-pic.png" alt="Profile Picture" height="100rem">
-    </section>
-    <section >
-        <form action="" name="newplayer">
-            <div class="form-group">
-            <label for="name">Player Name</label><br>
-            <input type="text" name="name" id="name" placeholder="Name" class="bottom-margin"><br>
-            <label for="pnum">Player Number</label><br>
-            <input type="number" name="pnum" id="pnum" placeholder="Player Number"><br>
-            <label for="pos">Position</label><br>
-            <input list="position" placeholder="Position" name="pos" id="pos" class="form-control"><br>
-            <datalist id="position">
-                <option value="Forward"></option>
-                <option value="Midfielder"></option>
-                <option value="Defender"></option>
-                <option value="Goalkeeper"></option>
-            </datalist>
-            </div>
-            <input type="submit" value="Add Player">
-        </form>
-    </section>
     <hr>
-    <footer class="flex row">
+    <header class="center">
+        <p>Upload Profile Picture</p>
+        <img src="img/default-pic.png" alt="Profile Picture" style="height:7rem">
+    </header>
+    <form name="newplayer" class="form-group">
+        <label for="name">Player Name</label><br>
+        <input type="text" name="name" id="name" placeholder="Name" class="bottom-margin"><br>
+        <label for="pnum">Player Number</label><br>
+        <input type="number" name="pnum" id="pnum" placeholder="Player Number"><br>
+        <label for="pos">Position</label><br>
+        <input list="position" placeholder="Position" name="pos" id="pos" class="form-control"><br>
+        <datalist id="position">
+            <option value="Forward"></option>
+            <option value="Midfielder"></option>
+            <option value="Defender"></option>
+            <option value="Goalkeeper"></option>
+        </datalist>
+        <input type="submit" value="Add Player">
+    </form>
+    <hr>
+    <footer class="flex centered row">
         <a href="home.html">&lt;&lt;Back</a>
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </footer>

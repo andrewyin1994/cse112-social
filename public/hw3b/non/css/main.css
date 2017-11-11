@@ -126,6 +126,7 @@ input[type="submit"] {
     font-weight: bold;
 }   
 
+/* flexbox related stuff, webkit and ms prefixed stuff are for compatability, will trigger warnings */
 .flex{
     /* nested flex container */
     display: -webkit-flex;
@@ -154,7 +155,7 @@ input[type="submit"] {
 .align-right{
     align-self: flex-end;
 }
-.half{
+.split{
     flex:1
 }
 
