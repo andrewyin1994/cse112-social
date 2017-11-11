@@ -3,7 +3,24 @@
 <head>
     <meta charset="utf-8">
     <title>Add Game Page</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .dropdown select{
+            /* height: 1.5rem; */
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: .85rem;
+            padding: 0.5rem .625rem;
+        }
+        header a{
+            float: right;
+        }
+        header a:hover{
+            text-decoration: none;
+        }
+    </style>    
 </head>
 <body>
     <div class="container">
@@ -12,7 +29,7 @@
         </header>
     </div>
     <section class="container">
-        <div class="col-md-4">
+        <div class="dropdown">
             <select class="form-control">
                 <option value="team1">Team 1</option>
                 <option value="team2" selected>Team 2</option>
@@ -23,7 +40,7 @@
     <section class="row text-center">
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </section>
-    <section class="container">
+    <section >
         <form name="gameForm" method="get" action="">
             <div class="form-group">
                 <label for="location">Location:</label>

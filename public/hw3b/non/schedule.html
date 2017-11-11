@@ -3,23 +3,21 @@
 <head>
     <meta charset="utf-8">
     <title>Schedule Page</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Schedule Page</h1>
-        <div class="row pull-right">
-            <a href="addgame.html" class="btn btn-default btn-lg">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
-            </a>
+    <h1>Schedule Page</h1>
+    <header class="flex">
+        <div class="align-right">
+            <a style="font-size:36px" href="addplayer.html">+</a>
         </div>
+    </header>
 
 
-    </div>
-    <div class="container text-center">
-        <section>
+    <div>
+        <section class="flex">
             <h2>Schedule</h2>
-            <div class="btn-group-vertical btn-block" role="group">
+            <div class="btn-group" role="group">
                 <!-- <div class="col-md-4"></div> -->
                     <a href="game.html" class="btn btn-primary">11/12  Team1 vs. Team2</a>
                     <button type="button" class="btn btn-primary">M/D  Team3 vs. Team4</button>
@@ -30,12 +28,12 @@
             </div>
         </section>
         <hr>
-        <section>
+        <section class="center">
             <a href="team.html" class="btn btn-info">Team</a>
-            <a href="roster.html" class="btn btn-info">Player</a>
+            <a href="roster.html" class="btn btn-info">Players</a>
             <!-- <button type="button" class="btn btn-info">Players</button> -->
         </section>
-        <footer>
+        <footer class="footer row">
             <a href="home.html">&lt;&lt;Back</a>
             <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
         </footer>
