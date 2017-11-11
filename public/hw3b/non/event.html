@@ -3,60 +3,52 @@
 <head>
     <meta charset="utf-8">
     <title>Team Watch Event Page</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <section class="container text-center">
-        <h1>Add Event</h1>
-    </section><hr>
-    <section class="container">
-        <form action="" name="event-type">
-            <div class="form-group">
-                <label for="event">Event: </label>
-                <input list="event_types" name="event" id="event" class="form-control">
-                <datalist id="event_types">
-                    <option value="Goal"></option>
-                    <option value="Foul"></option>
-                    <option value="Red Card"></option>
-                    <option value="Yellow Card"></option>
-                    <option value="Shots on Goal"></option>
-                    <option value="Corner Kick"></option>
-                    <option value="Goal Kick"></option>
-                </datalist>
-            </div>
+    <h1 class="center">Add Event</h1>
+    <section class="inputform">
+        <form class="form-group" action="" name="event-type">
+            <label for="event">Event: </label>
+            <input list="event_types" name="event" id="event" class="form-control">
+            <datalist id="event_types">
+                <option value="Goal"></option>
+                <option value="Foul"></option>
+                <option value="Red Card"></option>
+                <option value="Yellow Card"></option>
+                <option value="Shots on Goal"></option>
+                <option value="Corner Kick"></option>
+                <option value="Goal Kick"></option>
+            </datalist>
 
-            <div class="form-group">
-                <label for="name">Player Name:</label>
-                <input type="text" id="name" name="player" class="form-control">
-            </div>
+            <label for="name">Player Name:</label>
+            <input type="text" id="name" name="player" class="form-control">
             <input type="submit" id="add" value="Add Event">
         </form>
     </section>
 
-    <section class="container text-center">
-        <p>Event Feed</p>
-        <div class="btn-group-vertical btn-block" role="button group">
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-            <button class="btn btn-primary">Lionel Messi scored a goal!</button>
-        </div>
-        <footer>
-            <a href="home.html">&lt;&lt;Back</a>
-            <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-        </footer>
+    <p class="center">Event Feed</p>
+    <section class="btn-group" role="button group">
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
+        <button class="btn btn-primary">Lionel Messi scored a goal!</button>
     </section>
+    <footer class="center">
+        <a href="home.html">&lt;&lt;Back</a>
+        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+    </footer>
 </body>
 </html>
