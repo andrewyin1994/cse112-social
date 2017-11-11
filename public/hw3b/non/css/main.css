@@ -48,10 +48,31 @@ hr {
     margin: .25rem 0;
     cursor: pointer;
 }
-
 .btn-group button:hover {
     background-color: #235585;
 }
+
+.btn-group a {
+    color: white;
+    background-color: #2C6FAE;
+    font-size: 1rem;
+    display: block;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    margin: .25rem 0 0 0;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .85rem;
+}
+.btn-group a:hover {
+    background-color: #235585;
+    text-decoration: none;
+}
+
+
 
 a{
     text-decoration: none;
