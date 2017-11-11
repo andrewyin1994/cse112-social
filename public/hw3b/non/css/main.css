@@ -72,8 +72,6 @@ hr {
     text-decoration: none;
 }
 
-
-
 a{
     text-decoration: none;
 }
@@ -83,6 +81,10 @@ a:hover{
 
 input[type="submit"] {
     padding: .1rem .5rem;
+}
+
+.center{
+    text-align: center;
 }
 
 .img-center {
@@ -97,5 +99,4 @@ input[type="submit"] {
     -ms-flex-align: center;
     align-items: center;
     justify-content: center;
-
 }
