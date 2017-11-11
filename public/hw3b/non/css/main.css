@@ -13,6 +13,17 @@ body{
     line-height: 1.1;
     font-size: 36px;
 }
+/* forms style */
+.inputform input {
+    width: 100%;
+    padding: 10px 20px;
+    margin: .4rem 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .85rem;
+}
 
 /* forms style */
 .inputform .form-group input{
@@ -31,13 +42,14 @@ label {
     margin-bottom: .1rem;
     font-weight: bold;
 }
-hr {
+hr{
     display: block;
     height: 1px;
     border: 0;
     border-top: 1px solid #eeeeee;
     margin: 1em 0;
     padding: 0;
+    
 }
 .btn-group button {
     color: white;
@@ -85,7 +97,29 @@ input[type="submit"] {
     padding: .1rem .5rem;
 }
 
-.center {
+.center{
+    text-align: center;
+}
+/* forms style */
+.form-group input{
+    width: 100%;
+    padding: .5rem .625rem; /*vertical then horiz*/
+    margin-top: .4rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .85rem;
+}
+.form-group label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: .1rem;
+    font-weight: bold;
+}   
+
+.flex{
     /* nested flex container */
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -116,6 +150,9 @@ input[type="submit"] {
 
 .align-right{
     align-self: flex-end;
+}
+.half{
+    flex:1
 }
 
 @font-face {

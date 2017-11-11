@@ -3,45 +3,35 @@
 <head>
     <meta charset="utf-8">
     <title>Team Watch Add Player Page</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <section class="container">
-        <header class="page-header">
-            <h1 >Add Player</h1>            
-        </header>
-    </section>
-    <section class="container text-center">
+    <h1>Add Player</h1>
+    <section class="center">
         <p>Upload Profile Picture</p>
-        <img src="img/default-pic.png" alt="Profile Picture" height="100rem">           
+        <img src="img/default-pic.png" alt="Profile Picture" height="100rem">
     </section>
-    <section class="container">
+    <section >
         <form action="" name="newplayer">
             <div class="form-group">
-                <label for="name">Player Name</label>
-                <input type="text" name="name" id="name" placeholder="Name" class="form-control"><br>                    
+            <label for="name">Player Name</label><br>
+            <input type="text" name="name" id="name" placeholder="Name" class="bottom-margin"><br>
+            <label for="pnum">Player Number</label><br>
+            <input type="number" name="pnum" id="pnum" placeholder="Player Number"><br>
+            <label for="pos">Position</label><br>
+            <input list="position" placeholder="Position" name="pos" id="pos" class="form-control"><br>
+            <datalist id="position">
+                <option value="Forward"></option>
+                <option value="Midfielder"></option>
+                <option value="Defender"></option>
+                <option value="Goalkeeper"></option>
+            </datalist>
             </div>
-            <div class="form-group">
-                <label for="pnum">Player Number</label>
-                <input type="number" name="pnum" id="pnum"
-                placeholder="Player Number" class="form-control"><br>
-            </div>
-            <div class="form-group">
-                <label for="pos">Position</label>
-                <input list="position" placeholder="Position" name="pos" id="pos" class="form-control"><br>                    
-            </div>
-                <datalist id="position">
-                    <option value="Forward"></option>
-                    <option value="Midfielder"></option>
-                    <option value="Defender"></option>
-                    <option value="Goalkeeper"></option>
-                </datalist>
-            <div class="form-group">
-                <input type="submit" value="Add Player">                    
-            </div>
-            </form>            
+            <input type="submit" value="Add Player">
+        </form>
     </section>
-    <footer class="row text-center">
+    <hr>
+    <footer class="flex row">
         <a href="home.html">&lt;&lt;Back</a>
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </footer>

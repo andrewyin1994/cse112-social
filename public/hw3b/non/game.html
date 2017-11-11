@@ -3,42 +3,43 @@
 <head>
     <meta charset="utf-8">
     <title>Game Page</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <div class="container">
         <h1>Game Page</h1>
 
-        <div class="row">
-            <button type="button" class="btn btn-default btn-lg pull-right">
+        <header class="flex">
+            <button type="button" class="btn align-right">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </button>
-        </div>
-        <section class="text-center">
             <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-        </section>
+        </header>
     </div>
-    <div class="container">
-        <section class="row-fluid text-center">
+    <div class="center">
+        <section class="flex">
             <h2>November 12, 2017</h2>
+            
             <h3>Camp Nou</h3>
-            <div class="col-xs-5">
-                <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-                <h2>FC Barcelona</h2>
-
-            </div>
-            <div class="col-xs-2">
-                <h3>vs</h3>
-                <a href="event.html" class="btn btn-info">Play by Play</a>
-            </div>
-            <div class="col-xs-5">
-                <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-                <h2>Real Madrid</h2>
+            <div class="row">
+                <div class="half">
+                    <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+                    <h2>FC Barcelona</h2>
+    
+                </div>
+                <div class="half">
+                    <h3>vs</h3>
+                    <a href="event.html" class="btn btn-info">Play by Play</a>
+                </div>
+                <div class="half">
+                    <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+                    <h2>Real Madrid</h2>
+                </div>
             </div>
         </section>
         <hr>
-        <div class="row">
-            <section class="col-xs-6" style="border-right:1px solid black">
+        <div class="row" style="text-align:left">
+            <section class="half" style="border-right:1px solid black">
                 <p>Goals: 2</p>
                 <ul>
                     <li>Shots on goal: 4</li>
@@ -52,7 +53,7 @@
                     <li>Red: 1</li>
                 </ul>
             </section>
-            <section class="col-xs-5 col-xs-offset-1">
+            <section class="half" style="margin-left:1rem">
                 <p>Goals: 1</p>
                 <ul>
                     <li>Shots on goal: 7</li>
@@ -69,16 +70,17 @@
             </section>
         </div>
         <hr>
-        <div class="row text-center">
+        <div class="center">
             <section>
                 <a href="schedule.html" class="btn btn-info">Schedule</a>
                 <button type="button" class="btn btn-info">Players</button>
             </section>
-            <footer>
-                <a href="home.html">&lt;&lt;Back</a>
-                <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-            </footer>
+            
         </div>
+        <footer class="flex row">
+            <a href="home.html">&lt;&lt;Back</a>
+            <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+        </footer>
     </div>
 
 </body>
