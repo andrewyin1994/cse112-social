@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Team Watch Event Page</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <h1 class="center">Add Event</h1>
+    <form method="get" action="event.html" name="event-type">
+        <div class="form-group">
+        <label for="event">Event: </label>
+        <input list="event_types" name="event" id="event" class="form-control">
+        <datalist id="event_types">
+            <option value="Goal"></option>
+            <option value="Foul"></option>
+            <option value="Red Card"></option>
+            <option value="Yellow Card"></option>
+            <option value="Shots on Goal"></option>
+            <option value="Corner Kick"></option>
+            <option value="Goal Kick"></option>
+        </datalist>
+
+        <label for="name">Player Name:</label>
+        <input type="text" id="name" name="player" class="form-control">
+        </div>
+        <input type="submit" id="add" value="Add Event">
+    </form>
+
+    <p class="center">Event Feed</p>
+    <div class="btn-group">
+        <button>Lionel Messi scored a goal!</button>
+        <button>Lionel Messi scored a goal!</button>
+        <button>Lionel Messi scored a goal!</button>
+        <button>Lionel Messi scored a goal!</button>
+        <button>Lionel Messi scored a goal!</button>
+        <button>Lionel Messi scored a goal!</button>
+        <button>Lionel Messi scored a goal!</button>
+    </div>
+    <footer class="flex centered row">
+        <a href="home.html">&lt;&lt;Back</a>
+        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+    </footer>
+</body>
+</html>

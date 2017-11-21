@@ -1,0 +1,44 @@
+body {
+    margin: 1.5rem;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    margin: 1em 0;
+    padding: 0;
+}
+.btn-group button {
+    color: white;
+    background-color: #2C6FAE;
+    font-size: 1rem;
+    display: block;
+    padding: 10px 24px;
+    width: 100%;
+    margin: .25rem 0;
+    cursor: pointer;
+}
+
+.btn-group button:hover {
+    background-color: #235585;
+}
+
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+/* forms style */
+.inputform input {
+    width: 100%;
+    padding: 10px 20px;
+    margin: .4rem 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .85rem;
+}

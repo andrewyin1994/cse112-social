@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Team Watch Roster Page</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+    .dropdown select{
+        /* height: 1.5rem; */
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: .85rem;
+        padding: 0.5rem .625rem;
+    }
+    header a{
+        float: right;
+    }
+    header a:hover{
+        text-decoration: none;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Players
+            <a href="addplayer.html">+</a>
+        </h1>
+    </header>
+    
+    <div class="dropdown">
+        <select name="role" style="margin-top:.5rem; margin-bottom:.5rem;">
+            <option value="position">All</option>
+            <option value="goalkeeper">Goalkeeper</option>
+            <option value="forward">Forward</option>
+            <option value="midfielder">Midfielder</option>
+            <option value="defender">Defender</option>
+        </select>
+        <br>
+        <select name="goalkeeperstats">
+            <option value="stats" disabled selected>Sort By: Stat</option>
+            <option value="sog">Sort By: SOG Against</option>
+            <option value="shots">Sort By: Shots Against</option>
+            <option value="saves">Sort By: Saves</option>
+            <option value="starter">Sort By: Games as Starter</option>
+            <option value="wins">Sort By: Wins</option>
+            <option value="losses">Sort By: Losses</option>
+            <option value="draws">Sort By: Draws</option>
+        </select>
+    </div>
+    <hr>
+    <div class="btn-group">
+        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
+        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
+        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
+        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
+        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
+    </div>
+
+    <hr>
+    <footer class="flex centered row">
+        <a href="home.html">&lt;&lt;Back</a>
+        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+    </footer>
+
+</body>
+</html>

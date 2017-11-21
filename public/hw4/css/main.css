@@ -1,0 +1,224 @@
+body {
+    /* same padding and margins as other */
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto; 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    
+    /* font-size: 14px; */
+    
+}
+.heading, h1, h2, h3, h4, h5 {
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: .75rem;
+    margin-top: 1.25rem;
+}
+h2 {
+    font-size: 2rem;
+}
+h1 {
+    font-size: 2.2rem;
+}
+/* forms style */
+.inputform input {
+    width: 100%;
+    padding: 10px 20px;
+    margin: .4rem 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .85rem;
+}
+
+/* forms style */
+.inputform .form-group input{
+    width: 100%;
+    padding: .5rem .625rem; /*vertical then horiz*/
+    margin: .4rem 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .85rem;
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: .1rem;
+    font-weight: bold;
+}
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    margin: 1em 0;
+    padding: 0;
+}
+.btn-group button {
+    color: white;
+    background-color: #2C6FAE;
+    font-size: 1rem;
+    display: block;
+    padding: 10px 24px;
+    width: 100%;
+    margin: .25rem 0;
+    cursor: pointer;
+}
+.btn-group button:hover {
+    background-color: #235585;
+}
+
+.btn-group a {
+    color: white;
+    background-color: #2C6FAE;
+    font-size: 1rem;
+    display: block;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    margin: .25rem 0 0 0;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .85rem;
+}
+.btn-group a:hover {
+    background-color: #235585;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+    color: #337ab7;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+input[type="submit"] {
+    padding: .1rem .5rem;
+}
+
+.center{
+    text-align: center;
+}
+/* forms style */
+.form-group input{
+    width: 100%;
+    padding: .5rem .625rem; /*vertical then horiz*/
+    margin-top: .4rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .85rem;
+}
+.form-group label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: .1rem;
+    font-weight: bold;
+}   
+
+/* flexbox related stuff, webkit and ms prefixed stuff are for compatability, will trigger warnings */
+.flex{
+    /* nested flex container */
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.column{
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.row {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+.centered {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.align-right{
+    align-self: flex-end;
+}
+.split{
+    flex:1
+}
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+  
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  }
+
+.glyphicon {
+    /* position: relative; */
+    top: 1px;
+    /* display: inline-block; */
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+} 
+
+
+.glyphicon-cog:before {
+    content: "\e019";
+}
+
+.footer p{
+    margin: 0 0 .75rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+.btn-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.btn-info:hover {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+    text-decoration: none;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
+  text-decoration: none;
+}
