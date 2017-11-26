@@ -51,18 +51,80 @@
     </div>
     <hr>
     <div class="btn-group">
-        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
-        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
-        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
-        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
-        <a href="player.html">Little Jim Bob - Forward - Goals: 9999</a>
+        <ul>
+            <li class="player btn">
+                
+                Little Jim Bob #123
+                <br>
+                <strong>Forward</strong> - Goals: 9999
+                <div class="recordControls">add delete
+                        <a href="player.html">view info</a>
+                </div>
+            </li>
+            <li class="player">
+                    
+                    Little Jim Bob #123
+                    <br>
+                    <strong>Forward</strong> - Goals: 9999
+                    <div class="recordControls">add delete
+                            <a href="player.html">view info</a>
+                    </div>
+                </li>
+            <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
+            <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
+            <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
+            <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
+            <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
+        </ul>
     </div>
+
+    
+
+    <main id="view"></main>
+
+    <input type="button" value="render" onclick="render()">
 
     <hr>
     <footer class="flex centered row">
         <a href="home.html">&lt;&lt;Back</a>
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </footer>
+    <script src="js/main.js"></script>
 
+    <!-- Partials for the app -->
+    <template id="roster">
+            <h1>Team Roster</h1>
+            <div id="playerList"></div>
+            <input type="button" value="Add" id="addBtn">
+        </template>
+    
+    
+        <template id="playerFormTemplate">
+        <form id="playerForm">
+            <fieldset>
+            <legend>Player</legend>
+            <div>
+            <label for="playerName">Name</label>
+            <input type="text" id="playerName" placeholder="Player name" autofocus required>
+            </div>
+    
+            <div>
+            <label for="playerPosition">Position</label>
+            <input type="text" id="playerPosition" placeholder="Player position">
+            </div>
+            
+            <div>
+            <label for="playerNumber">Number</label>
+            <input type="number" id="playerNumber" placeholder="Player number" required>
+            </div>
+    
+            <div>
+            <input type="button" id="addPlayerBtn" value="Add">
+            <input type="button" id="cancelPlayerBtn" value="Cancel">
+            </div>
+        </fieldset>
+        </form>
+        </template>
+    
 </body>
 </html>
