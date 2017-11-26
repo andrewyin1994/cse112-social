@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tiny Futobal App - 0.1</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<header>
+    <h1 class="logo">Tiny Futobal App</h1>
+    <nav>
+        <button id="rosterNav">Roster</button>
+        <button id="scheduleNav">Schedule</button>
+        <button id="statsNav">Stats</button>
+    </nav>
+</header>
+
+<main id="view"></main>
+
+<footer>
+   <div class="legal">&copy; 2017 TFASoft, Inc.</div>
+</footer>
+
+
+
+    <!-- Partials for the app -->
+    <template id="roster">
+        <h1>Team Roster</h1>
+        <div id="playerList"></div>
+        <input type="button" value="Add" id="addBtn">
+    </template>
+    
+    
+    <template id="playerFormTemplate">
+    <form id="playerForm">
+        <fieldset>
+        <legend>Player</legend>
+        <div>
+         <label for="playerName">Name</label>
+         <input type="text" id="playerName" placeholder="Player name" autofocus required>
+        </div>
+
+        <div>
+         <label for="playerPosition">Position</label>
+         <input type="text" id="playerPosition" placeholder="Player position">
+        </div>
+        
+        <div>
+         <label for="playerNumber">Number</label>
+         <input type="number" id="playerNumber" placeholder="Player number" required>
+        </div>
+
+        <div>
+         <input type="button" id="addPlayerBtn" value="Add">
+         <input type="button" id="cancelPlayerBtn" value="Cancel">
+        </div>
+    </fieldset>
+</form>
+</template>
+
+
+<template id="schedule">
+    <h1>Team Schedule</h1>
+</template>
+
+
+<template id="stats">
+    <h1>Team Stats</h1>
+</template>
+    
+<script src="data.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
