@@ -53,6 +53,10 @@ function test2() {
    
 }
 
+function verify() {
+    
+}
+
 function logIn(/*usr, pwd*/) {
     /* TODO */
 
