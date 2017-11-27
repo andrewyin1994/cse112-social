@@ -1,0 +1,13 @@
+/* main.css */
+
+ul li {list-style-type: none;
+       margin-bottom: .5em;}
+
+.player {width: 50vw;}
+.player:hover {outline : 1px dashed black;}
+.player:hover div.recordControls {visibility: visible }
+
+.recordControls {visibility: hidden; position: relative; top: 0px; right: 0px}
+
+.editBtn {cursor: pointer; color: blue;}
+.legal {font-size: xx-small;}

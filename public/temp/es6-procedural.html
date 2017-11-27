@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="app">
+      <nav class="app__navigation">
+        <ul></ul>
+      </nav>
+      <div class="app__content">
+      </div>
+    </div>
+    <!-- PAGE: Roster -->
+    <template name="roster">
+      <div id="roster" class="app__page">
+        <header><h1>Team Roster</h1></header>
+        <div class="roster__content">
+          <ul></ul>
+        </div>
+        <button onclick="modalOpen()">Add Member</button>
+        <div class="roster__modal" style="display:none;">
+          <section class="modal__card">
+            <div class="roster__field">
+              <label for="modal-name">Member Name</label>
+              <input id="modal-name" type="text">
+            </div>
+            <div class="roster__field">
+              <label for="modal-position">Position Played</label>
+              <input id="modal-position" type="text">
+            </div>
+            <div class="roster__field">
+              <label for="modal-number">Jersey Number</label>
+              <input id="modal-number" type="text">
+            </div>
+            <button onclick="modalClose()">Cancel</button>
+            <button onclick="modalSave()">Confirm</button>
+            <input id="modal-action" type="hidden" value="create">
+            <input id="modal-key" type="hidden" value="">
+          </section>
+        </div>
+        <script>
+          refreshRoster();
+          function refreshRoster() {
+            const rosterEl = document.querySelector('.roster__content ul');
+            rosterEl.innerHTML = '';
+            let members = '' ;
+            State.store.members.forEach(member => {
+              members += 
+`<li class="member">
+  <section class="member__name">${member.name} ${member.number}</section>
+  <section class="member__position">${member.position}</section>
+  <section class="member__actions">
+    <button onclick="editMember('${member.name}')">EDIT</button>
+    <button onclick="deleteMember('${member.name}')">DELETE</button>
+  </section>
+</li>`;
+            });
+            members = members.replace('\n', '');
+            rosterEl.innerHTML = members;
+          }
+          function editMember(memberName) {
+            const member = State.store.members.filter(member => member.name === memberName)[0];
+            modalOpen(member);
+          }
+          function deleteMember(memberName) {
+            if(window.confirm(`Are you sure you want to delete ${memberName}?`)) {
+              const index = State.store.members.findIndex(member => member.name === memberName);
+              State.store.members.splice(index, 1);
+              refreshRoster();
+            }
+          }
+
+          // MODAL
+          function modalOpen(member) {
+            if(member) {
+              // Populate the fields before opening
+              ['name', 'position', 'number'].forEach(prop => {
+                document.getElementById(`modal-${prop}`).value = member[prop];
+              });
+              // Indicate this is an update
+              document.getElementById('modal-action').value = 'update'
+              document.getElementById('modal-key').value = member.name;
+            } else {
+              // Indicate this is a create
+              document.getElementById('modal-action').value = 'create';
+            }
+            document.querySelector('.roster__modal').style.display = "initial";
+          }
+          function modalClose() {
+            document.querySelector('.roster__modal').style.display = "none";
+          }
+          function modalSave() {
+            const actionType = document.getElementById('modal-action').value;
+
+            // Extract each input value and create an object
+            const member = ['name', 'position', 'number'].reduce((obj, prop) => {
+              obj[prop] = document.getElementById(`modal-${prop}`).value;
+              return obj;
+            }, {});
+
+            if(actionType === 'create') {
+              State.store.members.push(member);
+            } else if(actionType === 'update') {
+              const oldName = document.getElementById('modal-key').value;
+              const targetIndex = State.store.members.findIndex(member => member.name === oldName);
+              State.store.members.splice(targetIndex, 1, member);
+            }
+
+            // Clear out old values in the modal
+            ['name', 'position', 'number'].forEach(prop => {
+                document.getElementById(`modal-${prop}`).value = '';
+            });
+            refreshRoster();
+            modalClose();
+          }
+        </script>
+      </div>
+    </template>
+
+    <!-- PAGE: Schedule -->
+    <template name="schedule">
+      <div class="app__page">
+        <header><h1>Schedule</h1></header>
+      </div>
+    </template>
+
+    <!-- PAGE: Stats-->
+    <template name="stats">
+      <div class="app__page">
+        <header><h1>Stats</h1></header>
+      </div>
+    </template>
+
+    <script>
+      const App = {
+        pages: ['roster','schedule', 'stats'],
+        init(page) {
+          const navList = document.querySelector('.app__navigation ul');
+          App.pages.forEach(page => {
+            const navItem = document.createElement('li');
+            navItem.innerHTML = page;
+            navList.appendChild(navItem);
+            navItem.addEventListener('click', event => {
+              Router.navigate(event.target.innerHTML);
+            });
+          });
+          if(page) {
+            Router.navigate(page);
+          }
+        }
+      };
+      const Router = {
+        current: null,
+        navigate(page) {
+          const content = document.querySelector('.app__content');
+          content.innerHTML = '';
+          const newContent = document.importNode(document.querySelector(`template[name="${page}"]`).content, true);
+          content.appendChild(newContent);
+        },
+      };
+      const State = {
+        store: {
+          members: [
+            {name: 'Foo', position: 'Midfield', number: 1},
+            {name: 'Bar', position: 'Forward', number: 2},
+            {name: 'Baz', position: 'Goalie', number: 3},
+          ]
+        },
+      };
+      App.init('roster');
+    </script>
+  </body>
+</html>
