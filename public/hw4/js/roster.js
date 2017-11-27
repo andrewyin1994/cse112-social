@@ -239,7 +239,7 @@ function reload() {
 
 window.addEventListener('DOMContentLoaded', function () {
     
-    // test basic roster
+    // test basic rosterd
     for(let i = 0; i < roster.length; i++) {
         console.log(roster[i]);
     }
