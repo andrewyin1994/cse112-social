@@ -66,7 +66,6 @@ function verifyLogin() {
     }
     else {
         console.log("wrong");
-        //alert("wrong");
         return false;
     }
 
@@ -74,8 +73,8 @@ function verifyLogin() {
 
 
 function logOut() {
-    /* TODO */
-    return false;
+    window.location.href = "home.html";
+    return true;
 }
 
 function handleSchedule() {
