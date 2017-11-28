@@ -10,6 +10,7 @@ const TeamSnip = {
     }
 
 };
+
 /**
  * Class representing the team's roster of players. 
  */

@@ -4,25 +4,37 @@
     <meta charset="utf-8">
     <title>Team Watch Event Page</title>
     <link rel="stylesheet" href="css/main.css">
+    <style>
+            select{
+            /* height: 1.5rem; */
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: .85rem;
+            padding: 0.5rem .625rem;
+        }
+    </style>
 </head>
 <body>
     <h1 class="center">Add Event</h1>
     <form method="get" action="event.html" name="event-type">
         <div class="form-group">
         <label for="event">Event: </label>
-        <input list="event_types" name="event" id="event" class="form-control">
-        <datalist id="event_types">
-            <option value="Goal"></option>
-            <option value="Foul"></option>
-            <option value="Red Card"></option>
-            <option value="Yellow Card"></option>
-            <option value="Shots on Goal"></option>
-            <option value="Corner Kick"></option>
-            <option value="Goal Kick"></option>
-        </datalist>
+        <!-- <input list="event_types" name="event" id="event" class="form-control"> -->
+        <select name="event" id="event_types" >
+            <option value="Goal">Goal</option>
+            <option value="Shot on Goal">Shot on Goal</option>
+            <option value="Corner Kick">Corner Kick</option>
+            <option value="Goal Kick">Goal Kick</option>
+            <option value="Foul">Foul</option>
+            <option value="Yellow Card">Yellow Card</option>
+            <option value="Red Card">Red Card</option>
+        </select>
 
         <label for="name">Player Name:</label>
-        <input type="text" id="name" name="player" class="form-control">
+        <select name="name" id="player_name"
+        <!-- <input type="text" id="name" name="player" class="form-control"> -->
         </div>
         <input type="submit" id="add" value="Add Event">
     </form>
