@@ -33,14 +33,18 @@
         </select>
 
         <label for="name">Player Name:</label>
-        <select name="name" id="player_name"
+        <select name="name" id="player_name">
+
+        </select>
         <!-- <input type="text" id="name" name="player" class="form-control"> -->
         </div>
         <input type="submit" id="add" value="Add Event">
     </form>
 
     <p class="center">Event Feed</p>
-    <div class="btn-group">
+    
+    <main id="view"></main>
+    <!-- <div class="btn-group">
         <button>Lionel Messi scored a goal!</button>
         <button>Lionel Messi scored a goal!</button>
         <button>Lionel Messi scored a goal!</button>
@@ -48,10 +52,15 @@
         <button>Lionel Messi scored a goal!</button>
         <button>Lionel Messi scored a goal!</button>
         <button>Lionel Messi scored a goal!</button>
-    </div>
+    </div> -->
     <footer class="flex centered row">
         <a href="home.html">&lt;&lt;Back</a>
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </footer>
+
+    <template id="events">
+        <h1>Events</h1>
+        <div id="eventList" class="btn-group"></div>
+    </template>
 </body>
 </html>
