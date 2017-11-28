@@ -236,7 +236,7 @@ const TeamSnip = {
     } /* Player */
 
 
-  /**
+    /**
      * Class representing the team's schedule of games, practices
      * and other events
      */

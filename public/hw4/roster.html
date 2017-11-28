@@ -24,7 +24,7 @@
 </head>
 <body>
     <header>
-        <h1>Players
+        <h1>Roster
             <a href="addplayer.html">+</a>
         </h1>
     </header>
@@ -71,10 +71,10 @@
                     </div>
                 </li>
             <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
+            <!-- <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
             <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
             <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
-            <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
-            <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li>
+            <li><a href="player.html" class="btn">Little Jim Bob - Forward - Goals: 9999</a></li> -->
         </ul>
     </div>
 
@@ -83,18 +83,20 @@
     <main id="view"></main>
 
     <input type="button" value="render" onclick="render()">
+    <input type="button" value="reload" onclick="reload()">
 
     <hr>
     <footer class="flex centered row">
         <a href="home.html">&lt;&lt;Back</a>
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </footer>
-    <script src="js/main.js"></script>
+    <script src="js/roster.js"></script>
+    <script src="js/data.js"></script>
 
     <!-- Partials for the app -->
     <template id="roster">
             <h1>Team Roster</h1>
-            <div id="playerList"></div>
+            <div id="playerList" class="btn-group"></div>
             <input type="button" value="Add" id="addBtn">
         </template>
     

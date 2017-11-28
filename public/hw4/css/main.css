@@ -76,9 +76,9 @@ hr{
     color: white;
     background-color: #2C6FAE;
     font-size: 1rem;
-    display: block;
+    /* display: block; */
     padding: 10px 0 10px 0;
-    width: 100%;
+    /* width: 100%; */
     margin: .25rem 0 0 0;
     cursor: pointer;
     text-align: center;
@@ -232,3 +232,4 @@ ul li {
 .player:hover {outline : 1px dashed black;}
 .player:hover div.recordControls {visibility: visible}
 .recordControls {visibility: hidden; position: relative; top: 0px; right: 0px}
+

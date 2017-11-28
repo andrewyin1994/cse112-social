@@ -4,6 +4,23 @@
     <meta charset="utf-8">
     <title>Team Watch Add Player Page</title>
     <link rel="stylesheet" href="css/main.css">
+    <style>
+        select{
+            /* height: 1.5rem; */
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: .85rem;
+            padding: 0.5rem .625rem;
+        }
+        header a{
+            float: right;
+        }
+        header a:hover{
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Add Player</h1>
@@ -18,15 +35,17 @@
         <label for="pnum">Player Number</label><br>
         <input type="number" name="pnum" id="pnum" placeholder="Player Number"><br>
         <label for="pos">Position</label><br>
-        <input list="position" placeholder="Position" name="pos" id="pos" class="form-control"><br>
-        <datalist id="position">
-            <option value="Forward"></option>
-            <option value="Midfielder"></option>
-            <option value="Defender"></option>
-            <option value="Goalkeeper"></option>
-        </datalist>
+        <!-- <input list="select" placeholder="Position" name="pos" id="pos" class="form-control"><br> -->
+        <select style="margin-top:.5rem; margin-bottom:.5rem;" name="pos">
+            <option value="bench">Bench</option>
+            <option value="goalkeeper">Goalkeeper</option>
+            <option value="forward">Forward</option>
+            <option value="midfielder">Midfielder</option>
+            <option value="defender">Defender</option>
+        </select>
         <input type="submit" value="Add Player">
     </form>
+    
     <hr>
     <footer class="flex centered row">
         <a href="home.html">&lt;&lt;Back</a>
