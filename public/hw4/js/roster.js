@@ -35,8 +35,9 @@ class Roster {
         return false;
     }
     
-    addPlayer(name, number, position) {
-        let player = new Player(name, number, position);
+    addPlayer(name, number, position, archived) {
+        let player = new Player(name, number, position, archived);
+        console.log(archived);
         this.roster.push(player);
         window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
     }
@@ -166,12 +167,12 @@ class Roster {
         
 class Player {
     
-    constructor (name,number,position = 'Not assigned') {
+    constructor (name,number,position,archived = 'Not assigned') {
         this.playerId = TeamSnip.util.uuid();
         this.name = name;
         this.number = number;
         this.position = position;
-        this.archived = false;
+        this.archived = (archived==false)?false:true;
         this.goals = 0;
         this.sog = 0;
         this.gkicks = 0;
@@ -209,21 +210,21 @@ class Player {
     render() {
         let MARKUP = '';
         if (!this.archived) {
-        MARKUP = `<li class="player btn">
-            ${this.name} # ${this.number}
-            <br>
-            <strong>${this.position}</strong>
-            <div class="recordControls">
-            [
-                <span class="editBtn" onclick="TeamSnip.currentRoster.renderAddForm(this.id)" id="${this.playerId}">Edit</span> 
-            ] &nbsp;&nbsp; [
-                <span class="editBtn" onclick="TeamSnip.currentRoster.removePlayer(this.id); TeamSnip.currentRoster.render()" id="${this.playerId}">Delete</span> 
-            ] &nbsp;&nbsp; [
-                <span class="editBtn" onclick="TeamSnip.currentRoster.renderStats(this.id)" id="${this.playerId}">View Info</span> 
-            ]
-            </div>
-            </li>`;
-        }
+            MARKUP = `<li class="player btn">
+                ${this.name} # ${this.number}
+                <br>
+                <strong>${this.position}</strong>
+                <div class="recordControls">
+                [
+                    <span class="editBtn" onclick="TeamSnip.currentRoster.renderAddForm(this.id)" id="${this.playerId}">Edit</span> 
+                ] &nbsp;&nbsp; [
+                    <span class="editBtn" onclick="TeamSnip.currentRoster.removePlayer(this.id); TeamSnip.currentRoster.render()" id="${this.playerId}">Delete</span> 
+                ] &nbsp;&nbsp; [
+                    <span class="editBtn" onclick="TeamSnip.currentRoster.renderStats(this.id)" id="${this.playerId}">View Info</span> 
+                ]
+                </div>
+                </li>`;
+            }
         return MARKUP;
     }
 
@@ -269,13 +270,13 @@ function reload() {
 
 window.addEventListener('DOMContentLoaded', function () {
     if(window.localStorage['loaded']) {
-        console.log(window.localStorage['loaded']);
+        // console.log(window.localStorage['loaded']);
         var out = JSON.parse(window.localStorage['roster']);
         console.log(out);
         TeamSnip.currentRoster = new Roster();
         for (let i = 0; i < out.length; i++) {
-            TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position);
-            // console.log(out[i].name,out[i].number,out[i].position);
+            TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived);
+             console.log(out[i].name,out[i].number,out[i].position,out[i].archived);
         } 
         TeamSnip.currentRoster.render();
     }
