@@ -223,7 +223,7 @@ function reload() {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    if(window.localStorage['loaded']) {
+    if(window.localStorage['loadedSched']) {
         console.log(window.localStorage['loaded']);
         var out = JSON.parse(window.localStorage['schedule']);
         console.log(out);
@@ -244,7 +244,7 @@ window.addEventListener('DOMContentLoaded', function () {
         //     console.log(TeamSnip.currentRoster.roster[i]);
         // }
 
-        window.localStorage['loaded'] = true;
+        window.localStorage['loadedSched'] = true;
         window.localStorage['schedule'] = JSON.stringify(TeamSnip.currentSchedule.schedule);
         console.log(window.localStorage['roster']);
         TeamSnip.currentSchedule.render();
