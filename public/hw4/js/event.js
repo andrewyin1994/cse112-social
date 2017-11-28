@@ -60,6 +60,9 @@ function submitEvent() {
     console.log(nToAdd, eToAdd);
     TeamSnip.currentEventFeed.addEvent(nToAdd,eToAdd);
     TeamSnip.currentEventFeed.render();
+
+    // update player stats
+    window.localStorage['events'] = JSON.stringify(TeamSnip.currentEventFeed.events);
 }
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -75,13 +78,15 @@ window.addEventListener('DOMContentLoaded', function() {
             markup += "<option>" + n + "</option>";
         } 
         document.querySelector("#player_name").innerHTML = markup;
-        
     }
-    else {
-        
+
+    TeamSnip.currentEventFeed = new EventFeed();    
+    if(window.localStorage['events']) {
+        var out = JSON.parse(window.localStorage['events']);
+        for(let i=0; i < out.length; i++) {
+            TeamSnip.currentEventFeed.addEvent(out[i].name,out[i].event);
+        }
     }
-    
-    TeamSnip.currentEventFeed = new EventFeed();
     TeamSnip.currentEventFeed.render();
 }
 , false);
