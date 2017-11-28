@@ -28,7 +28,6 @@
             <a href="addplayer.html">+</a>
         </h1>
     </header>
-    
     <div class="dropdown">
         <select name="role" style="margin-top:.5rem; margin-bottom:.5rem;">
             <option value="position">All</option>
@@ -104,29 +103,42 @@
         <template id="playerFormTemplate">
         <form id="playerForm">
             <fieldset>
-            <legend>Player</legend>
-            <div>
-            <label for="playerName">Name</label>
-            <input type="text" id="playerName" placeholder="Player name" autofocus required>
-            </div>
-    
-            <div>
-            <label for="playerPosition">Position</label>
-            <input type="text" id="playerPosition" placeholder="Player position">
-            </div>
-            
-            <div>
-            <label for="playerNumber">Number</label>
-            <input type="number" id="playerNumber" placeholder="Player number" required>
-            </div>
-    
-            <div>
-            <input type="button" id="addPlayerBtn" value="Add">
-            <input type="button" id="cancelPlayerBtn" value="Cancel">
-            </div>
-        </fieldset>
+                <legend>Player</legend>
+                <div>
+                <label for="playerName">Name</label>
+                <input type="text" id="playerName" placeholder="Player name" autofocus required>
+                </div>
+        
+                <div>
+                <label for="playerPosition">Position</label>
+                <input type="text" id="playerPosition" placeholder="Player position">
+                </div>
+                
+                <div>
+                <label for="playerNumber">Number</label>
+                <input type="number" id="playerNumber" placeholder="Player number" required>
+                </div>
+        
+                <div>
+                <input type="button" id="addPlayerBtn" value="Add">
+                <input type="button" id="cancelPlayerBtn" value="Cancel">
+                </div>
+            </fieldset>
         </form>
         </template>
-    
-</body>
+
+        <template id="playerStatTemplate">
+            <fieldset>
+                <legend id="playerName"></legend>
+                <p id="goals"></p>    
+                <p id="sog"></p>
+                <p id="gkicks"></p>
+                <p id="ckicks"></p>
+                <p id="fouls"></p>
+                <p id="ycards"></p>
+                <p id="rcards"></p>
+                <input type="button" id="cancelPlayerBtn" value="Cancel">
+            </fieldset>
+        </template>
+    </body>
 </html>

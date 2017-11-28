@@ -56,7 +56,7 @@ class Roster {
 
     removePlayer(playerId) {
         let player = this.findPlayer(playerId);
-        player.remove();        
+        player.remove();
     }
 
     get() {
@@ -82,13 +82,12 @@ class Roster {
         
         let view = document.querySelector('#view');
         view.innerHTML = "";
-        view.appendChild(clonedTemplate); 
+        view.appendChild(clonedTemplate);
     
         document.querySelector('#addBtn').addEventListener('click', function () {
             TeamSnip.currentRoster.renderAddForm();
         }, false);
 
-    
     }
 
     renderAddForm(playerId) {
@@ -96,7 +95,6 @@ class Roster {
             clonedTemplate = document.importNode(template.content, true),
             view = document.querySelector('#view');
 
-        
 
         view.innerHTML = "";
         view.appendChild(clonedTemplate); 
@@ -134,6 +132,32 @@ class Roster {
         }, false);
     }
 
+    renderStats(playerId) {
+        let template = document.querySelector('#playerStatTemplate'),
+        clonedTemplate = document.importNode(template.content, true),
+        view = document.querySelector('#view');
+
+
+        view.innerHTML = "";
+        view.appendChild(clonedTemplate); 
+
+        if (playerId) {
+            let player = TeamSnip.currentRoster.findPlayer(playerId);
+            document.querySelector('#playerName').innerHTML = player.name;
+            document.querySelector('#goals').innerHTML = 'Goals: ' + player.goals;
+            document.querySelector('#sog').innerHTML = 'Shots on Goal: ' + player.sog;
+            document.querySelector('#gkicks').innerHTML = 'Goal Kicks: ' + player.gkicks;
+            document.querySelector('#ckicks').innerHTML = 'Corner Kicks: ' + player.ckicks;
+            document.querySelector('#fouls').innerHTML = 'Fouls: ' + player.fouls;
+            document.querySelector('#ycards').innerHTML = 'Yellow Cards: ' + player.ycards;
+            document.querySelector('#rcards').innerHTML = 'Red Cards: ' + player.rcards;
+        }
+        document.querySelector('#cancelPlayerBtn').addEventListener('click', function () {
+            TeamSnip.currentRoster.render();
+        }, false);
+        
+    }
+
 }
         
 class Player {
@@ -144,6 +168,13 @@ class Player {
         this.number = number;
         this.position = position;
         this.archived = false;
+        this.goals = 0;
+        this.sog = 0;
+        this.gkicks = 0;
+        this.ckicks = 0;
+        this.fouls = 0;
+        this.ycards = 0;
+        this.rcards = 0;
     }
 
     edit(name, number, position) {
@@ -179,17 +210,19 @@ class Player {
             <br>
             <strong>${this.position}</strong>
             <div class="recordControls">
-            [ <span class="editBtn" onclick="TeamSnip.currentRoster.renderAddForm(this.id)" id="${this.playerId}">Edit</span> 
+            [
+                <span class="editBtn" onclick="TeamSnip.currentRoster.renderAddForm(this.id)" id="${this.playerId}">Edit</span> 
             ] &nbsp;&nbsp; [
-            <span class="editBtn" onclick="TeamSnip.currentRoster.removePlayer(this.id); TeamSnip.currentRoster.render()" id="${this.playerId}">Delete</span> 
+                <span class="editBtn" onclick="TeamSnip.currentRoster.removePlayer(this.id); TeamSnip.currentRoster.render()" id="${this.playerId}">Delete</span> 
             ] &nbsp;&nbsp; [
-            <a href="player.html">view info</a>
+                <span class="editBtn" onclick="TeamSnip.currentRoster.renderStats(this.id)" id="${this.playerId}">View Info</span> 
             ]
             </div>
             </li>`;
         }
         return MARKUP;
-    } 
+    }
+
         
 } /* Player */
 // roster = [];
@@ -238,7 +271,6 @@ function reload() {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    
     // test basic rosterd
     for(let i = 0; i < roster.length; i++) {
         console.log(roster[i]);
@@ -254,19 +286,7 @@ window.addEventListener('DOMContentLoaded', function () {
         console.log(TeamSnip.currentRoster.roster[i]);
     }
 
-    window.sessionStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
-    console.log(window.sessionStorage['roster']);
-    
-    // create the team
-    // TeamSnip.currentRoster = new Team(store.teamname);
-    // for (let i = 0; i < store.roster.length; i++) {
-    //     TeamSnip.currentRoster.addPlayer(store.roster[i].name,store.roster[i].number,store.roster[i].position);
-    // }
-
-    // // bind the nav handlers
-    // document.querySelector('#rosterNav').addEventListener('click', function () { TeamSnip.currentRoster.renderRoster(); }, false);
-    // document.querySelector('#scheduleNav').addEventListener('click', function ()  { TeamSnip.currentRoster.renderSchedule(); }, false);
-    // document.querySelector('#statsNav').addEventListener('click', function () { TeamSnip.currentRoster.renderStats(); }, false);
-
-
+    window.localStorage('loaded') = true;
+    window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
+    console.log(window.localStorage['roster']);
 }, false);
