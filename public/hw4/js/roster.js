@@ -167,12 +167,12 @@ class Roster {
         
 class Player {
     
-    constructor (name,number,position,archived = 'Not assigned') {
+    constructor (name,number,position = 'Not assigned', archived) {
         this.playerId = TeamSnip.util.uuid();
         this.name = name;
         this.number = number;
         this.position = position;
-        this.archived = (archived==false)?false:true;
+        this.archived = archived;
         this.goals = 0;
         this.sog = 0;
         this.gkicks = 0;
