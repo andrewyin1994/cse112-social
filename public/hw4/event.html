@@ -5,7 +5,7 @@
     <title>Team Watch Event Page</title>
     <link rel="stylesheet" href="css/main.css">
     <style>
-            select{
+        select{
             /* height: 1.5rem; */
             width: 100%;
             border: 1px solid #ccc;
@@ -14,11 +14,16 @@
             font-size: .85rem;
             padding: 0.5rem .625rem;
         }
+
+        .event {width: 50vw;}
+        .event:hover {outline : 1px dashed black;}
+        .event:hover div.recordControls {visibility: visible}
+
     </style>
 </head>
 <body>
     <h1 class="center">Add Event</h1>
-    <form method="get" action="event.html" name="event-type">
+    <div name="event-type">
         <div class="form-group">
         <label for="event">Event: </label>
         <!-- <input list="event_types" name="event" id="event" class="form-control"> -->
@@ -38,11 +43,10 @@
         </select>
         <!-- <input type="text" id="name" name="player" class="form-control"> -->
         </div>
-        <input type="submit" id="add" value="Add Event">
-    </form>
+        <input type="button" id="add" value="Add Event" onclick="submitEvent()">
+    </div>
 
     <p class="center">Event Feed</p>
-    
     <main id="view"></main>
     <!-- <div class="btn-group">
         <button>Lionel Messi scored a goal!</button>
@@ -54,12 +58,13 @@
         <button>Lionel Messi scored a goal!</button>
     </div> -->
     <footer class="flex centered row">
-        <a href="home.html">&lt;&lt;Back</a>
+        <!-- <a href="home.html">&lt;&lt;Back</a> -->         
+        <input type="button" value="logout" onclick="logOut()">
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </footer>
 
+    <script src="js/event.js"></script>
     <template id="events">
-        <h1>Events</h1>
         <div id="eventList" class="btn-group"></div>
     </template>
 </body>
