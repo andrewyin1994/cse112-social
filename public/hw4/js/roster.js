@@ -37,7 +37,7 @@ class Roster {
     
     addPlayer(name, number, position, archived, goals) {
         let player = new Player(name, number, position, archived, goals);
-        // console.log(archived);
+        // console.log(archived);it 
         this.roster.push(player);
         window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
     }
