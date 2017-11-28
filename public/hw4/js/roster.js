@@ -12,7 +12,7 @@ const TeamSnip = {
 };
 
 /**
- * Class representing the team's roster of players. 
+ * Class representing the team"s roster of players. 
  */
 class Roster {
 
@@ -39,13 +39,13 @@ class Roster {
         let player = new Player(name, number, position, archived);
         console.log(archived);
         this.roster.push(player);
-        window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
+        window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
     }
 
     editPlayer(playerId, name, number, position) {
         let player = this.findPlayer(playerId);
         player.edit(name, number, position);   
-        window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
+        window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
     }
 
     findPlayer(playerId) {
@@ -61,7 +61,7 @@ class Roster {
     removePlayer(playerId) {
         let player = this.findPlayer(playerId);
         player.remove();
-        window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
+        window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
     }
 
     get() {
@@ -70,35 +70,35 @@ class Roster {
 
     render() {
         
-        let template = document.querySelector('#roster');
+        let template = document.querySelector("#roster");
         
-        let markup = '<ul>';
+        let markup = "<ul>";
         for (let i=0, len = roster.length; i < len; i++) {
             markup += roster[i].render(); 
         }
         for (let i=0, len = TeamSnip.currentRoster.roster.length; i < len; i++) {
             markup += TeamSnip.currentRoster.roster[i].render(); 
         }
-        markup += '</ul>';
+        markup += "</ul>";
     
-        template.content.querySelector('#playerList').innerHTML = markup;
+        template.content.querySelector("#playerList").innerHTML = markup;
     
         let clonedTemplate = document.importNode(template.content, true);
         
-        let view = document.querySelector('#view');
+        let view = document.querySelector("#view");
         view.innerHTML = "";
         view.appendChild(clonedTemplate);
     
-        document.querySelector('#addBtn').addEventListener('click', function () {
+        document.querySelector("#addBtn").addEventListener("click", function () {
             TeamSnip.currentRoster.renderAddForm();
         }, false);
 
     }
 
     renderAddForm(playerId) {
-        let template = document.querySelector('#playerFormTemplate'),
+        let template = document.querySelector("#playerFormTemplate"),
             clonedTemplate = document.importNode(template.content, true),
-            view = document.querySelector('#view');
+            view = document.querySelector("#view");
 
 
         view.innerHTML = "";
@@ -107,21 +107,21 @@ class Roster {
         if (playerId) {
             let player = TeamSnip.currentRoster.findPlayer(playerId);
             
-            document.querySelector('#playerName').value = player.name;
-            document.querySelector('#playerPosition').value = player.position;
-            document.querySelector('#playerNumber').value = player.number;
-            document.querySelector('#addPlayerBtn').setAttribute('data-action','edit');
-            document.querySelector('#addPlayerBtn').setAttribute('data-playerid',playerId);
+            document.querySelector("#playerName").value = player.name;
+            document.querySelector("#playerPosition").value = player.position;
+            document.querySelector("#playerNumber").value = player.number;
+            document.querySelector("#addPlayerBtn").setAttribute("data-action","edit");
+            document.querySelector("#addPlayerBtn").setAttribute("data-playerid",playerId);
         }
         
-        document.querySelector('#addPlayerBtn').addEventListener('click', function () {
+        document.querySelector("#addPlayerBtn").addEventListener("click", function () {
             
             let name, position, number,playerId;
 
-            name = document.querySelector('#playerName').value;
-            position = document.querySelector('#playerPosition').value;
-            number = document.querySelector('#playerNumber').value;
-            playerId = document.querySelector('#addPlayerBtn').getAttribute('data-playerid');
+            name = document.querySelector("#playerName").value;
+            position = document.querySelector("#playerPosition").value;
+            number = document.querySelector("#playerNumber").value;
+            playerId = document.querySelector("#addPlayerBtn").getAttribute("data-playerid");
 
             if (playerId) {
             TeamSnip.currentRoster.editPlayer(playerId,name,number,position);
@@ -132,15 +132,15 @@ class Roster {
             TeamSnip.currentRoster.render();
         }, false);
 
-        document.querySelector('#cancelPlayerBtn').addEventListener('click', function () {
+        document.querySelector("#cancelPlayerBtn").addEventListener("click", function () {
             TeamSnip.currentRoster.render();
         }, false);
     }
 
     renderStats(playerId) {
-        let template = document.querySelector('#playerStatTemplate'),
+        let template = document.querySelector("#playerStatTemplate"),
         clonedTemplate = document.importNode(template.content, true),
-        view = document.querySelector('#view');
+        view = document.querySelector("#view");
 
 
         view.innerHTML = "";
@@ -148,16 +148,16 @@ class Roster {
 
         if (playerId) {
             let player = TeamSnip.currentRoster.findPlayer(playerId);
-            document.querySelector('#playerName').innerHTML = player.name;
-            document.querySelector('#goals').innerHTML = 'Goals: ' + player.goals;
-            document.querySelector('#sog').innerHTML = 'Shots on Goal: ' + player.sog;
-            document.querySelector('#gkicks').innerHTML = 'Goal Kicks: ' + player.gkicks;
-            document.querySelector('#ckicks').innerHTML = 'Corner Kicks: ' + player.ckicks;
-            document.querySelector('#fouls').innerHTML = 'Fouls: ' + player.fouls;
-            document.querySelector('#ycards').innerHTML = 'Yellow Cards: ' + player.ycards;
-            document.querySelector('#rcards').innerHTML = 'Red Cards: ' + player.rcards;
+            document.querySelector("#playerName").innerHTML = player.name;
+            document.querySelector("#goals").innerHTML = "Goals: " + player.goals;
+            document.querySelector("#sog").innerHTML = "Shots on Goal: " + player.sog;
+            document.querySelector("#gkicks").innerHTML = "Goal Kicks: " + player.gkicks;
+            document.querySelector("#ckicks").innerHTML = "Corner Kicks: " + player.ckicks;
+            document.querySelector("#fouls").innerHTML = "Fouls: " + player.fouls;
+            document.querySelector("#ycards").innerHTML = "Yellow Cards: " + player.ycards;
+            document.querySelector("#rcards").innerHTML = "Red Cards: " + player.rcards;
         }
-        document.querySelector('#cancelPlayerBtn').addEventListener('click', function () {
+        document.querySelector("#cancelPlayerBtn").addEventListener("click", function () {
             TeamSnip.currentRoster.render();
         }, false);
         
@@ -167,19 +167,19 @@ class Roster {
         
 class Player {
     
-    constructor (name,number,position,archived = 'Not assigned') {
+    constructor (name,number,position,archived = "Not assigned", goals=0, sog=0, gkicks=0, ckicks=0, fouls=0, ycards=0,rcards=0) {
         this.playerId = TeamSnip.util.uuid();
         this.name = name;
         this.number = number;
         this.position = position;
         this.archived = (archived==false)?false:true;
-        this.goals = 0;
-        this.sog = 0;
-        this.gkicks = 0;
-        this.ckicks = 0;
-        this.fouls = 0;
-        this.ycards = 0;
-        this.rcards = 0;
+        this.goals = goals;
+        this.sog = sog;
+        this.gkicks = gkicks;
+        this.ckicks = ckicks;
+        this.fouls = fouls;
+        this.ycards = ycards;
+        this.rcards = rcards;
     }
 
     edit(name, number, position) {
@@ -207,8 +207,15 @@ class Player {
         }
     }
 
+    addgoal() {
+        this.goals++;
+    }
+    addSOG() {
+        this.sog++;
+    }
+
     render() {
-        let MARKUP = '';
+        let MARKUP = "";
         if (!this.archived) {
             MARKUP = `<li class="player btn">
                 ${this.name} # ${this.number}
@@ -235,26 +242,26 @@ class Player {
 
 function render() {
     
-    let template = document.querySelector('#roster');
+    let template = document.querySelector("#roster");
 
-    let markup = '<ul>';
+    let markup = "<ul>";
     // for (let i=0, len = roster.length; i < len; i++) {
     //     markup += roster[i].render(); 
     // }
     for (let i=0, len = TeamSnip.currentRoster.roster.length; i < len; i++) {
         markup += TeamSnip.currentRoster.roster[i].render(); 
     }
-    markup += '</ul>';
+    markup += "</ul>";
 
-    template.content.querySelector('#playerList').innerHTML = markup;
+    template.content.querySelector("#playerList").innerHTML = markup;
 
     let clonedTemplate = document.importNode(template.content, true);
    
-    let view = document.querySelector('#view');
+    let view = document.querySelector("#view");
     view.innerHTML = "";
     view.appendChild(clonedTemplate); 
 
-    document.querySelector('#addBtn').addEventListener('click', function () {
+    document.querySelector("#addBtn").addEventListener("click", function () {
        TeamSnip.currentRoster.renderAddForm();
     }, false);
 
@@ -268,14 +275,14 @@ function reload() {
     } 
 }
 
-window.addEventListener('DOMContentLoaded', function () {
-    if(window.localStorage['loaded']) {
-        // console.log(window.localStorage['loaded']);
-        var out = JSON.parse(window.localStorage['roster']);
+window.addEventListener("DOMContentLoaded", function () {
+    if(window.localStorage["loaded"]) {
+        // console.log(window.localStorage["loaded"]);
+        var out = JSON.parse(window.localStorage["roster"]);
         console.log(out);
         TeamSnip.currentRoster = new Roster();
         for (let i = 0; i < out.length; i++) {
-            TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived);
+            TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
              console.log(out[i].name,out[i].number,out[i].position,out[i].archived);
         } 
         TeamSnip.currentRoster.render();
@@ -290,9 +297,9 @@ window.addEventListener('DOMContentLoaded', function () {
         //     console.log(TeamSnip.currentRoster.roster[i]);
         // }
 
-        window.localStorage['loaded'] = true;
-        window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
-        console.log(window.localStorage['roster']);
+        window.localStorage["loaded"] = true;
+        window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
+        console.log(window.localStorage["roster"]);
         TeamSnip.currentRoster.render();
     }
 }, false);

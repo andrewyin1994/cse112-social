@@ -1,6 +1,4 @@
-const TeamSnip = {
-    currentEventFeed : undefined
-};
+const TeamSnip = { currentEventFeed : undefined };
 
 class EventFeed {
 
@@ -57,25 +55,37 @@ function submitEvent() {
     var eToAdd = e.options[e.selectedIndex].value;
     var n = document.getElementById('player_name');
     var nToAdd = n.options[n.selectedIndex].textContent;
+    var pId = n.options[n.selectedIndex].id;
     console.log(nToAdd, eToAdd);
     TeamSnip.currentEventFeed.addEvent(nToAdd,eToAdd);
     TeamSnip.currentEventFeed.render();
 
     // update player stats
+    var out = JSON.parse(window.localStorage['roster']);
+    if(eToAdd == 'Goal') {
+        for(let i = 0; i < out.length; i++) {
+            if(out[i].playerId == pId) {
+                out[i].goals++;
+            }
+        }
+    }
+
+    window.localStorage['roster'] = JSON.stringify(out);
+    
+    var out = JSON.parse(window.localStorage['roster']);
+    console.log(out);
     window.localStorage['events'] = JSON.stringify(TeamSnip.currentEventFeed.events);
 }
 
 window.addEventListener('DOMContentLoaded', function() {
     //read in from localStorage
     if(window.localStorage['loaded']) {
-        console.log(window.localStorage['loaded']);
         var out = JSON.parse(window.localStorage['roster']);
         let markup = '';
         for (let i = 0; i < out.length; i++) {
-            // TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position);
+            //TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position);
             // console.log(out[i].name,out[i].number,out[i].position);
-            n = out[i].name;
-            markup += "<option>" + n + "</option>";
+            markup += "<option id=" + out[i].playerId + ">" + out[i].name + "</option>";
         } 
         document.querySelector("#player_name").innerHTML = markup;
     }
