@@ -37,11 +37,13 @@ class Roster {
     addPlayer(name, number, position) {
         let player = new Player(name, number, position);
         this.roster.push(player);
+        window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
     }
 
     editPlayer(playerId, name, number, position) {
         let player = this.findPlayer(playerId);
         player.edit(name, number, position);   
+        window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
     }
 
     findPlayer(playerId) {
@@ -57,6 +59,7 @@ class Roster {
     removePlayer(playerId) {
         let player = this.findPlayer(playerId);
         player.remove();
+        window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
     }
 
     get() {
@@ -271,22 +274,36 @@ function reload() {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    // test basic rosterd
-    for(let i = 0; i < roster.length; i++) {
-        console.log(roster[i]);
+    if(window.localStorage['loaded']) {
+        console.log(window.localStorage['loaded']);
+        var out = JSON.parse(window.localStorage['roster']);
+        console.log(out);
+        TeamSnip.currentRoster = new Roster();
+        for (let i = 0; i < out.length; i++) {
+            TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position);
+            // console.log(out[i].name,out[i].number,out[i].position);
+        } 
+        TeamSnip.currentRoster.render();
     }
+    else {
+        // test basic roster
+        for(let i = 0; i < roster.length; i++) {
+            console.log(roster[i]);
+        }
 
-    TeamSnip.currentRoster = new Roster();
-    //testRoster = new Roster();
-    for (let i = 0; i < store.roster.length; i++) {
-        TeamSnip.currentRoster.addPlayer(store.roster[i].name,store.roster[i].number,store.roster[i].position);
-    } 
+        TeamSnip.currentRoster = new Roster();
+        //testRoster = new Roster();
+        for (let i = 0; i < store.roster.length; i++) {
+            TeamSnip.currentRoster.addPlayer(store.roster[i].name,store.roster[i].number,store.roster[i].position);
+        } 
 
-    for(let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
-        console.log(TeamSnip.currentRoster.roster[i]);
+        for(let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
+            console.log(TeamSnip.currentRoster.roster[i]);
+        }
+
+        window.localStorage['loaded'] = true;
+        window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
+        console.log(window.localStorage['roster']);
+        TeamSnip.currentRoster.render();
     }
-
-    window.localStorage('loaded') = true;
-    window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
-    console.log(window.localStorage['roster']);
 }, false);
