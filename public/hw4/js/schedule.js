@@ -1,5 +1,5 @@
 const TeamSnip = {
-    currentRoster : undefined,
+    currentSchedule : undefined,
 
     util : {
          uuid : function () {
@@ -23,6 +23,17 @@ class Roster {
         this.roster = [];
     }
 
+    isPlayerActive(playerId) {
+        return this.findPlayer(playerId).archived;
+    }
+
+    isNumberTaken(number) {
+        for (let i = 0; i < this.roster.length; i++) {
+            if (!this.roster[i].archived && (this.roster[i].number === number))
+                return true;
+        }
+        return false;
+    }
 
     addPlayer(name, number, position) {
         let player = new Player(name, number, position);
@@ -199,7 +210,7 @@ class Player {
         let MARKUP = '';
         if (!this.archived) {
         MARKUP = `<li class="player btn">
-            ${this.name}; Time: ${this.number}
+            ${this.name} # ${this.number}
             <br>
             <strong>${this.position}</strong>
             <div class="recordControls">
@@ -217,7 +228,8 @@ class Player {
     }
 
 
-}
+} /* Player */
+
 
 
 function render() {
@@ -246,7 +258,7 @@ function render() {
     }, false);
 
 
-   }
+}
 
 function reload() {
     for (let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
@@ -268,20 +280,14 @@ window.addEventListener('DOMContentLoaded', function () {
         TeamSnip.currentRoster.render();
     }
     else {
-        // test basic roster
-        for(let i = 0; i < roster.length; i++) {
-            console.log(roster[i]);
+        TeamSnip.currentRoster = new Roster();;
+        for (let i = 0; i < store.roster.length; i++) {
+            TeamSnip.currentRoster.addPlayer(store.roster[i].name,store.roster[i].number,store.roster[i].position);
         }
 
-        TeamSnip.currentRoster = new Roster();
-        //testRoster = new Roster();
-        for (let i = 0; i < storeSchedule.roster.length; i++) {
-            TeamSnip.currentRoster.addPlayer(storeSchedule.roster[i].name,storeSchedule.roster[i].number,storeSchedule.roster[i].position);
-        }
-
-        for(let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
-            console.log(TeamSnip.currentRoster.roster[i]);
-        }
+        // for(let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
+        //     console.log(TeamSnip.currentRoster.roster[i]);
+        // }
 
         window.localStorage['loaded'] = true;
         window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
