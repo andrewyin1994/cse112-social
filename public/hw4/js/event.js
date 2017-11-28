@@ -1,3 +1,7 @@
+const TeamSnip = {
+    currentEventFeed : undefined
+};
+
 class EventFeed {
 
     constructor() {
@@ -10,11 +14,11 @@ class EventFeed {
     }
 
     render() {
-        console.log(events.length);
+        console.log(TeamSnip.currentEventFeed.events.length);
         let template = document.querySelector('#events');
-        let markup = '<ul>';
-        for (let i=0, len = events.length; i < len; i++) {
-            markup += events[i].render(); 
+        let markup = "<ul>";
+        for (let i=0, len = TeamSnip.currentEventFeed.events.length; i < len; i++) {
+            markup += TeamSnip.currentEventFeed.events[i].render(); 
         }
         markup += '</ul>';
 
@@ -40,9 +44,7 @@ class Event {
         let MARKUP = '';
         if (!this.archived) {
         MARKUP = `<li class="event btn">
-            ${this.name} # ${this.name}
-            <br>
-            <strong>${this.name}</strong>
+            ${this.name}, ${this.event}
             </li>`;
         }
         return MARKUP;
@@ -50,11 +52,37 @@ class Event {
 
 }
 
+function submitEvent() {
+    var e = document.getElementById('event_types');
+    var eToAdd = e.options[e.selectedIndex].value;
+    var n = document.getElementById('player_name');
+    var nToAdd = n.options[n.selectedIndex].textContent;
+    console.log(nToAdd, eToAdd);
+    TeamSnip.currentEventFeed.addEvent(nToAdd,eToAdd);
+    TeamSnip.currentEventFeed.render();
+}
+
 window.addEventListener('DOMContentLoaded', function() {
     //read in from localStorage
-    let events = new EventFeed();
-    console.log('hi');
-    events.addEvent('Lionel Messi','Goal');
-    events.render();
+    if(window.localStorage['loaded']) {
+        console.log(window.localStorage['loaded']);
+        var out = JSON.parse(window.localStorage['roster']);
+        let markup = '';
+        for (let i = 0; i < out.length; i++) {
+            // TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position);
+            // console.log(out[i].name,out[i].number,out[i].position);
+            n = out[i].name;
+            markup += "<option>" + n + "</option>";
+        } 
+        document.querySelector("#player_name").innerHTML = markup;
+        
+    }
+    else {
+        
+    }
+    
+    TeamSnip.currentEventFeed = new EventFeed();
+    TeamSnip.currentEventFeed.addEvent('Lionel Messi','Goal');
+    TeamSnip.currentEventFeed.render();
 }
 , false);
