@@ -229,9 +229,7 @@ class Player {
 
         
 } /* Player */
-// roster = [];
-// var player = new Player('ABC', '123', 'Goalkeeper');
-// roster.push(player);
+
 
 
 function render() {
@@ -260,14 +258,9 @@ function render() {
     }, false);
 
    
-   }
+}
 
 function reload() {
-    // if(TeamSnip.currentRoster.roster.length == 0) {
-    //     for (let i = 0; i < store.roster.length; i++) {
-    //         TeamSnip.currentRoster.addPlayer(store.roster[i].name,store.roster[i].number,store.roster[i].position);
-    //     } 
-    // }
     for (let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
         if(TeamSnip.currentRoster.roster[i].archived == true)
             TeamSnip.currentRoster.roster[i].archived = false;
@@ -287,20 +280,14 @@ window.addEventListener('DOMContentLoaded', function () {
         TeamSnip.currentRoster.render();
     }
     else {
-        // test basic roster
-        for(let i = 0; i < roster.length; i++) {
-            console.log(roster[i]);
-        }
-
-        TeamSnip.currentRoster = new Roster();
-        //testRoster = new Roster();
+        TeamSnip.currentRoster = new Roster();;
         for (let i = 0; i < store.roster.length; i++) {
             TeamSnip.currentRoster.addPlayer(store.roster[i].name,store.roster[i].number,store.roster[i].position);
         } 
 
-        for(let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
-            console.log(TeamSnip.currentRoster.roster[i]);
-        }
+        // for(let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
+        //     console.log(TeamSnip.currentRoster.roster[i]);
+        // }
 
         window.localStorage['loaded'] = true;
         window.localStorage['roster'] = JSON.stringify(TeamSnip.currentRoster.roster);
