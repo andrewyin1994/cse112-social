@@ -82,7 +82,6 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     
     TeamSnip.currentEventFeed = new EventFeed();
-    TeamSnip.currentEventFeed.addEvent('Lionel Messi','Goal');
     TeamSnip.currentEventFeed.render();
 }
 , false);
