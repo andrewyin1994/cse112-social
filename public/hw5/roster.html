@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Team Watch Roster Page</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+    .dropdown select{
+        /* height: 1.5rem; */
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: .85rem;
+        padding: 0.5rem .625rem;
+    }
+    header a{
+        float: right;
+    }
+    header a:hover{
+        text-decoration: none;
+    }
+    </style>
+</head>
+<body>
+    <main id="view"></main>
+    <!-- <header>
+        <h1>Roster
+            <a href="addplayer.html">+</a>
+        </h1>
+    </header>
+    <div class="dropdown">
+        <select name="role" style="margin-top:.5rem; margin-bottom:.5rem;" id="sort"> 
+            <option value="position">All</option>
+            <option value="goalkeeper">Goalkeeper</option>
+            <option value="forward">Forward</option>
+            <option value="midfielder">Midfielder</option>
+            <option value="defender">Defender</option>
+        </select>
+    </div> -->
+
+    
+
+    <main id="view"></main>
+
+    <!-- <input type="button" value="render" onclick="render()">
+    <input type="button" value="reload" onclick="reload()"> -->
+
+    <hr>
+    <footer class="flex centered row">
+        <!-- <a href="home.html">&lt;&lt;Back</a> -->         
+        <input type="button" value="logout" onclick="logOut()">
+        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+    </footer>
+    <script src="js/roster.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Partials for the app -->
+    <template id="roster">
+        <h1>Team Roster</h1>
+        <div id="playerList" class="btn-group"></div>
+        <input type="button" value="Add" id="addBtn">
+    </template>
+    
+    
+    <template id="playerFormTemplate">
+        <form id="playerForm">
+            <fieldset>
+                <legend>Player</legend>
+                <div>
+                <label for="playerName">Name</label>
+                <input type="text" id="playerName" placeholder="Player name" autofocus required>
+                </div>
+        
+                <div>
+                <label for="playerPosition">Position</label>
+                <input type="text" id="playerPosition" placeholder="Player position">
+                </div>
+                
+                <div>
+                <label for="playerNumber">Number</label>
+                <input type="number" id="playerNumber" placeholder="Player number" required>
+                </div>
+        
+                <div>
+                <input type="button" id="addPlayerBtn" value="Add">
+                <input type="button" id="cancelPlayerBtn" value="Cancel">
+                </div>
+            </fieldset>
+        </form>
+    </template>
+
+    <template id="playerStatTemplate">
+        <fieldset>
+            <legend id="playerName"></legend>
+            <p id="goals"></p>    
+            <p id="sog"></p>
+            <p id="gkicks"></p>
+            <p id="ckicks"></p>
+            <p id="fouls"></p>
+            <p id="ycards"></p>
+            <p id="rcards"></p>
+            <input type="button" id="cancelPlayerBtn" value="Cancel">
+        </fieldset>
+    </template>
+    </body>
+</html>

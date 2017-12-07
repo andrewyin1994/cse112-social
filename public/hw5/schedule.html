@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Schedule Page</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <main id="view"></main>
+    <!-- <input type="button" value="render" onclick="render()">
+    <input type="button" value="reload" onclick="reload()"> -->
+    <footer class="footer flex centered row">
+        <!-- <a href="home.html">&lt;&lt;Back</a> -->
+        <input type="button" value="logout" onclick="logOut()">
+        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
+    </footer>
+
+
+    <script src="js/schedule.js"></script>
+    <script src="js/dataSchedule.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Partials for the app -->
+    <template id="schedule">
+            <h1>Team Schedule</h1>
+            <div id="playerList" class="btn-group"></div>
+            <input type="button" value="Add" id="addBtn">
+        </template>
+
+
+    <template id="playerFormTemplate">
+    <form id="playerForm">
+        <fieldset>
+        <legend>Add Schedule</legend>
+        <div>
+        <label for="playerName">Event: </label>
+        <input type="text" id="playerName" placeholder="Event name" autofocus required>
+        </div>
+
+        <div>
+        <label for="playerPosition">Date: </label>
+        <input type="text" id="playerPosition" placeholder="Date of event">
+        </div>
+
+        <div>
+        <label for="playerNumber">Time:</label>
+        <input type="number" id="playerNumber" placeholder="Time of event:" required>
+        </div>
+
+        <div>
+        <input type="button" id="addPlayerBtn" value="Add">
+        <input type="button" id="cancelPlayerBtn" value="Cancel">
+        </div>
+    </fieldset>
+    </form>
+    </template>
+</body>
+</html>

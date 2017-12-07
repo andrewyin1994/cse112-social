@@ -1,0 +1,10 @@
+statistics
+report
+adding images
+service worker and turning it into pwa
+(pwa = https, sw, manifest.json)
+network
+database
+cleanup of unused code
+refactoring of code to make it fast enough
+RAIL
