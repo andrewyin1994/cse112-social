@@ -5,6 +5,7 @@ service worker and turning it into pwa
 (pwa = https, sw, manifest.json)
 network
 database
+lighthouse and timings for report
 cleanup of unused code
 refactoring of code to make it fast enough
 RAIL
