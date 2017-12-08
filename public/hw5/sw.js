@@ -28,7 +28,7 @@ self.addEventListener('install', function(event) {
     caches.open(cacheID)
     .then(function(cache) {
       return cache.addAll(cacheFiles);
-    })
+    })cd 
     .catch(function(error) {
       console.log(`Unable to add cached assets: ${error}`);
     })
