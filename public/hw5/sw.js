@@ -3,18 +3,18 @@ const cacheID = 'v1';
 // Files to precache
 const cacheFiles = [
   // HTML Files
-  './page1.html',
-  './page2.html',
-  './page3.html',
+  './home.html',
+  './roster.html',
+  './schedule.html',
   // CSS Files
-  'assets/css/style.min.css',
+  './css/main.css',
   // Font Files
-  'assets/fonts/Lato.woff2',
+  './fonts/',
   // Image Files
-  'assets/imgs/placeholder.jpg',
+  './img/default-pic.jpg',
   // JS Files
-  'assets/js/index.js',
-  'assets/js/raven.min.js',
+  './js/index.js',
+  './js/raven.min.js',
   './sw.js',
   './app.js',
   // Misc. Files
