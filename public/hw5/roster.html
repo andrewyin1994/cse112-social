@@ -52,10 +52,8 @@
         <input type="button" value="logout" onclick="logOut()">
         <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
     </footer>
-    <script src="js/roster.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
-
+    <input type="button" value="clear localStorage" onclick="test123()">
+    
     <!-- Partials for the app -->
     <template id="roster">
         <h1>Team Roster</h1>
@@ -105,4 +103,37 @@
         </fieldset>
     </template>
     </body>
+    
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>    
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD2KbGQQLhhapSRQCa9y3cden7rmSL28tM",
+            authDomain: "cse134gahuyi.firebaseapp.com",
+            databaseURL: "https://cse134gahuyi.firebaseio.com",
+            projectId: "cse134gahuyi",
+            storageBucket: "cse134gahuyi.appspot.com",
+            messagingSenderId: "741715887321"
+        };
+        firebase.initializeApp(config);
+
+        //Initialize Firestore through Firebase
+        const fb = require("firebase");
+        // Required for side-effects
+        require("firebase/firestore");
+
+        var db = fb.firestore();
+    </script>
+
+    <script src="js/roster.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+            function test123() {
+            console.log("test123");
+            db.collection('roster/RJUNBogyEo5oUVZjWSnM').add({name: "John"});
+        }
+    </script>
+
 </html>
