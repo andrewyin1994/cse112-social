@@ -21,6 +21,8 @@
         text-decoration: none;
     }
     </style>
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
 </head>
 <body>
     <main id="view"></main>
@@ -102,21 +104,20 @@
             <input type="button" id="cancelPlayerBtn" value="Cancel">
         </fieldset>
     </template>
+
+    <!-- my firestore test -->
+    <h1 id="testingOutput">Test status:</h1>
+    <input type="textfield" id="latestTestStatus"/>
+    <button id="saveButton">Save</button>
+    
+    <script src="js/roster.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/testFirestore.js"></script>
+    <!-- end of firestore test-->
     </body>
     
-    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>    
     <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyD2KbGQQLhhapSRQCa9y3cden7rmSL28tM",
-            authDomain: "cse134gahuyi.firebaseapp.com",
-            databaseURL: "https://cse134gahuyi.firebaseio.com",
-            projectId: "cse134gahuyi",
-            storageBucket: "cse134gahuyi.appspot.com",
-            messagingSenderId: "741715887321"
-        };
-        firebase.initializeApp(config);
 
         //Initialize Firestore through Firebase
         const fb = require("firebase");
@@ -124,15 +125,13 @@
         require("firebase/firestore");
 
         var db = fb.firestore();
+        console.log("test123 part 2");
     </script>
 
-    <script src="js/roster.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
     <script>
             function test123() {
             console.log("test123");
-            db.collection('roster/RJUNBogyEo5oUVZjWSnM').add({name: "John"});
+            db.doc("roster/RJUNBogyEo5oUVZjWSnM").add({name: "John"});
         }
     </script>
 
