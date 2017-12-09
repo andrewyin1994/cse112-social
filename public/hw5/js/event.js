@@ -61,7 +61,6 @@ function submitEvent() {
     var n = document.getElementById('player_name');
     var nToAdd = n.options[n.selectedIndex].textContent;
     var pId = n.options[n.selectedIndex].id;
-    console.log(nToAdd, eToAdd);
     TeamSnip.currentEventFeed.addEvent(nToAdd,eToAdd);
     TeamSnip.currentEventFeed.render();
 
@@ -132,7 +131,8 @@ window.addEventListener('DOMContentLoaded', function() {
                 var e = JSON.parse(eventData);
                 for(let i=0; i < e.length; i++) {
                     TeamSnip.currentEventFeed.addEvent(e[i].name,e[i].event);
-                }                    
+                }     
+                TeamSnip.currentEventFeed.render();                
             }
             else {
                 console.log("NO DOC");
@@ -141,8 +141,6 @@ window.addEventListener('DOMContentLoaded', function() {
         .catch(function(err) {
             console.log("Error: ", err);
         });
-        console.log(TeamSnip.currentEventFeed.events,TeamSnip.currentEventFeed.events.length);
-        TeamSnip.currentEventFeed.render();
     }
 }
 , false);
