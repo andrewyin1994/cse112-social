@@ -1,33 +1,3 @@
-/*
-Goal:
-Add functionality for at least 5 features:
-1) login
-2) logout
-3) scheduling
-4) roster
-5) statistics
-
-useful:
-https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-use localStorage, which is a built-in object in the browser/webAPI/ that allows you to store key value pairs,
-use it to store arrays of objects or whatever kind of data you need
-(key k: value v, v can be any kind of thing, even an array[])
-sessionStorage is stored until the browser session ends
-*/
-
-/* Firebase Aunthetication */
-// not under one function??
-// initialize Firebase
-// var config = {
-//     apiKey: "AIzaSyD2KbGQQLhhapSRQCa9y3cden7rmSL28tM",
-//     authDomain: "cse134gahuyi.firebaseapp.com",
-//     databaseURL: "https://cse134gahuyi.firebaseio.com",
-//     projectId: "cse134gahuyi",
-//     storageBucket: "cse134gahuyi.appspot.com",
-//     messagingSenderId: "741715887321"
-// };
-// firebase.initializeApp(config);
-
 const txtEmail = document.getElementById('user');
 const txtPassword = document.getElementById('password');
 const btnLogin = document.getElementById('btnLogin');
@@ -56,10 +26,10 @@ btnSignUp.addEventListener('click', e => {
     promise.catch(e => console.log(e.message));
 });
 
-// Logout button
-btnLogout.addEventListener('click', e => {
-    firebase.auth().signOut();
-});
+// // Logout button
+// btnLogout.addEventListener('click', e => {
+//     firebase.auth().signOut();
+// });
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
     // checks if user exists
