@@ -1,102 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Team Watch Roster Page</title>
-    <link rel="stylesheet" href="css/main.css">
-    <style>
-    .dropdown select{
-        /* height: 1.5rem; */
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: .85rem;
-        padding: 0.5rem .625rem;
-    }
-    header a{
-        float: right;
-    }
-    header a:hover{
-        text-decoration: none;
-    }
-    </style>
-    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+<meta charset="utf-8">
+<title>Team Watch Roster Page</title>
+<link rel="stylesheet" href="css/main.css">
+<style>
+.dropdown select{
+/* height: 1.5rem; */
+width: 100%;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+font-size: .85rem;
+padding: 0.5rem .625rem;
+}
+header a{
+float: right;
+}
+header a:hover{
+text-decoration: none;
+}
+</style>
+<script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
 </head>
 <body>
 
-    <main id="view"></main>
+<main id="view"></main>
 
-    <!-- <input type="button" value="render" onclick="render()">
-    <input type="button" value="reload" onclick="reload()"> -->
+<!-- <input type="button" value="render" onclick="render()">
+<input type="button" value="reload" onclick="reload()"> -->
 
-    <hr>
-    <footer class="flex centered row">
-        <!-- <a href="home.html">&lt;&lt;Back</a> -->         
-        <input type="button" value="logout" onclick="logOut()">
-        <img src="img/soccer_ball_emoji.png" alt="soccer ball" height="42">
-    </footer>
-    <input type="button" value="clear localStorage" onclick="test123()">
-    
-    <!-- Partials for the app -->
-    <template id="roster">
-        <h1>Team Roster</h1>
-        <div id="playerList" class="btn-group"></div>
-        <input type="button" value="Add" id="addBtn">
-    </template>
-    
-    <template id="playerFormTemplate">
-        <form id="playerForm">
-            <fieldset>
-                <legend>Player</legend>
-                <div>
-                <label for="playerName">Name</label>
-                <input type="text" id="playerName" placeholder="Player name" autofocus required>
-                </div>
-        
-                <div>
-                <label for="playerPosition">Position</label>
-                <input type="text" id="playerPosition" placeholder="Player position">
-                </div>
-                
-                <div>
-                <label for="playerNumber">Number</label>
-                <input type="number" id="playerNumber" placeholder="Player number" required>
-                </div>
-        
-                <div>
-                <input type="button" id="addPlayerBtn" value="Add">
-                <input type="button" id="cancelPlayerBtn" value="Cancel">
-                </div>
-            </fieldset>
-        </form>
-    </template>
+<hr>
+<footer class="flex centered row">
+<!-- <a href="home.html">&lt;&lt;Back</a> -->         
+<input type="button" value="logout" onclick="logOut()">
+<img src="img/soccer_ball_emoji.webp" alt="soccer ball" height="42">
+</footer>
 
-    <template id="playerStatTemplate">
-        <fieldset>
-            <legend id="playerName"></legend>
-            <p id="goals"></p>    
-            <p id="sog"></p>
-            <p id="gkicks"></p>
-            <p id="ckicks"></p>
-            <p id="fouls"></p>
-            <p id="ycards"></p>
-            <p id="rcards"></p>
-            <input type="button" id="cancelPlayerBtn" value="Cancel">
-        </fieldset>
-    </template>
+<!-- Partials for the app -->
+<template id="roster">
+<h1>Team Roster</h1>
+<div id="playerList" class="btn-group"></div>
+<input type="button" value="Add" id="addBtn">
+</template>
 
-    <!-- my firestore test -->
-    <h1 id="testingOutput">Test status:</h1>
-    <input type="textfield" id="latestTestStatus"/>
-    <button id="saveButton">Save</button>
-    <button id="loadButton">Load</button>
-    
-    <script src="js/fb.js"></script>    
-    <script src="js/roster.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
-    <!-- end of firestore test-->
-    </body>
+<template id="playerFormTemplate">
+<form id="playerForm">
+<fieldset>
+<legend>Player</legend>
+<div>
+<label for="playerName">Name</label>
+<input type="text" id="playerName" placeholder="Player name" autofocus required>
+</div>
+
+<div>
+<label for="playerPosition">Position</label>
+<input type="text" id="playerPosition" placeholder="Player position">
+</div>
+
+<div>
+<label for="playerNumber">Number</label>
+<input type="number" id="playerNumber" placeholder="Player number" required>
+</div>
+
+<div>
+<input type="button" id="addPlayerBtn" value="Add">
+<input type="button" id="cancelPlayerBtn" value="Cancel">
+</div>
+</fieldset>
+</form>
+</template>
+
+<template id="playerStatTemplate">
+<fieldset>
+<legend id="playerName"></legend>
+<p id="goals"></p>    
+<p id="sog"></p>
+<p id="gkicks"></p>
+<p id="ckicks"></p>
+<p id="fouls"></p>
+<p id="ycards"></p>
+<p id="rcards"></p>
+<input type="button" id="cancelPlayerBtn" value="Cancel">
+</fieldset>
+</template>
+
+<script src="js/fb.js"></script>    
+<script src="js/roster.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>
