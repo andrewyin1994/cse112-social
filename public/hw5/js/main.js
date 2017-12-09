@@ -28,8 +28,8 @@ sessionStorage is stored until the browser session ends
 // };
 // firebase.initializeApp(config);
 
-const txtEmail = document.getElementById('txtEmail');
-const txtPassword = document.getElementById('txtPassword');
+const txtEmail = document.getElementById('user');
+const txtPassword = document.getElementById('password');
 const btnLogin = document.getElementById('btnLogin');
 const btnSignUp = document.getElementById('btnSignUp');
 const btnLogout = document.getElementById('btnLogout');
@@ -42,6 +42,7 @@ btnLogin.addEventListener('click', e => {
 
     const promise = auth.signInWithEmailAndPassword(email, pass);
     promise.catch(e => console.log(e.message));
+
 });
 
 // Sign Up button
@@ -63,7 +64,8 @@ btnLogout.addEventListener('click', e => {
 firebase.auth().onAuthStateChanged(firebaseUser => {
     // checks if user exists
     if(firebaseUser) {
-        console.log(firebaseUser);
+        console.log(firebaseUser);  
+        window.location.href = "team.html";
     } else {
         console.log('not logged in');
     }
@@ -95,6 +97,7 @@ function verifyLogin() {
 
 /* old logout */
 function logOut() {
+    firebase.auth().signOut();
     window.location.href = "home.html";
     return true;
 }
