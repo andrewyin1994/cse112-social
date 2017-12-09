@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Schedule Page</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
 </head>
 <body>
 
@@ -17,9 +19,6 @@
     </footer>
 
 
-    <script src="js/schedule.js"></script>
-    <script src="js/dataSchedule.js"></script>
-    <script src="js/main.js"></script>
 
     <!-- Partials for the app -->
     <template id="schedule">
@@ -27,7 +26,6 @@
             <div id="playerList" class="btn-group"></div>
             <input type="button" value="Add" id="addBtn">
         </template>
-
 
     <template id="playerFormTemplate">
     <form id="playerForm">
@@ -55,5 +53,10 @@
     </fieldset>
     </form>
     </template>
+
+    <script src="js/fb.js"></script>
+    <script src="js/schedule.js"></script>
+    <script src="js/dataSchedule.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
