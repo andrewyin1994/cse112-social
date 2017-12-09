@@ -11,6 +11,8 @@ const TeamSnip = {
 
 };
 
+const dR = firestore.doc("roster/players")
+
 /**
  * Class representing the team"s roster of players. 
  */
@@ -40,12 +42,14 @@ class Roster {
         // console.log(archived);it 
         this.roster.push(player);
         window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
+        dR.set({roster: window.localStorage["roster"]});
     }
 
     editPlayer(playerId, name, number, position) {
         let player = this.findPlayer(playerId);
         player.edit(name, number, position);   
         window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
+        dR.set({roster: window.localStorage["roster"]});        
     }
 
     findPlayer(playerId) {
@@ -62,6 +66,7 @@ class Roster {
         let player = this.findPlayer(playerId);
         player.remove();
         window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
+        dR.set({roster: window.localStorage["roster"]});
     }
 
     get() {
@@ -238,8 +243,6 @@ class Player {
         
 } /* Player */
 
-
-
 function render() {
     
     let template = document.querySelector("#roster");
@@ -264,8 +267,6 @@ function render() {
     document.querySelector("#addBtn").addEventListener("click", function () {
        TeamSnip.currentRoster.renderAddForm();
     }, false);
-
-   
 }
 
 function reload() {
@@ -276,22 +277,35 @@ function reload() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
-    if(window.localStorage["loaded"]) {
+    if(!navigator.onLine) {
         // console.log(window.localStorage["loaded"]);
         var out = JSON.parse(window.localStorage["roster"]);
         console.log(out);
         TeamSnip.currentRoster = new Roster();
         for (let i = 0; i < out.length; i++) {
             TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
-             console.log(out[i].name,out[i].number,out[i].position,out[i].archived,);
+             console.log(out[i].name,out[i].number,out[i].position,out[i].archived);
         } 
         TeamSnip.currentRoster.render();
     }
     else {
-        TeamSnip.currentRoster = new Roster();;
-        for (let i = 0; i < store.roster.length; i++) {
-            TeamSnip.currentRoster.addPlayer(store.roster[i].name,store.roster[i].number,store.roster[i].position);
-        } 
+        TeamSnip.currentRoster = new Roster();
+        dR.get().then(function(doc) {
+                if(doc && doc.exists) {
+                    const myData = doc.data().roster;
+                    console.log(myData);
+                    var out = JSON.parse(myData);
+                    for (let i = 0; i < out.length; i++) {
+                        TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
+                        console.log(out[i].name,out[i].number,out[i].position,out[i].archived);            
+                    }
+                }
+                TeamSnip.currentRoster.render();
+                
+            })
+            .catch(function(err) {
+                console.log("Error: ", err);
+            }); 
 
         // for(let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
         //     console.log(TeamSnip.currentRoster.roster[i]);
