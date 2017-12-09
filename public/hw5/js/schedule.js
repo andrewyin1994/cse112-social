@@ -12,12 +12,12 @@ const TeamSnip = {
 };
 
 /**
- * Class representing the team's roster of players.
+ * Class representing the team's schedule of players.
  */
 class Schedule {
 
     /**
-     * Set the roster as an array of Players.
+     * Set the schedule as an array of Players.
      */
     constructor () {
         this.schedule = [];
@@ -223,30 +223,32 @@ function reload() {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    if(window.localStorage['loadedSched']) {
-        console.log(window.localStorage['loaded']);
-        var out = JSON.parse(window.localStorage['schedule']);
-        console.log(out);
-        TeamSnip.currentSchedule = new Schedule();
-        for (let i = 0; i < out.length; i++) {
-            TeamSnip.currentSchedule.addSchedule(out[i].name,out[i].number,out[i].position);
-            // console.log(out[i].name,out[i].number,out[i].position);
+
+    if(!navigator.onLine) {   
+        if(window.localStorage['loadedSched']) {
+            console.log(window.localStorage['loaded']);
+            var out = JSON.parse(window.localStorage['schedule']);
+            console.log(out);
+            TeamSnip.currentSchedule = new Schedule();
+            for (let i = 0; i < out.length; i++) {
+                TeamSnip.currentSchedule.addSchedule(out[i].name,out[i].number,out[i].position);
+            }
+            TeamSnip.currentSchedule.render();
         }
-        TeamSnip.currentSchedule.render();
     }
     else {
-        TeamSnip.currentSchedule = new Schedule();;
-        for (let i = 0; i < storeSchedule.roster.length; i++) {
-            TeamSnip.currentSchedule.addSchedule(storeSchedule.roster[i].name,storeSchedule.roster[i].number,storeSchedule.roster[i].position);
+        if (doc && doc.exists) {
+            TeamSnip.currentSchedule = new Schedule();
+            for (let i = 0; i < storeSchedule.roster.length; i++) {
+                TeamSnip.currentSchedule.addSchedule(storeSchedule.roster[i].name,storeSchedule.roster[i].number,storeSchedule.roster[i].position);
+            }
+
+            window.localStorage['loadedSched'] = true;
+            window.localStorage['schedule'] = JSON.stringify(TeamSnip.currentSchedule.schedule);
+            TeamSnip.currentSchedule.render();
         }
-
-        // for(let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
-        //     console.log(TeamSnip.currentRoster.roster[i]);
-        // }
-
-        window.localStorage['loadedSched'] = true;
-        window.localStorage['schedule'] = JSON.stringify(TeamSnip.currentSchedule.schedule);
-        console.log(window.localStorage['roster']);
-        TeamSnip.currentSchedule.render();
+        else {
+            console.log("NO DOC")
+        }
     }
 }, false);

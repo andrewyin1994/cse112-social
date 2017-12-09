@@ -240,7 +240,8 @@ class Player {
     }
 
         
-} /* Player */
+} 
+/* Player */
 
 // function render() {
     
@@ -278,14 +279,16 @@ function reload() {
 window.addEventListener("DOMContentLoaded", function () {
     TeamSnip.currentRoster = new Roster();
     if(!navigator.onLine) {
-        // console.log(window.localStorage["loaded"]);
-        var out = JSON.parse(window.localStorage["roster"]);
-        console.log("Offline");
-        for (let i = 0; i < out.length; i++) {
-            TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
-             console.log(out[i].name,out[i].number,out[i].position,out[i].archived);
-        } 
-        TeamSnip.currentRoster.render();
+        if(window.localStorage['roster']) {            
+            // console.log(window.localStorage["loaded"]);
+            var out = JSON.parse(window.localStorage["roster"]);
+            console.log("Offline");
+            for (let i = 0; i < out.length; i++) {
+                TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
+                console.log(out[i].name,out[i].number,out[i].position,out[i].archived);
+            } 
+            TeamSnip.currentRoster.render();
+        }
     }
     else {
         console.log("Online");        
