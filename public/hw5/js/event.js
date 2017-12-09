@@ -7,22 +7,23 @@ const docRef2 = firestore.doc("plays/events");
 
 class EventFeed {
 
-    constructor() {
-        this.events = [];     
+    constructor(events=[]) {
+        this.events = events;
+        this.count = 0;
     }
 
     addEvent(name,eventType) {
         let event = new Event(name,eventType);
-        TeamSnip.currentEventFeed.events.push(event);
-        console.log(name, eventType);
+        this.events.push(event);
+        this.count++;
     }
 
     render() {
-        console.log(TeamSnip.currentEventFeed.events.length);
+        console.log(this.events);
         let template = document.querySelector('#events');
         let markup = "<ul>";
-        for (let i=0, len = TeamSnip.currentEventFeed.events.length; i < len; i++) {
-            markup += TeamSnip.currentEventFeed.events[i].render(); 
+        for (let i=0, len = this.events.length; i < len; i++) {
+            markup += this.events[i].render();
         }
         markup += '</ul>';
 
@@ -140,7 +141,8 @@ window.addEventListener('DOMContentLoaded', function() {
         .catch(function(err) {
             console.log("Error: ", err);
         });
-        TeamSnip.currentEventFeed.render();        
+        console.log(TeamSnip.currentEventFeed.events,TeamSnip.currentEventFeed.events.length);
+        TeamSnip.currentEventFeed.render();
     }
 }
 , false);
