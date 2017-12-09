@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Team Watch Home Page</title>
     <!-- <link rel="stylesheet" href="css/home.css"> -->
+    <!-- Firebase -->   
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
     <style>
         body{
             /* same padding and margins as other */
@@ -82,7 +84,7 @@
 <body>
     <h1 class="heading">TeamWatch</h1>
     <header class="img-center">
-        <!-- <img src="img/soccer_ball_emoji.webp" alt="soccer ball" height="100%"> -->
+        <img src="img/soccer_ball_emoji.webp" alt="soccer ball" height="100%">
     </header>
     <form name="loginForm" method="get" action="team.html" onsubmit="return verifyLogin()">
         <div class="form-group">
@@ -98,6 +100,16 @@
         <footer><a href="create-prompt.html"><p>New User</p></a></footer>
     </form>
 
+    <!-- login authentication -->
+    <input id="txtEmail" type="email" placeholder="Email">
+    <input id="txtPassword" type="password" placeholder="Password">
+
+    <button id="btnLogin">Login</button>
+    <button id="btnSignUp">Sign Up</button>
+    <button id="btnLogout" class="hide">Log Out</button>
+
+    <!-- <input type="button" value="test1" onclick="test()">
+    <input type="button" value="test2" onclick="test2()"> -->
     <footer class="footer">
         <a href="about.html">About TeamWatch</a>
         <p>&copy;Team VL</p>

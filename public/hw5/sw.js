@@ -9,21 +9,15 @@ const cacheFiles = [
   // CSS Files
   './css/main.css',
   // Font Files
-  // './fonts
-  // './fonts/glyphicons-halflings-regular.eot',
-  // './fonts/glyphicons-halflings-regular.svg',
-  // './fonts/glyphicons-halflings-regular.ttf',
-  // './fonts/glyphicons-halflings-regular.woff',
-  // './fonts/glyphicons-halflings-regular.woff2',
   // Image Files
-  './img/default-pic.jpg',
+  // './img/default-pic.jpg',
   // JS Files
-  // './js/index.js',
-  // './js/raven.min.js',
   './sw.js',
-  './app.js',
+  './js/roster.js',
+  './js/schedule.js',
+  // './app.js',
   // Misc. Files
-  './manifest.json',
+  // './manifest.json',
 ];
 
 // Service Worker Install Event
