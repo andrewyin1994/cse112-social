@@ -35,9 +35,9 @@ class Roster {
         }      
         return false;
     }
-    
-    addPlayer(name, number, position, archived, goals) {
-        let player = new Player(name, number, position, archived, goals);
+
+    addPlayer(name, number, position, archived, goals, sog, gkicks, ckicks, fouls, ycards, rcards) {
+        let player = new Player(name, number, position, archived, goals, sog, gkicks, ckicks, fouls, ycards, rcards);
         // console.log(archived);it 
         this.roster.push(player);
         window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
@@ -282,8 +282,9 @@ window.addEventListener("DOMContentLoaded", function () {
         var out = JSON.parse(window.localStorage["roster"]);
         console.log("Offline");
         for (let i = 0; i < out.length; i++) {
-            TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
+            TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals,out[i].sog,out[i].gkicks, out[i].ckicks, out[i].fouls, out[i].ycards, out[i].rcards);
              console.log(out[i].name,out[i].number,out[i].position,out[i].archived);
+             
         } 
         TeamSnip.currentRoster.render();
     }
@@ -296,7 +297,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     console.log(myData);
                     var out = JSON.parse(myData);
                     for (let i = 0; i < out.length; i++) {
-                        TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
+                        TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals,out[i].sog,out[i].gkicks, out[i].ckicks, out[i].fouls, out[i].ycards, out[i].rcards);
                         console.log(out[i].name,out[i].number,out[i].position,out[i].archived);            
                     }
                 }
