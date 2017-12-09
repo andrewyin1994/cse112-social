@@ -7,22 +7,23 @@ const docRef2 = firestore.doc("plays/events");
 
 class EventFeed {
 
-    constructor() {
-        this.events = [];     
+    constructor(events=[]) {
+        this.events = events;
+        this.count = 0;
     }
 
     addEvent(name,eventType) {
         let event = new Event(name,eventType);
-        TeamSnip.currentEventFeed.events.push(event);
-        console.log(name, eventType);
+        this.events.push(event);
+        this.count++;
     }
 
     render() {
-        console.log(TeamSnip.currentEventFeed.events.length);
+        console.log(this.events);
         let template = document.querySelector('#events');
         let markup = "<ul>";
-        for (let i=0, len = TeamSnip.currentEventFeed.events.length; i < len; i++) {
-            markup += TeamSnip.currentEventFeed.events[i].render(); 
+        for (let i=0, len = this.events.length; i < len; i++) {
+            markup += this.events[i].render();
         }
         markup += '</ul>';
 
@@ -60,7 +61,6 @@ function submitEvent() {
     var n = document.getElementById('player_name');
     var nToAdd = n.options[n.selectedIndex].textContent;
     var pId = n.options[n.selectedIndex].id;
-    console.log(nToAdd, eToAdd);
     TeamSnip.currentEventFeed.addEvent(nToAdd,eToAdd);
     TeamSnip.currentEventFeed.render();
 
@@ -131,7 +131,8 @@ window.addEventListener('DOMContentLoaded', function() {
                 var e = JSON.parse(eventData);
                 for(let i=0; i < e.length; i++) {
                     TeamSnip.currentEventFeed.addEvent(e[i].name,e[i].event);
-                }                    
+                }     
+                TeamSnip.currentEventFeed.render();                
             }
             else {
                 console.log("NO DOC");
@@ -140,7 +141,6 @@ window.addEventListener('DOMContentLoaded', function() {
         .catch(function(err) {
             console.log("Error: ", err);
         });
-        TeamSnip.currentEventFeed.render();        
     }
 }
 , false);
