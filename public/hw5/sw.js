@@ -9,12 +9,17 @@ const cacheFiles = [
   // CSS Files
   './css/main.css',
   // Font Files
-  './fonts/',
+  // './fonts
+  // './fonts/glyphicons-halflings-regular.eot',
+  // './fonts/glyphicons-halflings-regular.svg',
+  // './fonts/glyphicons-halflings-regular.ttf',
+  // './fonts/glyphicons-halflings-regular.woff',
+  // './fonts/glyphicons-halflings-regular.woff2',
   // Image Files
   './img/default-pic.jpg',
   // JS Files
-  './js/index.js',
-  './js/raven.min.js',
+  // './js/index.js',
+  // './js/raven.min.js',
   './sw.js',
   './app.js',
   // Misc. Files
@@ -28,7 +33,7 @@ self.addEventListener('install', function(event) {
     caches.open(cacheID)
     .then(function(cache) {
       return cache.addAll(cacheFiles);
-    })cd 
+    })
     .catch(function(error) {
       console.log(`Unable to add cached assets: ${error}`);
     })
