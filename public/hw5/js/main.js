@@ -16,6 +16,7 @@ sessionStorage is stored until the browser session ends
 */
 
 /* Firebase Aunthetication */
+// not under one function??
 // initialize Firebase
 var config = {
     apiKey: "AIzaSyD2KbGQQLhhapSRQCa9y3cden7rmSL28tM",
@@ -27,7 +28,47 @@ var config = {
 };
 firebase.initializeApp(config);
 
+const txtEmail = document.getElementById('txtEmail');
+const txtPassword = document.getElementById('txtPassword');
+const btnLogin = document.getElementById('btnLogin');
+const btnSignUp = document.getElementById('btnSignUp');
+const btnLogout = document.getElementById('btnLogout');
 
+// Login button
+btnLogin.addEventListener('click', e => {
+    const email = txtEmail.value;
+    const pass = txtPassword.value;
+    const auth = firebase.auth();
+
+    const promise = auth.signInWithEmailAndPassword(email, pass);
+    promise.catch(e => console.log(e.message));
+});
+
+// Sign Up button
+btnSignUp.addEventListener('click', e => {
+    // need for email verification
+    const email = txtEmail.value;
+    const pass = txtPassword.value;
+    const auth = firebase.auth();
+
+    const promise = auth.createUserWithEmailAndPassword(email, pass);
+    promise.catch(e => console.log(e.message));
+});
+
+// Logout button
+btnLogout.addEventListener('click', e => {
+    firebase.auth().signOut();
+});
+// Real time listener
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    // checks if user exists
+    if(firebaseUser) {
+        console.log(firebaseUser);
+    } else {
+        console.log('not logged in');
+    }
+});
+/* end of Firebase Authentication */
 
 function clearStorage() {
     window.localStorage.clear();
@@ -85,7 +126,7 @@ function verifyLogin() {
 
 }
 
-
+/* old logout */
 function logOut() {
     window.location.href = "home.html";
     return true;
