@@ -10,7 +10,7 @@ const TeamSnip = {
     }   
 };
 
-const dR = firestore.doc("roster/players")
+const dR = firestore.doc("roster/players");
 
 /**
  * Class representing the team"s roster of players. 
@@ -292,12 +292,16 @@ window.addEventListener("DOMContentLoaded", function () {
         dR.get().then(function(doc) {
                 if(doc && doc.exists) {
                     const myData = doc.data().roster;
+                    window.localStorage['roster'];
                     console.log(myData);
                     var out = JSON.parse(myData);
                     for (let i = 0; i < out.length; i++) {
                         TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
                         console.log(out[i].name,out[i].number,out[i].position,out[i].archived);            
                     }
+                }
+                else {
+                    console.log("NO DOC");
                 }
                 TeamSnip.currentRoster.render();
                 

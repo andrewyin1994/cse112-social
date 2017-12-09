@@ -18,15 +18,15 @@ sessionStorage is stored until the browser session ends
 /* Firebase Aunthetication */
 // not under one function??
 // initialize Firebase
-var config = {
-    apiKey: "AIzaSyD2KbGQQLhhapSRQCa9y3cden7rmSL28tM",
-    authDomain: "cse134gahuyi.firebaseapp.com",
-    databaseURL: "https://cse134gahuyi.firebaseio.com",
-    projectId: "cse134gahuyi",
-    storageBucket: "cse134gahuyi.appspot.com",
-    messagingSenderId: "741715887321"
-};
-firebase.initializeApp(config);
+// var config = {
+//     apiKey: "AIzaSyD2KbGQQLhhapSRQCa9y3cden7rmSL28tM",
+//     authDomain: "cse134gahuyi.firebaseapp.com",
+//     databaseURL: "https://cse134gahuyi.firebaseio.com",
+//     projectId: "cse134gahuyi",
+//     storageBucket: "cse134gahuyi.appspot.com",
+//     messagingSenderId: "741715887321"
+// };
+// firebase.initializeApp(config);
 
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
@@ -106,7 +106,7 @@ function clearStorage() {
 
 window.addEventListener("DOMContentLoaded", function() {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('./sw.js')
         .then(function(registration) {
             console.log('Registration successful, scope is:', registration.scope);
         })

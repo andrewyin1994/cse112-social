@@ -1,5 +1,10 @@
 const TeamSnip = { currentEventFeed : undefined };
 
+firestore = firebase.firestore();
+
+const docRef = firestore.doc("roster/players");
+const docRef2 = firestore.doc("plays/events");
+
 class EventFeed {
 
     constructor() {
@@ -8,7 +13,8 @@ class EventFeed {
 
     addEvent(name,eventType) {
         let event = new Event(name,eventType);
-        this.events.push(event);
+        TeamSnip.currentEventFeed.events.push(event);
+        console.log(name, eventType);
     }
 
     render() {
@@ -27,7 +33,6 @@ class EventFeed {
         let view = document.querySelector('#view');
         view.innerHTML = "";
         view.appendChild(clonedTemplate);
-
     }
 }
 
@@ -47,7 +52,6 @@ class Event {
         }
         return MARKUP;
     }
-
 }
 
 function submitEvent() {
@@ -71,32 +75,72 @@ function submitEvent() {
     }
 
     window.localStorage['roster'] = JSON.stringify(out);
+    docRef.set({roster:window.localStorage['roster']});
     
-    var out = JSON.parse(window.localStorage['roster']);
-    console.log(out);
     window.localStorage['events'] = JSON.stringify(TeamSnip.currentEventFeed.events);
+    docRef2.set({plays:window.localStorage['events']});
 }
 
 window.addEventListener('DOMContentLoaded', function() {
     //read in from localStorage
-    if(window.localStorage['loaded']) {
-        var out = JSON.parse(window.localStorage['roster']);
+    if(!navigator.onLine) {
+        var p = JSON.parse(window.localStorage['roster']);
         let markup = '';
-        for (let i = 0; i < out.length; i++) {
-            //TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position);
-            // console.log(out[i].name,out[i].number,out[i].position);
-            markup += "<option id=" + out[i].playerId + ">" + out[i].name + "</option>";
+        for (let i = 0; i < p.length; i++) {
+            markup += "<option id=" + p[i].playerId + ">" + p[i].name + "</option>";
         } 
         document.querySelector("#player_name").innerHTML = markup;
     }
-
-    TeamSnip.currentEventFeed = new EventFeed();    
-    if(window.localStorage['events']) {
-        var out = JSON.parse(window.localStorage['events']);
-        for(let i=0; i < out.length; i++) {
-            TeamSnip.currentEventFeed.addEvent(out[i].name,out[i].event);
-        }
+    else {
+        docRef.get().then(function(doc) {
+            if (doc && doc.exists) {
+                const playerData = doc.data().roster;
+                window.localStorage['roster'] = playerData;
+                var p = JSON.parse(playerData);   
+                let markup = '';
+                for (let i = 0; i < p.length; i++) {
+                    //TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position);
+                    markup += "<option id=" + p[i].playerId + ">" + p[i].name + "</option>";
+                } 
+                document.querySelector("#player_name").innerHTML = markup;
+            }
+            else {
+                console.log("NO DOC");
+            }
+        })
+        .catch(function(err) {
+            console.log("Error: ", err);
+        });
     }
-    TeamSnip.currentEventFeed.render();
+    
+    TeamSnip.currentEventFeed = new EventFeed();    
+    if(!navigator.onLine) {
+        if(window.localStorage['events']) {
+            var e = JSON.parse(window.localStorage['events']);
+            for(let i=0; i < e.length; i++) {
+                TeamSnip.currentEventFeed.addEvent(e[i].name,e[i].event);
+            }
+        }
+        TeamSnip.currentEventFeed.render();
+    }
+    else {
+        docRef2.get().then(function(doc) {
+            if (doc && doc.exists) {
+                const eventData = doc.data().plays;
+                window.localStorage['events'] = eventData;
+                var e = JSON.parse(eventData);
+                for(let i=0; i < e.length; i++) {
+                    TeamSnip.currentEventFeed.addEvent(e[i].name,e[i].event);
+                }                    
+            }
+            else {
+                console.log("NO DOC");
+            }
+        })
+        .catch(function(err) {
+            console.log("Error: ", err);
+        });
+        TeamSnip.currentEventFeed.render();        
+    }
 }
 , false);
