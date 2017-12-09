@@ -20,7 +20,13 @@ const cacheFiles = [
   // './manifest.json',
 ];
 
-console.log("hi");
+console.log("hi i'm service worker");
+
+self.addEventListener("fetch", e=>{
+  e.respondWith(
+    new Response("hello")    
+  );
+});
 
 // Service Worker Install Event
 self.addEventListener('install', function(event) {
