@@ -35,9 +35,9 @@ class Roster {
         }      
         return false;
     }
-    
-    addPlayer(name, number, position, archived, goals) {
-        let player = new Player(name, number, position, archived, goals);
+
+    addPlayer(name, number, position, archived, goals, sog, gkicks, ckicks, fouls, ycards, rcards) {
+        let player = new Player(name, number, position, archived, goals, sog, gkicks, ckicks, fouls, ycards, rcards);
         // console.log(archived);it 
         this.roster.push(player);
         window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
@@ -240,34 +240,7 @@ class Player {
     }
 
         
-} 
-/* Player */
-
-// function render() {
-    
-//     let template = document.querySelector("#roster");
-
-//     let markup = "<ul>";
-//     // for (let i=0, len = roster.length; i < len; i++) {
-//     //     markup += roster[i].render(); 
-//     // }
-//     for (let i=0, len = TeamSnip.currentRoster.roster.length; i < len; i++) {
-//         markup += TeamSnip.currentRoster.roster[i].render(); 
-//     }
-//     markup += "</ul>";
-
-//     template.content.querySelector("#playerList").innerHTML = markup;
-
-//     let clonedTemplate = document.importNode(template.content, true);
-   
-//     let view = document.querySelector("#view");
-//     view.innerHTML = "";
-//     view.appendChild(clonedTemplate); 
-
-//     document.querySelector("#addBtn").addEventListener("click", function () {
-//        TeamSnip.currentRoster.renderAddForm();
-//     }, false);
-// }
+} //player
 
 function reload() {
     for (let i = 0; i < TeamSnip.currentRoster.roster.length; i++) {
@@ -284,29 +257,30 @@ window.addEventListener("DOMContentLoaded", function () {
             var out = JSON.parse(window.localStorage["roster"]);
             console.log("Offline");
             for (let i = 0; i < out.length; i++) {
-                TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
+                TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals,out[i].sog,out[i].gkicks, out[i].ckicks, out[i].fouls, out[i].ycards, out[i].rcards);
                 console.log(out[i].name,out[i].number,out[i].position,out[i].archived);
             } 
             TeamSnip.currentRoster.render();
         }
     }
     else {
-        console.log("Online");        
         dR.get().then(function(doc) {
                 if(doc && doc.exists) {
+                    console.log("Online");        
                     const myData = doc.data().roster;
-                    window.localStorage['roster'];
-                    console.log(myData);
                     var out = JSON.parse(myData);
+                    window.localStorage['roster'] = out;
+                    console.log("myData",myData);
+                    console.log(out);
                     for (let i = 0; i < out.length; i++) {
-                        TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals);
+                        TeamSnip.currentRoster.addPlayer(out[i].name,out[i].number,out[i].position,out[i].archived,out[i].goals,out[i].sog,out[i].gkicks, out[i].ckicks, out[i].fouls, out[i].ycards, out[i].rcards);
                         console.log(out[i].name,out[i].number,out[i].position,out[i].archived);            
                     }
+                    TeamSnip.currentRoster.render();
                 }
                 else {
                     console.log("NO DOC");
                 }
-                TeamSnip.currentRoster.render();
                 
             })
             .catch(function(err) {
@@ -317,9 +291,9 @@ window.addEventListener("DOMContentLoaded", function () {
         //     console.log(TeamSnip.currentRoster.roster[i]);
         // }
 
-        window.localStorage["loaded"] = true;
-        window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
-        console.log(window.localStorage["roster"]);
-        TeamSnip.currentRoster.render();
+        // window.localStorage["loaded"] = true;
+        // window.localStorage["roster"] = JSON.stringify(TeamSnip.currentRoster.roster);
+        // console.log(window.localStorage["roster"]);
+        // TeamSnip.currentRoster.render();
     }
 }, false);

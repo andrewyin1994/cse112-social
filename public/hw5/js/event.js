@@ -73,7 +73,49 @@ function submitEvent() {
             }
         }
     }
-
+    else if(eToAdd == 'Shot on Goal') {
+        for(let i = 0; i < out.length; i++) {
+            if(out[i].playerId == pId) {
+                out[i].sog++;
+            }
+        }
+    }
+    else if(eToAdd == 'Corner Kick') {
+        for(let i = 0; i < out.length; i++) {
+            if(out[i].playerId == pId) {
+                out[i].ckicks++;
+            }
+        }
+    }
+    else if(eToAdd == 'Foul') {
+        for(let i = 0; i < out.length; i++) {
+            if(out[i].playerId == pId) {
+                out[i].fouls++;
+            }
+        }
+    }
+    else if(eToAdd == 'Goal Kick') {
+        for(let i = 0; i < out.length; i++) {
+            if(out[i].playerId == pId) {
+                out[i].gkicks++;
+            }
+        }
+    }
+    else if(eToAdd == 'Yellow Card') {
+        for(let i = 0; i < out.length; i++) {
+            if(out[i].playerId == pId) {
+                out[i].ycards++;
+            }
+        }
+    }
+    else if(eToAdd == 'Red Card') {
+        for(let i = 0; i < out.length; i++) {
+            if(out[i].playerId == pId) {
+                out[i].rcards++;
+            }
+        }
+    }
+    
     window.localStorage['roster'] = JSON.stringify(out);
     docRef.set({roster:window.localStorage['roster']});
     
