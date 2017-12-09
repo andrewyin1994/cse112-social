@@ -42,6 +42,7 @@ btnLogin.addEventListener('click', e => {
 
     const promise = auth.signInWithEmailAndPassword(email, pass);
     promise.catch(e => console.log(e.message));
+
 });
 
 // Sign Up button
@@ -106,7 +107,7 @@ function clearStorage() {
 
 window.addEventListener("DOMContentLoaded", function() {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('./sw.js')
         .then(function(registration) {
             console.log('Registration successful, scope is:', registration.scope);
         })
