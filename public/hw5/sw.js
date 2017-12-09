@@ -20,6 +20,8 @@ const cacheFiles = [
   // './manifest.json',
 ];
 
+console.log("hi");
+
 // Service Worker Install Event
 self.addEventListener('install', function(event) {
   console.log('Attempting to install service worker and cache static assets');
