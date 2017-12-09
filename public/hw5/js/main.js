@@ -76,39 +76,6 @@ function clearStorage() {
     return true;
 }
 
-// function test() {
-//     //show current localStorage
-//     console.log(window.localStorage);
-
-//     //example in appending
-//     var tmp = {'usr': 'pwd'};
-//     console.log(tmp);
-//     tmp['dog']='cat';
-//     console.log(tmp);
-
-
-//     window.localStorage['login'] = JSON.stringify(tmp);
-//     console.log(window.localStorage['login']);
-//     var out = JSON.parse(window.localStorage['login']);
-//     console.log(tmp);
-// }
-
-// function test2() {
-//     //grab the current username and password
-//     usr = document.loginForm.user.value;
-//     pwd = document.loginForm.password.value;
-//     if(usr=='usr') {
-//         window.location.href = "team.html";
-//         return true;
-//     }
-//     else {
-//         console.log("wrong");
-//         //alert("wrong");
-//         return false;
-//     }
-
-// }
-
 function verifyLogin() {
     //grab the current username and password
     usr = document.loginForm.user.value;
@@ -133,3 +100,19 @@ function logOut() {
     return true;
 }
 
+function clearStorage() {
+    window.localStorage.clear();
+    return true;
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+        .then(function(registration) {
+            console.log('Registration successful, scope is:', registration.scope);
+        })
+        .catch(function(error) {
+            console.log('Service worker registration failed, error:', error);
+        });
+    }
+});
