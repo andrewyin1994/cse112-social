@@ -3,17 +3,17 @@
     "name": "Team Watch",
     "icons": [
         {
-            "src": "soccer_ball_emoji48x48.png",
+            "src": "img/soccer_ball_emoji48x48.png",
             "type": "image/png",
             "sizes": "48x48"
         },
         {
-            "src": "soccer_ball_emoji192x192.png",
+            "src": "img/soccer_ball_emoji192x192.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "soccer_ball_emoji512x512.png",
+            "src": "img/soccer_ball_emoji512x512.png",
             "type": "image/png",
             "sizes": "512x512"
         }
