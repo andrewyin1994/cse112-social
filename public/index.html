@@ -1,34 +1,47 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>team page</title>
-    <link href="main.css" type="text/css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
-  </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SafeBook</title>
 
-  <body>
-    <header>
-      <h1>welcome to our page.</h1>
-    </header>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
+</head>
+<body>
+  <section id="login">
+      <h1>SafeBook</h1>
 
-    <!-- TEAM SECTION -->
-    <section id="team-info">
-      <h2>meet team vl...</h2>
-      
+    <div class="mui-container-fluid">
+      <div class="mui-row">
+        <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+          <form class="mui-form">
+            <legend>Login</legend>
+            <div class="mui-textfield">
+              <input type="text" name="user" id="user" placeholder="username">
+              <label for"user">Email</label>
+            </div>
+            <div class="mui-textfield">
+              <input type="password" name="password" id="password" placeholder="password">
+              <label for="password">Password</label>
+            </div>
+
+            <button type="submit" class="mui-btn mui-btn--primary" id="btnLogin">Login</button>
+            <button class="mui-btn mui-btn--danger" id="btnSignUp">Sign up</button>
+            <button class="mui-btn mui-btn--accent" id="btnLogout">Log out</button>
+          </form>
+          <div id="testInsert">changes</div>
+          </div>
       </div>
-    </section>
+    </div>
 
-    <!-- WORK SECTION -->
-    <section id="homework">
-      <h2>see our work: </h2>
-      <ul>
-        <li><a href="112 V2/index.html">Safebook</a> 
-      </ul>
-    </section>
+    <a href="homepage.html"><button class="mui-btn mui-btn--fab mui-btn--accent">+</button> </a>
+  </section>
 
-    <footer>
-      <p>thanks for visiting :)</p>
-    </footer>
-  </body>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+  <script src="js/firebase.js"></script>
+  <script src="js/authorize.js"></script>
+</body>
 </html>
