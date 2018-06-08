@@ -37,7 +37,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   // checks if user exists
   if (firebaseUser) {
     console.log(firebaseUser);
-    testInsert.innerHTML = "signed in as: " + currentUser.email;
+    testInsert.innerHTML = "signed in as: " + firebaseUser.email;
     //window.location.href = "team.html";
   } else {
     console.log('not logged in');
