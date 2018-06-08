@@ -51,3 +51,19 @@ btnLogout.addEventListener('click', function(){
 });
 
 /* end of Firebase Authentication */
+
+/* Sign Up modal */
+function activateSignUp() {
+  // initialize modal element
+  var modalEl = document.createElement('div');
+  modalEl.style.width = '400px';
+  modalEl.style.height = '300px';
+  modalEl.style.margin = '100px auto';
+  modalEl.style.backgroundColor = '#fff';
+
+  modalEl.innerHTML = "Hello";
+
+  // show modal
+  mui.overlay('on', modalEl);
+}
+/* end of Sign Up modal */
