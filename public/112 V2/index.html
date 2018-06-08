@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
   <section id="login">
@@ -20,12 +21,12 @@
           <form class="mui-form">
             <legend>Login</legend>
             <div class="mui-textfield">
-              <input type="text">
-              <label>Email</label>
+              <input type="text" name="user" id="user" placeholder="username">
+              <label for"user">Email</label>
             </div>
             <div class="mui-textfield">
-              <input type="text">
-              <label>Password</label>
+              <input type="password" name="password" id="password" placeholder="password">
+              <label for="password">Password</label>
             </div>
 
             <button type="submit" class="mui-btn mui-btn--primary">Login</button>
