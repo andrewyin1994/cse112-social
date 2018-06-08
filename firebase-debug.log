@@ -1,17 +1,42 @@
-[debug] [2017-12-08T21:16:32.349Z] ----------------------------------------------------------------------
-[debug] [2017-12-08T21:16:32.357Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Andrew\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] [2017-12-08T21:16:32.357Z] CLI Version:   3.16.0
-[debug] [2017-12-08T21:16:32.358Z] Platform:      win32
-[debug] [2017-12-08T21:16:32.358Z] Node Version:  v8.9.2
-[debug] [2017-12-08T21:16:32.359Z] Time:          Fri Dec 08 2017 13:16:32 GMT-0800 (Pacific Standard Time)
-[debug] [2017-12-08T21:16:32.359Z] ----------------------------------------------------------------------
+[debug] [2018-06-08T21:41:02.824Z] ----------------------------------------------------------------------
+[debug] [2018-06-08T21:41:02.834Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Aspidiske\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-06-08T21:41:02.834Z] CLI Version:   3.18.4
+[debug] [2018-06-08T21:41:02.835Z] Platform:      win32
+[debug] [2018-06-08T21:41:02.835Z] Node Version:  v6.11.4
+[debug] [2018-06-08T21:41:02.835Z] Time:          Fri Jun 08 2018 14:41:02 GMT-0700 (Pacific Daylight Time)
+[debug] [2018-06-08T21:41:02.835Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2017-12-08T21:16:32.398Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2017-12-08T21:16:32.399Z] > authorizing via signed-in user
-[debug] [2017-12-08T21:16:32.406Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/cse134gahuyi  
+[debug] [2018-06-08T21:41:02.854Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-06-08T21:41:02.858Z] > authorizing via signed-in user
+[debug] [2018-06-08T21:41:02.863Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-06-08T21:41:02.864Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/y8UrQZYHNUXzvm-d3nFY2F7LcVEaWh-8UmT9VOUeeQU',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Jun 08 2018 14:41:02 GMT-0700 (Pacific Daylight Time)
+[debug] [2018-06-08T21:41:03.049Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-08T21:41:03.082Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/cse112sb  
   
- Fri Dec 08 2017 13:16:32 GMT-0800 (Pacific Standard Time)
-[debug] [2017-12-08T21:16:33.068Z] <<< HTTP RESPONSE 200
-[debug] [2017-12-08T21:16:33.070Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/cse134gahuyi/tokens  
+ Fri Jun 08 2018 14:41:03 GMT-0700 (Pacific Daylight Time)
+[debug] [2018-06-08T21:41:03.568Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-08T21:41:03.568Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/cse112sb/tokens  
   
- Fri Dec 08 2017 13:16:33 GMT-0800 (Pacific Standard Time)
+ Fri Jun 08 2018 14:41:03 GMT-0700 (Pacific Daylight Time)
+[debug] [2018-06-08T21:41:03.970Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-08T21:41:03.986Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/cse112sb  
+  
+ Fri Jun 08 2018 14:41:03 GMT-0700 (Pacific Daylight Time)
+[debug] [2018-06-08T21:41:04.505Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Aspidiske\Documents\cse\cse112\cse112-social'...
+[info] 
+[debug] [2018-06-08T21:41:04.511Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/299405505457/clients/_:getWebAppConfig  
+  
+ Fri Jun 08 2018 14:41:04 GMT-0700 (Pacific Daylight Time)
+[debug] [2018-06-08T21:41:04.920Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+
+[info] Shutting down...

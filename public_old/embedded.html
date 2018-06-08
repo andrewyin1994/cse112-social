@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>embedded content</title>
+    <meta charset="utf-8">
+
+</head>
+<body>
+    <h1><u>embedded content</u></h1>
+    <hr>
+    <h2>img test: left is available, right is unavailable</h2>
+    <img src="http://assets.academy.com/mgen/75/10644675.jpg" alt="soccer ball" height="100">
+    <img src="not_available" alt="not available">
+
+    <h2>png test</h2>
+    <img src="soccer_ball.png" alt="soccer ball" height="42">
+    
+
+    <hr>
+    <h2>inline img test: small soccerball emoji</h2>
+    <p>inline <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/240/facebook/65/soccer-ball_26bd.png" alt="soccer ball" height="12"> time</p>
+
+    <hr>
+    <h2>imagemap+map+area test: click on messi's jersey</h2>
+    <img src="https://www.thesun.co.uk/wp-content/uploads/2017/08/nintchdbpict0003469611372.jpg?strip=all&w=960" alt="" height="200" usemap="#jersey">
+    <map name="jersey">
+        <area shape="poly" coords="78,124,124,10,189,29,173,93,168,132,136,151,110,130"
+         href="jersey.jpg" alt="gg">
+    </map>
+
+    <hr>
+    <h2>iframe test: soccer ipsum and iframe page</h2>
+    <iframe src="soccer-ipsum.com/"></iframe>
+    <iframe src="https://www.w3.org/TR/html5/embedded-content-0.html#the-iframe-element">
+    </iframe>
+
+    <hr>
+    <h2 id="headbutt">embed and object test: on a gif</h2>
+    <embed src="soccer_headbutt.gif">
+    <object data="soccer_headbutt.gif" height="120" width="210"></object>
+
+    <hr>
+    <h2>param test: on a mp4 object</h2>
+    <object data="soccervid.mp4">
+        <param name="src" value="soccervid.mp4">
+        <param name="autoplay" value="false">
+        Your computer cannot play .mp4 video files.
+    </object>
+
+    <hr>
+    <h2>video and audio test</h2>
+    <video height="180" width="320" controls>
+        <source src="soccervid.mp4">
+    </video>
+
+    <audio controls>
+        <source src="gol_espanol.mp3">
+    </audio>
+
+    <hr>
+    <h2>track test: video with subtitles (vtt)</h2>
+    <video height="180" width="320" controls>
+        <source src="soccervid.mp4">
+            <track kind=subtitles src=soccervid.vtt srclang=en label="eng">
+    </video>
+    
+    <!--Validator link-->
+    <p>
+        <a href="https://validator.w3.org/check?uri=referer"><img
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0!" height="31" width="88" /></a>
+    </p> 
+</body>
+</html>
