@@ -44,3 +44,17 @@ $titleEls.on('click', function() {
 
 // end of homepage js
 
+//signout
+
+
+document.getElementById('btnLogout').addEventListener('click', function () {
+  const currentUser = firebase.auth().currentUser;
+  firebase.auth().signOut().then(function () {
+    // Sign-out successful.
+    console.log(currentUser + "signed out");
+
+    //testInsert.innerHTML = "sign out works";
+  }, function (error) {
+    // An error happened.
+  });
+});
