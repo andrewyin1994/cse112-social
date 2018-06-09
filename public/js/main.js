@@ -1,3 +1,5 @@
+import PostComponent from './PostComponent.js';
+
 // homepage js
 jQuery(function($) {
   var $bodyEl = $('body'),
@@ -23,7 +25,6 @@ jQuery(function($) {
     }, 20);
   }
 
-
   function hideSidedrawer() {
     $bodyEl.toggleClass('hide-sidedrawer');
   }
@@ -35,9 +36,7 @@ jQuery(function($) {
 
 var $titleEls = $('strong', $sidedrawerEl);
 
-$titleEls
-  .next()
-  .hide();
+$titleEls.next().hide();
 
 $titleEls.on('click', function() {
   $(this).next().slideToggle(200);
