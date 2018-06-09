@@ -55,7 +55,7 @@ document.getElementById('btnLogout').addEventListener('click', function () {
     // Sign-out successful.
     console.log(currentUser + "signed out");
 
-    //testInsert.innerHTML = "sign out works";
+    window.location.href = "homepage.html";
   }, function (error) {
     // An error happened.
   });
