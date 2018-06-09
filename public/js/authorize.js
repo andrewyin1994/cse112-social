@@ -100,29 +100,3 @@ function activateSignUp() {
   mui.overlay('on', modalEl);
 }
 /* end of Sign Up modal */
-
-
-
-{/* <div class="mui-container-fluid">
-<div class="mui-row">
-  <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-    <form class="mui-form">
-      <legend>Login</legend>
-      <div class="mui-textfield mui-textfield--float-label">
-        <input type="text" name="user" id="username">
-        <label for="user">Email</label>
-      </div>
-      <div class="mui-textfield mui-textfield--float-label">
-        <input type="password" name="password" id="password">
-        <label for="password">Password</label>
-      </div>    
-    </form>
-    
-
-    <button class="mui-btn mui-btn--primary" id="btnLogin">Login</button>
-    <button class="mui-btn mui-btn--danger" id="btnSignUpForm">Sign up</button>
-    <button class="mui-btn mui-btn--accent" id="btnLogout">Log out</button>
-    <div id="testInsert">changes</div>
-    </div>
-</div>
-</div> */}
