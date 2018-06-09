@@ -68,3 +68,10 @@ document
                 // An error happened.
             });
     });
+
+
+// PRELOADER
+$(window).load(function(){
+    $('.loader').fadeOut(2000);
+    
+  });
