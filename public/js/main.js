@@ -1,4 +1,4 @@
-import PostComponent from './PostComponent.js';
+// import PostComponent from './PostComponent.js';
 
 // homepage js
 jQuery(function($) {

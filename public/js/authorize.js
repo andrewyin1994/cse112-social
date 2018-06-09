@@ -79,22 +79,22 @@ function activateSignUp() {
   modalEl.style.backgroundColor = '#fff';
 
   modalEl.innerHTML = 
-    "<form class='mui-form'>" +
-      "<legend>Title</legend>" + 
-      "<div class='mui-textfield mui-textfield--float-label'>" +
-        "<input type='text' name='muser' id='muser'>" +
-        "<label for='muser'>Email</label>" +
-      "</div>" +
-      "<div class='mui-textfield mui-textfield--float-label'>" +
-        "<input type='password' name='mpass' id='mpass'>" +
-        "<label for='mpass'>Password</label>" +
-      "</div>" +
-      "<div class='mui-textfield mui-textfield--float-label'>" +
-        "<input type='password' name='cpass' id='cpass'>" +
-        "<label for='cpass'>Confirm Password</label>" +
-      "</div>" +
-    "</form> " +
-    "<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>";
+  `<form class='mui-form'>
+  <legend>Title</legend>
+  <div class='mui-textfield mui-textfield--float-label'>
+    <input type='text' name='muser' id='muser'>
+    <label for='muser'>Email</label>
+  </div>
+  <div class='mui-textfield mui-textfield--float-label'>
+    <input type='password' name='mpass' id='mpass'>
+    <label for='mpass'>Password</label>
+  </div>
+  <div class='mui-textfield mui-textfield--float-label'>
+    <input type='password' name='cpass' id='cpass'>
+    <label for='cpass'>Confirm Password</label>
+  </div>
+</form> 
+<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>`;
 
   // show modal
   mui.overlay('on', modalEl);
