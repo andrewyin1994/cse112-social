@@ -63,8 +63,15 @@ document
               // Sign-out successful.
               console.log(currentUser + "signed out");
 
-              window.location.href = "index.html";
-          }, function (error) {
-              // An error happened.
-          });
+                window.location.href = "index.html";
+            }, function (error) {
+                // An error happened.
+            });
+    });
+
+
+// PRELOADER
+$(window).load(function(){
+    $('.loader').fadeOut(2000);
+    
   });
