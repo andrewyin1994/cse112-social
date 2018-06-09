@@ -18,19 +18,6 @@ btnLogin.addEventListener('click', e => {
   testInsert.innerHTML = "login works";
 });
 
-// Sign Up button
-// btnSignUp.addEventListener('click', e => {
-//   // need for email verification
-//   const email = txtEmail.value;
-//   const pass = txtPassword.value;
-//   const auth = firebase.auth();
-
-//   const promise = auth.createUserWithEmailAndPassword(email, pass);
-//   promise.catch(e => console.log(e.message));
-
-
-//   testInsert.innerHTML = "signup works";
-// });
 btnSignUpForm.addEventListener('click', activateSignUp);
 
 // Sign Up Function
@@ -51,11 +38,6 @@ function submitFunc() {
   }, function(error) {
     console.log(error.message);
   });
-  
-  // .catch(function (error) {
-  //   // An error happened.
-  //   console.log(error.message);
-  // });
 }
 
 // Real time listener
@@ -64,7 +46,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
     console.log(firebaseUser);
     testInsert.innerHTML = "signed in as: " + firebaseUser.email;
-    //window.location.href = "team.html";
+    window.location.href = "homepage.html";
   } else {
     console.log('not logged in');
   }
