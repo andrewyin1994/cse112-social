@@ -1,7 +1,7 @@
 const txtEmail = document.getElementById('username');
 const txtPassword = document.getElementById('password');
 const btnLogin = document.getElementById('btnLogin');
-const btnSignUp = document.getElementById('btnSignUp');
+const btnSignUpForm = document.getElementById('btnSignUpForm');
 const btnLogout = document.getElementById('btnLogout');
 
 const testInsert = document.getElementById('testInsert');
@@ -18,19 +18,27 @@ btnLogin.addEventListener('click', e => {
   testInsert.innerHTML = "login works";
 });
 
-// Sign Up button
-btnSignUp.addEventListener('click', e => {
-  // need for email verification
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
+btnSignUpForm.addEventListener('click', activateSignUp);
+
+// Sign Up Function
+function submitFunc() {
+  const muser = document.getElementById('muser').value;
+  const mpass = document.getElementById('mpass').value;
+  const cpass = document.getElementById('cpass').value;
   const auth = firebase.auth();
 
-  const promise = auth.createUserWithEmailAndPassword(email, pass);
-  promise.catch(e => console.log(e.message));
+  /* @issue verify mpass == cpass on firebase */
 
+  firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(function(currentUser) {
+    // Sign-out successful.
+    console.log(currentUser + "signed Up");
+    mui.overlay('off');
 
-  testInsert.innerHTML = "signup works";
-});
+    testInsert.innerHTML = "sign Up works";
+  }, function(error) {
+    console.log(error.message);
+  });
+}
 
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -38,7 +46,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
     console.log(firebaseUser);
     testInsert.innerHTML = "signed in as: " + firebaseUser.email;
-    //window.location.href = "team.html";
+    window.location.href = "homepage.html";
   } else {
     console.log('not logged in');
   }
@@ -52,7 +60,6 @@ btnLogout.addEventListener('click', function () {
   firebase.auth().signOut().then(function () {
     // Sign-out successful.
     console.log(currentUser + "signed out");
-
 
     testInsert.innerHTML = "sign out works";
   }).catch(function (error) {
@@ -71,17 +78,23 @@ function activateSignUp() {
   modalEl.style.margin = '100px auto';
   modalEl.style.backgroundColor = '#fff';
 
-  modalEl.innerHTML = "<form class='mui-form'>" + "<legend>Title</legend>" + "<div class='mui-textfield mui-textfield--float-label'>" +
-    "<input type='text' name='user'>" + "<label for='user'>Email</label>" +
-  "</div>" +
-   "<div class='mui-textfield mui-textfield--float-label'>" +
-    "<input type='password' name='password'>" + "<label for='password'>Password</label>" +
-  "</div>" +
-  "<div class='mui-textfield mui-textfield--float-label'>" +
-  "<input type='password' name='password'>" + "<label for='password'>Confirm Password</label>" +
-"</div>" +
-  "<button type='submit' class='mui-btn mui-btn--raised'>Submit</button>" +
-"</form> ";
+  modalEl.innerHTML = 
+    "<form class='mui-form'>" +
+      "<legend>Title</legend>" + 
+      "<div class='mui-textfield mui-textfield--float-label'>" +
+        "<input type='text' name='muser' id='muser'>" +
+        "<label for='muser'>Email</label>" +
+      "</div>" +
+      "<div class='mui-textfield mui-textfield--float-label'>" +
+        "<input type='password' name='mpass' id='mpass'>" +
+        "<label for='mpass'>Password</label>" +
+      "</div>" +
+      "<div class='mui-textfield mui-textfield--float-label'>" +
+        "<input type='password' name='cpass' id='cpass'>" +
+        "<label for='cpass'>Confirm Password</label>" +
+      "</div>" +
+    "</form> " +
+    "<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>";
 
   // show modal
   mui.overlay('on', modalEl);
