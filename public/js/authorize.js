@@ -73,14 +73,14 @@ btnLogout.addEventListener('click', function () {
 function activateSignUp() {
   // initialize modal element
   var modalEl = document.createElement('div');
-  modalEl.style.width = '400px';
-  modalEl.style.height = '300px';
+  modalEl.style.width = '28em';
+  modalEl.style.height = '28em';
   modalEl.style.margin = '100px auto';
   modalEl.style.backgroundColor = '#fff';
 
-  modalEl.innerHTML = 
+  modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` + 
   `<form class='mui-form'>
-  <legend>Title</legend>
+  <legend>Sign Up</legend>
   <div class='mui-textfield mui-textfield--float-label'>
     <input type='text' name='muser' id='muser'>
     <label for='muser'>Email</label>
@@ -94,9 +94,35 @@ function activateSignUp() {
     <label for='cpass'>Confirm Password</label>
   </div>
 </form> 
-<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>`;
+<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>` + `</div></div></div>`;
 
   // show modal
   mui.overlay('on', modalEl);
 }
 /* end of Sign Up modal */
+
+
+
+{/* <div class="mui-container-fluid">
+<div class="mui-row">
+  <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+    <form class="mui-form">
+      <legend>Login</legend>
+      <div class="mui-textfield mui-textfield--float-label">
+        <input type="text" name="user" id="username">
+        <label for="user">Email</label>
+      </div>
+      <div class="mui-textfield mui-textfield--float-label">
+        <input type="password" name="password" id="password">
+        <label for="password">Password</label>
+      </div>    
+    </form>
+    
+
+    <button class="mui-btn mui-btn--primary" id="btnLogin">Login</button>
+    <button class="mui-btn mui-btn--danger" id="btnSignUpForm">Sign up</button>
+    <button class="mui-btn mui-btn--accent" id="btnLogout">Log out</button>
+    <div id="testInsert">changes</div>
+    </div>
+</div>
+</div> */}
