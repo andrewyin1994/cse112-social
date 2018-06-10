@@ -52,17 +52,17 @@ jQuery(function ($) {
 // end of homepage js signout
 
 document
-    .getElementById('btnLogout')
-    .addEventListener('click', function () {
-        const currentUser = firebase
-            .auth()
-            .currentUser;
-        firebase
-            .auth()
-            .signOut()
-            .then(function () {
-                // Sign-out successful.
-                console.log(currentUser + "signed out");
+  .getElementById('btnLogout')
+  .addEventListener('click', function () {
+      const currentUser = firebase
+          .auth()
+          .currentUser;
+      firebase
+          .auth()
+          .signOut()
+          .then(function () {
+              // Sign-out successful.
+              console.log(currentUser + "signed out");
 
                 window.location.href = "index.html";
             }, function (error) {
