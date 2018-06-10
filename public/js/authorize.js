@@ -25,19 +25,40 @@ function submitFunc() {
   const muser = document.getElementById('muser').value;
   const mpass = document.getElementById('mpass').value;
   const cpass = document.getElementById('cpass').value;
+  const emailerr = document.getElementById('emailerr');
+  const passerr = document.getElementById('passerr');
+  const matcherr = document.getElementById('matcherr');
   const auth = firebase.auth();
 
   /* @issue verify mpass == cpass on firebase */
 
-  firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(function(currentUser) {
-    // Sign-out successful.
-    console.log(currentUser + "signed Up");
-    mui.overlay('off');
+  emailerr.innerHTML = passerr.innerHTML = matcherr.innerHTML = '';
 
-    testInsert.innerHTML = "sign Up works";
-  }, function(error) {
-    console.log(error.message);
-  });
+  if(mpass != cpass) {
+    matcherr.innerHTML = 'Passwords do not match.';
+  }
+  else {
+    firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(function(currentUser) {
+      // Sign-out successful.
+      console.log(currentUser + "signed Up");
+      mui.overlay('off');
+
+      testInsert.innerHTML = "sign Up works";
+    },
+    function(error) {
+      let errorCode = error.code;
+      let errorMessage = error.message;
+
+      console.log(errorCode);
+      
+      if(errorCode == 'auth/invalid-email') {
+        emailerr.innerHTML = errorMessage;
+      }
+      if(errorCode == 'auth/weak-password') {
+        passerr.innerHTML = errorMessage;
+      }
+    });
+  }
 }
 
 // Real time listener
@@ -63,7 +84,7 @@ btnLogout.addEventListener('click', function () {
 
     testInsert.innerHTML = "sign out works";
   }).catch(function (error) {
-    // An error happened.
+    console.log(error.message);
   });
 });
 
@@ -85,14 +106,18 @@ function activateSignUp() {
     <input type='text' name='muser' id='muser'>
     <label for='muser'>Email</label>
   </div>
+  <div id='emailerr' style='color:red;'></div>
+
   <div class='mui-textfield mui-textfield--float-label'>
     <input type='password' name='mpass' id='mpass'>
     <label for='mpass'>Password</label>
   </div>
+  <div id='passerr' style='color:red;'></div>
   <div class='mui-textfield mui-textfield--float-label'>
     <input type='password' name='cpass' id='cpass'>
     <label for='cpass'>Confirm Password</label>
   </div>
+  <div id='matcherr' style='color:red;'></div>
 </form> 
 <button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>` + `</div></div></div>`;
 
