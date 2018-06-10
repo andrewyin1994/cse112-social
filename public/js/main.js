@@ -1,4 +1,4 @@
-import PostComponent from '../PostComponent.js';
+import PostComponent from './PostComponent.js';
 
 // homepage js
 jQuery(function ($) {
@@ -51,20 +51,27 @@ jQuery(function ($) {
 // end of homepage js signout
 
 document
-    .getElementById('btnLogout')
-    .addEventListener('click', function () {
-        const currentUser = firebase
-            .auth()
-            .currentUser;
-        firebase
-            .auth()
-            .signOut()
-            .then(function () {
-                // Sign-out successful.
-                console.log(currentUser + "signed out");
+  .getElementById('btnLogout')
+  .addEventListener('click', function () {
+      const currentUser = firebase
+          .auth()
+          .currentUser;
+      firebase
+          .auth()
+          .signOut()
+          .then(function () {
+              // Sign-out successful.
+              console.log(currentUser + "signed out");
 
                 window.location.href = "index.html";
             }, function (error) {
                 // An error happened.
             });
     });
+
+
+// PRELOADER
+$(window).load(function(){
+    $('.loader').fadeOut(2000);
+    
+  });

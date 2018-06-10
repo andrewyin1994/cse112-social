@@ -7,7 +7,25 @@
     height: 100%;
   }
 
+.icon {
+  height: 15em;
+  width: 15em;
+  align-content: center;
+  padding-left: 5em;
+}
 
+@media screen and (max-width: 991px) {
+  .icon {
+    padding-left: 1em;
+  }
+}
+
+
+@media screen and (max-width: 639px) {
+  .icon {
+    padding-left: 0em;
+  }
+}
 
   
 
