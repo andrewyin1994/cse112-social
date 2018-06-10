@@ -15,7 +15,7 @@ btnLogin.addEventListener('click', e => {
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
 
-  testInsert.innerHTML = "login works";
+  // testInsert.innerHTML = "login works";
 });
 
 btnSignUpForm.addEventListener('click', activateSignUp);
@@ -43,7 +43,7 @@ function submitFunc() {
       console.log(currentUser + "signed Up");
       mui.overlay('off');
 
-      testInsert.innerHTML = "sign Up works";
+      // testInsert.innerHTML = "sign Up works";
     },
     function(error) {
       let errorCode = error.code;
@@ -66,7 +66,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   // checks if user exists
   if (firebaseUser) {
     console.log(firebaseUser);
-    testInsert.innerHTML = "signed in as: " + firebaseUser.email;
+    // testInsert.innerHTML = "signed in as: " + firebaseUser.email;
     window.location.href = "homepage.html";
   } else {
     console.log('not logged in');
@@ -82,7 +82,7 @@ btnLogout.addEventListener('click', function () {
     // Sign-out successful.
     console.log(currentUser + "signed out");
 
-    testInsert.innerHTML = "sign out works";
+    // testInsert.innerHTML = "sign out works";
   }).catch(function (error) {
     console.log(error.message);
   });
