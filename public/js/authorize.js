@@ -13,6 +13,7 @@ btnLogin.addEventListener('click', e => {
   const auth = firebase.auth();
 
   const promise = auth.signInWithEmailAndPassword(email, pass);
+  //database
   promise.catch(e => console.log(e.message));
 
   testInsert.innerHTML = "login works";
