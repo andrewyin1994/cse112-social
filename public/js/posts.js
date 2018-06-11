@@ -1,5 +1,6 @@
 const testBtn = document.getElementById('postBtn');
 const testInsert = document.getElementById('testInsert');
+const uploadBtn = document.getElementById('uploadBtn');
 
 const DEBUG = false;
 
@@ -52,6 +53,32 @@ function getPostsByUser(userRef){
 //     });
 // }
 
+/**
+ * Get upload the current image in uploadControl and once uploaded, put it in uploadImg tag
+ * 
+ */
+function uploadFile() {
+  const ref = firebase.storage().ref();
+  const file = document.querySelector('#uploadControl').files[0];
+  const name = (+new Date()) + '-' + file.name;
+  const metadata = {
+    contentType: file.type
+  };
+  //task will be the Promise returned after trying to put the image onto firebase storage
+  const task = ref.child(name).put(file, metadata);
+  task.then((snapshot) => {
+    const urlPromise = ref.child(name).getDownloadURL();
+    console.log(snapshot, urlPromise);
+    urlPromise.then(function(urlSnapshot){
+      //urlSnapshot is the link to the content just added to storage
+      console.log(urlSnapshot); 
+      document.querySelector('#uploadImg').src = urlSnapshot;
+    });;
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
   // checks if user exists
@@ -64,6 +91,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     testBtn.addEventListener('click', function () {
       addPost(userRef);
     });
+
+    uploadBtn.addEventListener('click', function(){
+      uploadFile();
+    });
+
 
     console.log("userRef:", userRef);
     // getPostsByUser(userRef);
