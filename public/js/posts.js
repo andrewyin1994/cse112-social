@@ -24,29 +24,14 @@ function writePost(firebaseUser) {
   );
 };
 
-function sendPost(firebaseUser) {
-  const cR = firestore.collection(`users/`)
-  testBtn.addEventListener('click', function () {
-    cR.get().then(function (doc) {
-      console.log(doc.exists);
-      if (doc && doc.exists) {
-        console.log(doc.data());
-      }
-    })
-      .catch(function (err) {
-        console.log("Error: ", err);
-      });
-    console.log("done");
-    writePost(firebaseUser);
-  });
-}
-
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
   // checks if user exists
   if (firebaseUser) {
     console.log(firebaseUser);
-    sendPost(firebaseUser);
+    testBtn.addEventListener('click', function () {
+      writePost(firebaseUser);
+   });
   } else {
     console.log('not logged in');
   }
