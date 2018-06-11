@@ -29,7 +29,7 @@ jQuery(function ($) {
     $('#post-container').append(PostComponent({content:'third'}))
 
     function hideSidedrawer() {
-        $bodgyEl.toggleClass('hide-sidedrawer');
+        $bodyEl.toggleClass('hide-sidedrawer');
     }
 
     $('.js-show-sidedrawer').on('click', showSidedrawer);
@@ -64,7 +64,8 @@ postModal.addEventListener('click',function(){
 });
 var PostCancel = document.getElementById('btnPostCancel');
 PostCancel.onclick = function(){
-    //mui.onclick("")
+    // mui.overlay('off', modalEl);
+    mui.onclick("")
 };
 
 
