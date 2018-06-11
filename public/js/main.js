@@ -1,4 +1,4 @@
-import PostComponent from './PostComponent.js';
+import PostComponent from '../js/PostComponent.js';
 
 // homepage js
 jQuery(function ($) {
@@ -24,9 +24,9 @@ jQuery(function ($) {
         }, 20);
     }
 
-    $('#post-container').append(PostComponent({ content: 'first' }))
-    $('#post-container').append(PostComponent({ content: 'second' }))
-    $('#post-container').append(PostComponent({ content: 'third' }))
+    $('#post-container').append(PostComponent({content:'first'}))
+    $('#post-container').append(PostComponent({content:'second'}))
+    $('#post-container').append(PostComponent({content:'third'}))
 
     function hideSidedrawer() {
         $bodyEl.toggleClass('hide-sidedrawer');
@@ -48,6 +48,26 @@ jQuery(function ($) {
     });
 });
 
+// PostModal onclick event
+
+var postModal = document.getElementById('postModal');
+var post = document.getElementById('post');
+postModal.addEventListener('click',function(){
+    var modalEl = document.createElement('div');
+    modalEl.style.width = '800px';
+    modalEl.style.height = '500px';
+    modalEl.style.margin = '300px auto';
+    modalEl.appendChild(post);
+
+    // show modal
+    mui.overlay('on', modalEl);
+});
+var PostCancel = document.getElementById('btnPostCancel');
+PostCancel.onclick = function(){
+    mui.onclick("")
+};
+
+
 // end of homepage js signout
 
 document
@@ -68,10 +88,3 @@ document
                 // An error happened.
             });
     });
-
-
-// PRELOADER
-$(window).load(function () {
-    $('.loader').fadeOut(2000);
-
-});
