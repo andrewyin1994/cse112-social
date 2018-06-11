@@ -29,7 +29,7 @@ jQuery(function ($) {
     $('#post-container').append(PostComponent({content:'third'}))
 
     function hideSidedrawer() {
-        $bodgyEl.toggleClass('hide-sidedrawer');
+        $bodyEl.toggleClass('hide-sidedrawer');
     }
 
     $('.js-show-sidedrawer').on('click', showSidedrawer);
