@@ -1,4 +1,4 @@
-try{
+try {
   const config = {
     apiKey: "AIzaSyB66GZ37bvTX0t7y2k16ixM0cI_vHlp6C8",
     authDomain: "cse112sb.firebaseapp.com",
@@ -8,7 +8,7 @@ try{
     messagingSenderId: "299405505457"
   };
   firebase.initializeApp(config);
-} catch(e) {
+} catch (e) {
   console.log('=========Firebase firestore initializer==============')
   console.log(e)
   console.log('====================================')

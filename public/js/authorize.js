@@ -34,30 +34,30 @@ function submitFunc() {
 
   emailerr.innerHTML = passerr.innerHTML = matcherr.innerHTML = '';
 
-  if(mpass != cpass) {
+  if (mpass != cpass) {
     matcherr.innerHTML = 'Passwords do not match.';
   }
   else {
-    firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(function(currentUser) {
+    firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(function (currentUser) {
       // Sign-out successful.
       console.log(currentUser + "signed Up");
       mui.overlay('off');
 
       // testInsert.innerHTML = "sign Up works";
     },
-    function(error) {
-      let errorCode = error.code;
-      let errorMessage = error.message;
+      function (error) {
+        let errorCode = error.code;
+        let errorMessage = error.message;
 
-      console.log(errorCode);
-      
-      if(errorCode == 'auth/invalid-email') {
-        emailerr.innerHTML = errorMessage;
-      }
-      if(errorCode == 'auth/weak-password') {
-        passerr.innerHTML = errorMessage;
-      }
-    });
+        console.log(errorCode);
+
+        if (errorCode == 'auth/invalid-email') {
+          emailerr.innerHTML = errorMessage;
+        }
+        if (errorCode == 'auth/weak-password') {
+          passerr.innerHTML = errorMessage;
+        }
+      });
   }
 }
 
@@ -99,8 +99,8 @@ function activateSignUp() {
   modalEl.style.margin = '100px auto';
   modalEl.style.backgroundColor = '#fff';
 
-  modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` + 
-  `<form class='mui-form'>
+  modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` +
+    `<form class='mui-form'>
   <legend>Sign Up</legend>
   <div class='mui-textfield mui-textfield--float-label'>
     <input type='text' name='muser' id='muser'>

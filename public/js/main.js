@@ -24,9 +24,9 @@ jQuery(function ($) {
         }, 20);
     }
 
-    $('#post-container').append(PostComponent({content:'first'}))
-    $('#post-container').append(PostComponent({content:'second'}))
-    $('#post-container').append(PostComponent({content:'third'}))
+    $('#post-container').append(PostComponent({ content: 'first' }))
+    $('#post-container').append(PostComponent({ content: 'second' }))
+    $('#post-container').append(PostComponent({ content: 'third' }))
 
     function hideSidedrawer() {
         $bodyEl.toggleClass('hide-sidedrawer');
@@ -51,17 +51,17 @@ jQuery(function ($) {
 // end of homepage js signout
 
 document
-  .getElementById('btnLogout')
-  .addEventListener('click', function () {
-      const currentUser = firebase
-          .auth()
-          .currentUser;
-      firebase
-          .auth()
-          .signOut()
-          .then(function () {
-              // Sign-out successful.
-              console.log(currentUser + "signed out");
+    .getElementById('btnLogout')
+    .addEventListener('click', function () {
+        const currentUser = firebase
+            .auth()
+            .currentUser;
+        firebase
+            .auth()
+            .signOut()
+            .then(function () {
+                // Sign-out successful.
+                console.log(currentUser + "signed out");
 
                 window.location.href = "index.html";
             }, function (error) {
@@ -71,7 +71,7 @@ document
 
 
 // PRELOADER
-$(window).load(function(){
+$(window).load(function () {
     $('.loader').fadeOut(2000);
-    
-  });
+
+});

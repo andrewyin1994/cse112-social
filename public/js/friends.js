@@ -21,12 +21,12 @@ function grabFriends() {
     firestore.collection("users").get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         // doc.data() is never undefined for query doc snapshots
-         testMsg += `<br>uid: ${doc.id} => <br>`;
+        testMsg += `<br>uid: ${doc.id} => <br>`;
         console.log(doc.id, " => ", doc.data());
         let data = doc.data();
-        Object.keys(data).forEach(dKey=>{
-          console.log(dKey,": " ,data[dKey]);
-          testMsg += `<br>${dKey}: ${data[dKey].length==0? "null": data[dKey]}`;
+        Object.keys(data).forEach(dKey => {
+          console.log(dKey, ": ", data[dKey]);
+          testMsg += `<br>${dKey}: ${data[dKey].length == 0 ? "null" : data[dKey]}`;
         });
       });
       testInsert.innerHTML = testMsg;

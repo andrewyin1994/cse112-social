@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SafeBook</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SafeBook</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
+  <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
 </head>
+
 <body>
   <section id="login">
 
     <div class="mui-container-fluid">
       <div class="mui-row">
         <div class="mui-col-xs-6 mui-col-xs-offset-2 mui-col-md-8 mui-col-md-offset-4 mui-col-lg-offset-4">
-            <img class="icon" src="images/lock-icon2.png" alt="icon">
+          <img class="icon" src="images/lock-icon2.png" alt="icon">
         </div>
       </div>
     </div>
@@ -33,23 +35,26 @@
             <div class="mui-textfield mui-textfield--float-label">
               <input type="password" name="password" id="password">
               <label for="password">Password</label>
-            </div>    
+            </div>
           </form>
-          
+
 
           <button class="mui-btn mui-btn--flat mui-btn--primary" id="btnLogin">Login</button>
           <button class="mui-btn mui-btn--flat mui-btn--primary" id="btnSignUpForm">Sign up</button>
           <!-- <button class="mui-btn mui-btn--accent" id="btnLogout">Log out</button> -->
           <!-- <div id="testInsert">changes</div> -->
-          </div>
+        </div>
       </div>
     </div>
 
-    <a href="homepage.html"><button class="mui-btn mui-btn--fab mui-btn--accent">+</button> </a>
+    <a href="homepage.html">
+      <button class="mui-btn mui-btn--fab mui-btn--accent">+</button>
+    </a>
   </section>
 
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
   <script src="js/firebase.config.js"></script>
   <script src="js/authorize.js"></script>
 </body>
+
 </html>
