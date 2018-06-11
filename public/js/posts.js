@@ -36,15 +36,6 @@ function getPostsByUser(userRef){
     });
 }
 
-/**
- * Get all users that userRef is following
- * @param {*} userRef ref to current logged in user
- */
-function getUserFollowing(userRef){
-  userRef.get().then(ref=>{
-    console.log(ref.data().followingRefs);
-  });
-}
 
 /**
  * Get all posts by userRef and users that userRef is following
@@ -76,7 +67,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
     console.log("userRef:", userRef);
     // getPostsByUser(userRef);
-    getUserFollowing(userRef);
+    // getUserFollowing(userRef);
 
   } else {
     console.log('not logged in');
