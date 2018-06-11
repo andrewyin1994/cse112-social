@@ -29,7 +29,7 @@ jQuery(function ($) {
     $('#post-container').append(PostComponent({content:'third'}))
 
     function hideSidedrawer() {
-        $bodyEl.toggleClass('hide-sidedrawer');
+        $bodgyEl.toggleClass('hide-sidedrawer');
     }
 
     $('.js-show-sidedrawer').on('click', showSidedrawer);
@@ -64,7 +64,7 @@ postModal.addEventListener('click',function(){
 });
 var PostCancel = document.getElementById('btnPostCancel');
 PostCancel.onclick = function(){
-    mui.onclick("")
+    //mui.onclick("")
 };
 
 
@@ -88,3 +88,9 @@ document
                 // An error happened.
             });
     });
+
+// PRELOADER
+$(window).load(function () {
+    $('.loader').fadeOut(2000);
+ 
+ });
