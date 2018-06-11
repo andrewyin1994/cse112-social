@@ -32,8 +32,8 @@ function getPostsByUser(userRef){
       ref.forEach(postRef=>{
         //TODO
         console.log(postRef.id);
-      })
-    })
+      });
+    });
 }
 
 /**
@@ -41,27 +41,25 @@ function getPostsByUser(userRef){
  * @param {*} userRef ref to current logged in user
  */
 function getUserFollowing(userRef){
-  userRef.get('followingUsers').then(ref=>{
-    ref.forEach(friendRef=>{
-      console.log(friendRef.id)
-    })
-  })
+  userRef.get().then(ref=>{
+    console.log(ref.data().followingRefs);
+  });
 }
 
 /**
- * Get all posts by userRef and userRef's following
+ * Get all posts by userRef and users that userRef is following
  * @param {*} userRef ref to current logged in user
  */
-function getPostsFeedByUser(userRef){
-  userRef.get()
-  firestore.collection('posts').where('ownRef','==', userRef)
-    .get().then(ref=>{
-      ref.forEach(postRef=>{
-        //TODO
-        console.log(postRef.id);
-      })
-    })
-}
+// function getPostsFeedByUser(userRef){
+//   userRef.get()
+//   firestore.collection('posts').where('ownRef','==', userRef)
+//     .get().then(ref=>{
+//       ref.forEach(postRef=>{
+//         //TODO
+//         console.log(postRef.id);
+//       });
+//     });
+// }
 
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -76,6 +74,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
       addPost(userRef);
     });
 
+    console.log("userRef:", userRef);
     // getPostsByUser(userRef);
     getUserFollowing(userRef);
 
