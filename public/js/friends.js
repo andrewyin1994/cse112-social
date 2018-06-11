@@ -3,13 +3,13 @@ const testBtn = document.getElementById('testBtn');
 const testInsert = document.getElementById('testInsert');
 
 function grabFriends() {
-  const d = firestore.doc(`users/${firebase.auth().currentUser.uid}`)
-  const dR = firestore.doc(`users/e4L1ADzjqzQsc1DThDHZdTKbVuU2`)
+  const d = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+  const dR = firestore.doc(`users/e4L1ADzjqzQsc1DThDHZdTKbVuU2`);
   testBtn.addEventListener('click', function () {
     dR.get().then(function (doc) {
-      console.log(doc.exists)
+      console.log(doc.exists);
       if (doc && doc.exists) {
-        console.log("doc data if it exists: ")
+        console.log("doc data if it exists: ");
         console.log(doc.data());
       }
     })

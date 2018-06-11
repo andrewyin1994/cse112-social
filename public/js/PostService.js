@@ -11,6 +11,7 @@ const TeamSnip = {
 };
 
 const dR = firestore.doc("roster/players");
+const cR = firestore.collection("user");
 
 /**
 * Class representing the team"s roster of players. 
