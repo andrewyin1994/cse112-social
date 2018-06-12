@@ -67,37 +67,31 @@ function getPostsFeedByUser(userRef, followingRefs){
     let postFeedList = [];
 
     followingRefs.forEach((friendRef)=>{
-      // firestore.collection('posts').where('ownRef','==', friendRef)
-      // .get().then(ref=>{
-          // console.log('ref', ref.docs);
-          counter++;
-          getPostsByUserRef(friendRef).then(posts=>{
+      counter++;
+      getPostsByUserRef(friendRef).then(posts=>{
 
-            console.log('posts', posts);
+        console.log('posts', posts);
 
-            // Update postFeedList
+        // Update postFeedList
+        postFeedList = [
+          ...postFeedList,
+          ...posts
+        ]
+
+        // 
+        if (counter === followingRefs.length){
+          getPostsByUserRef(userRef).then(selfPosts=>{
+
             postFeedList = [
               ...postFeedList,
-              ...posts
-            ];
+              ...selfPosts
+            ]
 
-            // append all of currentUsers posts to the feed
-            if (counter === followingRefs.length) {
-              getPostsByUserRef(userRef).then(selfPosts=>{
-
-                postFeedList = [
-                  ...postFeedList,
-                  ...selfPosts
-                ];
-
-                resolve(postFeedList);
-              });
-            }
+            resolve(postFeedList)
           });
-        // }
-      // );
+        }
+      });
     });
-
   });
 }
 
