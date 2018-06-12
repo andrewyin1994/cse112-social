@@ -48,6 +48,8 @@ jQuery(function ($) {
     });
 });
 
+
+
 // PostModal onclick event
 
 var postModal = document.getElementById('postModal');
@@ -75,7 +77,7 @@ postModal.addEventListener('click', function () {
           </div>
         </form>
 
-        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick()="postCancel">CANCEL</button>
+        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="postCancel">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
       </div>
     </div>
