@@ -48,10 +48,6 @@ jQuery(function ($) {
     });
 });
 
-function cancelPostFunc() {
-    mui.overlay("off");
-  }
-
 // PostModal onclick event
 
 var postModal = document.getElementById('postModal');
@@ -79,7 +75,7 @@ postModal.addEventListener('click', function () {
           </div>
         </form>
 
-        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="cancelPostFunc()">CANCEL</button>
+        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
       </div>
     </div>
