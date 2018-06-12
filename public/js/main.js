@@ -79,7 +79,7 @@ postModal.addEventListener('click', function () {
           </div>
         </form>
 
-        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="cancelFunc()">CANCEL</button>
+        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
       </div>
     </div>
