@@ -128,7 +128,7 @@ function uploadFile() {
   });
 }
 
-function registerPageHandlers(){
+function registerPageHandlers(userRef){
 
   // Register listener for add post button
   testBtn.addEventListener('click', function () {
@@ -180,7 +180,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
       handleUserData(userRef,followingRefs,followerRefs);
     });
 
-    registerPageHandlers();
+    registerPageHandlers(userRef);
 
   } else {
     if (DEBUG) console.log('not logged in');
