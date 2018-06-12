@@ -16,13 +16,13 @@
     img {
       border-radius: 50%;
     }
-</style>
-<script>
+  </style>
+  <script>
     function activateOverlay() {
       // show overlay
       mui.overlay('on');
     }
-</script>
+  </script>
 </head>
 
 <body class="hide-sidedrawer">
@@ -99,40 +99,42 @@
       <br>
       <h1>Homepage</h1>
       <!-- button for post modal-->
-    <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
-      <table class="mui-table--bordered">
-              <td>
-                  <img id = "default" src="images/default-pic.png" width="35" height="35" >
-              </td>
-              <td>
-                <div>What's new with you?</div>
-              </td>
+
+
+      <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
+        <table class="mui-table--bordered">
+          <td>
+            <img id="default" src="images/default-pic.png" width="35" height="35">
+          </td>
+          <td>
+            <div>What's new with you?</div>
+          </td>
         </table>
-   </button>
-<!--post div-->
-<div class="mui-container-fluid" id ="post">
-   <div class="mui-row">
-     <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-       <form class="mui-form">
-           <table class="mui-table--bordered">
-               <td>
-                   <img id = "default" src="images/default-pic.png" width="35" height="35" >
-               </td>
-               <td>
-                 <div>user name</div>
-               </td>
-         </table>
-         <div class="mui-textfield mui-textfield--float-label">
-           <input type="text" name="text" id="postContent">
-           <label for="user">What's new with you?</label>
-         </div>
-       </form>
-       
-       <button class="mui-btn mui-btn--primary" id="btnPostCancel">CANCEL</button>
-       <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
-       </div>
-   </div>
- </div>
+      </button>
+      <!--post div-->
+      <!-- <div class="mui-container-fluid" id="post">
+        <div class="mui-row">
+          <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+            <form class="mui-form">
+              <table class="mui-table--bordered">
+                <td>
+                  <img id="default" src="images/default-pic.png" width="35" height="35">
+                </td>
+                <td>
+                  <div>user name</div>
+                </td>
+              </table>
+              <div class="mui-textfield mui-textfield--float-label">
+                <input type="text" name="text" id="postContent">
+                <label for="user">What's new with you?</label>
+              </div>
+            </form>
+
+            <button class="mui-btn mui-btn--primary" id="btnPostCancel">CANCEL</button>
+            <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
+          </div>
+        </div>
+      </div> -->
 
     </div>
   </div>

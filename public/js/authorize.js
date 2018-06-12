@@ -3,7 +3,7 @@ const txtPassword = document.getElementById('password');
 const btnLogin = document.getElementById('btnLogin');
 const btnSignUpForm = document.getElementById('btnSignUpForm');
 const btnLogout = document.getElementById('btnLogout');
-
+const googleLogin = document.getElementById('googleLogin');
 const testInsert = document.getElementById('testInsert');
 
 // Login button
@@ -16,6 +16,26 @@ btnLogin.addEventListener('click', e => {
   promise.catch(e => console.log(e.message));
 
   // testInsert.innerHTML = "login works";
+});
+
+googleLogin.addEventListener('click', e => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log("Google Success")
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    console.log("Google Failure")
+  });
 });
 
 btnSignUpForm.addEventListener('click', activateSignUp);
