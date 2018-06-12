@@ -57,28 +57,23 @@ function submitFunc() {
   const matcherr = document.getElementById('matcherr');
   const auth = firebase.auth();
 
-  /* @issue verify mpass == cpass on firebase */
-
+  // clear any warning messages
   emailerr.innerHTML = passerr.innerHTML = matcherr.innerHTML = '';
 
-  if (mpass != cpass) {
+  // warn user for non-matching password on signup
+  if (!(mpass === cpass)) {
     matcherr.innerHTML = 'Passwords do not match.';
   }
   else {
-    firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(function (currentUser) {
-      // Sign-out successful.
-      console.log(currentUser,  "signed Up");
-      let payload = {
-        followerRefs:[],
-        followingRefs:[]
-      };
-      
-      if (DEBUG) console.log(payload);
-    
-      firestore.doc(`users/${currentUser.user.uid}`).set(payload);
-      mui.overlay('off');
+    firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(
+      function(currentUser) {
+        // Sign-up successful.
+        console.log(currentUser,  "signed Up");
 
-      // testInsert.innerHTML = "sign Up works";
+        // close the dialog box upon successful sign-up
+        mui.overlay('off');
+
+        // testInsert.innerHTML = "sign up works";
     },
       function (error) {
         let errorCode = error.code;
@@ -141,18 +136,19 @@ function activateSignUp() {
     <input type='text' name='muser' id='muser'>
     <label for='muser'>Email</label>
   </div>
-  <div id='emailerr' style='color:red;'></div>
+  <p id='emailerr' style='color:red;'></p>
 
   <div class='mui-textfield mui-textfield--float-label'>
     <input type='password' name='mpass' id='mpass'>
     <label for='mpass'>Password</label>
   </div>
-  <div id='passerr' style='color:red;'></div>
+  <p id='passerr' style='color:red;'></p>
+
   <div class='mui-textfield mui-textfield--float-label'>
     <input type='password' name='cpass' id='cpass'>
     <label for='cpass'>Confirm Password</label>
   </div>
-  <div id='matcherr' style='color:red;'></div>
+  <p id='matcherr' style='color:red;'></p>
 </form> 
 <button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>
 <button type='cancel' class='mui-btn mui-btn--raised' id='btncancel' onclick='cancelFunc()'>Cancel</button>

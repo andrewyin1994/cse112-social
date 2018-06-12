@@ -31,12 +31,14 @@ function addPost(userRef) {
  */
 function getPostsByUserRef(userRef){
   return new Promise((resolve,reject)=>{
-    let parsedData = []
-    let query = firestore.collection('posts').where('ownRef','==', userRef)
-    query.orderBy('createDate')
+    let parsedData = [];
+    let query = firestore.collection('posts').where('ownRef','==', userRef);
+    query.orderBy('createDate');
     query.get().then(postsRefs=>{
         postsRefs.forEach(postResult=>{
-          postContent=postResult.data()
+          postContent=postResult.data();
+
+          // append newly parsed data to currently parsed data array
           parsedData = [
             ...parsedData,
             {
@@ -45,13 +47,12 @@ function getPostsByUserRef(userRef){
                 ...postContent
               }
             }
-          ]
+          ];
         });
-        resolve(parsedData)
+        resolve(parsedData);
       });
-  })
+  });
 }
-
 
 /**
  * Get all posts by userRef and users that userRef is following
@@ -62,44 +63,48 @@ function getPostsByUserRef(userRef){
 function getPostsFeedByUser(userRef, followingRefs){
 
   return new Promise((resolve,reject)=>{
-    let counter = 0 // Keep track of # of request promises being solved
-    let postFeedList = []
+    let counter = 0; // Keep track of # of request promises being solved
+    let postFeedList = [];
 
     followingRefs.forEach((friendRef)=>{
-      firestore.collection('posts').where('ownRef','==', friendRef)
-      .get().then(ref=>{
+      // firestore.collection('posts').where('ownRef','==', friendRef)
+      // .get().then(ref=>{
+          // console.log('ref', ref.docs);
           counter++;
           getPostsByUserRef(friendRef).then(posts=>{
+
+            console.log('posts', posts);
 
             // Update postFeedList
             postFeedList = [
               ...postFeedList,
               ...posts
-            ]
+            ];
 
-            // 
-            if (counter === followingRefs.length){
+            // append all of currentUsers posts to the feed
+            if (counter === followingRefs.length) {
               getPostsByUserRef(userRef).then(selfPosts=>{
 
                 postFeedList = [
                   ...postFeedList,
                   ...selfPosts
-                ]
+                ];
 
-                resolve(postFeedList)
-              })
+                resolve(postFeedList);
+              });
             }
-          })
-        }
-      );
-    })
-  })
+          });
+        // }
+      // );
+    });
+
+  });
 }
 
 function orderPostFeedByDate(postFeed){
   return postFeed.sort((postA,postB)=>{
-    return postA[Object.keys(postA)[0]].createDate - postB[Object.keys(postB)[0]].createDate
-  })
+    return postA[Object.keys(postA)[0]].createDate - postB[Object.keys(postB)[0]].createDate;
+  });
 }
 
 /**
@@ -109,6 +114,7 @@ function orderPostFeedByDate(postFeed){
 function uploadFile() {
   const ref = firebase.storage().ref();
   const file = document.querySelector('#uploadControl').files[0];
+  // we do +new Date() to force the time to be epoch time instead of standard day-month-year etc
   const name = (+new Date()) + '-' + file.name;
   const metadata = {
     contentType: file.type
@@ -129,7 +135,6 @@ function uploadFile() {
 }
 
 function registerPageHandlers(userRef){
-
   // Register listener for add post button
   testBtn.addEventListener('click', function () {
     addPost(userRef);
