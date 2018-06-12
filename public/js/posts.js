@@ -66,32 +66,28 @@ function getPostsFeedByUser(userRef, followingRefs){
     let postFeedList = []
 
     followingRefs.forEach((friendRef)=>{
-      firestore.collection('posts').where('ownRef','==', friendRef)
-      .get().then(ref=>{
-          counter++;
-          getPostsByUserRef(friendRef).then(posts=>{
+      counter++;
+      getPostsByUserRef(friendRef).then(posts=>{
 
-            // Update postFeedList
+        // Update postFeedList
+        postFeedList = [
+          ...postFeedList,
+          ...posts
+        ]
+
+        // 
+        if (counter === followingRefs.length){
+          getPostsByUserRef(userRef).then(selfPosts=>{
+
             postFeedList = [
               ...postFeedList,
-              ...posts
+              ...selfPosts
             ]
 
-            // 
-            if (counter === followingRefs.length){
-              getPostsByUserRef(userRef).then(selfPosts=>{
-
-                postFeedList = [
-                  ...postFeedList,
-                  ...selfPosts
-                ]
-
-                resolve(postFeedList)
-              })
-            }
+            resolve(postFeedList)
           })
         }
-      );
+      })
     })
   })
 }
