@@ -40,6 +40,11 @@ googleLogin.addEventListener('click', e => {
 
 btnSignUpForm.addEventListener('click', activateSignUp);
 
+// Cancel Function
+function cancelFunc() {
+  mui.overlay('off');
+}
+
 // Sign Up Function
 function submitFunc() {
   const muser = document.getElementById('muser').value;
@@ -139,7 +144,9 @@ function activateSignUp() {
   </div>
   <div id='matcherr' style='color:red;'></div>
 </form> 
-<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>` + `</div></div></div>`;
+<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='submitFunc()'>Submit</button>
+<button type='cancel' class='mui-btn mui-btn--raised' id='btncancel' onclick='cancelFunc()'>Cancel</button>
+</div></div></div>`;
 
   // show modal
   mui.overlay('on', modalEl);
