@@ -74,8 +74,7 @@ postModal.addEventListener('click', function () {
             </td>
           </table>
           <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="text" id="postContent">
-            <label for="user">What's new with you?</label>
+          <textarea type="text" name="post" id="postText"></textarea>
           </div>
         </form>
 
