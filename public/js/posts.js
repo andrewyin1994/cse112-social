@@ -1,6 +1,7 @@
-const testBtn = document.getElementById('postBtn');
+const postBtn = document.getElementById('postBtn');
 const testInsert = document.getElementById('testInsert');
 const uploadBtn = document.getElementById('uploadBtn');
+const testBtn = document.getElementById('testBtn');
 
 const DEBUG = true;
 
@@ -9,20 +10,37 @@ const DEBUG = true;
  * @param {*} userRef ref to current logged in user
  */
 function addPost(userRef) {
-  const postText = document.getElementById("postText").value;
+  const postText = document.getElementById('postText').value;
   
   let payload = {
     ownRef: userRef,
     text: postText,
     createDate: new Date().getTime(),
     favorRefs:[],
-    imageUrl:""
+    imageUrl:''
   };
   
   if (DEBUG) console.log(payload);
 
   firestore.collection('posts').add(payload);
 };
+
+/**
+ * Delete post from firestore
+ * @param {*} userRef ref to the user currently logged in
+ * @param {*} postId ref to post being deleted
+ */
+function deletePost(userRef, postId) {
+  return new Promise((resolve,reject) => {
+    let query = firestore.collection('posts').doc(postId);
+    query.delete().then(() => {
+      console.log('Post deleted!');
+    },
+    (e) => {
+      console.log('Error removing post: ', e);
+    });
+  });
+}
 
 /**
  * Get all posts created by a user
@@ -70,7 +88,7 @@ function getPostsFeedByUser(userRef, followingRefs){
       counter++;
       getPostsByUserRef(friendRef).then(posts=>{
 
-        console.log('posts', posts);
+      if (DEBUG) console.log('posts', posts);
 
         // Update postFeedList
         postFeedList = [
@@ -128,10 +146,15 @@ function uploadFile() {
   });
 }
 
-function registerPageHandlers(userRef){
+function registerPageHandlers(userRef) {
+  console.log('register page handler');
   // Register listener for add post button
-  testBtn.addEventListener('click', function () {
+  postBtn.addEventListener('click', function () {
     addPost(userRef);
+  });
+
+  testBtn.addEventListener('click', function() {
+    deleteTest(userRef);
   });
 
   uploadBtn.addEventListener('click', function(){
@@ -185,4 +208,19 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (DEBUG) console.log('not logged in');
   }
 });
+
+function deleteTest(userRef) {
+  console.log('begin test');
+  let payload = {
+    ownRef: userRef,
+    text: 'test',
+    createDate: new Date().getTime(),
+    favorRefs:[],
+    imageUrl:''
+  };  
+  firestore.collection('posts').doc('test').set(payload).then(() => {
+      deletePost(userRef,'test').then(() => {
+    });
+  });
+}
 
