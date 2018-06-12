@@ -6,6 +6,8 @@ const btnLogout = document.getElementById('btnLogout');
 const googleLogin = document.getElementById('googleLogin');
 const testInsert = document.getElementById('testInsert');
 
+const DEBUG = true;
+
 // Login button
 btnLogin.addEventListener('click', e => {
   const email = txtEmail.value;
@@ -65,7 +67,15 @@ function submitFunc() {
   else {
     firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(function (currentUser) {
       // Sign-out successful.
-      console.log(currentUser + "signed Up");
+      console.log(currentUser,  "signed Up");
+      let payload = {
+        followerRefs:[],
+        followingRefs:[]
+      };
+      
+      if (DEBUG) console.log(payload);
+    
+      firestore.doc(`users/${currentUser.user.uid}`).set(payload);
       mui.overlay('off');
 
       // testInsert.innerHTML = "sign Up works";
