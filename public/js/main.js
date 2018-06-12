@@ -2,70 +2,66 @@ import PostComponent from '../js/PostComponent.js';
 
 // homepage js
 jQuery(function ($) {
-    var $bodyEl = $('body'),
-        $sidedrawerEl = $('#sidedrawer');
+  var $bodyEl = $('body'),
+    $sidedrawerEl = $('#sidedrawer');
 
-    function showSidedrawer() {
-        // show overlay
-        var options = {
-            onclose: function () {
-                $sidedrawerEl
-                    .removeClass('active')
-                    .appendTo(document.body);
-            }
-        };
+  function showSidedrawer() {
+    // show overlay
+    var options = {
+      onclose: function () {
+        $sidedrawerEl
+          .removeClass('active')
+          .appendTo(document.body);
+      }
+    };
 
-        var $overlayEl = $(mui.overlay('on', options));
+    var $overlayEl = $(mui.overlay('on', options));
 
-        // show element
-        $sidedrawerEl.appendTo($overlayEl);
-        setTimeout(function () {
-            $sidedrawerEl.addClass('active');
-        }, 20);
-    }
+    // show element
+    $sidedrawerEl.appendTo($overlayEl);
+    setTimeout(function () {
+      $sidedrawerEl.addClass('active');
+    }, 20);
+  }
 
-    $('#post-container').append(PostComponent({ content: 'first' }))
-    $('#post-container').append(PostComponent({ content: 'second' }))
-    $('#post-container').append(PostComponent({ content: 'third' }))
+  $('#post-container').append(PostComponent({ content: 'first' }))
+  $('#post-container').append(PostComponent({ content: 'second' }))
+  $('#post-container').append(PostComponent({ content: 'third' }))
 
-    function hideSidedrawer() {
-        $bodgityEl.toggleClass('hide-sidedrawer');
-    }
+  function hideSidedrawer() {
+    $bodgityEl.toggleClass('hide-sidedrawer');
+  }
 
-    $('.js-show-sidedrawer').on('click', showSidedrawer);
-    $('.js-hide-sidedrawer').on('click', hideSidedrawer);
+  $('.js-show-sidedrawer').on('click', showSidedrawer);
+  $('.js-hide-sidedrawer').on('click', hideSidedrawer);
 
-    var $titleEls = $('strong', $sidedrawerEl);
+  var $titleEls = $('strong', $sidedrawerEl);
 
-    $titleEls
-        .next()
-        .hide();
+  $titleEls
+    .next()
+    .hide();
 
-    $titleEls.on('click', function () {
-        $(this)
-            .next()
-            .slideToggle(200);
-    });
+  $titleEls.on('click', function () {
+    $(this)
+      .next()
+      .slideToggle(200);
+  });
 });
 
-<<<<<<< HEAD
+function cancelFunc() {
+  mui.overlay('off');
+}
 
-=======
-function cancelPostFunc() {
-    mui.overlay("off");
-  }
->>>>>>> be1bab45263dd7c0fbae293eacab328fc4255483
-
-// PostModal onclick event
+// PostModal onclick event`
 
 var postModal = document.getElementById('postModal');
 var post = document.getElementById('post');
 postModal.addEventListener('click', function () {
-    var modalEl = document.createElement('div');
-    modalEl.style.width = '800px';
-    modalEl.style.height = '500px';
-    modalEl.style.margin = '300px auto';
-    modalEl.innerHTML = `<div class="mui-container-fluid" id="post">
+  var modalEl = document.createElement('div');
+  modalEl.style.width = '800px';
+  modalEl.style.height = '500px';
+  modalEl.style.margin = '300px auto';
+  modalEl.innerHTML = `<div class="mui-container-fluid" id="post">
     <div class="mui-row">
       <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
         <form class="mui-form">
@@ -83,18 +79,14 @@ postModal.addEventListener('click', function () {
           </div>
         </form>
 
-<<<<<<< HEAD
-        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="postCancel">CANCEL</button>
-=======
-        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="cancelPostFunc()">CANCEL</button>
->>>>>>> be1bab45263dd7c0fbae293eacab328fc4255483
+        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="cancelFunc()">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
       </div>
     </div>
-  </div>`
+  </div>`;
 
-    // show modal
-    mui.overlay('on', modalEl);
+  // show modal
+  mui.overlay('on', modalEl);
 });
 
 /*var PostCancel = document.getElementById('btnPostCancel');
@@ -106,26 +98,26 @@ PostCancel.onclick = function () {
 // end of homepage js signout
 
 document
-    .getElementById('btnLogout')
-    .addEventListener('click', function () {
-        const currentUser = firebase
-            .auth()
-            .currentUser;
-        firebase
-            .auth()
-            .signOut()
-            .then(function () {
-                // Sign-out successful.
-                console.log(currentUser + "signed out");
+  .getElementById('btnLogout')
+  .addEventListener('click', function () {
+    const currentUser = firebase
+      .auth()
+      .currentUser;
+    firebase
+      .auth()
+      .signOut()
+      .then(function () {
+        // Sign-out successful.
+        console.log(currentUser + "signed out");
 
-                window.location.href = "index.html";
-            }, function (error) {
-                // An error happened.
-            });
-    });
+        window.location.href = "index.html";
+      }, function (error) {
+        // An error happened.
+      });
+  });
 
 // PRELOADER
 $(window).load(function () {
-    $('.loader').fadeOut(2000);
+  $('.loader').fadeOut(2000);
 
 });
