@@ -29,7 +29,7 @@ jQuery(function ($) {
     $('#post-container').append(PostComponent({ content: 'third' }))
 
     function hideSidedrawer() {
-        $bodyEl.toggleClass('hide-sidedrawer');
+        $bodgityEl.toggleClass('hide-sidedrawer');
     }
 
     $('.js-show-sidedrawer').on('click', showSidedrawer);
@@ -75,7 +75,7 @@ postModal.addEventListener('click', function () {
           </div>
         </form>
 
-        <button class="mui-btn mui-btn--primary" id="btnPostCancel">CANCEL</button>
+        <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick()="postCancel">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
       </div>
     </div>
