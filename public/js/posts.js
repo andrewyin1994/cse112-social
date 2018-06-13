@@ -13,7 +13,7 @@ class Post {
       createDate: new Date().getTime(),
       favorRefs: [],
       imageUrl: [],
-      id: userRef.id
+      ownerId: userRef.id
     }
   }
 }
