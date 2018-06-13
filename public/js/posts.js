@@ -234,17 +234,28 @@ function postMaker(prop){
   const currTime = new Date(prop.createDate);
   return `<div class="mui-row">
   <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-  <p>${currTime.toTimeString()}</p>
   <p>${prop.postText}</p>
+  <p style="text-align:right;font-size:75%">${currTime.toTimeString()}</p>
   </div>
 </div>`;
 }
 
-//tests basic functionality for showing user posts (for now)
-//should have the logic seperated from the test
+//tests basic functionality for showing posts
 function showPostTest(){
-  userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
-  getPostsByUserRef(userRef).then(function(postList){
+  let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+  let followingRefs;
+  userRef.get().then(snapshot=>{
+    followingRefs = snapshot.data().followingRefs;
+    console.log(followingRefs);
+  });
+  showPost(userRef, followingRefs);
+}
+
+//if you have friends, this will add their posts in too (may need fixing)
+function showPost(userRef, followingRefs){
+  let refListReq = (followingRefs != null && followingRefs.length > 0) ? getPostsFeedByUser(userRef, followingRefs)
+                                              :getPostsByUserRef(userRef)
+  refListReq.then(function(postList){
     console.log(postList);
     postList.forEach(function(post){
       console.log(post[Object.keys(post)[0]].createDate);
@@ -252,8 +263,6 @@ function showPostTest(){
     });
   });
 }
-
-
 
 
 
@@ -277,13 +286,13 @@ function handleUserData(userRef, followingRefs, followerRefs){
     if (DEBUG) console.log(sortedFeed)
     sortedFeed.forEach(post => {
       if(DEBUG) console.log(post[Object.keys(post)[0]].createDate)
-    })
-  })
+    });
+  });
 }
 
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
-  var userRef, followingRefs, followerRefs;
+  let userRef, followingRefs, followerRefs;
 
   // checks if user exists
   if (firebaseUser) {
