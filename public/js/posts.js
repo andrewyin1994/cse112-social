@@ -2,9 +2,15 @@ const postBtn = document.getElementById('postBtn');
 const testInsert = document.getElementById('testInsert');
 const uploadBtn = document.getElementById('uploadBtn');
 const testBtn = document.getElementById('testBtn');
+const editBtn = document.getElementById('editBtn');
 
 const DEBUG = true;
 
+/**
+ * Post class, what will be added to Firestore
+ * @param {*} userRef ref to current logged in user
+ * @param {*} postText text that user wishes to post
+ */
 class Post {
   constructor(userRef, postText) {
     this.post = {
@@ -13,11 +19,7 @@ class Post {
       postText: postText,
       createDate: new Date().getTime(),
       favorRefs: [],
-      imageUrl: [],
-<<<<<<< HEAD
-      ownerId: userRef.id
-=======
->>>>>>> 8316ab6d52b3a0c4288bb5113b7626e61905b56a
+      imageUrl: []
     }
   }
 }
@@ -31,31 +33,23 @@ function addPost(userRef) {
     
   let payload = new Post(userRef, postText);
   
-  // let payload = {
-  //   ownRef: userRef,
-  //   text: postText,
-  //   createDate: new Date().getTime(),
-  //   favorRefs:[],
-  //   imageUrl:''
-  // };
-  
   if (DEBUG) console.log(payload);
 
   firestore.collection('posts').add(payload.post);
 };
 
 /**
- * Delete post from firestore
+ * Delete post from Firestore
  * @param {*} userRef ref to the user currently logged in
  * @param {*} postId ref to post being deleted
  */
 function deletePost(postId) {
   return new Promise((resolve,reject) => {
     let query = firestore.collection('posts').doc(postId);
-    query.delete().then(() => {
+    query.delete().then(
+      () => { //success
       console.log('Post deleted!');
-    },
-    (e) => {
+    },(e) => { //fail
       console.log('Error removing post: ', e);
     });
   });
@@ -64,8 +58,18 @@ function deletePost(postId) {
 /**
  * Edit post on firestore
  */
-function editPost(postId) {
-  
+function editPost(postId, editText) {
+  return new Promise((resolve,reject) => {
+    let query = firestore.collection('posts').doc(postId);
+    query.update({
+      postText: editText
+    }).then(
+      () => { //success
+      console.log('Post updated!');
+    },(e) => { //fail
+      console.log('Error updating post: ', e);
+    });
+  });
 }
 
 /**
@@ -84,8 +88,9 @@ function getPostsByUserRef(userRef){
 
           // append newly parsed data to currently parsed data array
           parsedData = [
-            ...parsedData,
+            ...parsedData, //this is the old parsedData to append to
             {
+              //this is what is appended on
               [postResult.id]: {
                 id: postResult.id,
                 ...postContent
@@ -96,6 +101,34 @@ function getPostsByUserRef(userRef){
         resolve(parsedData);
       });
   });
+}
+
+function editTest() {
+  var modalEl = document.createElement('div');
+  modalEl.style.width = '28em';
+  modalEl.style.height = '28em';
+  modalEl.style.margin = '100px auto';
+  modalEl.style.backgroundColor = '#fff';
+
+  modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` +
+    `<form class='mui-form'>
+  <legend>Edit Post</legend>
+  <div class='mui-textfield mui-textfield--float-label'>
+    <input type='text' name='postIdVal' id='postIdVal'>
+    <label for='postIdVal'>postId</label>
+  </div>
+
+  <div class='mui-textfield mui-textfield--float-label'>
+  <input type='text' name='editText' id='editText'>
+  <label for='editText'>text</label>
+  </div>
+
+</form> 
+<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='editPost(document.getElementById("postIdVal").value, document.getElementById("editText").value)'>Submit</button>
+</div></div></div>`;
+
+  // show modal
+  mui.overlay('on', modalEl);
 }
 
 /**
@@ -186,6 +219,10 @@ function registerPageHandlers(userRef) {
   uploadBtn.addEventListener('click', function(){
     uploadFile();
   });
+
+  editBtn.addEventListener('click', function(){
+    editTest();
+  });
 }
 
 /**
@@ -243,17 +280,8 @@ function deleteTest(userRef) {
   console.log('deleteTest uid', userRef.id);
   console.log('payload', payload);
 
-  // let payload = {
-  //   ownRef: userRef,
-  //   text: 'test',
-  //   createDate: new Date().getTime(),
-  //   favorRefs:[],
-  //   imageUrl:''
-  // };
-
   firestore.collection('posts').doc('test').set(payload.post).then(() => {
-      deletePost('test').then(() => {}
-    );
+      deletePost('test');
   });
 }
 

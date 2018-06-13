@@ -8,16 +8,16 @@ admin.initializeApp();
 // exports.helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
+
 class Friends {
   constructor() {
+    //firestore's set() needs an object to do so
     this.follow = {
       followerRefs: [],
       followingRefs: []
     }
   }
 }
-
-// console.log(functions.auth.user());
 
 exports.onUserCreate = functions.auth.user().onCreate((user) => {
   console.log('User Created', user.uid);
