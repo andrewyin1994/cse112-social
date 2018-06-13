@@ -1,4 +1,4 @@
-import PostComponent from '../js/PostComponent.js';
+// import PostComponent from '../js/PostComponent.js';
 
 // homepage js
 jQuery(function ($) {
@@ -24,9 +24,9 @@ jQuery(function ($) {
     }, 20);
   }
 
-  $('#post-container').append(PostComponent({ content: 'first' }))
-  $('#post-container').append(PostComponent({ content: 'second' }))
-  $('#post-container').append(PostComponent({ content: 'third' }))
+  // $('#post-container').append(PostComponent({ content: 'first' }))
+  // $('#post-container').append(PostComponent({ content: 'second' }))
+  // $('#post-container').append(PostComponent({ content: 'third' }))
 
   function hideSidedrawer() {
     $bodyEl.toggleClass('hide-sidedrawer');
@@ -74,8 +74,7 @@ postModal.addEventListener('click', function () {
             </td>
           </table>
           <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="text" id="postContent">
-            <label for="user">What's new with you?</label>
+          <textarea type="text" name="post" id="postText"></textarea>
           </div>
         </form>
 
@@ -94,7 +93,6 @@ PostCancel.onclick = function () {
     //mui.onclick("")
 };*/
 
-
 // end of homepage js signout
 
 document.getElementById('btnLogout').addEventListener('click', function () {
@@ -112,5 +110,4 @@ document.getElementById('btnLogout').addEventListener('click', function () {
 // PRELOADER
 $(window).load(function () {
   $('.loader').fadeOut(2000);
-
 });

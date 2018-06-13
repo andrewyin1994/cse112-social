@@ -1,6 +1,7 @@
-const testBtn = document.getElementById('postBtn');
+const postBtn = document.getElementById('postBtn');
 const testInsert = document.getElementById('testInsert');
 const uploadBtn = document.getElementById('uploadBtn');
+const testBtn = document.getElementById('testBtn');
 
 const DEBUG = true;
 
@@ -9,14 +10,14 @@ const DEBUG = true;
  * @param {*} userRef ref to current logged in user
  */
 function addPost(userRef) {
-  const postText = document.getElementById("postText").value;
+  const postText = document.getElementById('postText').value;
   
   let payload = {
     ownRef: userRef,
     text: postText,
     createDate: new Date().getTime(),
     favorRefs:[],
-    imageUrl:""
+    imageUrl:''
   };
   
   if (DEBUG) console.log(payload);
@@ -25,18 +26,37 @@ function addPost(userRef) {
 };
 
 /**
+ * Delete post from firestore
+ * @param {*} userRef ref to the user currently logged in
+ * @param {*} postId ref to post being deleted
+ */
+function deletePost(userRef, postId) {
+  return new Promise((resolve,reject) => {
+    let query = firestore.collection('posts').doc(postId);
+    query.delete().then(() => {
+      console.log('Post deleted!');
+    },
+    (e) => {
+      console.log('Error removing post: ', e);
+    });
+  });
+}
+
+/**
  * Get all posts created by a user
  * @param {*} userRef ref to current logged in user
  * @returns {Promise} resolve([{[postResult.id]: {id: postResult.id,...postContent}])
  */
 function getPostsByUserRef(userRef){
   return new Promise((resolve,reject)=>{
-    let parsedData = []
-    let query = firestore.collection('posts').where('ownRef','==', userRef)
-    query.orderBy('createDate')
+    let parsedData = [];
+    let query = firestore.collection('posts').where('ownRef','==', userRef);
+    query.orderBy('createDate');
     query.get().then(postsRefs=>{
         postsRefs.forEach(postResult=>{
-          postContent=postResult.data()
+          postContent=postResult.data();
+
+          // append newly parsed data to currently parsed data array
           parsedData = [
             ...parsedData,
             {
@@ -45,13 +65,12 @@ function getPostsByUserRef(userRef){
                 ...postContent
               }
             }
-          ]
+          ];
         });
-        resolve(parsedData)
+        resolve(parsedData);
       });
-  })
+  });
 }
-
 
 /**
  * Get all posts by userRef and users that userRef is following
@@ -62,44 +81,42 @@ function getPostsByUserRef(userRef){
 function getPostsFeedByUser(userRef, followingRefs){
 
   return new Promise((resolve,reject)=>{
-    let counter = 0 // Keep track of # of request promises being solved
-    let postFeedList = []
+    let counter = 0; // Keep track of # of request promises being solved
+    let postFeedList = [];
 
     followingRefs.forEach((friendRef)=>{
-      firestore.collection('posts').where('ownRef','==', friendRef)
-      .get().then(ref=>{
-          counter++;
-          getPostsByUserRef(friendRef).then(posts=>{
+      counter++;
+      getPostsByUserRef(friendRef).then(posts=>{
 
-            // Update postFeedList
+      if (DEBUG) console.log('posts', posts);
+
+        // Update postFeedList
+        postFeedList = [
+          ...postFeedList,
+          ...posts
+        ]
+
+        // 
+        if (counter === followingRefs.length){
+          getPostsByUserRef(userRef).then(selfPosts=>{
+
             postFeedList = [
               ...postFeedList,
-              ...posts
+              ...selfPosts
             ]
 
-            // 
-            if (counter === followingRefs.length){
-              getPostsByUserRef(userRef).then(selfPosts=>{
-
-                postFeedList = [
-                  ...postFeedList,
-                  ...selfPosts
-                ]
-
-                resolve(postFeedList)
-              })
-            }
-          })
+            resolve(postFeedList)
+          });
         }
-      );
-    })
-  })
+      });
+    });
+  });
 }
 
 function orderPostFeedByDate(postFeed){
   return postFeed.sort((postA,postB)=>{
-    return postA[Object.keys(postA)[0]].createDate - postB[Object.keys(postB)[0]].createDate
-  })
+    return postA[Object.keys(postA)[0]].createDate - postB[Object.keys(postB)[0]].createDate;
+  });
 }
 
 /**
@@ -109,6 +126,7 @@ function orderPostFeedByDate(postFeed){
 function uploadFile() {
   const ref = firebase.storage().ref();
   const file = document.querySelector('#uploadControl').files[0];
+  // we do +new Date() to force the time to be epoch time instead of standard day-month-year etc
   const name = (+new Date()) + '-' + file.name;
   const metadata = {
     contentType: file.type
@@ -128,11 +146,15 @@ function uploadFile() {
   });
 }
 
-function registerPageHandlers(userRef){
-
+function registerPageHandlers(userRef) {
+  console.log('register page handler');
   // Register listener for add post button
-  testBtn.addEventListener('click', function () {
+  postBtn.addEventListener('click', function () {
     addPost(userRef);
+  });
+
+  testBtn.addEventListener('click', function() {
+    deleteTest(userRef);
   });
 
   uploadBtn.addEventListener('click', function(){
@@ -186,4 +208,19 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     if (DEBUG) console.log('not logged in');
   }
 });
+
+function deleteTest(userRef) {
+  console.log('begin test');
+  let payload = {
+    ownRef: userRef,
+    text: 'test',
+    createDate: new Date().getTime(),
+    favorRefs:[],
+    imageUrl:''
+  };  
+  firestore.collection('posts').doc('test').set(payload).then(() => {
+      deletePost(userRef,'test').then(() => {
+    });
+  });
+}
 
