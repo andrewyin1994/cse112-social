@@ -74,7 +74,7 @@ postModal.addEventListener('click', function () {
             </td>
           </table>
           <div class="mui-textfield mui-textfield--float-label">
-          <textarea type="text" name="post" id="postText"></textarea>
+          <textarea type="text" name="post" id="postText" onkeyup="SetButtonStatus(this, 'btnPost')"></textarea>
           </div>
         </form>
 
