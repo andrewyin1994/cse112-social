@@ -12,7 +12,8 @@ class Post {
       postText: postText,
       createDate: new Date().getTime(),
       favorRefs: [],
-      imageUrl: []
+      imageUrl: [],
+      id: userRef.id
     }
   }
 }
