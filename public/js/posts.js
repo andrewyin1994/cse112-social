@@ -5,20 +5,33 @@ const testBtn = document.getElementById('testBtn');
 
 const DEBUG = true;
 
+class Post {
+  constructor(userRef, postText) {
+    this.ownRef = userRef;
+    this.id = userRef.id;
+    this.postText = postText;
+    this.createDate = new Date().getTime();
+    this.favorRefs = [];
+    this.imageUrl = [];
+  }
+}
+
 /**
  * Add post to firestore
  * @param {*} userRef ref to current logged in user
  */
 function addPost(userRef) {
   const postText = document.getElementById('postText').value;
+    
+  let payload = new Post(userRef, postText);
   
-  let payload = {
-    ownRef: userRef,
-    text: postText,
-    createDate: new Date().getTime(),
-    favorRefs:[],
-    imageUrl:''
-  };
+  // let payload = {
+  //   ownRef: userRef,
+  //   text: postText,
+  //   createDate: new Date().getTime(),
+  //   favorRefs:[],
+  //   imageUrl:''
+  // };
   
   if (DEBUG) console.log(payload);
 
@@ -30,7 +43,7 @@ function addPost(userRef) {
  * @param {*} userRef ref to the user currently logged in
  * @param {*} postId ref to post being deleted
  */
-function deletePost(userRef, postId) {
+function deletePost(postId) {
   return new Promise((resolve,reject) => {
     let query = firestore.collection('posts').doc(postId);
     query.delete().then(() => {
@@ -218,16 +231,20 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 function deleteTest(userRef) {
   console.log('begin test');
-  let payload = {
-    ownRef: userRef,
-    text: 'test',
-    createDate: new Date().getTime(),
-    favorRefs:[],
-    imageUrl:''
-  };  
+
+  let payload = new Post(userRef, 'test');
+
+  // let payload = {
+  //   ownRef: userRef,
+  //   text: 'test',
+  //   createDate: new Date().getTime(),
+  //   favorRefs:[],
+  //   imageUrl:''
+  // };
+
   firestore.collection('posts').doc('test').set(payload).then(() => {
-      deletePost(userRef,'test').then(() => {
-    });
+    //   deletePost(userRef,'test').then(() => {}
+    // );
   });
 }
 

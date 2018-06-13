@@ -27,7 +27,7 @@ googleLogin.addEventListener('click', e => {
     var token = result.credential.accessToken;
     // The signed-in user info.
     var user = result.user;
-    console.log("Google Success")
+    console.log("Google Success", token, user);
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -36,7 +36,7 @@ googleLogin.addEventListener('click', e => {
     var email = error.email;
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
-    console.log("Google Failure ", errorCode, errorMessage)
+    console.log("Google Failure", email, credential, errorCode, errorMessage)
   });
 });
 
@@ -55,7 +55,7 @@ function submitFunc() {
   const emailerr = document.getElementById('emailerr');
   const passerr = document.getElementById('passerr');
   const matcherr = document.getElementById('matcherr');
-  const auth = firebase.auth();
+  // const auth = firebase.auth();
 
   // clear any warning messages
   emailerr.innerHTML = passerr.innerHTML = matcherr.innerHTML = '';
@@ -74,7 +74,7 @@ function submitFunc() {
         mui.overlay('off');
 
         // testInsert.innerHTML = "sign up works";
-    },
+      },
       function (error) {
         let errorCode = error.code;
         let errorMessage = error.message;
