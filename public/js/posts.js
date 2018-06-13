@@ -176,7 +176,7 @@ function registerPageHandlers(userRef) {
   });
 
   testBtn.addEventListener('click', function() {
-    deleteTest('test');
+    deleteTest(userRef);
   });
 
   uploadBtn.addEventListener('click', function(){
@@ -193,7 +193,7 @@ function registerPageHandlers(userRef) {
  */
 function handleUserData(userRef, followingRefs, followerRefs){
 
-  if (DEBUG) console.log('uid', userRef);
+  if (DEBUG) console.log('uid', userRef.id);
   if (DEBUG) console.log(followingRefs);
   if (DEBUG) console.log(followerRefs);
 
@@ -236,7 +236,7 @@ function deleteTest(userRef) {
   console.log('begin test');
 
   let payload = new Post(userRef, 'test');
-  
+  console.log('deleteTest uid', userRef.id);
   console.log('payload', payload);
 
   // let payload = {
@@ -248,7 +248,7 @@ function deleteTest(userRef) {
   // };
 
   firestore.collection('posts').doc('test').set(payload.post).then(() => {
-      deletePost(userRef,'test').then(() => {}
+      deletePost('test').then(() => {}
     );
   });
 }
