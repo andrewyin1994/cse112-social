@@ -98,6 +98,8 @@ function orderPostFeedByDate(postFeed){
   })
 }
 
+var u;
+
 /**
  * Get upload the current image in uploadControl and once uploaded, put it in uploadImg tag
  * 
@@ -168,6 +170,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
     // Firebase doesn't check userRef validity
     userRef = firestore.doc(`users/${firebaseUser.uid}`);
+    
+    u = userRef;
+    
     // Get data from this user
     userRef.get().then(snapshot=>{
 

@@ -1,6 +1,7 @@
-
 const testBtn = document.getElementById('testBtn');
 const testInsert = document.getElementById('testInsert');
+
+const DEBUG = true;
 
 function grabFriends() {
   const d = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
@@ -36,15 +37,30 @@ function grabFriends() {
   });
 }
 
+function handleUserData(userRef,followingRefs,followerRefs){
+  
+}
 
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
+  var userRef, followingRefs, followerRefs;
+
   // checks if user exists
   if (firebaseUser) {
-    console.log(firebaseUser);
-    grabFriends();
+
+    // Firebase doesn't check userRef validity
+    userRef = firestore.doc(`users/${firebaseUser.uid}`);
+    // Get data from this user
+    userRef.get().then(snapshot=>{
+
+      followingRefs = snapshot.data().followingRefs;
+      followerRefs = snapshot.data().followerRefs;
+      handleUserData(userRef,followingRefs,followerRefs);
+    });
+
+    registerPageHandlers(userRef);
+
   } else {
-    console.log('not logged in');
+    if (DEBUG) console.log('not logged in');
   }
 });
-
