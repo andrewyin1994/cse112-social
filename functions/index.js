@@ -1,7 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const firestore = admin.firestore;
-admin.initializeApp;
+admin.initializeApp();
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -11,17 +10,16 @@ admin.initializeApp;
 // });
 class Friends {
   constructor() {
-    followers = [];
-    following = [];
+    this.followers = [];
+    this.following = [];
   }
 }
 
-const onUserCreate = functions.auth.user().onCreate((event) => {
-  return new Promise((resolve,reject) => {
-    const user = event.data;
-    const friends = new Friends;
-    return firestore.collection('users').doc(user.uid).add(friends).then(e => {
-      resolve();
-    }).catch(reject);
-  });
+// console.log(functions.auth.user());
+
+exports.onUserCreate = functions.auth.user().onCreate((user) => {
+  console.log('User Created', user.uid);
+  const friends = new Friends();
+  // firestore.collection('users').doc(user.uid).set(  friends);
+  admin.firestore().collection('users').doc(user.uid).set({ 'test': 'test' });
 });
