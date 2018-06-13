@@ -9,11 +9,15 @@ class Post {
   constructor(userRef, postText) {
     this.post = {
       ownRef: userRef,
+      ownerId: userRef.id,
       postText: postText,
       createDate: new Date().getTime(),
       favorRefs: [],
       imageUrl: [],
+<<<<<<< HEAD
       ownerId: userRef.id
+=======
+>>>>>>> 8316ab6d52b3a0c4288bb5113b7626e61905b56a
     }
   }
 }
@@ -193,9 +197,9 @@ function registerPageHandlers(userRef) {
  */
 function handleUserData(userRef, followingRefs, followerRefs){
 
-  if (DEBUG) console.log(userRef)
-  if (DEBUG) console.log(followingRefs)
-  if (DEBUG) console.log(followerRefs)
+  if (DEBUG) console.log('uid', userRef);
+  if (DEBUG) console.log(followingRefs);
+  if (DEBUG) console.log(followerRefs);
 
   // getPostsFeedByUser(userRef,followingRefs)
   getPostsFeedByUser(userRef, followingRefs).then(postFeed=>{
@@ -216,6 +220,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
     // Firebase doesn't check userRef validity
     userRef = firestore.doc(`users/${firebaseUser.uid}`);
+    // console.log('uid:', userRef.id);
     // Get data from this user
     userRef.get().then(snapshot=>{
 
