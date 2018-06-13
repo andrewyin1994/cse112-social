@@ -1,4 +1,3 @@
-
 const testBtn = document.getElementById('testBtn');
 const testInsert = document.getElementById('testInsert');
 
@@ -36,7 +35,6 @@ function grabFriends() {
   });
 }
 
-
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
   // checks if user exists
@@ -47,4 +45,3 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log('not logged in');
   }
 });
-

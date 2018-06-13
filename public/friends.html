@@ -1,60 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>SafeBook</title>
-
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="css/home-style.css">
+
   <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
+  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+  <style>
+    img {
+      border-radius: 50%;
+    }
+  </style>
 </head>
 
-<body>
-  <section id="login">
+<body class="hide-sidedrawer">
+  <!-- PRE LOADER -->
+  <div class="loader">
+    <div class="indicator">
+      <svg width="14px" height="16px" viewBox="0 0 28 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+        <g id="New-Customer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+          <g id="Loading" sketch:type="MSArtboardGroup" transform="translate(-526.000000, -915.000000)" fill="#FFFFFF">
+            <g id="Loading-Indicator" sketch:type="MSLayerGroup" transform="translate(468.000000, 862.000000)">
+              <g id="Secure" transform="translate(58.000000, 53.000000)" sketch:type="MSShapeGroup">
+                <path d="M6,10 L6,7.9998866 C6,3.57774184 9.581722,0 14,0 C18.4092877,0 22,3.58167123 22,7.9998866 L22,10 L18,10 L18,7.9947834 C18,5.78852545 16.2046438,4 14,4 C11.790861,4 10,5.79171562 10,7.9947834 L10,10 L6,10 Z M0.996534824,14 C0.446163838,14 0,14.4449463 0,14.9933977 L0,31.0066023 C0,31.5552407 0.439813137,32 0.996534824,32 L27.0034652,32 C27.5538362,32 28,31.5550537 28,31.0066023 L28,14.9933977 C28,14.4447593 27.5601869,14 27.0034652,14 L0.996534824,14 Z"
+                  id="Rectangle-520"></path>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
 
-    <div class="mui-container-fluid">
-      <div class="mui-row">
-        <div class="mui-col-xs-6 mui-col-xs-offset-2 mui-col-md-8 mui-col-md-offset-4 mui-col-lg-offset-4">
-          <img class="icon" src="images/lock-icon2.png" alt="icon">
-        </div>
+  <!-- Sidedrawer -->
+  <div id="sidedrawer" class="mui--no-user-select">
+    <!-- Side drawer content goes here -->
+    <div id="sidedrawer-brand" class="mui--appbar-line-height">
+      <span class="mui--text-title">SafeBook</span>
+    </div>
+    <div class="mui-divider"></div>
+    <ul>
+      <li>
+        <a href="homepage.html">
+          <strong>Home</strong>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <strong>Profile</strong>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <strong>Friends</strong>
+        </a>
+      </li>
+      <li>
+        <a href="posts.html">
+          <strong>Post</strong>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <strong>Settings</strong>
+        </a>
+      </li>
+      <li>
+        <strong id="btnLogout">Logout</strong>
+      </li>
+    </ul>
+  </div>
+  <header id="header">
+    <div class="mui-appbar mui--appbar-line-height">
+      <div class="mui-container-fluid">
+        <a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
+        <a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
+        <span class="mui--text-title mui--visible-xs-inline-block">SafeBook</span>
       </div>
     </div>
-
+  </header>
+  <div id="content-wrapper">
+    <!-- Main content goes here -->
+    <div class="mui--appbar-height"></div>
     <div class="mui-container-fluid">
-      <div class="mui-row">
-        <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-          <form class="mui-form">
-            <legend>Login</legend>
-            <div class="mui-textfield mui-textfield--float-label">
-              <input type="text" name="user" id="username">
-              <label for="user">Email</label>
-            </div>
-            <div class="mui-textfield mui-textfield--float-label">
-              <input type="password" name="password" id="password">
-              <label for="password">Password</label>
-            </div>
-          </form>
-
-
-          <!-- <button class="mui-btn mui-btn--flat mui-btn--primary" id="btnLogin">Login</button> -->
-          <!-- <button class="mui-btn mui-btn--flat mui-btn--primary" id="btnSignUpForm">Sign up</button> -->
-          <button class="mui-btn mui-btn--accent" id="testBtn">Test</button>
-          <div id="testInsert">changes</div>
-        </div>
+      <br>
+      <h1>Friends</h1>
+      
+      <!-- Friends homepage options-->
+      <ul class="mui-tabs__bar mui-tabs__bar--justified">
+        <li class="mui--is-active">
+          <a data-mui-toggle="tab" data-mui-controls="pane-justified-1">Finding Friends</a>
+        </li>
+        <li>
+          <a data-mui-toggle="tab" data-mui-controls="pane-justified-2">Following</a>
+        </li>
+        <li>
+          <a data-mui-toggle="tab" data-mui-controls="pane-justified-3">Followers</a>
+        </li>
+      </ul>
+      <div class="mui-tabs__pane mui--is-active" id="pane-justified-1"></div>
+      <div class="mui-tabs__pane" id="pane-justified-2"></div>
+      <div class="mui-tabs__pane" id="pane-justified-3"></div>
+      <br><br>
+      <!-- Friend component sample-->
+      <div class="mui-panel" style="width:210px;height:200px;margin:30px">
+          <img id="default" src="images/default-pic.png" width="80" height="80" style="margin-left:62px">
+          <h4 style="margin-left:60px">User Name</h4>
+          <button class="mui-btn mui-btn--flat mui-btn--danger" style="margin:45px">Follow</button>
       </div>
+
+      <!-- button for post modal-->
+      <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
+        <table class="mui-table--bordered">
+          <td>
+            <img id="default" src="images/default-pic.png" width="35" height="35">
+          </td>
+          <td>
+            <div>What"s new with you?</div>
+          </td>
+          <img id="default" src="images/camera-icon.png" width="35" height="35" style="float: right">
+        </table>
+      </button>
     </div>
+  </div>
+  <footer id="footer">
+    <div class="mui-container-fluid">
+      <br> Made by Team Overflow
+    </div>
+  </footer>
 
-    <a href="homepage.html">
-      <button class="mui-btn mui-btn--fab mui-btn--accent">+</button>
-    </a>
-  </section>
-
-  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
   <script src="js/firebase.config.js"></script>
-  <script src="js/friends.js"></script>
+  <script src="js/main.js"></script>
+  <!-- <script src="js/test.js"></script> -->
+  <!-- <script type="module" src="js/main.js"></script> -->
+
 </body>
 
 </html>

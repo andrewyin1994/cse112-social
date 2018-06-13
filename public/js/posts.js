@@ -2,8 +2,27 @@ const postBtn = document.getElementById('postBtn');
 const testInsert = document.getElementById('testInsert');
 const uploadBtn = document.getElementById('uploadBtn');
 const testBtn = document.getElementById('testBtn');
+const editBtn = document.getElementById('editBtn');
 
 const DEBUG = true;
+
+/**
+ * Post class, what will be added to Firestore
+ * @param {*} userRef ref to current logged in user
+ * @param {*} postText text that user wishes to post
+ */
+class Post {
+  constructor(userRef, postText) {
+    this.post = {
+      ownRef: userRef,
+      ownerId: userRef.id,
+      postText: postText,
+      createDate: new Date().getTime(),
+      favorRefs: [],
+      imageUrl: []
+    }
+  }
+}
 
 /**
  * Add post to firestore
@@ -11,33 +30,46 @@ const DEBUG = true;
  */
 function addPost(userRef) {
   const postText = document.getElementById('postText').value;
-  
-  let payload = {
-    ownRef: userRef,
-    text: postText,
-    createDate: new Date().getTime(),
-    favorRefs:[],
-    imageUrl:''
-  };
+    
+  let payload = new Post(userRef, postText);
   
   if (DEBUG) console.log(payload);
 
-  firestore.collection('posts').add(payload);
+  firestore.collection('posts').add(payload.post);
 };
 
 /**
- * Delete post from firestore
+ * Delete post from Firestore
  * @param {*} userRef ref to the user currently logged in
  * @param {*} postId ref to post being deleted
  */
-function deletePost(userRef, postId) {
+function deletePost(postId) {
   return new Promise((resolve,reject) => {
     let query = firestore.collection('posts').doc(postId);
-    query.delete().then(() => {
+    query.delete().then(
+      () => { //success
       console.log('Post deleted!');
-    },
-    (e) => {
+    },(e) => { //fail
       console.log('Error removing post: ', e);
+    });
+  });
+}
+
+/**
+ * Edit post on firestore
+ */
+function editPost(postId, editText) {
+  return new Promise((resolve,reject) => {
+    let query = firestore.collection('posts').doc(postId);
+    query.update({
+      postText: editText
+    }).then(
+      () => { //success
+      console.log('Post updated!');
+      mui.overlay('on', modalEl);
+    },(e) => { //fail
+      console.log('Error updating post: ', e);
+      // document.querySelector("#postUpdateStatus").innerHTML = ("abc");
     });
   });
 }
@@ -58,8 +90,9 @@ function getPostsByUserRef(userRef){
 
           // append newly parsed data to currently parsed data array
           parsedData = [
-            ...parsedData,
+            ...parsedData, //this is the old parsedData to append to
             {
+              //this is what is appended on as next entry
               [postResult.id]: {
                 id: postResult.id,
                 ...postContent
@@ -70,6 +103,40 @@ function getPostsByUserRef(userRef){
         resolve(parsedData);
       });
   });
+}
+
+function editTest(postIdV) {
+  var modalEl = document.createElement('div');
+  modalEl.style.width = '28em';
+  modalEl.style.height = '28em';
+  modalEl.style.margin = '100px auto';
+  modalEl.style.backgroundColor = '#fff';
+ 
+  let postIdVal = (postIdV != null) ? postIdV : "";
+  console.log("postId: ", postIdV,"postIdVal: ", postIdVal)
+
+  modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` +
+    `<form class='mui-form'>
+  <legend>Edit Post</legend>
+  <div class='mui-textfield mui-textfield--float-label'>
+    <input type='text' name='postIdVal' id='postIdVal' value=${postIdVal}>
+    <label for='postIdVal'>postId</label>
+  </div>
+
+  <div class='mui-textfield mui-textfield--float-label'>
+  <input type='text' name='editText' id='editText'>
+  <label for='editText'>text</label>
+  </div>
+
+</form> 
+
+<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='editPost(document.getElementById("postIdVal").value, document.getElementById("editText").value)'>Submit</button>
+<p id="postUpdateStatus"></p>
+</div>
+</div></div>`;
+
+  // show modal
+  mui.overlay('on', modalEl);
 }
 
 /**
@@ -160,20 +227,70 @@ function registerPageHandlers(userRef) {
   uploadBtn.addEventListener('click', function(){
     uploadFile();
   });
+
+  editBtn.addEventListener('click', function(){
+    editTest("0mkuqZklhSe9aXEPKsDi");
+  });
+
+  testBtn2.addEventListener('click', ()=>{
+    showPostTest();
+  });
 }
+
+//generates markup for post
+function postMaker(prop){
+  const currTime = new Date(prop.createDate);
+  console.log("prop_id:", prop.id);
+  return `<div class="mui-row">
+  <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+  <p id="${prop.id}">${prop.postText}</p>
+  <p style="text-align:right;font-size:75%">${currTime.toTimeString()}</p>
+  <button class="mui-btn mui-btn--accent" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
+  </div>
+</div>`;
+}
+
+//tests basic functionality for showing posts
+function showPostTest(){
+  let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+  let followingRefs;
+  userRef.get().then(snapshot=>{
+    followingRefs = snapshot.data().followingRefs;
+    console.log(followingRefs);
+  });
+  showPost(userRef, followingRefs);
+}
+
+//if you have friends, this will add their posts in too (may need fixing)
+function showPost(userRef, followingRefs){
+  let refListReq = (followingRefs != null && followingRefs.length > 0) ? getPostsFeedByUser(userRef, followingRefs)
+                                              :getPostsByUserRef(userRef)
+  refListReq.then(function(postList){
+    console.log(postList);
+    let postMarkup = "";
+    postList.forEach(function(post){
+      console.log(post[Object.keys(post)[0]].createDate);
+      postMarkup += (postMaker(post[Object.keys(post)[0]]));
+    });
+    document.querySelector('#post-container').innerHTML = postMarkup;
+  });
+}
+
+
+
 
 /**
  * A callback function that handles all data returned by firestore about
  * current user
  * @param {Reference} userRef reference to the current logged in user
  * @param {Array<Reference>} followingRefs list of refs to followings
- * @param {Array<Reference>} followingRefs list of refs to followers
+ * @param {Array<Reference>} followerRefs list of refs to followers
  */
 function handleUserData(userRef, followingRefs, followerRefs){
 
-  if (DEBUG) console.log(userRef)
-  if (DEBUG) console.log(followingRefs)
-  if (DEBUG) console.log(followerRefs)
+  if (DEBUG) console.log('uid', userRef.id);
+  if (DEBUG) console.log(followingRefs);
+  if (DEBUG) console.log(followerRefs);
 
   // getPostsFeedByUser(userRef,followingRefs)
   getPostsFeedByUser(userRef, followingRefs).then(postFeed=>{
@@ -181,19 +298,20 @@ function handleUserData(userRef, followingRefs, followerRefs){
     if (DEBUG) console.log(sortedFeed)
     sortedFeed.forEach(post => {
       if(DEBUG) console.log(post[Object.keys(post)[0]].createDate)
-    })
-  })
+    });
+  });
 }
 
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
-  var userRef, followingRefs, followerRefs;
+  let userRef, followingRefs, followerRefs;
 
   // checks if user exists
   if (firebaseUser) {
 
     // Firebase doesn't check userRef validity
     userRef = firestore.doc(`users/${firebaseUser.uid}`);
+    // console.log('uid:', userRef.id);
     // Get data from this user
     userRef.get().then(snapshot=>{
 
@@ -211,16 +329,13 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 function deleteTest(userRef) {
   console.log('begin test');
-  let payload = {
-    ownRef: userRef,
-    text: 'test',
-    createDate: new Date().getTime(),
-    favorRefs:[],
-    imageUrl:''
-  };  
-  firestore.collection('posts').doc('test').set(payload).then(() => {
-      deletePost(userRef,'test').then(() => {
-    });
+
+  let payload = new Post(userRef, 'test');
+  console.log('deleteTest uid', userRef.id);
+  console.log('payload', payload);
+
+  firestore.collection('posts').doc('test').set(payload.post).then(() => {
+      deletePost('test');
   });
 }
 
