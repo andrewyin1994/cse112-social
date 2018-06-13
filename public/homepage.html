@@ -109,8 +109,20 @@
           <td>
             <div>What"s new with you?</div>
           </td>
+          <img id="default" src="images/camera-icon.png" width="35" height="35" style="float: right">
         </table>
       </button>
+
+      <!--onkeyup setting-->
+      <script language="javascript" type="text/javascript">
+        function SetButtonStatus(sender, target) {
+          if (sender.value.length == 0)
+            document.getElementById(target).disabled = true;
+          else
+            document.getElementById(target).disabled = false;
+        }
+      </script>
+
       <!--post div-->
       <!-- <div class="mui-container-fluid" id="post">
         <div class="mui-row">
