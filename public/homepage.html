@@ -20,7 +20,7 @@
   <script>
     function activateOverlay() {
       // show overlay
-      mui.overlay('on');
+      mui.overlay("on");
     }
   </script>
 </head>
@@ -100,17 +100,33 @@
       <h1>Homepage</h1>
       <!-- button for post modal-->
 
+      <div class="mui-container-fluid" id="post-container">
 
-      <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
-        <table class="mui-table--bordered">
-          <td>
-            <img id="default" src="images/default-pic.png" width="35" height="35">
-          </td>
-          <td>
-            <div>What's new with you?</div>
-          </td>
-        </table>
-      </button>
+        <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
+          <table class="mui-table--bordered">
+            <td>
+              <img id="default" src="images/default-pic.png" width="35" height="35">
+            </td>
+            <td>
+              <div>What"s new with you?</div>
+            </td>
+            <img id="default" src="images/camera-icon.png" width="35" height="35" style="float: right">
+          </table>
+        </button>
+      </div>
+    
+      
+
+      <!--onkeyup setting-->
+      <script language="javascript" type="text/javascript">
+        function SetButtonStatus(sender, target) {
+          if (sender.value.length == 0)
+            document.getElementById(target).disabled = true;
+          else
+            document.getElementById(target).disabled = false;
+        }
+      </script>
+
       <!--post div-->
       <!-- <div class="mui-container-fluid" id="post">
         <div class="mui-row">
@@ -126,7 +142,7 @@
               </table>
               <div class="mui-textfield mui-textfield--float-label">
                 <input type="text" name="text" id="postContent">
-                <label for="user">What's new with you?</label>
+                <label for="user">What"s new with you?</label>
               </div>
             </form>
 
@@ -145,7 +161,10 @@
   </footer>
 
   <script src="js/firebase.config.js"></script>
-  <script type="module" src="js/main.js"></script>
+  <script src="js/main.js"></script>
+  <!-- <script src="js/test.js"></script> -->
+  <!-- <script type="module" src="js/main.js"></script> -->
+
 </body>
 
 </html>

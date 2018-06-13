@@ -38,7 +38,7 @@ function grabFriends() {
 }
 
 function handleUserData(userRef,followingRefs,followerRefs){
-  
+
 }
 
 // Real time listener
