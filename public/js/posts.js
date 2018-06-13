@@ -229,7 +229,7 @@ function registerPageHandlers(userRef) {
   });
 }
 
-
+//generates markup for post
 function postMaker(prop){
   const currTime = new Date(prop.createDate);
   return `<div class="mui-row">
@@ -240,6 +240,8 @@ function postMaker(prop){
 </div>`;
 }
 
+//tests basic functionality for showing user posts (for now)
+//should have the logic seperated from the test
 function showPostTest(){
   userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
   getPostsByUserRef(userRef).then(function(postList){
@@ -261,7 +263,7 @@ function showPostTest(){
  * current user
  * @param {Reference} userRef reference to the current logged in user
  * @param {Array<Reference>} followingRefs list of refs to followings
- * @param {Array<Reference>} followingRefs list of refs to followers
+ * @param {Array<Reference>} followerRefs list of refs to followers
  */
 function handleUserData(userRef, followingRefs, followerRefs){
 
