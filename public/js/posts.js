@@ -66,8 +66,10 @@ function editPost(postId, editText) {
     }).then(
       () => { //success
       console.log('Post updated!');
+      mui.overlay('on', modalEl);
     },(e) => { //fail
       console.log('Error updating post: ', e);
+      // document.querySelector("#postUpdateStatus").innerHTML = ("abc");
     });
   });
 }
@@ -103,18 +105,21 @@ function getPostsByUserRef(userRef){
   });
 }
 
-function editTest() {
+function editTest(postIdV) {
   var modalEl = document.createElement('div');
   modalEl.style.width = '28em';
   modalEl.style.height = '28em';
   modalEl.style.margin = '100px auto';
   modalEl.style.backgroundColor = '#fff';
+ 
+  let postIdVal = (postIdV != null) ? postIdV : "";
+  console.log("postId: ", postIdV,"postIdVal: ", postIdVal)
 
   modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` +
     `<form class='mui-form'>
   <legend>Edit Post</legend>
   <div class='mui-textfield mui-textfield--float-label'>
-    <input type='text' name='postIdVal' id='postIdVal'>
+    <input type='text' name='postIdVal' id='postIdVal' value=${postIdVal}>
     <label for='postIdVal'>postId</label>
   </div>
 
@@ -124,8 +129,11 @@ function editTest() {
   </div>
 
 </form> 
+
 <button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='editPost(document.getElementById("postIdVal").value, document.getElementById("editText").value)'>Submit</button>
-</div></div></div>`;
+<p id="postUpdateStatus"></p>
+</div>
+</div></div>`;
 
   // show modal
   mui.overlay('on', modalEl);
@@ -221,7 +229,7 @@ function registerPageHandlers(userRef) {
   });
 
   editBtn.addEventListener('click', function(){
-    editTest();
+    editTest("0mkuqZklhSe9aXEPKsDi");
   });
 
   testBtn2.addEventListener('click', ()=>{
@@ -232,10 +240,12 @@ function registerPageHandlers(userRef) {
 //generates markup for post
 function postMaker(prop){
   const currTime = new Date(prop.createDate);
+  console.log("prop_id:", prop.id);
   return `<div class="mui-row">
   <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-  <p>${prop.postText}</p>
+  <p id="${prop.id}">${prop.postText}</p>
   <p style="text-align:right;font-size:75%">${currTime.toTimeString()}</p>
+  <button class="mui-btn mui-btn--accent" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
   </div>
 </div>`;
 }
@@ -257,10 +267,12 @@ function showPost(userRef, followingRefs){
                                               :getPostsByUserRef(userRef)
   refListReq.then(function(postList){
     console.log(postList);
+    let postMarkup = "";
     postList.forEach(function(post){
       console.log(post[Object.keys(post)[0]].createDate);
-        document.querySelector('#post-container').innerHTML += (postMaker(post[Object.keys(post)[0]]));
+      postMarkup += (postMaker(post[Object.keys(post)[0]]));
     });
+    document.querySelector('#post-container').innerHTML = postMarkup;
   });
 }
 
