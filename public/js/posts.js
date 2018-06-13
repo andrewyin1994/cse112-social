@@ -90,7 +90,7 @@ function getPostsByUserRef(userRef){
           parsedData = [
             ...parsedData, //this is the old parsedData to append to
             {
-              //this is what is appended on
+              //this is what is appended on as next entry
               [postResult.id]: {
                 id: postResult.id,
                 ...postContent
@@ -223,7 +223,38 @@ function registerPageHandlers(userRef) {
   editBtn.addEventListener('click', function(){
     editTest();
   });
+
+  testBtn2.addEventListener('click', ()=>{
+    showPostTest();
+  });
 }
+
+
+function postMaker(prop){
+  const currTime = new Date(prop.createDate);
+  return `<div class="mui-row">
+  <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+  <p>${currTime.toTimeString()}</p>
+  <p>${prop.postText}</p>
+  </div>
+</div>`;
+}
+
+function showPostTest(){
+  userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+  getPostsByUserRef(userRef).then(function(postList){
+    console.log(postList);
+    postList.forEach(function(post){
+      console.log(post[Object.keys(post)[0]].createDate);
+        document.querySelector('#post-container').innerHTML += (postMaker(post[Object.keys(post)[0]]));
+    });
+  });
+}
+
+
+
+
+
 
 /**
  * A callback function that handles all data returned by firestore about

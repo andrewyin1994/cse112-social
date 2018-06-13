@@ -24,9 +24,19 @@ jQuery(function ($) {
     }, 20);
   }
 
+
   // $('#post-container').append(PostComponent({ content: 'first' }))
   // $('#post-container').append(PostComponent({ content: 'second' }))
   // $('#post-container').append(PostComponent({ content: 'third' }))
+  function abc(prop){
+    return `<div class="mui-row">
+    <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+    <p>${prop.content}</p>
+    </div>
+  </div>`;
+  }
+  
+  $('#post-container').append(abc({ content: 'first' }))
 
   function hideSidedrawer() {
     $bodyEl.toggleClass('hide-sidedrawer');
