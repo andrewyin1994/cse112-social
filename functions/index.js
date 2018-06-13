@@ -10,8 +10,10 @@ admin.initializeApp();
 // });
 class Friends {
   constructor() {
-    this.followers = [];
-    this.following = [];
+    this.follow = {
+      followerRefs: [],
+      followingRefs: []
+    }
   }
 }
 
@@ -19,7 +21,11 @@ class Friends {
 
 exports.onUserCreate = functions.auth.user().onCreate((user) => {
   console.log('User Created', user.uid);
-  const friends = new Friends();
-  // firestore.collection('users').doc(user.uid).set(  friends);
-  admin.firestore().collection('users').doc(user.uid).set({ 'test': 'test' });
+  return new Promise((resolve,reject) => {
+    const friends = new Friends();
+    // firestore.collection('users').doc(user.uid).set(  friends);
+    return admin.firestore().collection('users').doc(user.uid)
+      .set( friends.follow )
+      .then(e => { resolve(); }, e => { reject(); });
+  });
 });
