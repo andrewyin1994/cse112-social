@@ -43,6 +43,13 @@ function deletePost(userRef, postId) {
 }
 
 /**
+ * Edit post on firestore
+ */
+function editPost(postId) {
+  
+}
+
+/**
  * Get all posts created by a user
  * @param {*} userRef ref to current logged in user
  * @returns {Promise} resolve([{[postResult.id]: {id: postResult.id,...postContent}])
