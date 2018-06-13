@@ -7,12 +7,13 @@ const DEBUG = true;
 
 class Post {
   constructor(userRef, postText) {
-    this.ownRef = userRef;
-    this.id = userRef.id;
-    this.postText = postText;
-    this.createDate = new Date().getTime();
-    this.favorRefs = [];
-    this.imageUrl = [];
+    this.post = {
+      ownRef: userRef,
+      postText: postText,
+      createDate: new Date().getTime(),
+      favorRefs: [],
+      imageUrl: []
+    }
   }
 }
 
@@ -35,7 +36,7 @@ function addPost(userRef) {
   
   if (DEBUG) console.log(payload);
 
-  firestore.collection('posts').add(payload);
+  firestore.collection('posts').add(payload.post);
 };
 
 /**
@@ -174,7 +175,7 @@ function registerPageHandlers(userRef) {
   });
 
   testBtn.addEventListener('click', function() {
-    deleteTest(userRef);
+    deleteTest('test');
   });
 
   uploadBtn.addEventListener('click', function(){
@@ -233,6 +234,8 @@ function deleteTest(userRef) {
   console.log('begin test');
 
   let payload = new Post(userRef, 'test');
+  
+  console.log('payload', payload);
 
   // let payload = {
   //   ownRef: userRef,
@@ -242,9 +245,9 @@ function deleteTest(userRef) {
   //   imageUrl:''
   // };
 
-  firestore.collection('posts').doc('test').set(payload).then(() => {
-    //   deletePost(userRef,'test').then(() => {}
-    // );
+  firestore.collection('posts').doc('test').set(payload.post).then(() => {
+      deletePost(userRef,'test').then(() => {}
+    );
   });
 }
 
