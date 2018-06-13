@@ -77,7 +77,9 @@ postModal.addEventListener('click', function () {
           <textarea type="text" name="post" id="postText" onkeyup="SetButtonStatus(this, 'btnPost')"></textarea>
           </div>
         </form>
-
+        <div>
+        <img id="default" src="images/camera-icon.png" width="35" height="35">
+        </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
       </div>
