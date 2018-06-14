@@ -38,7 +38,10 @@ function addPost(userRef) {
   
   if (DEBUG) console.log(payload);
 
-  firestore.collection('posts').add(payload.post);
+  firestore.collection('posts').add(payload.post).then(() => {
+    mui.overlay('off', modalEl);
+    showPostTest();
+  });
 };
 
 /**
@@ -51,9 +54,9 @@ function deletePost(postId) {
     let query = firestore.collection('posts').doc(postId);
     query.delete().then(
       () => { //success
-      console.log('Post deleted!');
+      if(DEBUG) console.log('Post deleted!');
     },(e) => { //fail
-      console.log('Error removing post: ', e);
+      if(DEBUG) console.log('Error removing post: ', e);
     });
   });
 }
