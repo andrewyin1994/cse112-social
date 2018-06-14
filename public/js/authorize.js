@@ -41,6 +41,7 @@ googleLogin.addEventListener('click', e => {
   });
 });
 
+// Activate sign-up function
 btnSignUpForm.addEventListener('click', activateSignUp);
 
 // Cancel Function
@@ -129,7 +130,7 @@ function activateSignUp() {
   modalEl.style.height = '28em';
   modalEl.style.margin = '100px auto';
   modalEl.style.backgroundColor = '#fff';
-
+  
   modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` +
     `<form class='mui-form'>
   <legend>Sign Up</legend>
