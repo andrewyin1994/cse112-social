@@ -125,6 +125,18 @@
           else
             document.getElementById(target).disabled = false;
         }
+        
+        function addPost(userRef, pt) {
+          console.log('posting');
+          const postText = document.getElementById('postText').value;
+          let payload = new Post(userRef, postText);
+          if (DEBUG) console.log(payload);
+            firestore.collection('posts').add(payload.post);
+        }
+        var postBtn = document.getElementById('btnPost');
+        function postFunc(postBtn, pt) {
+          postBtn.onclick = addPost(userRef, pt);
+        }
       </script>
 
       <!--post div-->

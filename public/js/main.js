@@ -1,5 +1,25 @@
 // import PostComponent from '../js/PostComponent.js';
 
+const DEBUG = true;
+
+/**
+ * Post class, what will be added to Firestore
+ * @param {*} userRef ref to current logged in user
+ * @param {*} postText text that user wishes to post
+ */
+class Post {
+  constructor(userRef, postText) {
+    this.post = {
+      ownRef: userRef,
+      ownerId: userRef.id,
+      postText: postText,
+      createDate: new Date().getTime(),
+      favorRefs: [],
+      imageUrl: []
+    }
+  }
+}
+
 // homepage js
 jQuery(function ($) {
   var $bodyEl = $('body'),
@@ -28,14 +48,14 @@ jQuery(function ($) {
   // $('#post-container').append(PostComponent({ content: 'first' }))
   // $('#post-container').append(PostComponent({ content: 'second' }))
   // $('#post-container').append(PostComponent({ content: 'third' }))
-  function abc(prop){
+  function abc(prop) {
     return `<div class="mui-row">
     <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
     <p>${prop.content}</p>
     </div>
   </div>`;
   }
-  
+
   $('#post-container').append(abc({ content: 'first' }))
 
   function hideSidedrawer() {
@@ -91,7 +111,7 @@ postModal.addEventListener('click', function () {
         <img id="default" src="images/camera-icon.png" width="35" height="35">
         </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
-        <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
+        <button class="mui-btn mui-btn--primary" disabled id="btnPost" onclick = "postFunc(postBtn, postText)"style="float: right">POST</button>
       </div>
     </div>
   </div>`;
@@ -99,6 +119,7 @@ postModal.addEventListener('click', function () {
   // show modal
   mui.overlay('on', modalEl);
 });
+
 
 /*var PostCancel = document.getElementById('btnPostCancel');
 PostCancel.onclick = function () {
@@ -108,16 +129,16 @@ PostCancel.onclick = function () {
 // end of homepage js signout
 
 document.getElementById('btnLogout').addEventListener('click', function () {
-    const currentUser = firebase.auth().currentUser;
-    firebase.auth().signOut().then(function () {
-        // Sign-out successful.
-        console.log(currentUser + "signed out");
+  const currentUser = firebase.auth().currentUser;
+  firebase.auth().signOut().then(function () {
+    // Sign-out successful.
+    console.log(currentUser + "signed out");
 
-        window.location.href = "index.html";
-      }, function (error) {
-        // An error happened.
-      });
+    window.location.href = "index.html";
+  }, function (error) {
+    // An error happened.
   });
+});
 
 // PRELOADER
 $(window).load(function () {
