@@ -473,7 +473,7 @@ firebase
           initPage(userRef, followingRefs, followerRefs);
         });
 
-      showrcmd()
+      showfind()
 
     } else {
       if (DEBUG)
