@@ -5,24 +5,21 @@ const DEBUG = true;
 
 /**
  *
- * @param {*} selfRef
- * @param {*} friendRef
- * @param {*} newFollowingRef
+ * @param {*} selfQRef reference to self
+ * @param {*} flwingQRefs newFollowingQRef will be added to it inplace 
+ * @param {*} newFollowingQRef assumed to not exist in flwingQRefs
  * @returns {Promise} resolve()
  */
-function addFriendByRef(selfQRef, flwingQRefs, newFollowingQRef) {
-  flwingQRefs = [
-    ...flwingQRefs,
-    newFollowingQRef
-  ]
-  return selfQRef.update({followingRefs: newFollowingQRefs});
+function addFriendByRefToFB(selfQRef, flwingQRefs, newFollowingQRef) {
+  flwingQRefs.push(newFollowingQRef) // ***** array is modified inplace, change will persist
+  return selfQRef.update({followingRefs: flwingQRefs});
 }
 
 /**
  *
  * @param {*} selfRef
- * @param {*} followingRefs
- * @param {*} newFollowingId
+ * @param {*} followingRefs qref === newFollowingId 
+ * @param {*} newFollowingId existence will be checked
  */
 function addFriendById(selfRef, followingRefs, newFollowingId) {
   let query = firestore.doc(`users/${newFollowingId}`);
@@ -31,11 +28,12 @@ function addFriendById(selfRef, followingRefs, newFollowingId) {
       .get()
       .then(targetSRef => {
         if (targetSRef.exists && !isIdAlreadyFriend(followingRefs, newFollowingId)) {
-          return addFriendByRef(selfRef, followingRefs, query);
+          addFriendByRefToFB(selfRef, followingRefs, query).then((d) => {
+            res(followingRefs)
+          });
         } else 
-          return false;
-        }
-      );
+          res(false)
+      });
   });
 }
 
@@ -56,10 +54,37 @@ function isIdAlreadyFriend(followingRefs, newFollowingId) {
 
 /**
  *
- * @param {*} selfRef
- * @param {*} friendRef
+ * @param {*} selfQRef query reference to self
+ * @param {*} flwingQRefs newFollowingQRef[delIdx] will be deleted inplace 
+ * @param {*} delIdx < flwingQRefs.length
  */
-function deleteFriendByRef(selfRef, friendRef) {}
+function deleteFriendByIdxFromFB(selfQRef, flwingQRefs, delIdx) {
+  flwingQRefs.splice(delIdx, 1); // ***** array is modified inplace, change will persist
+  return selfQRef.update({followingRefs: flwingQRefs});
+}
+
+/**
+ *
+ * @param {*} selfRef
+ * @param {*} followingRefs contains exactly one element: el.id === newFollowingId
+ * @param {*} newFollowingId existence will be checked
+ */
+function deleteFriendById(selfRef, followingRefs, newFollowingId) {
+  return new Promise((res,rej)=>{
+    let delIdx = -1
+    for (let i = 0; i<followingRefs.length;i++){
+      if(followingRefs[i].id===newFollowingId){
+        delIdx = followingRefs[i].id
+      }
+    }
+
+    // Only deleted when found
+    if (delIdx != -1) deleteFriendByIdxFromFB(selfRef,followingRefs,delIdx).then((d) => {
+      res(followingRefs)
+    })
+    else res(false);
+  })
+}
 
 /**
  * Get a user data by his reference
@@ -145,9 +170,7 @@ function grabFriends(followingRefs) {
 
 function handleUserData(userRef, followingRefs, followerRefs) {
   // getFriendsDataByRefs(userRef).then(() => {},()=>{})
-  addFriendById(userRef, followingRefs, "7oZiWgeMNnTmw0B5moy5nA9pApl2").then((e) => {
-    console.log(followingRefs)
-  })
+  deleteFriendById(userRef, followingRefs, "7oZiWgeMNnTmw0B5moy5nA9pApl2").then((e) => {})
 }
 
 function registerPageHandlers() {}
