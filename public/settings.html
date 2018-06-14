@@ -5,10 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <title>Friends</title>
-
   <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
+
   <link rel="stylesheet" href="css/home-style.css">
 
   <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
@@ -18,36 +16,17 @@
     img {
       border-radius: 50%;
     }
-
-    .user-tile{
-      width:210px;
-      height:200px;
-      margin:30px;
-      /* display: flex;
-      align-items: center;
-      justify-content: center; */
-    }
-
-    .user-tile-avatar{
-      width: 80px;
-      height: 80px;
-    }
-
-    .user-tile-name{
-      margin-top:30px;
-    }
-
-    .hidden-container{
-      display: none;
-    }
-
-    .visible-container{
-      display: block;
-    }
   </style>
+  <script>
+    function activateOverlay() {
+      // show overlay
+      mui.overlay("on");
+    }
+  </script>
 </head>
 
 <body class="hide-sidedrawer">
+
   <!-- Sidedrawer -->
   <div id="sidedrawer" class="mui--no-user-select">
     <!-- Side drawer content goes here -->
@@ -100,28 +79,12 @@
     <div class="mui--appbar-height"></div>
     <div class="mui-container-fluid">
       <br>
-      <h1>Friends</h1>
-      
-      <!-- Friends homepage options-->
-      <ul class="mui-tabs__bar mui-tabs__bar--justified">
-        <li id="rcmd-link" class="mui--is-active">
-          <a data-mui-toggle="tab" onclick="showrcmd()" data-mui-controls="pane-justified-1">Finding Friends</a>
-        </li>
-        <li id="flwing-link" >
-          <a data-mui-toggle="tab" onclick="showflwing()" data-mui-controls="pane-justified-2">Following</a>
-        </li>
-        <li id="flwer-link">
-          <a  data-mui-toggle="tab" onclick="showflwer()" data-mui-controls="pane-justified-3">Followers</a>
-        </li>
-      </ul>
-      <div class="mui-tabs__pane mui--is-active" id="pane-justified-1"></div>
-      <div class="mui-tabs__pane" id="pane-justified-2"></div>
-      <div class="mui-tabs__pane" id="pane-justified-3"></div>
-      <br><br>
-      <!-- Friend component sample-->
-      <div class="users-container" id="rcmd-container"></div>
-      <div class="users-container" id="flwing-container"></div>
-      <div class="users-container" id="flwer-container"></div>
+      <h1>Settings</h1>
+      <!-- button for post modal-->
+
+      <div class="mui-container-fluid">
+
+      </div>
 
     </div>
   </div>
@@ -133,7 +96,6 @@
 
   <script src="js/firebase.config.js"></script>
   <script src="js/sidedrawer.js"></script>
-  <script async defer src="js/friends.js"></script>
   <!-- <script src="js/test.js"></script> -->
   <!-- <script type="module" src="js/main.js"></script> -->
 
