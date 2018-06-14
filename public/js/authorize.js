@@ -6,6 +6,8 @@ const btnLogout = document.getElementById('btnLogout');
 const googleLogin = document.getElementById('googleLogin');
 const testInsert = document.getElementById('testInsert');
 
+const follow = document.getElementById('follow');
+
 const DEBUG = true;
 
 // Login button
@@ -95,9 +97,14 @@ function submitFunc() {
 firebase.auth().onAuthStateChanged(firebaseUser => {
   // checks if user exists
   if (firebaseUser) {
-    console.log(firebaseUser);
+    console.log('fbUser', firebaseUser, '.');
     // testInsert.innerHTML = "signed in as: " + firebaseUser.email;
+    if(firebaseUser.metadata.a === firebaseUser.metadata.b) {
+      window.location.href = 'profile.html';
+    }
+    else {
     window.location.href = "homepage.html";
+    }
   } else {
     console.log('not logged in');
   }

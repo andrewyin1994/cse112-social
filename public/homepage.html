@@ -5,8 +5,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
 
+  <title>Homepage</title>
+
+  <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="css/home-style.css">
 
   <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
@@ -54,12 +56,12 @@
     <div class="mui-divider"></div>
     <ul>
       <li>
-        <a href="#">
+        <a href="homepage.html">
           <strong>Home</strong>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="profile.html">
           <strong>Profile</strong>
         </a>
       </li>
@@ -74,7 +76,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="settings.html">
           <strong>Settings</strong>
         </a>
       </li>
@@ -100,23 +102,66 @@
     <div class="mui-container-fluid">
       <br>
       <h1>Homepage</h1>
+<<<<<<< HEAD
 
       <!-- button for post modal-->
-      <div class="mui-container-fluid" id="post-container">
-
-        <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
-          <table class="mui-table--bordered">
-            <td>
-              <img id="default" src="images/default-pic.png" width="35" height="35">
-            </td>
-            <td>
-              <div>What"s new with you?</div>
-            </td>
-            <img id="default" src="images/camera-icon.png" width="35" height="35" style="float: right">
-          </table>
-        </button>
-      </div>
+=======
+      <!-- button for post modal-->
+      <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
+        <table class="mui-table--bordered">
+          <td>
+            <img id="default" src="images/default-pic.png" width="35" height="35">
+          </td>
+          <td>
+            <div>What's new with you?</div>
+          </td>
+          <img id="default" src="images/camera-icon.png" width="35" height="35" style="float: right">
+        </table>
+      </button>
       
+>>>>>>> d2da74da3a8bfa5dff49bc25baea704a06ede36d
+      <div class="mui-container-fluid" id="post-container">
+      </div>
+<<<<<<< HEAD
+      
+=======
+
+      <!--onkeyup setting-->
+      <!-- <script language="javascript" type="text/javascript">
+        function SetButtonStatus(sender, target) {
+          if (sender.value.length == 0)
+            document.getElementById(target).disabled = true;
+          else
+            document.getElementById(target).disabled = false;
+        }
+      </script> -->
+
+      <!--post div-->
+      <!-- <div class="mui-container-fluid" id="post">
+        <div class="mui-row">
+          <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+            <form class="mui-form">
+              <table class="mui-table--bordered">
+                <td>
+                  <img id="default" src="images/default-pic.png" width="35" height="35">
+                </td>
+                <td>
+                  <div>user name</div>
+                </td>
+              </table>
+              <div class="mui-textfield mui-textfield--float-label">
+                <input type="text" name="text" id="postContent">
+                <label for="user">What"s new with you?</label>
+              </div>
+            </form>
+
+            <button class="mui-btn mui-btn--primary" id="btnPostCancel">CANCEL</button>
+            <button class="mui-btn mui-btn--primary" disabled id="btnPost" style="float: right">POST</button>
+          </div>
+        </div>
+      </div> -->
+
+>>>>>>> d2da74da3a8bfa5dff49bc25baea704a06ede36d
     </div>
   </div>
   <footer id="footer">
@@ -126,9 +171,15 @@
   </footer>
 
   <script src="js/firebase.config.js"></script>
+  <script src="js/timeago.min.js"></script>
+  <script src="js/sidedrawer.js"></script>
+  <script src="js/posts.js"></script>
   <script src="js/main.js"></script>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d2da74da3a8bfa5dff49bc25baea704a06ede36d
 </body>
 
 </html>

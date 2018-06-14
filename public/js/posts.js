@@ -5,8 +5,6 @@ const testBtn = document.getElementById('testBtn');
 const editBtn = document.getElementById('editBtn');
 
 const modalEl = document.createElement('div');
-
-
 const DEBUG = true;
 
 /**
@@ -22,9 +20,9 @@ class Post {
       postText: postText,
       createDate: new Date().getTime(),
       favorRefs: [],
-      imageUrl: [],
+      imageUrl: "",
       editedFlag: false,
-      updateTime: createDate
+      updateTime: new Date().getTime()
     }
   }
 }
@@ -40,7 +38,10 @@ function addPost(userRef) {
   
   if (DEBUG) console.log(payload);
 
-  firestore.collection('posts').add(payload.post);
+  firestore.collection('posts').add(payload.post).then(() => {
+    mui.overlay('off', modalEl);
+    showPostTest();
+  });
 };
 
 /**
@@ -53,9 +54,9 @@ function deletePost(postId) {
     let query = firestore.collection('posts').doc(postId);
     query.delete().then(
       () => { //success
-      console.log('Post deleted!');
+      if(DEBUG) console.log('Post deleted!');
     },(e) => { //fail
-      console.log('Error removing post: ', e);
+      if(DEBUG) console.log('Error removing post: ', e);
     });
   });
 }
@@ -74,6 +75,7 @@ function editPost(postId, editText) {
       () => { //success
       console.log('Post updated!');
       mui.overlay('off', modalEl);
+      showPostTest();
     },(e) => { //fail
       console.log('Error updating post: ', e);
       // document.querySelector("#postUpdateStatus").innerHTML = ("abc");
@@ -232,6 +234,7 @@ function registerPageHandlers(userRef) {
     deleteTest(userRef);
   });
 
+
   uploadBtn.addEventListener('click', function(){
     uploadFile();
   });
@@ -239,6 +242,7 @@ function registerPageHandlers(userRef) {
   editBtn.addEventListener('click', function(){
     editTest("0mkuqZklhSe9aXEPKsDi");
   });
+
 
   testBtn2.addEventListener('click', ()=>{
     showPostTest();
@@ -262,7 +266,8 @@ function postMaker(prop){
 function showPostTest(){
   let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
   let followingRefs;
-  userRef.get().then(snapshot=>{
+  userRef.get().then(snapshot => {
+    if (DEBUG) console.log('snapshot followingRefs')
     followingRefs = snapshot.data().followingRefs;
     showPost(userRef, followingRefs);
   });
@@ -271,8 +276,8 @@ function showPostTest(){
 
 //if you have friends, this will add their posts in too (may need fixing)
 function showPost(userRef, followingRefs){
-  if (DEBUG) console.log('uid', userRef.id);
-  if (DEBUG) console.log(followingRefs);
+  // if (DEBUG) console.log('uid', userRef.id);
+  // if (DEBUG) console.log(followingRefs);
   let refListReq = (followingRefs != null && followingRefs.length > 0) ? getPostsFeedByUser(userRef, followingRefs)
                                               :getPostsByUserRef(userRef);
   refListReq.then(function(postList){
@@ -288,9 +293,6 @@ function showPost(userRef, followingRefs){
   });
 }
 
-
-
-
 /**
  * A callback function that handles all data returned by firestore about
  * current user
@@ -298,7 +300,7 @@ function showPost(userRef, followingRefs){
  * @param {Array<Reference>} followingRefs list of refs to followings
  * @param {Array<Reference>} followerRefs list of refs to followers
  */
-function handleUserData(userRef, followingRefs, followerRefs){
+function initPage(userRef, followingRefs, followerRefs){
 
   if (DEBUG) console.log('uid', userRef.id);
   if (DEBUG) console.log(followingRefs);
@@ -329,10 +331,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
       followingRefs = snapshot.data().followingRefs;
       followerRefs = snapshot.data().followerRefs;
-      handleUserData(userRef,followingRefs,followerRefs);
+      initPage(userRef,followingRefs,followerRefs);
     });
 
-    registerPageHandlers(userRef);
+    showPostTest();
+    // registerPageHandlers(userRef);
 
   } else {
     if (DEBUG) console.log('not logged in');

@@ -14,7 +14,14 @@ class Friends {
     //firestore's set() needs an object to do so
     this.follow = {
       followerRefs: [],
-      followingRefs: []
+      followingRefs: [],
+      followerCount: 0,
+      openToSearch: false,
+      name:"",
+      email:"",
+      city:"",
+      description:"",
+      avatarUrl:""
     }
   }
 }
