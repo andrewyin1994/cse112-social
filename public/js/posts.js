@@ -72,6 +72,7 @@ function editPost(postId, editText) {
       () => { //success
       console.log('Post updated!');
       mui.overlay('off', modalEl);
+      showPostTest();
     },(e) => { //fail
       console.log('Error updating post: ', e);
       // document.querySelector("#postUpdateStatus").innerHTML = ("abc");
