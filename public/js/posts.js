@@ -335,7 +335,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     });
 
     showPostTest();
-    // registerPageHandlers(userRef);
+    //registerPageHandlers(userRef);
 
   } else {
     if (DEBUG) console.log('not logged in');
