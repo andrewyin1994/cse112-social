@@ -77,9 +77,6 @@ jQuery(function ($) {
   });
 });
 
-function cancelFunc() {
-  mui.overlay('off');
-}
 
 // Post Modal event listener
 postModal.addEventListener('click', activatePosting);
@@ -120,6 +117,10 @@ function activatePosting(){
   mui.overlay('on', modalEl);
 }
 
+/**
+ *  From this line, it is for posting
+ */
+
 function setButtonStatus(sender, target) {
   if (sender.value.length == 0)
     document.getElementById(target).disabled = true;
@@ -139,18 +140,9 @@ function postFunc(postBtn, pt) {
   postBtn.onclick = addPost(userRef, pt);
 }
 
-
-document.getElementById('btnLogout').addEventListener('click', function () {
-  const currentUser = firebase.auth().currentUser;
-  firebase.auth().signOut().then(function () {
-    // Sign-out successful.
-    console.log(currentUser + "signed out");
-
-    window.location.href = "index.html";
-  }, function (error) {
-    // An error happened.
-  });
-});
+function cancelFunc() {
+  mui.overlay('off');
+}
 
 // PRELOADER
 $(window).load(function () {
