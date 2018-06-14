@@ -1,6 +1,9 @@
 // import PostComponent from '../js/PostComponent.js';
-
 const DEBUG = true;
+
+//Getting IDs from homepage.html
+const postModal = document.getElementById('postModal')
+const post = document.getElementById('post');
 
 /**
  * Post class, what will be added to Firestore
@@ -44,10 +47,6 @@ jQuery(function ($) {
     }, 20);
   }
 
-
-  // $('#post-container').append(PostComponent({ content: 'first' }))
-  // $('#post-container').append(PostComponent({ content: 'second' }))
-  // $('#post-container').append(PostComponent({ content: 'third' }))
   function abc(prop) {
     return `<div class="mui-row">
     <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
@@ -82,16 +81,17 @@ function cancelFunc() {
   mui.overlay('off');
 }
 
-// PostModal onclick event`
+// Post Modal event listener
+postModal.addEventListener('click', activatePosting);
 
-var postModal = document.getElementById('postModal');
-var post = document.getElementById('post');
-postModal.addEventListener('click', function () {
+// Activate post modal
+function activatePosting(){
   var modalEl = document.createElement('div');
   modalEl.style.width = '800px';
   modalEl.style.height = '500px';
   modalEl.style.margin = '300px auto';
-  modalEl.innerHTML = `<div class="mui-container-fluid" id="post">
+  modalEl.innerHTML = 
+  `<div class="mui-container-fluid" id="post">
     <div class="mui-row">
       <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
         <form class="mui-form">
@@ -104,7 +104,7 @@ postModal.addEventListener('click', function () {
             </td>
           </table>
           <div class="mui-textfield mui-textfield--float-label">
-          <textarea type="text" name="post" id="postText" onkeyup="SetButtonStatus(this, 'btnPost')"></textarea>
+          <textarea type="text" name="post" id="postText" onkeyup="setButtonStatus(this, 'btnPost')"></textarea>
           </div>
         </form>
         <div>
@@ -118,15 +118,27 @@ postModal.addEventListener('click', function () {
 
   // show modal
   mui.overlay('on', modalEl);
-});
+}
 
+function setButtonStatus(sender, target) {
+  if (sender.value.length == 0)
+    document.getElementById(target).disabled = true;
+  else
+    document.getElementById(target).disabled = false;
+}
 
-/*var PostCancel = document.getElementById('btnPostCancel');
-PostCancel.onclick = function () {
-    //mui.onclick("")
-};*/
+function addPost(userRef, pt) {
+  console.log('posting');
+  const postText = document.getElementById('postText').value;
+  let payload = new Post(userRef, postText);
+  if (DEBUG) console.log(payload);
+    firestore.collection('posts').add(payload.post);
+}
+var postBtn = document.getElementById('btnPost');
+function postFunc(postBtn, pt) {
+  postBtn.onclick = addPost(userRef, pt);
+}
 
-// end of homepage js signout
 
 document.getElementById('btnLogout').addEventListener('click', function () {
   const currentUser = firebase.auth().currentUser;
