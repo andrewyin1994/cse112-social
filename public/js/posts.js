@@ -5,8 +5,6 @@ const testBtn = document.getElementById('testBtn');
 const editBtn = document.getElementById('editBtn');
 
 const modalEl = document.createElement('div');
-
-
 const DEBUG = true;
 
 /**
@@ -24,7 +22,7 @@ class Post {
       favorRefs: [],
       imageUrl: "",
       editedFlag: false,
-      updateTime: createDate
+      updateTime: new Date().getTime()
     }
   }
 }
@@ -232,6 +230,7 @@ function registerPageHandlers(userRef) {
     deleteTest(userRef);
   });
 
+
   uploadBtn.addEventListener('click', function(){
     uploadFile();
   });
@@ -239,6 +238,7 @@ function registerPageHandlers(userRef) {
   editBtn.addEventListener('click', function(){
     editTest("0mkuqZklhSe9aXEPKsDi");
   });
+
 
   testBtn2.addEventListener('click', ()=>{
     showPostTest();
@@ -262,7 +262,8 @@ function postMaker(prop){
 function showPostTest(){
   let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
   let followingRefs;
-  userRef.get().then(snapshot=>{
+  userRef.get().then(snapshot => {
+    if (DEBUG) console.log('snapshot followingRefs')
     followingRefs = snapshot.data().followingRefs;
     showPost(userRef, followingRefs);
   });
@@ -271,8 +272,8 @@ function showPostTest(){
 
 //if you have friends, this will add their posts in too (may need fixing)
 function showPost(userRef, followingRefs){
-  if (DEBUG) console.log('uid', userRef.id);
-  if (DEBUG) console.log(followingRefs);
+  // if (DEBUG) console.log('uid', userRef.id);
+  // if (DEBUG) console.log(followingRefs);
   let refListReq = (followingRefs != null && followingRefs.length > 0) ? getPostsFeedByUser(userRef, followingRefs)
                                               :getPostsByUserRef(userRef);
   refListReq.then(function(postList){
@@ -329,7 +330,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
       initPage(userRef,followingRefs,followerRefs);
     });
 
-    registerPageHandlers(userRef);
+    showPostTest();
+    // registerPageHandlers(userRef);
 
   } else {
     if (DEBUG) console.log('not logged in');

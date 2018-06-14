@@ -8,7 +8,7 @@ function cancelFunc() {
 postModal.addEventListener('click', activatePosting);
 
 // Activate post modal
-function activatePosting(){
+function activatePosting() {
   var modalEl = document.createElement('div');
   modalEl.style.width = '800px';
   modalEl.style.height = '500px';
@@ -27,20 +27,27 @@ function activatePosting(){
             </td>
           </table>
           <div class="mui-textfield mui-textfield--float-label">
-          <textarea type="text" name="post" id="postText" onkeyup="setButtonStatus(this, 'btnPost')"></textarea>
+          <textarea type="text" name="post" id="postText" onkeyup="setButtonStatus(this, 'postBtn')"></textarea>
           </div>
         </form>
         <div>
         <img id="default" src="images/camera-icon.png" width="35" height="35">
         </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
-        <button class="mui-btn mui-btn--primary" disabled id="btnPost" onclick = "postFunc(postBtn, postText)"style="float: right">POST</button>
+        <button class="mui-btn mui-btn--primary" disabled id="postBtn" "style="float: right">POST</button>
       </div>
     </div>
   </div>`;
 
   // show modal
   mui.overlay('on', modalEl);
+
+  document.getElementById('postBtn').addEventListener('click', () => {
+    if(firebase.auth()) {
+      let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+      addPost(userRef);
+    }
+  });
 }
 
 function setButtonStatus(sender, target) {
@@ -50,18 +57,17 @@ function setButtonStatus(sender, target) {
     document.getElementById(target).disabled = false;
 }
 
-function addPost(userRef, pt) {
-  console.log('posting');
-  const postText = document.getElementById('postText').value;
-  let payload = new Post(userRef, postText);
-  if (DEBUG) console.log(payload);
-    firestore.collection('posts').add(payload.post);
-}
-var postBtn = document.getElementById('btnPost');
-function postFunc(postBtn, pt) {
-  postBtn.onclick = addPost(userRef, pt);
-}
-
+// function addPost(userRef, pt) {
+//   console.log('posting');
+//   const postText = document.getElementById('postText').value;
+//   let payload = new Post(userRef, postText);
+//   if (DEBUG) console.log(payload);
+//     firestore.collection('posts').add(payload.post);
+// }
+// var postBtn = document.getElementById('postBtn');
+// function postFunc(postBtn, pt) {
+//   postBtn.onclick = addPost(userRef, pt);
+// }
 
 document.getElementById('btnLogout').addEventListener('click', function () {
   const currentUser = firebase.auth().currentUser;
