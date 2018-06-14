@@ -4,6 +4,7 @@ const uploadBtn = document.getElementById('uploadBtn');
 const testBtn = document.getElementById('testBtn');
 const editBtn = document.getElementById('editBtn');
 
+const modalEl = document.createElement('div');
 
 
 const DEBUG = true;
@@ -68,7 +69,7 @@ function editPost(postId, editText) {
     }).then(
       () => { //success
       console.log('Post updated!');
-      mui.overlay('on', modalEl);
+      mui.overlay('off', modalEl);
     },(e) => { //fail
       console.log('Error updating post: ', e);
       // document.querySelector("#postUpdateStatus").innerHTML = ("abc");
@@ -108,7 +109,6 @@ function getPostsByUserRef(userRef){
 }
 
 function editTest(postIdV) {
-  var modalEl = document.createElement('div');
   modalEl.style.width = '28em';
   modalEl.style.height = '28em';
   modalEl.style.margin = '100px auto';
