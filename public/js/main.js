@@ -47,6 +47,8 @@ function activatePosting() {
       let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
       addPost(userRef);
     }
+    mui.overlay('off', modalEl);
+    showPostTest();
   });
 }
 
