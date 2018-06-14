@@ -6,17 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>SafeBook</title>
+  <img class="icon" src="images/lock-icon2.png" alt="icon">
 
   <link rel="stylesheet" href="css/style.css">
+  <!--stying for PWA need app bar for app shell, but distorts the layout. -->
+  <!--<link rel="stylesheet" type="text/css" href="projectPWA/work/styles/inline.css">-->
+
   <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
   <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
 </head>
 
 <body>
+
+  <!--Header added so as to make this more of a PWA and hide the url bar....?????-->
+  <header class="header">
+    <h1 class="header__title">SafeBook PWA (Needs to be styed.... with a refresh button.)</h1>
+    <button id="butRefresh" class="headerButton"></button>
+  </header>
+
   <section id="login">
-<<<<<<< HEAD
-      <h1>SafeBook</h1>
-=======
 
     <div class="mui-container-fluid">
       <div class="mui-row">
@@ -25,7 +33,7 @@
         </div>
       </div>
     </div>
->>>>>>> f4db08c792480f15ed4fcce149dc865b74164798
+
 
     <div class="mui-container-fluid">
       <div class="mui-row">
@@ -44,20 +52,14 @@
           </form>
 
 
-<<<<<<< HEAD
-          <button class="mui-btn mui-btn--primary" id="btnLogin">Login</button>
-          <button class="mui-btn mui-btn--danger" id="btnSignUpForm">Sign up</button>
-          <button class="mui-btn mui-btn--accent" id="btnLogout">Log out</button>
-          <div id="testInsert">changes</div>
-          </div>
-=======
+
           <button class="mui-btn mui-btn--flat mui-btn--primary" id="btnLogin">Login</button>
           <button class="mui-btn mui-btn--flat mui-btn--primary" id="googleLogin">Google-Login</button>
           <button class="mui-btn mui-btn--flat mui-btn--primary" id="btnSignUpForm">Sign up</button>
           <button class="mui-btn mui-btn--accent" id="btnLogout">Log out</button>
           <!-- <div id="testInsert">changes</div> -->
         </div>
->>>>>>> f4db08c792480f15ed4fcce149dc865b74164798
+
       </div>
     </div>
 
@@ -69,6 +71,8 @@
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
   <script src="js/firebase.js"></script>
   <script src="js/authorize.js"></script>
+  <!-- points to the main app for running the  PWA, which will subsequently make use of the service worker.-->
+  <script src="projectPWA/work/scripts/app.js" async></script>
 </body>
 
 </html>
