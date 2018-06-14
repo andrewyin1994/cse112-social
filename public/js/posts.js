@@ -4,6 +4,9 @@ const uploadBtn = document.getElementById('uploadBtn');
 const testBtn = document.getElementById('testBtn');
 const editBtn = document.getElementById('editBtn');
 
+const modalEl = document.createElement('div');
+
+
 const DEBUG = true;
 
 /**
@@ -19,7 +22,9 @@ class Post {
       postText: postText,
       createDate: new Date().getTime(),
       favorRefs: [],
-      imageUrl: []
+      imageUrl: [],
+      editedFlag: false,
+      updateTime: createDate
     }
   }
 }
@@ -62,11 +67,13 @@ function editPost(postId, editText) {
   return new Promise((resolve,reject) => {
     let query = firestore.collection('posts').doc(postId);
     query.update({
-      postText: editText
+      postText: editText,
+      editedFlag: true,
+      updateTime: new Date().getTime()
     }).then(
       () => { //success
       console.log('Post updated!');
-      mui.overlay('on', modalEl);
+      mui.overlay('off', modalEl);
     },(e) => { //fail
       console.log('Error updating post: ', e);
       // document.querySelector("#postUpdateStatus").innerHTML = ("abc");
@@ -106,7 +113,6 @@ function getPostsByUserRef(userRef){
 }
 
 function editTest(postIdV) {
-  var modalEl = document.createElement('div');
   modalEl.style.width = '28em';
   modalEl.style.height = '28em';
   modalEl.style.margin = '100px auto';
@@ -182,9 +188,11 @@ function getPostsFeedByUser(userRef, followingRefs){
 
 function orderPostFeedByDate(postFeed){
   return postFeed.sort((postA,postB)=>{
-    return postA[Object.keys(postA)[0]].createDate - postB[Object.keys(postB)[0]].createDate;
+    return postB[Object.keys(postB)[0]].createDate - postA[Object.keys(postA)[0]].createDate;
   });
 }
+
+var u;
 
 /**
  * Get upload the current image in uploadControl and once uploaded, put it in uploadImg tag
@@ -239,12 +247,12 @@ function registerPageHandlers(userRef) {
 
 //generates markup for post
 function postMaker(prop){
-  const currTime = new Date(prop.createDate);
+  const currTime = (prop.editedFlag)?`${timeago().format(prop.updateTime)} (edited)`:`${timeago().format(prop.createDate)}`;
   console.log("prop_id:", prop.id);
   return `<div class="mui-row">
   <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
   <p id="${prop.id}">${prop.postText}</p>
-  <p style="text-align:right;font-size:75%">${currTime.toTimeString()}</p>
+  <p style="text-align:right;font-size:75%">${currTime}</p>
   <button class="mui-btn mui-btn--accent" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
   </div>
 </div>`;
@@ -256,16 +264,20 @@ function showPostTest(){
   let followingRefs;
   userRef.get().then(snapshot=>{
     followingRefs = snapshot.data().followingRefs;
-    console.log(followingRefs);
+    showPost(userRef, followingRefs);
   });
-  showPost(userRef, followingRefs);
+  
 }
 
 //if you have friends, this will add their posts in too (may need fixing)
 function showPost(userRef, followingRefs){
+  if (DEBUG) console.log('uid', userRef.id);
+  if (DEBUG) console.log(followingRefs);
   let refListReq = (followingRefs != null && followingRefs.length > 0) ? getPostsFeedByUser(userRef, followingRefs)
-                                              :getPostsByUserRef(userRef)
+                                              :getPostsByUserRef(userRef);
   refListReq.then(function(postList){
+    let sortedFeed = orderPostFeedByDate(postList);
+    console.log("sorted:", sortedFeed);
     console.log(postList);
     let postMarkup = "";
     postList.forEach(function(post){
@@ -294,10 +306,10 @@ function handleUserData(userRef, followingRefs, followerRefs){
 
   // getPostsFeedByUser(userRef,followingRefs)
   getPostsFeedByUser(userRef, followingRefs).then(postFeed=>{
-    let sortedFeed = orderPostFeedByDate(postFeed)
-    if (DEBUG) console.log(sortedFeed)
+    let sortedFeed = orderPostFeedByDate(postFeed);
+    if (DEBUG) console.log(sortedFeed);
     sortedFeed.forEach(post => {
-      if(DEBUG) console.log(post[Object.keys(post)[0]].createDate)
+      if(DEBUG) console.log(post[Object.keys(post)[0]].createDate);
     });
   });
 }
