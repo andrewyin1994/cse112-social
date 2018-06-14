@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>SafeBook</title>
-  <img class="icon" src="images/lock-icon2.png" alt="icon">
 
   <link rel="stylesheet" href="css/style.css">
   <!--stying for PWA need app bar for app shell, but distorts the layout. -->
@@ -14,6 +13,17 @@
 
   <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
   <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
+  <!-- the manifest for download of icons. -->
+  <link rel="manifest" href="/manifest.json">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Lock Banner">
+  <link rel="apple-touch-icon" href="images/lock-icon2_152x152.png">
+
+  <meta name="msapplication-TileImage" content="images/lock-icon2_152x152.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+
 </head>
 
 <body>
@@ -72,7 +82,7 @@
   <script src="js/firebase.js"></script>
   <script src="js/authorize.js"></script>
   <!-- points to the main app for running the  PWA, which will subsequently make use of the service worker.-->
-  <script src="projectPWA/work/scripts/app.js" async></script>
+  <script src="./scripts/app.js" async></script>
 </body>
 
 </html>
