@@ -298,7 +298,7 @@ function showPost(userRef, followingRefs){
  * @param {Array<Reference>} followingRefs list of refs to followings
  * @param {Array<Reference>} followerRefs list of refs to followers
  */
-function handleUserData(userRef, followingRefs, followerRefs){
+function initPage(userRef, followingRefs, followerRefs){
 
   if (DEBUG) console.log('uid', userRef.id);
   if (DEBUG) console.log(followingRefs);
@@ -329,7 +329,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
       followingRefs = snapshot.data().followingRefs;
       followerRefs = snapshot.data().followerRefs;
-      handleUserData(userRef,followingRefs,followerRefs);
+      initPage(userRef,followingRefs,followerRefs);
     });
 
     registerPageHandlers(userRef);
