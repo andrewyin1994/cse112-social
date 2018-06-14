@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="css/home-style.css">
+
+  <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
+  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+  <style>
+    img {
+      border-radius: 50%;
+    }
+  </style>
+  <script>
+    function activateOverlay() {
+      // show overlay
+      mui.overlay("on");
+    }
+  </script>
+</head>
+
+<body class="hide-sidedrawer">
+
+  <!-- Sidedrawer -->
+  <div id="sidedrawer" class="mui--no-user-select">
+    <!-- Side drawer content goes here -->
+    <div id="sidedrawer-brand" class="mui--appbar-line-height">
+      <span class="mui--text-title">SafeBook</span>
+    </div>
+    <div class="mui-divider"></div>
+    <ul>
+      <li>
+        <a href="homepage.html">
+          <strong>Home</strong>
+        </a>
+      </li>
+      <li>
+        <a href="profile.html">
+          <strong>Profile</strong>
+        </a>
+      </li>
+      <li>
+        <a href="friends.html">
+          <strong>Friends</strong>
+        </a>
+      </li>
+      <li>
+        <a href="posts.html">
+          <strong>Post</strong>
+        </a>
+      </li>
+      <li>
+        <a href="settings.html">
+          <strong>Settings</strong>
+        </a>
+      </li>
+      <li>
+        <strong id="btnLogout">Logout</strong>
+      </li>
+    </ul>
+  </div>
+  <header id="header">
+    <div class="mui-appbar mui--appbar-line-height">
+      <div class="mui-container-fluid">
+        <a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
+        <a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
+        <span class="mui--text-title mui--visible-xs-inline-block">SafeBook</span>
+      </div>
+    </div>
+  </header>
+  <div id="content-wrapper">
+    <!-- Main content goes here -->
+    <div class="mui--appbar-height"></div>
+    <div class="mui-container-fluid">
+      <br>
+      <div class="mui-container-fluid">
+        <div class="mui-panel">
+            <form class="mui-form">
+                <legend>Edit Profile</legend>
+                <div class="mui-textfield mui-textfield--float-label">
+                <input type="text">
+                <label>Name</label>
+                </div>
+                <div class="mui-textfield mui-textfield--float-label">
+                <input type="text">
+                <label>Email</label>
+                </div>
+                <div class="mui-textfield mui-textfield--float-label">
+                <input type="text">
+                <label>Title</label>
+                </div>
+                <div class="mui-textfield mui-textfield--float-label">
+                <textarea></textarea>
+                <label>Tell us about yourself</label>
+                </div>
+                <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
+            </form>
+          </div>
+      </div>
+
+    </div>
+  </div>
+  <footer id="footer">
+    <div class="mui-container-fluid">
+      <br> Made by Team Overflow
+    </div>
+  </footer>
+
+  <script src="js/firebase.config.js"></script>
+  <script src="js/sidedrawer.js"></script>
+  <!-- <script src="js/test.js"></script> -->
+  <!-- <script type="module" src="js/main.js"></script> -->
+
+</body>
+
+</html>
