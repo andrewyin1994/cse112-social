@@ -1,17 +1,17 @@
 const testBtn = document.getElementById('testBtn');
 const testInsert = document.getElementById('testInsert');
 
-const DEBUG = true;
 const FOLLOWER_COUNT = 'followerCount'
-/**---------------------------------------------------------------------------------- */
-/* When adding/delete following, firestore should automatically add/del 
+
+/**-------------------------- following api -------------------------------- */
+/* When adding/delete following, firestore should automatically add/del
 the followee's followerRefs array and followerCount field */
 
 /**
- * When follower adds/dels his own following, firestore should automatically 
+ * When follower adds/dels his own following, firestore should automatically
  * add/del the followee's followerRefs array and followerCount field
  * @param {*} selfQRef reference to self
- * @param {*} flwingQRefs newFollowingQRef will be added to it inplace 
+ * @param {*} flwingQRefs newFollowingQRef will be added to it inplace
  * @param {*} newFollowingQRef assumed to not exist in flwingQRefs
  * @returns {Promise} resolve()
  */
@@ -23,7 +23,7 @@ function addFollowingByRefToFB(selfQRef, flwingQRefs, newFollowingQRef) {
 /**
  *
  * @param {*} selfRef
- * @param {*} followingRefs qref === newFollowingId 
+ * @param {*} followingRefs qref === newFollowingId
  * @param {*} newFollowingId existence in fb will be checked
  */
 function addFollowingById(selfRef, followingRefs, newFollowingId) {
@@ -43,25 +43,22 @@ function addFollowingById(selfRef, followingRefs, newFollowingId) {
 }
 
 /**
- * Check if the id is already in the ref list before adding to firestore
- * @param {*} followingRefs
- * @param {*} newFollowingId
+ * Tool function to check if the id exists in the ref list
+ * @param {Array<Reference>} followingRefs 
+ * @param {String} newFollowingId
  */
 function refsHasId(followingRefs, newFollowingId) {
-  // let exists = false;
-  // followingRefs.forEach(qRef => {
-  //   if (qRef.id === newFollowingId) 
-  //     exists = true;
-  //   }
-  // )
-  // return exists;
-  return followingRefs.some(((qRef)=>{ return qRef.id === newFollowingId }))
+  // let exists = false; followingRefs.forEach(qRef => {   if (qRef.id ===
+  // newFollowingId)     exists = true;   } ) return exists;
+  return followingRefs.some(((qRef) => {
+    return qRef.id === newFollowingId
+  }))
 }
 
 /**
  *
  * @param {*} selfQRef query reference to self
- * @param {*} flwingQRefs newFollowingQRef[delIdx] will be deleted inplace 
+ * @param {*} flwingQRefs newFollowingQRef[delIdx] will be deleted inplace
  * @param {*} delIdx < flwingQRefs.length
  */
 function delFollowingByIdxFromFB(selfQRef, flwingQRefs, delIdx) {
@@ -76,33 +73,36 @@ function delFollowingByIdxFromFB(selfQRef, flwingQRefs, delIdx) {
  * @param {*} targetFollowingId existence in fb will be checked
  */
 function delFollowingById(selfRef, followingRefs, targetFollowingId) {
-  return new Promise((res,rej)=>{
+  return new Promise((res, rej) => {
     let delIdx = -1
-    for (let i = 0; i<followingRefs.length;i++){
-      if(followingRefs[i].id===targetFollowingId){
+    for (let i = 0; i < followingRefs.length; i++) {
+      if (followingRefs[i].id === targetFollowingId) {
         delIdx = followingRefs[i].id
       }
     }
 
     // Only deleted when found
-    if (delIdx !== -1) delFollowingByIdxFromFB(selfRef,followingRefs,delIdx).then((d) => {
-      res(followingRefs)
-    })
-    else res(false);
-  })
+    if (delIdx !== -1) 
+      delFollowingByIdxFromFB(selfRef, followingRefs, delIdx).then((d) => {
+        res(followingRefs)
+      })
+    else 
+      res(false);
+    }
+  )
 }
 
-/**---------------------------------------------------------------------------------- */
-/* You can't add followers, but you could remove them 
- * When you delete follower, firestore should automatically decrement your 
+/**---------------------------follower api --------------------------------- */
+/* You can't add followers, but you could remove them
+ * When you delete follower, firestore should automatically decrement your
  * followerCount and remove you from follower's followingRefs list */
 
 /**
- * You can't add followers, but you could remove them 
- * When you delete follower, firestore should automatically decrement your 
- * followerCount and remove you from follower's followingRefs list 
+ * You can't add followers, but you could remove them
+ * When you delete follower, firestore should automatically decrement your
+ * followerCount and remove you from follower's followingRefs list
  * @param {*} selfQRef query reference to self
- * @param {*} flwerQRefs newFollowingQRef[delIdx] will be deleted inplace 
+ * @param {*} flwerQRefs newFollowingQRef[delIdx] will be deleted inplace
  * @param {*} delIdx < flwingQRefs.length
  */
 function delFollowerByIdxFromFB(selfQRef, flwerQRefs, delIdx) {
@@ -117,25 +117,28 @@ function delFollowerByIdxFromFB(selfQRef, flwerQRefs, delIdx) {
  * @param {*} targetFollowerId existence in fb will be checked
  */
 function delFollowerById(selfRef, followerRefs, targetFollowerId) {
-  return new Promise((res,rej)=>{
+  return new Promise((res, rej) => {
     let delIdx = -1
-    for (let i = 0; i<followerRefs.length;i++){
-      if(followerRefs[i].id===targetFollowerId){
+    for (let i = 0; i < followerRefs.length; i++) {
+      if (followerRefs[i].id === targetFollowerId) {
         delIdx = followerRefs[i].id
       }
     }
 
     // Only deleted when found
-    if (delIdx !== -1) delFollowerByIdxFromFB(selfRef,followerRefs,delIdx).then((d) => {
-      res(followerRefs)
-    })
-    else res(false);
-  }) // end promise()
+    if (delIdx !== -1) 
+      delFollowerByIdxFromFB(selfRef, followerRefs, delIdx).then((d) => {
+        res(followerRefs)
+      })
+    else 
+      res(false);
+    }
+  ) // end promise()
 }
 
-/**---------------------------------------------------------------------------------- */
+/**--------------------------get user info api ------------------------------ */
 /**
- * Used locally for display purpose
+ * Used locally for visibility purpose
  */
 class UserInfo {
   /**
@@ -143,6 +146,7 @@ class UserInfo {
    * calling QueryReference.get()
    */
   constructor(userSnapshot) {
+    /************* Don't forget to change createUserDOM() with changes to this ctor ****************/
     // this.username:snapshot.data().username,
     this.uid = userSnapshot.id;
     // this.avatarUrl:snapshot.avatarUrl
@@ -156,9 +160,11 @@ class UserInfo {
  */
 function getUserInfoByRef(qref) {
   return new Promise((resolve, reject) => {
-    qref.get().then(snapshot => {
+    qref
+      .get()
+      .then(snapshot => {
 
-        if(snapshot.exists) {
+        if (snapshot.exists) {
           resolve(new UserInfo(snapshot))
         } else {
           resolve(false)
@@ -172,7 +178,7 @@ function getUserInfoByRef(qref) {
  * @param {*} uid the uid whose info we want to get
  * @returns {Promise}
  */
-function getUserInfoById(fs,uid) {
+function getUserInfoById(fs, uid) {
   return getUserInfoByRef(fs.doc(`users/${uid}`))
 }
 
@@ -183,19 +189,23 @@ function getUserInfoById(fs,uid) {
  */
 function getUsersInfoByRefs(userRefs) {
   return new Promise((resolve, reject) => {
+    // when there're no eleemnts, resolve should still be called
+    if(userRefs.length === 0) resolve([])
+
     let userInfoList = []
     let counter = 0
     userRefs.forEach(userRef => {
-      getUserInfoByRef(userRef).then((info)=>{
-        if(userRef){
-          if(DEBUG) console.log(info)
+      getUserInfoByRef(userRef).then((info) => {
+        if (userRef) {
+          if (DEBUG) 
+            console.log(info)
           counter++;
           userInfoList = [
             ...userInfoList,
             info
           ]
 
-          if(counter === userRefs.length){
+          if (counter === userRefs.length) {
             resolve(userInfoList)
           }
         } // endif
@@ -210,53 +220,230 @@ function getUsersInfoByRefs(userRefs) {
  * @param {Reference} selfRef query reference to self
  * @param {Reference} followingRefs list of query reference to followings
  */
-function getRcmdUsersInfo(fs, selfRef, followingRefs){
-  return new Promise((resolve,reject)=>{
-    let query = fs.collection('users')
-      .where(FOLLOWER_COUNT,'>', 1);
+function getRcmdUsersInfo(fs, selfRef, followingRefs) {
+  return new Promise((resolve, reject) => {
+    let query = fs
+      .collection('users')
+      .where(FOLLOWER_COUNT, '>', 1);
     let infoList = []
-    query.get().then(snapshots=>{
-      snapshots.forEach(snapshot=>{
-        // exclude already-following users from rcmd list
-        if(!refsHasId(followingRefs, snapshot.id) && 
-          selfRef.id !== snapshot.id){
-          infoList = [
-            ...infoList,
-            new UserInfo(snapshot)
-          ]
-        } // endif
-      }) // end foreach
-      resolve(infoList)
-    }) // end then()
+    query
+      .get()
+      .then(snapshots => {
+        snapshots.forEach(snapshot => {
+          // exclude already-following users from rcmd list
+          if (!refsHasId(followingRefs, snapshot.id) && selfRef.id !== snapshot.id) {
+            infoList = [
+              ...infoList,
+              new UserInfo(snapshot)
+            ]
+          } // endif
+        }) // end foreach
+        resolve(infoList)
+      }) // end then()
   }) // end Promise()
 }
 
-function handleUserData(userRef, followingRefs, followerRefs) {
-  // addFollowingById(userRef, followingRefs, "7oZiWgeMNnTmw0B5moy5nA9pApl2").then((e) => {})
-  // addFollowingById(userRef, followingRefs, "CYjKvtzX7GOtBedx8MVB665lOnm1").then((e) => {})
-  // delFollowingById(userRef, followingRefs, "7oZiWgeMNnTmw0B5moy5nA9pApl2").then((e) => {})
-  getRcmdUsersInfo(firestore, userRef, followingRefs).then(rcmdList=>{
-    if(DEBUG) console.log(rcmdList)
-  })
-  // getUserInfoByRef(userRef).then((userInfo)=>{
-  //   if(DEBUG) console.log(userInfo)
-  // })
-  // getUsersInfoByRefs(followingRefs).then((userInfoList)=>{
-  //   if(DEBUG) console.log(userInfoList)
-  // })
+/**------------- user dom update for add/del ops ------------------ */
+/**
+ * A uid may have multiple user tiles in following, follower sections
+ * @param {String} uid whose doms have property data-uid="${uid}"
+ * @return {Array<Node>} an array of doms that corresponds to uid
+ */
+function getUserDOMsByUid(uid) {
+  return document.querySelectorAll(`div[data-uid="${uid}"]`)
 }
 
-function registerPageHandlers() {}
+function setBtnTextFollowed(uid) {
+  getUserDOMsByUid(uid).forEach(dom => {
+    let btn = dom.querySelector('button')
+    btn.textContent = 'UNFOLLOW'
+  })
+}
 
-function registerFriendsHandlers() {}
+function setBtnTextUnfollowed(uid) {
+  getUserDOMsByUid(uid).forEach(dom => {
+    let btn = dom.querySelector('button')
+    btn.textContent = 'FOLLOW'
+    // btn.onClick = setUserDOMsfollowed
+  })
+}
 
+/**
+ * Return a dom element that could be injected into the DOM page
+ * @param {UserInfo} userInfo infomate returned from fb
+ * @param {*} uid
+ * @param {*} type used to determine what handlers should be registered to follow/delete
+ */
+function createUserDOM(userInfo, following) {
+
+  let d = document.createElement('div');
+  d.innerHTML = `
+      <div class="mui-panel mui--text-center user-tile" data-uid=${userInfo.uid}>
+        <div><img class="user-tile-avatar" src="images/default-pic.png"></div>
+        <div class="user-tile-name">${userInfo.uid}</div>
+        <button class="user-tile-btn mui-btn mui-btn--flat mui-btn--danger" >${following?'UNFOLLOW':'FOLLOW'}</button>
+      </div>
+      `;
+  return d.firstElementChild
+}
+
+/*-------------------------- dom Handlers --------------------------- */
+
+function followBtnHandler(e){
+  let btnElement = e.currentTarget
+  if(DEBUG) console.log(followingRefs)
+  addFollowingById(userRef,followingRefs,this.uid).then((d)=>{
+    if(d){
+      if(DEBUG) console.log(followingRefs)
+      setBtnTextFollowed(this.uid)
+      btnElement.onclick = unfollowBtnHandler.bind({
+        uid:this.uid // continue to pass the target user id around
+      })
+    }
+  })
+}
+
+
+function unfollowBtnHandler(e){
+  let btnElement = e.currentTarget
+  if(DEBUG) console.log(followingRefs)
+  delFollowingById(userRef,followingRefs,this.uid).then((d)=>{
+    if(d){
+      if(DEBUG) console.log(followingRefs)
+      setBtnTextUnfollowed(this.uid)
+      btnElement.onclick = followBtnHandler.bind({
+        uid:this.uid // continue to pass the target user id around
+      })
+    }
+  })
+}
+
+function showrcmd(){
+  var rcmdCtnr = document.getElementById('rcmd-container')
+  var flwingCtnr = document.getElementById('flwing-container')
+  var flwerCtnr = document.getElementById('flwer-container')
+  rcmdCtnr.className = "visible-container"
+  flwingCtnr.className = "hidden-container"
+  flwerCtnr.className = "hidden-container"
+}
+
+function showflwing(){
+  var rcmdCtnr = document.getElementById('rcmd-container')
+  var flwingCtnr = document.getElementById('flwing-container')
+  var flwerCtnr = document.getElementById('flwer-container')
+  rcmdCtnr.className = "hidden-container"
+  flwingCtnr.className = "visible-container"
+  flwerCtnr.className = "hidden-container"
+}
+
+function showflwer(){
+  var rcmdCtnr = document.getElementById('rcmd-container')
+  var flwingCtnr = document.getElementById('flwing-container')
+  var flwerCtnr = document.getElementById('flwer-container')
+  rcmdCtnr.className = "hidden-container"
+  flwingCtnr.className = "hidden-container"
+  flwerCtnr.className = "visible-container"
+}
+
+/**
+ * Register page handlers for already existing info
+ * @param {Array<UserInfo>} flwings 
+ * @param {Array<UserInfo>} nonFlwings 
+ */
+function registerPageHandlers(flwings,nonFlwings) {
+  // following users have unfollow btns
+  flwings.forEach(info=>{
+    getUserDOMsByUid(info.uid).forEach(dom=>{
+      let btn = dom.querySelector('button')
+      btn.onclick = unfollowBtnHandler.bind({
+        uid:info.uid
+      })
+    })
+  })
+
+  nonFlwings.forEach(info=>{
+    getUserDOMsByUid(info.uid).forEach(dom=>{
+      let btn = dom.querySelector('button')
+      btn.onclick = followBtnHandler.bind({
+        uid:info.uid
+      })
+    })
+  })
+}
+
+/**-------------------------- fill page content ------------------------------ */
+
+
+var userRef,
+followingRefs,
+followerRefs;
+
+/**
+ * fetch data from fs to initialize page content
+ * @param {*} userRef 
+ * @param {*} followingRefs 
+ * @param {*} followerRefs 
+ */
+function initPage(userRef, followingRefs, followerRefs) {
+  Promise.all([
+    getRcmdUsersInfo(firestore, userRef, followingRefs),
+    getUsersInfoByRefs(followingRefs),
+    getUsersInfoByRefs(followerRefs)
+  ]).then(values => {
+    let rcmdDOM = ''
+    let flwingDOM = ''
+    let followersDOM = ''
+
+
+    const rcmdCtnr = document.querySelector('#rcmd-container')
+    const flwingCtnr = document.querySelector('#flwing-container')
+    const flwerCtnr = document.querySelector('#flwer-container')
+
+    if(DEBUG) console.log(values)
+
+    let [rcmds,
+      flwings,
+      followers] = values;
+
+    let nonFlwings = []
+
+    // rcmds users not followed by default
+    rcmds.forEach(rcmd => {
+      nonFlwings.push(rcmd)
+      let dom = createUserDOM(rcmd, false)
+      rcmdCtnr.appendChild(dom)
+    })
+
+    // flwings users followed by default
+    flwings.forEach(flwing => {
+      let dom = createUserDOM(flwing, true)
+      flwingCtnr.appendChild(dom)
+    })
+
+    // flwerCtnr users followed by default
+    followers.forEach(flwer => {
+      // Exclude mutual relationships
+      if(!refsHasId(flwings, flwer.id)) nonFlwings.push(flwer)
+      
+      let dom = createUserDOM(flwer) // update logic
+      flwerCtnr.appendChild(dom)
+    })
+
+    // ******* attention: we're dividing all refs into two parts: following and
+    // non-following ********************************************************
+    registerPageHandlers(flwings,nonFlwings);
+  })
+}
+
+
+/*-------------------------- initialization --------------------------- */
 // Real time listener
 firebase
   .auth()
   .onAuthStateChanged(firebaseUser => {
-    var userRef,
-      followingRefs,
-      followerRefs;
+    // var userRef,
+    //   followingRefs,
+    //   followerRefs;
 
     // checks if user exists
     if (firebaseUser) {
@@ -274,10 +461,10 @@ firebase
           followerRefs = snapshot
             .data()
             .followerRefs;
-          handleUserData(userRef, followingRefs, followerRefs);
+          initPage(userRef, followingRefs, followerRefs);
         });
 
-      registerPageHandlers(userRef);
+      showrcmd()
 
     } else {
       if (DEBUG) 

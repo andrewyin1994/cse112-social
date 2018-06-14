@@ -16,6 +16,32 @@
     img {
       border-radius: 50%;
     }
+
+    .user-tile{
+      width:210px;
+      height:200px;
+      margin:30px;
+      /* display: flex;
+      align-items: center;
+      justify-content: center; */
+    }
+
+    .user-tile-avatar{
+      width: 80px;
+      height: 80px;
+    }
+
+    .user-tile-name{
+      margin-top:30px;
+    }
+
+    .hidden-container{
+      display: none;
+    }
+
+    .visible-container{
+      display: block;
+    }
   </style>
 </head>
 
@@ -95,14 +121,14 @@
       
       <!-- Friends homepage options-->
       <ul class="mui-tabs__bar mui-tabs__bar--justified">
-        <li class="mui--is-active">
-          <a data-mui-toggle="tab" data-mui-controls="pane-justified-1">Finding Friends</a>
+        <li id="rcmd-link" class="mui--is-active">
+          <a data-mui-toggle="tab" onclick="showrcmd()" data-mui-controls="pane-justified-1">Finding Friends</a>
         </li>
-        <li>
-          <a data-mui-toggle="tab" data-mui-controls="pane-justified-2">Following</a>
+        <li id="flwing-link" >
+          <a data-mui-toggle="tab" onclick="showflwing()" data-mui-controls="pane-justified-2">Following</a>
         </li>
-        <li>
-          <a data-mui-toggle="tab" data-mui-controls="pane-justified-3">Followers</a>
+        <li id="flwer-link">
+          <a  data-mui-toggle="tab" onclick="showflwer()" data-mui-controls="pane-justified-3">Followers</a>
         </li>
       </ul>
       <div class="mui-tabs__pane mui--is-active" id="pane-justified-1"></div>
@@ -110,13 +136,9 @@
       <div class="mui-tabs__pane" id="pane-justified-3"></div>
       <br><br>
       <!-- Friend component sample-->
-      <div class="friends-container" id="friends-container">
-        <div class="mui-panel" style="width:210px;height:200px;margin:30px">
-            <img id="default" src="images/default-pic.png" width="80" height="80" style="margin-left:62px">
-            <h4 style="margin-left:60px">User Name</h4>
-            <button class="mui-btn mui-btn--flat mui-btn--danger" style="margin:45px">Follow</button>
-        </div>
-      </div>
+      <div class="users-container" id="rcmd-container"></div>
+      <div class="users-container" id="flwing-container"></div>
+      <div class="users-container" id="flwer-container"></div>
 
       <!-- button for post modal-->
       <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
