@@ -1,81 +1,4 @@
-// import PostComponent from '../js/PostComponent.js';
-const DEBUG = true;
-
-//Getting IDs from homepage.html
-const postModal = document.getElementById('postModal')
-const post = document.getElementById('post');
-
-/**
- * Post class, what will be added to Firestore
- * @param {*} userRef ref to current logged in user
- * @param {*} postText text that user wishes to post
- */
-class Post {
-  constructor(userRef, postText) {
-    this.post = {
-      ownRef: userRef,
-      ownerId: userRef.id,
-      postText: postText,
-      createDate: new Date().getTime(),
-      favorRefs: [],
-      imageUrl: []
-    }
-  }
-}
-
-// homepage js
-jQuery(function ($) {
-  var $bodyEl = $('body'),
-    $sidedrawerEl = $('#sidedrawer');
-
-  function showSidedrawer() {
-    // show overlay
-    var options = {
-      onclose: function () {
-        $sidedrawerEl
-          .removeClass('active')
-          .appendTo(document.body);
-      }
-    };
-
-    var $overlayEl = $(mui.overlay('on', options));
-
-    // show element
-    $sidedrawerEl.appendTo($overlayEl);
-    setTimeout(function () {
-      $sidedrawerEl.addClass('active');
-    }, 20);
-  }
-
-  function abc(prop) {
-    return `<div class="mui-row">
-    <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-    <p>${prop.content}</p>
-    </div>
-  </div>`;
-  }
-
-  $('#post-container').append(abc({ content: 'first' }))
-
-  function hideSidedrawer() {
-    $bodyEl.toggleClass('hide-sidedrawer');
-  }
-
-  $('.js-show-sidedrawer').on('click', showSidedrawer);
-  $('.js-hide-sidedrawer').on('click', hideSidedrawer);
-
-  var $titleEls = $('strong', $sidedrawerEl);
-
-  $titleEls
-    .next()
-    .hide();
-
-  $titleEls.on('click', function () {
-    $(this)
-      .next()
-      .slideToggle(200);
-  });
-});
+//homepage js
 
 function cancelFunc() {
   mui.overlay('off');
@@ -154,5 +77,7 @@ document.getElementById('btnLogout').addEventListener('click', function () {
 
 // PRELOADER
 $(window).load(function () {
+  let ref = document.referrer;
+  console.log('ref', ref);
   $('.loader').fadeOut(2000);
 });

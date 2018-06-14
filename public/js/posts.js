@@ -22,7 +22,7 @@ class Post {
       postText: postText,
       createDate: new Date().getTime(),
       favorRefs: [],
-      imageUrl: [],
+      imageUrl: "",
       editedFlag: false,
       updateTime: createDate
     }
@@ -287,9 +287,6 @@ function showPost(userRef, followingRefs){
     document.querySelector('#post-container').innerHTML = postMarkup;
   });
 }
-
-
-
 
 /**
  * A callback function that handles all data returned by firestore about
