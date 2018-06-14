@@ -276,9 +276,6 @@ function showPost(userRef, followingRefs){
   });
 }
 
-
-
-
 /**
  * A callback function that handles all data returned by firestore about
  * current user
