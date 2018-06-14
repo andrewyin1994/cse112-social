@@ -56,7 +56,7 @@
     <div class="mui-divider"></div>
     <ul>
       <li>
-        <a href="#">
+        <a href="homepage.html">
           <strong>Home</strong>
         </a>
       </li>
@@ -76,7 +76,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="settings.html">
           <strong>Settings</strong>
         </a>
       </li>
@@ -101,20 +101,19 @@
       <br>
       <h1>Homepage</h1>
       <!-- button for post modal-->
-
+      <button class="mui-col-md-6 mui-col-md-offset-3 mui-col-xs-7 mui-col-xs-offset-3 mui-panel" id="postModal">
+        <table class="mui-table--bordered">
+          <td>
+            <img id="default" src="images/default-pic.png" width="35" height="35">
+          </td>
+          <td>
+            <div>What's new with you?</div>
+          </td>
+          <img id="default" src="images/camera-icon.png" width="35" height="35" style="float: right">
+        </table>
+      </button>
+      <br><br><br><br><br>
       <div class="mui-container-fluid" id="post-container">
-
-        <button class="mui-col-md-6 mui-col-md-offset-3 mui-panel" id="postModal">
-          <table class="mui-table--bordered">
-            <td>
-              <img id="default" src="images/default-pic.png" width="35" height="35">
-            </td>
-            <td>
-              <div>What's new with you?</div>
-            </td>
-            <img id="default" src="images/camera-icon.png" width="35" height="35" style="float: right">
-          </table>
-        </button>
       </div>
 
       <!--onkeyup setting-->
@@ -161,11 +160,10 @@
   </footer>
 
   <script src="js/firebase.config.js"></script>
+  <script src="js/timeago.min.js"></script>
   <script src="js/sidedrawer.js"></script>
+  <script src="js/posts.js"></script>
   <script src="js/main.js"></script>
-  <!-- <script src="js/test.js"></script> -->
-  <!-- <script type="module" src="js/main.js"></script> -->
-
 </body>
 
 </html>

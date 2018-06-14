@@ -6,6 +6,8 @@ const btnLogout = document.getElementById('btnLogout');
 const googleLogin = document.getElementById('googleLogin');
 const testInsert = document.getElementById('testInsert');
 
+const follow = document.getElementById('follow');
+
 const DEBUG = true;
 
 // Login button

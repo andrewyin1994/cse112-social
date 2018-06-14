@@ -9,8 +9,8 @@ const findCtnr = document.querySelector('#rcmd-container')
 const flwingCtnr = document.querySelector('#flwing-container')
 const flwerCtnr = document.querySelector('#flwer-container')
 
-/**-------------------------- following api -------------------------------- */
-/* When adding/delete following, firestore should automatically add/del
+    /**-------------------------- following api -------------------------------- */
+    /* When adding/delete following, firestore should automatically add/del
 the followee's followerRefs array and followerCount field */
 
 /**
@@ -288,8 +288,8 @@ function setBtnTextUnfollowed(uid, parent) {
 */
 function createUserDOM(userInfo, following) {
 
-  let d = document.createElement('div');
-  d.innerHTML = `
+        let d = document.createElement('div');
+        d.innerHTML = `
       <div class="mui-panel mui--text-center user-tile" data-uid=${userInfo.uid}>
         <div><img class="user-tile-avatar" src="images/default-pic.png"></div>
         <div class="user-tile-name">${userInfo.uid}</div>
