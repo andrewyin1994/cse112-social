@@ -22,7 +22,9 @@ class Post {
       postText: postText,
       createDate: new Date().getTime(),
       favorRefs: [],
-      imageUrl: []
+      imageUrl: [],
+      editedFlag: false,
+      updateTime: createDate
     }
   }
 }
@@ -65,7 +67,9 @@ function editPost(postId, editText) {
   return new Promise((resolve,reject) => {
     let query = firestore.collection('posts').doc(postId);
     query.update({
-      postText: editText
+      postText: editText,
+      editedFlag: true,
+      updateTime: new Date().getTime()
     }).then(
       () => { //success
       console.log('Post updated!');
@@ -241,12 +245,12 @@ function registerPageHandlers(userRef) {
 
 //generates markup for post
 function postMaker(prop){
-  const currTime = new Date(prop.createDate);
+  const currTime = (prop.editedFlag)?timeago().format(prop.updateTime)+" (edited)":timeago().format(prop.createDate);
   console.log("prop_id:", prop.id);
   return `<div class="mui-row">
   <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
   <p id="${prop.id}">${prop.postText}</p>
-  <p style="text-align:right;font-size:75%">${timeago().format(currTime)}</p>
+  <p style="text-align:right;font-size:75%">${currTime}</p>
   <button class="mui-btn mui-btn--accent" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
   </div>
 </div>`;
