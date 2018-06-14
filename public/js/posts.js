@@ -38,7 +38,10 @@ function addPost(userRef) {
   
   if (DEBUG) console.log(payload);
 
-  firestore.collection('posts').add(payload.post);
+  firestore.collection('posts').add(payload.post).then(() => {
+    mui.overlay('off', modalEl);
+    showPostTest();
+  });
 };
 
 /**
@@ -51,9 +54,9 @@ function deletePost(postId) {
     let query = firestore.collection('posts').doc(postId);
     query.delete().then(
       () => { //success
-      console.log('Post deleted!');
+      if(DEBUG) console.log('Post deleted!');
     },(e) => { //fail
-      console.log('Error removing post: ', e);
+      if(DEBUG) console.log('Error removing post: ', e);
     });
   });
 }
@@ -72,6 +75,7 @@ function editPost(postId, editText) {
       () => { //success
       console.log('Post updated!');
       mui.overlay('off', modalEl);
+      showPostTest();
     },(e) => { //fail
       console.log('Error updating post: ', e);
       // document.querySelector("#postUpdateStatus").innerHTML = ("abc");
@@ -331,7 +335,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     });
 
     showPostTest();
-    // registerPageHandlers(userRef);
+    //registerPageHandlers(userRef);
 
   } else {
     if (DEBUG) console.log('not logged in');
