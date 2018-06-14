@@ -245,7 +245,7 @@ function registerPageHandlers(userRef) {
 
 //generates markup for post
 function postMaker(prop){
-  const currTime = (prop.editedFlag)?timeago().format(prop.updateTime)+" (edited)":timeago().format(prop.createDate);
+  const currTime = (prop.editedFlag)?`${timeago().format(prop.updateTime)} (edited)`:`${timeago().format(prop.createDate)}`;
   console.log("prop_id:", prop.id);
   return `<div class="mui-row">
   <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
