@@ -28,7 +28,11 @@ function activatePosting() {
           </div>
         </form>
         <div>
+        <input name="myFile" type="file" id="uploadControl">
+        <button id ="uploadedImg">
         <img id="default" src="images/camera-icon.png" width="35" height="35">
+        </button>
+        <img id="uploadImg"
         </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="postBtn" "style="float: right">POST</button>
@@ -47,11 +51,12 @@ function activatePosting() {
     mui.overlay('off', modalEl);
     showPostTest();
   });
+
+  document.getElementById("uploadedImg").addEventListener('click', function(){
+    uploadFile();
+  });
 }
 
-/**
- *  From this line, it is for posting
- */
 
 function setButtonStatus(sender, target) {
   if (sender.value.length == 0)
@@ -60,23 +65,6 @@ function setButtonStatus(sender, target) {
     document.getElementById(target).disabled = false;
 }
 
-<<<<<<< HEAD
-function addPost(userRef, pt) {
-  console.log('posting');
-  const postText = document.getElementById('postText').value;
-  let payload = new Post(userRef, postText);
-  if (DEBUG) console.log(payload);
-    firestore.collection('posts').add(payload.post);
-}
-var postBtn = document.getElementById('btnPost');
-function postFunc(postBtn, pt) {
-  postBtn.onclick = addPost(userRef, pt);
-}
-
-function cancelFunc() {
-  mui.overlay('off');
-}
-=======
 // function addPost(userRef, pt) {
 //   console.log('posting');
 //   const postText = document.getElementById('postText').value;
@@ -100,7 +88,6 @@ document.getElementById('btnLogout').addEventListener('click', function () {
     // An error happened.
   });
 });
->>>>>>> d2da74da3a8bfa5dff49bc25baea704a06ede36d
 
 // PRELOADER
 $(window).load(function () {
