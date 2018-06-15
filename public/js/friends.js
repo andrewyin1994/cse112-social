@@ -15,8 +15,8 @@ const searchInput = document.getElementById('search-input')
 const searchForm = document.getElementById('search-form')
 
 
-    /**-------------------------- following api -------------------------------- */
-    /* When adding/delete following, firestore should automatically add/del
+/**-------------------------- following api -------------------------------- */
+/* When adding/delete following, firestore should automatically add/del
 the followee's followerRefs array and followerCount field */
 
 /**
@@ -52,15 +52,6 @@ function addFollowingById(selfRef, followingRefs, newFollowingId) {
           res(false)
       });
   });
-}
-
-/**
- * Wrapper function around refsHasId
- * @param {String} uid check if is following current uid by accessing global
- * followingRefs
- */
-function isFollowing(uid){
-  return refsHasId(followingRefs,uid)
 }
 
 /**
@@ -316,7 +307,10 @@ function createUserDOM(userInfo, following) {
 /*-------------------------- dom Handlers --------------------------- */
 
 
-
+/**
+ * Handler for friend follow button
+ * @param {Event} e 
+ */
 function followBtnHandler(e) {
 
   if (DEBUG)
@@ -337,6 +331,10 @@ function followBtnHandler(e) {
   })
 }
 
+/**
+ * Handler for friend unfollow button
+ * @param {Event} e 
+ */
 function unfollowBtnHandler(e) {
 
   if (DEBUG)
@@ -356,18 +354,6 @@ function unfollowBtnHandler(e) {
 
       // only delete from following container
       if(existsUserDOMIn(deletedUserInfo, flwingCtnr)) delUserTileFrom(deletedUserInfo, flwingCtnr)
-
-      // replace existing dom in follower container
-      // if(existsUserDOMIn(deletedUserInfo, flwerCtnr)) {
-      //   delUserTileFrom(deletedUserInfo, flwerCtnr)
-      //   addUserTileTo(deletedUserInfo, false, flwerCtnr)
-      // }
-
-      // replace existing dom in query result container
-      // if(existsUserDOMIn(deletedUserInfo, qresultCtnr)) {
-      //   delUserTileFrom(deletedUserInfo, qresultCtnr)
-      //   addUserTileTo(deletedUserInfo, false, qresultCtnr)
-      // }
     }
   })
 }
