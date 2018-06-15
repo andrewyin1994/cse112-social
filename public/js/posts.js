@@ -65,6 +65,8 @@ function deletePost(postId) {
 
 /**
  * Edit post on firestore
+ * @param {*} postId ref to post being edited
+ * @param {*} editText ref to text you want to edit with
  */
 function editPost(postId, editText) {
   return new Promise((resolve,reject) => {
@@ -116,6 +118,11 @@ function getPostsByUserRef(userRef){
   });
 }
 
+
+/**
+ * create/Shows editing modal
+ * @param {*} postIdv postid value
+ */
 function editTest(postIdV) {
   modalEl.style.width = '28em';
   modalEl.style.height = '28em';
@@ -190,6 +197,11 @@ function getPostsFeedByUser(userRef, followingRefs){
   });
 }
 
+/**
+ * Orders post feed by post date (most recent first)
+ * @param {} postFeed the list of posts to sort by date
+ * @returns {*} newly sorted postFeed
+ */
 function orderPostFeedByDate(postFeed){
   return postFeed.sort((postA,postB)=>{
     return postB[Object.keys(postB)[0]].createDate - postA[Object.keys(postA)[0]].createDate;
@@ -225,6 +237,10 @@ function uploadFile() {
   });
 }
 
+/**
+ * Holds the event listeners/handlers for the page
+ * @param {*} userRef the reference to the user
+ */
 function registerPageHandlers(userRef) {
   console.log('register page handler');
   // Register listener for add post button
@@ -251,7 +267,11 @@ function registerPageHandlers(userRef) {
   });
 }
 
-//generates markup for post
+/**
+ * Makes the homepage post html
+ * @param {*} prop emulates react obj that renders a stream   
+ * @return {*} the post html
+ */
 function postMaker(prop){
   const currTime = (prop.editedFlag)?`${timeago().format(prop.updateTime)} (edited)`:`${timeago().format(prop.createDate)}`;
   console.log("prop_id:", prop.id);
@@ -267,7 +287,9 @@ function postMaker(prop){
 </div>`;
 }
 
-//tests basic functionality for showing posts
+/**
+ * tests basic functionality for showing posts
+ */
 function showPostTest(){
   let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
   let followingRefs;
@@ -279,7 +301,11 @@ function showPostTest(){
   
 }
 
-//if you have friends, this will add their posts in too (may need fixing)
+/**
+ * If you have friends, this will add their posts in too 
+ * @param {*} userRef ref to user
+ * @param {*} followingRefs list of refs of friends you are following
+ */
 function showPost(userRef, followingRefs){
   // if (DEBUG) console.log('uid', userRef.id);
   // if (DEBUG) console.log(followingRefs);
@@ -345,6 +371,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   }
 });
 
+/**
+ * tests firebase post deletion
+ * @param userRef ref to user
+ */
 function deleteTest(userRef) {
   console.log('begin test');
 
