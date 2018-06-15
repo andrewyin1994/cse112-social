@@ -279,6 +279,9 @@ function postMaker(prop){
   <div class="mui-col-md-6 mui-col-md-offset-3 mui-col-xs-7 mui-col-xs-offset-3 mui-panel">
     <div>
       <img id="default" src="images/default-pic.png" width="35" height="35" style="float: left">
+      <button id="trashcanBtn" style="float: right" style="border-radius: 50%">
+        <img id="trashcan" src="images/trashcan.png" width="40" height="40">
+      </button>
       <p class = "mui-col-md-offset-1">User Name</p>
       <p class = "mui-col-md-offset-1" style="font-size:75%">${currTime}</p>
       <br>
