@@ -276,9 +276,15 @@ function postMaker(prop){
   const currTime = (prop.editedFlag)?`${timeago().format(prop.updateTime)} (edited)`:`${timeago().format(prop.createDate)}`;
   console.log("prop_id:", prop.id);
   return `<div class="mui-row">
-  <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+  <div class="mui-col-md-6 mui-col-md-offset-3 mui-col-xs-7 mui-col-xs-offset-3 mui-panel">
+    <div>
+      <img id="default" src="images/default-pic.png" width="35" height="35" style="float: left">
+      <p class = "mui-col-md-offset-1">User Name</p>
+      <p class = "mui-col-md-offset-1" style="font-size:75%">${currTime}</p>
+      <br>
+    </div>
   <p id="${prop.id}">${prop.postText}</p>
-  <p style="text-align:right;font-size:75%">${currTime}</p>
+  <br>
   <button class="mui-btn mui-btn--raised mui-btn--primary" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
   <button class="mui-btn mui-btn--raised mui-btn--primary" id="likeBtn-${prop.id}">Like</button>
   <button class="mui-btn mui-btn--raised mui-btn--primary" id="showBtn-${prop.id}">${prop.likedCnt}</button>
