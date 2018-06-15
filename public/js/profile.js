@@ -1,39 +1,33 @@
-const user = firebase.auth().currentUser;
-const name, email, photoUrl, uid, emailVerified;
+const editProfile = document.getElementById('editProfile');
 
-if(user != null){
-    name = user.displayName;
-    email = user.email;
-    photoUrl = user.photoURL;
-    emailVerified = user.emailVerified;
-    uid = user.uid;
+// This is for set UserName
+function setUserName(newName){
+    firebase.auth().currentUser.updateProfile({
+       displayName: newName
+    }).then(function() {
+        // Update successful.
+        firebase.auth().currentUser.name = newName;
+        console.log('ssuccessfully changed');
+    }).catch(function(error) {
+        // An error happened.
+        console.log('could not changed');
+    });
 }
 
 // This is for get UserName
 function getUserName(){
-    firestore.collection('users').doc(firebase.auth().currentUser.uid).get().then(function(snapshot){
-        console.log(snapshot.data().name);
-    });
+    if(firebase.auth().currentUser.name != null){
+        return firebase.auth().currentUser.name;
+    }else{
+        console.log('Need to put name');
+    }
 }
 
-<<<<<<< HEAD
 // This is for get email
 function getUserEmail(){
-    console.log(user.email);
+    return firebase.auth().currentUser.email;
 }
 
-// This is for the fucntion that user can reset the password
-function resetPassword(){
-    firebase.auth().confirmPasswordReset(code, newPassword)
-    .then(function() {
-      // Success
-    })
-    .catch(function() {
-      // Invalid code
-    })
-}
-
-=======
 editProfile.addEventListener('click', editProfileForm);
 
 function editProfileForm() {
@@ -69,4 +63,3 @@ function editProfileForm() {
     // show modal
     mui.overlay('on', modalEl);
   }
->>>>>>> 3ec4273d9c8c842e64d3f9f811b6291ca6723484
