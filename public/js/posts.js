@@ -342,12 +342,16 @@ function showPost(userRef, followingRefs){
       console.log(post[Object.keys(post)[0]].createDate);
       const currPost = post[Object.keys(post)[0]];
       let likeBtn = document.querySelector(`#likeBtn-${currPost.id}`);
-      // firestore.doc(`posts/${currPost.id}`).collection('likedBy').get((snap)=>{
-
-      // });
-      likeBtn.onclick = (e)=>{
-        likePost(currPost, userRef);
-      };
+      let likedFlag = false;
+      firestore.doc(`posts/${currPost.id}`).collection('likedBy').get().then((snapshot)=>{
+        snapshot.forEach(e=>{
+          if(e.id == userRef.id) likedFlag = true;
+        });
+      });
+      if(likedFlag)
+        likeBtn.onclick = (e)=>{likePost(currPost, userRef);};
+      else
+        likeBtn.onclick = (e)=>{unlikePost(currPost, userRef);};
     });
   });
 }
