@@ -23,7 +23,6 @@ class Post {
       imageUrl: "",
       editedFlag: false,
       updateTime: new Date().getTime(),
-      likedBy:{},
       likedCnt:0
     }
   }
@@ -38,7 +37,10 @@ function addPost(userRef) {
     
   let payload = new Post(userRef, postText);
   
-  if (DEBUG) console.log(payload);
+  const currImg = document.querySelector('#uploadImg').dataset.imgref;
+  if(currImg != null) payload.imageUrl = currImg;
+
+  if (DEBUG) console.log("payload:", payload);
 
   firestore.collection('posts').add(payload.post).then(() => {
     mui.overlay('off', modalEl);
@@ -214,11 +216,12 @@ var u;
  * Get upload the current image in uploadControl and once uploaded, put it in uploadImg tag
  * 
  */
-function uploadFile() {
+function uploadFile(userRef) {
   const ref = firebase.storage().ref();
   const file = document.querySelector('#uploadControl').files[0];
   // we do +new Date() to force the time to be epoch time instead of standard day-month-year etc
-  const name = (+new Date()) + '-' + file.name;
+  const name = userRef.id + '/' + (+new Date()) + '-' + file.name;
+  console.log(name);
   const metadata = {
     contentType: file.type
   };
@@ -231,7 +234,9 @@ function uploadFile() {
       //urlSnapshot is the link to the content just added to storage
       if (DEBUG) console.log(urlSnapshot); 
       document.querySelector('#uploadImg').src = urlSnapshot;
-    });;
+      document.querySelector('#uploadImg').dataset.imgref = name;
+      //query.doc(`posts/${userRef.id}`).update({imageUrl:`${name}`});
+    });
   }).catch((error) => {
     if (DEBUG) console.error(error);
   });
@@ -254,7 +259,7 @@ function registerPageHandlers(userRef) {
 
 
   uploadBtn.addEventListener('click', function(){
-    uploadFile();
+    uploadFile(userRef);
   });
 
   editBtn.addEventListener('click', function(){
@@ -328,7 +333,7 @@ function showPost(userRef, followingRefs){
     postList.forEach(function(post){
       console.log(post[Object.keys(post)[0]].createDate);
       const currPost = post[Object.keys(post)[0]];
-      postMarkup += (postMaker(post[Object.keys(post)[0]]));
+      postMarkup += (postMaker(currPost));
       // document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', likePost(currPost));
     });
     document.querySelector('#post-container').innerHTML = postMarkup;
@@ -344,9 +349,6 @@ function showPost(userRef, followingRefs){
   });
 }
 
-function likeHandler(){
-
-}
 
 function likePost(currPost, userRef){  
   const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
