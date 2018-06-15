@@ -45,6 +45,21 @@ googleLogin.addEventListener('click', e => {
 // Activate sign-up function
 btnSignUpForm.addEventListener('click', activateSignUp);
 
+btnLogout.addEventListener('click', function () {
+  const email = txtEmail.value;
+  const pass = txtPassword.value;
+  const auth = firebase.auth();
+  const currentUser = firebase.auth().currentUser;
+  firebase.auth().signOut().then(function () {
+    // Sign-out successful.
+    console.log(currentUser + "signed out");
+
+    // testInsert.innerHTML = "sign out works";
+  }).catch(function (error) {
+    console.log(error.message);
+  });
+});
+
 // Cancel Function
 function cancelFunc() {
   mui.overlay('off');
@@ -109,21 +124,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   } else {
     console.log('not logged in');
   }
-});
-
-btnLogout.addEventListener('click', function () {
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
-  const auth = firebase.auth();
-  const currentUser = firebase.auth().currentUser;
-  firebase.auth().signOut().then(function () {
-    // Sign-out successful.
-    console.log(currentUser + "signed out");
-
-    // testInsert.innerHTML = "sign out works";
-  }).catch(function (error) {
-    console.log(error.message);
-  });
 });
 
 /* end of Firebase Authentication */
