@@ -59,7 +59,6 @@ function submitFunc() {
   const emailerr = document.getElementById('emailerr');
   const passerr = document.getElementById('passerr');
   const matcherr = document.getElementById('matcherr');
-  // const auth = firebase.auth();
 
   // clear any warning messages
   emailerr.innerHTML = passerr.innerHTML = matcherr.innerHTML = '';
@@ -71,18 +70,25 @@ function submitFunc() {
   else {
     firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(
       function(currentUser) {
-        console.log(mname);
-        // Sign-up successful.
-        console.log(currentUser,  "signed Up");
-        // Set up the user's name
-        currentUser.name = mname;
-        console.log(currentUser.name);
+        /*const query = firestore.collections('users').doc(currentUser.uid);
+        query.update({
+          name : mname
+        }).then(
+          () => {
+            console.log('putting name successfully');
+          },(e) => { //fail
+            console.log('Error putting name: ', e);
+          });*
+        /*currentUser.updateProfile({
+          displayName: mname
+        }).then(function() {
+          console.log('wanna do name thing');
+        }, function(error) {
+          console.log('error occured foor updateProfile', error);
+        });*/   
         // close the dialog box upon successful sign-up
         mui.overlay('off');
-
-        // testInsert.innerHTML = "sign up works";
-      },
-      function (error) {
+      },function (error) {
         let errorCode = error.code;
         let errorMessage = error.message;
 
@@ -95,6 +101,8 @@ function submitFunc() {
           passerr.innerHTML = errorMessage;
         }
       });
+      
+
   }
 }
 
@@ -105,7 +113,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log('fbUser', firebaseUser, '.');
     // testInsert.innerHTML = "signed in as: " + firebaseUser.email;
     if(firebaseUser.metadata.a === firebaseUser.metadata.b) {
-      //window.location.href = 'profile.html';
+     window.location.href = 'profile.html';
     }
     else {
       window.location.href = "homepage.html";
@@ -115,6 +123,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   }
 });
 
+// Button listener for 
 btnLogout.addEventListener('click', function () {
   const email = txtEmail.value;
   const pass = txtPassword.value;
@@ -145,7 +154,7 @@ function activateSignUp() {
     `<form class='mui-form'>
   <legend>Sign Up</legend>
   <div class='mui-textfield mui-textfield--float-label'>
-    <input type='name' name='mname' id='mname'>
+    <input type='text' name='mname' id='mname'>
     <label for='mname'>Name</label>
   </div>
   <p id='passerr' style='color:red;'></p>

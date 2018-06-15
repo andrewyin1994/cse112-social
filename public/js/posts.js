@@ -307,7 +307,6 @@ function showPostTest(){
     followingRefs = snapshot.data().followingRefs;
     showPost(userRef, followingRefs);
   });
-  
 }
 
 /**
@@ -360,6 +359,7 @@ function likePost(currPost, userRef){
       });
   });
 }
+
 function unlikePost(currPost, userRef){  
   const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
   query.doc(userRef.id).delete().then((snapshot) => {
@@ -397,7 +397,6 @@ function initPage(userRef, followingRefs, followerRefs){
 // Real time listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
   let userRef, followingRefs, followerRefs;
-
   // checks if user exists
   if (firebaseUser) {
     // Firebase doesn't check userRef validity
@@ -409,7 +408,6 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
       followerRefs = snapshot.data().followerRefs;
       initPage(userRef,followingRefs,followerRefs);
     });
-
     showPostTest();
     //registerPageHandlers(userRef);
 
