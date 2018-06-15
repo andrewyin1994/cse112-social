@@ -1,5 +1,3 @@
-
-
 (function() {
   'use strict';
 
@@ -39,9 +37,6 @@
     app.updateNothing();
   });
 
-
-
-
   /*****************************************************************************
    *
    * Methods to update/refresh the UI
@@ -69,15 +64,11 @@
    * freshest data.
    */
 
-   
-
-
   app.updateNothing = function() {
 
     console.log("refreshing Nothing");
 
   };
-
 
   // TODO add saveSelectedNothings function here
 
@@ -90,9 +81,6 @@
     var selectedNothings = JSON.stringify(app.selectedNothings);
     localStorage.selectedNothings = selectedNothings;
   };
-
-
-  
 
   //this is our initial injection data.... could be messages...
   var initialNothing = {
