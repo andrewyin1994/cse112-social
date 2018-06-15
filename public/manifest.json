@@ -1,6 +1,6 @@
 {
-  "name": "Lock Banner",
-  "short_name": "Lock Banner",
+  "name": "SafeBook",
+  "short_name": "SafeBook",
   "icons": [{
     "src": "images/lock-icon2_128x128.png",
       "sizes": "128x128",

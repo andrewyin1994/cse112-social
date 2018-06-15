@@ -18,19 +18,34 @@ var cacheName = 'safeBookPWA';
 var filesToCache = [
   '/',
   //maybe have an offline page too....
-  '/index.html',
-  '/scripts/app.js',
-  '/styles/inline.css',
+  'index.html',
+  'homepage.html',
+  'friends.html',
+  'js/app.js',
+  'css/home-style.css',
+  'css/profile-style.css',
+  'css/style.css',
 
-  '/images/ic_add_white_24px.svg',
-  '/images/ic_refresh_white_24px.svg',
+  'js/main.js',
+  'images/camera-icon.png',
+  'images/default-pic.png',
+  'images/ic_add_white_24px.svg',
+  'images/ic_refresh_white_24px.svg',
+
   //adding some more stuff....
-  'images/lock-icon2.png'
+  'images/lock-icon2.png',
 
-  
+  'images/lock-icon.png',
+  'images/lock-icon2_32x32.png',
+  'images/lock-icon2_128x128.png',
+  'images/lock-icon2_144x144.png',
+  'images/lock-icon2_152x152.png',
+  'images/lock-icon2_192x192.png',
+  'images/lock-icon2_256x256.png'
 
 ];
 
+//caching upon install
 self.addEventListener('install', function(e) {
   console.log('[ServiceWorker] Install');
   e.waitUntil(
@@ -66,18 +81,13 @@ self.addEventListener('activate', function(e) {
   return self.clients.claim();
 });
 
-//FETCHING new data upon refresh 
+//FETCHING new data upon refresh, frome the fetch API for handling online data. It then adds this data to the cache.
+/*
 self.addEventListener('fetch', function(e) {
   console.log('[Service Worker] Fetch', e.request.url);
-  var dataUrl = 'https://query.yahooapis.com/v1/public/yql';
+  var dataUrl = '//cdn.muicss.com/mui-0.9.39/css/mui.min.css';
   if (e.request.url.indexOf(dataUrl) > -1) {
-    /*
-     * When the request URL contains dataUrl, the app is asking for fresh
-     * weather data. In this case, the service worker always goes to the
-     * network and then caches the response. This is called the "Cache then
-     * network" strategy:
-     * https://jakearchibald.com/2014/offline-cookbook/#cache-then-network
-     */
+
     e.respondWith(
       caches.open(dataCacheName).then(function(cache) {
         return fetch(e.request).then(function(response){
@@ -87,15 +97,11 @@ self.addEventListener('fetch', function(e) {
       })
     );
   } else {
-    /*
-     * The app is asking for app shell files. In this scenario the app uses the
-     * "Cache, falling back to the network" offline strategy:
-     * https://jakearchibald.com/2014/offline-cookbook/#cache-falling-back-to-network
-     */
+
     e.respondWith(
       caches.match(e.request).then(function(response) {
         return response || fetch(e.request);
       })
     );
   }
-});
+});*/

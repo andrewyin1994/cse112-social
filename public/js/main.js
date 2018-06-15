@@ -29,10 +29,8 @@ function activatePosting() {
         </form>
         <div>
         <input name="myFile" type="file" id="uploadControl">
-        <button id ="uploadedImg">
-        <img id="default" src="images/camera-icon.png" width="35" height="35">
-        </button>
-        <img id="uploadImg">
+        <button id ="uploadedImg" class="mui-btn mui-btn--small mui-btn--primary mui-btn--raised">upload</button>
+        <img id="uploadImg" data-imgRef="">
         </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="postBtn" "style="float: right">POST</button>
@@ -53,7 +51,10 @@ function activatePosting() {
   });
 
   document.getElementById("uploadedImg").addEventListener('click', function(){
-    uploadFile();
+    if(firebase.auth()) {
+      let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+      uploadFile(userRef);
+    }
   });
 }
 
