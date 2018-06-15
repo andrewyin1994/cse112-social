@@ -1,13 +1,19 @@
 const testBtn = document.getElementById('testBtn');
 const testInsert = document.getElementById('testInsert');
 
-const FOLLOWER_COUNT = 'followerCount'
+const EMAIL_FIELD = 'email'
 const DEBUG = true
 
 
-const findCtnr = document.querySelector('#find-container')
-const flwingCtnr = document.querySelector('#flwing-container')
-const flwerCtnr = document.querySelector('#flwer-container')
+const findCtnr = document.getElementById('find-container')
+const flwingCtnr = document.getElementById('flwing-container')
+const flwerCtnr = document.getElementById('flwer-container')
+
+const qresultCtnr  = document.getElementById('qresult')
+
+const searchInput = document.getElementById('search-input')
+const searchForm = document.getElementById('search-form')
+
 
     /**-------------------------- following api -------------------------------- */
     /* When adding/delete following, firestore should automatically add/del
@@ -49,6 +55,15 @@ function addFollowingById(selfRef, followingRefs, newFollowingId) {
 }
 
 /**
+ * Wrapper function around refsHasId
+ * @param {String} uid check if is following current uid by accessing global
+ * followingRefs
+ */
+function isFollowing(uid){
+  return refsHasId(followingRefs,uid)
+}
+
+/**
 * Tool function to check if the id exists in the ref list
 * @param {Array<Reference>} followingRefs
 * @param {String} newFollowingId
@@ -84,7 +99,7 @@ function delFollowingById(selfRef, followingRefs, targetFollowingId) {
     let delIdx = -1
     for (let i = 0; i < followingRefs.length; i++) {
       if (followingRefs[i].id === targetFollowingId) {
-        delIdx = followingRefs[i].id
+        delIdx = i
       }
     }
 
@@ -131,7 +146,7 @@ function delFollowerById(selfRef, followerRefs, targetFollowerId) {
     let delIdx = -1
     for (let i = 0; i < followerRefs.length; i++) {
       if (followerRefs[i].id === targetFollowerId) {
-        delIdx = followerRefs[i].id
+        delIdx = i
       }
     }
 
@@ -157,7 +172,7 @@ class UserInfo {
 */
   constructor(userSnapshot) {
     /************* Don't forget to change createUserDOM() with changes to this ctor ****************/
-    // this.username:snapshot.data().username,
+    // this.name = snapshot.data().name,
     this.uid = userSnapshot.id;
     // this.avatarUrl:snapshot.avatarUrl
   }
@@ -229,27 +244,24 @@ function getUsersInfoByRefs(userRefs) {
 * Return recommended user list, excluding self and followings
 * @param {Object} fs firestore object
 * @param {Reference} selfRef query reference to self
-* @param {Reference} followingRefs list of query reference to followings
+* @param {Reference} email there's only one nonself user with such email in firestore
+* @return {UserInfo} a single UserInfo object that matches the given email in fs
 */
-function getRcmdUsersInfo(fs, selfRef, followingRefs) {
+function searchUsersInfoByEmail(fs, selfRef, email) {
   return new Promise((resolve, reject) => {
     let query = fs
       .collection('users')
-      .where(FOLLOWER_COUNT, '>', 1);
-    let infoList = []
+      .where(EMAIL_FIELD, '==', email);
+
     query
       .get()
       .then(snapshots => {
         snapshots.forEach(snapshot => {
-          // exclude already-following users from rcmd list
-          if (!refsHasId(followingRefs, snapshot.id) && selfRef.id !== snapshot.id) {
-            infoList = [
-              ...infoList,
-              new UserInfo(snapshot)
-            ]
+          // exclude self
+          if (selfRef.id !== snapshot.id) {
+            resolve(new UserInfo(snapshot))
           } // endif
         }) // end foreach
-        resolve(infoList)
       }) // end then()
   }) // end Promise()
 }
@@ -306,7 +318,7 @@ function createUserDOM(userInfo, following) {
 
 
 function followBtnHandler(e) {
-  let btnElement = e.currentTarget
+
   if (DEBUG)
     console.log(followingRefs)
   addFollowingById(userRef, followingRefs, this.uid).then((addedUserInfo) => {
@@ -316,15 +328,17 @@ function followBtnHandler(e) {
       setBtnTextFollowed(this.uid, document)
       if(!existsUserDOMIn(addedUserInfo, flwingCtnr)) addUserTileTo(addedUserInfo,true, flwingCtnr)
 
-      btnElement.onclick = unfollowBtnHandler.bind({
-        uid: this.uid // continue to pass the target user id around
+      getUserDOMsByUid(this.uid,document).forEach(dom=>{
+        dom.querySelector('button').onclick=unfollowBtnHandler.bind({
+          uid: this.uid // continue to pass the target user id around
+        })
       })
     }
   })
 }
 
 function unfollowBtnHandler(e) {
-  let btnElement = e.currentTarget
+
   if (DEBUG)
     console.log(followingRefs)
   delFollowingById(userRef, followingRefs, this.uid).then((deletedUserInfo) => {
@@ -332,19 +346,28 @@ function unfollowBtnHandler(e) {
       if (DEBUG)
         console.log(followingRefs)
 
-      btnElement.onclick = followBtnHandler.bind({
-        uid: this.uid // continue to pass the target user id around
+      getUserDOMsByUid(this.uid,document).forEach(dom=>{
+        dom.querySelector('button').onclick = followBtnHandler.bind({
+          uid: this.uid // continue to pass the target user id around
+        })
       })
 
       setBtnTextUnfollowed(this.uid, document)
 
-
+      // only delete from following container
       if(existsUserDOMIn(deletedUserInfo, flwingCtnr)) delUserTileFrom(deletedUserInfo, flwingCtnr)
 
-      if(existsUserDOMIn(deletedUserInfo, flwerCtnr)) {
-        delUserTileFrom(deletedUserInfo, flwerCtnr)
-        addUserTileTo(deletedUserInfo, false, flwerCtnr)
-      }
+      // replace existing dom in follower container
+      // if(existsUserDOMIn(deletedUserInfo, flwerCtnr)) {
+      //   delUserTileFrom(deletedUserInfo, flwerCtnr)
+      //   addUserTileTo(deletedUserInfo, false, flwerCtnr)
+      // }
+
+      // replace existing dom in query result container
+      // if(existsUserDOMIn(deletedUserInfo, qresultCtnr)) {
+      //   delUserTileFrom(deletedUserInfo, qresultCtnr)
+      //   addUserTileTo(deletedUserInfo, false, qresultCtnr)
+      // }
     }
   })
 }
@@ -371,38 +394,55 @@ function existsUserDOMIn(userInfo,parent) {
   return getUserDOMsByUid(userInfo.uid,parent).length>0;
 }
 
+/**
+ * Remove user from ui dom
+ * @param {UserInfo} userInfo information of user being deleted from dom
+ * @param {Element} parent the immediate parent container from which the file will be
+ * deleted
+ */
 function delUserTileFrom(userInfo, parent){
   getUserDOMsByUid(userInfo.uid,parent).forEach(dom=>dom.remove());
 }
 
-function addUserTileTo(userInfo, isFollowing, parent){
+/**
+ * add user to ui dom
+ * @param {UserInfo} userInfo information of user being added to dom
+ * @param {Boolean} isFollowing used to determine button
+ * @param {Element} parent the immediate parent container that holds all user tiles
+ * @returns
+ */
+function addUserTileTo(userInfo, isFollowing, parent, 
+  unflhdlr = unfollowBtnHandler.bind({ uid: userInfo.uid }), 
+  flhdlr = followBtnHandler.bind({ uid: userInfo.uid })){
   let dom = createUserDOM(userInfo, isFollowing)
   let btn = dom.querySelector('button')
-  btn.onclick = isFollowing? unfollowBtnHandler.bind({ uid: userInfo.uid }): 
-                            followBtnHandler.bind({ uid: userInfo.uid })
+  btn.onclick = isFollowing? unflhdlr: flhdlr
   parent.appendChild(dom)
 }
 
 /**
-* Register page handlers for already existing info
-* @param {Array<UserInfo>} flwings
-* @param {Array<UserInfo>} nonFlwings
+* Register page handlers for search tab
 */
-function registerPageHandlers(flwings, nonFlwings, parent) {
-  // following users have unfollow btns
-  flwings.forEach(info => {
-    getUserDOMsByUid(info.uid, parent).forEach(dom => {
-      let btn = dom.querySelector('button')
-      btn.onclick = unfollowBtnHandler.bind({ uid: info.uid })
-    })
-  })
+function registerPageHandlers() {
+  searchForm.onsubmit=function(e){
+    e.preventDefault()
 
-  nonFlwings.forEach(info => {
-    getUserDOMsByUid(info.uid, parent).forEach(dom => {
-      let btn = dom.querySelector('button')
-      btn.onclick = followBtnHandler.bind({ uid: info.uid })
+    qresultCtnr.innerHTML=""
+
+    let val = searchInput.value.trim()
+
+    if (validMail(val)) searchUsersInfoByEmail(firestore, userRef, val).then((userInfo)=>{
+      if(DEBUG) console.log(userInfo) 
+      addUserTileTo(userInfo,refsHasId(followingRefs, userInfo.uid), qresultCtnr)
     })
-  })
+
+    return false
+  }
+}
+
+function validMail(mail)
+{
+    return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(mail);
 }
 
 /**-------------------------- fill page content ------------------------------ */
@@ -445,7 +485,7 @@ function initPage(userRef, followingRefs, followerRefs) {
 
     // ******* attention: we're dividing all refs into two parts: following and
     // non-following ********************************************************
-    // registerPageHandlers(flwings, nonFlwings);
+    registerPageHandlers();
   })
 }
 
@@ -470,10 +510,9 @@ firebase
           followerRefs = snapshot
             .data()
             .followerRefs;
-          initPage(userRef, followingRefs, followerRefs);
-        });
+            initPage(userRef, followingRefs, followerRefs);        });
 
-      showrcmd()
+      showfind()
 
     } else {
       if (DEBUG)

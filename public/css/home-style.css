@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
 /**
  * Body CSS
  */
@@ -18,7 +20,15 @@
    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
  }
  
- 
+ /**
+  * Homepage header
+  */
+ .homeHeader {
+    text-align: center;
+    font-family: 'Karla', sans-serif;
+    font-size: 3.75em;
+    padding-bottom: 0.5em;
+ }
  /**
   * Layout CSS
   */
