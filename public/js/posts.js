@@ -260,8 +260,8 @@ function postMaker(prop){
   <p id="${prop.id}">${prop.postText}</p>
   <p style="text-align:right;font-size:75%">${currTime}</p>
   <button class="mui-btn mui-btn--raised mui-btn--primary" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
-  <button class="mui-btn mui-btn--raised mui-btn--primary" id="likeBtn" onclick="editTest('${prop.id}')">Like</button>
-  <button class="mui-btn mui-btn--raised mui-btn--primary" id="showBtn" onclick="editTest('${prop.id}')">${prop.likedCnt}</button>
+  <button class="mui-btn mui-btn--raised mui-btn--primary" id="likeBtn-${prop.id}">Like</button>
+  <button class="mui-btn mui-btn--raised mui-btn--primary" id="showBtn-${prop.id}">${prop.likedCnt}</button>
 
   </div>
 </div>`;
@@ -292,11 +292,49 @@ function showPost(userRef, followingRefs){
     let postMarkup = "";
     postList.forEach(function(post){
       console.log(post[Object.keys(post)[0]].createDate);
+      const currPost = post[Object.keys(post)[0]];
       postMarkup += (postMaker(post[Object.keys(post)[0]]));
+      // document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', likePost(currPost));
     });
     document.querySelector('#post-container').innerHTML = postMarkup;
+
+    postList.forEach(function(post){
+      console.log(post[Object.keys(post)[0]].createDate);
+      const currPost = post[Object.keys(post)[0]];
+      let likeBtn = document.querySelector(`#likeBtn-${currPost.id}`)
+      likeBtn.addEventListener('click', (e)=>{
+        likePost(currPost, userRef);
+        likeBtn.addEventListener('click', (e)=>{
+          unlikePost(currPost, userRef);
+        });
+      });
+    });
   });
 }
+
+function likeHandler(){
+
+}
+
+function likePost(currPost, userRef){  
+  const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
+  query.doc(userRef.id).set({liked: true}).then((snapshot) => {
+      query.get().then(subSnap=>{
+        console.log(subSnap.size);
+        document.getElementById(`showBtn-${currPost.id}`).innerHTML = subSnap.size;
+      });
+  });
+}
+function unlikePost(currPost, userRef){  
+  const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
+  query.doc(userRef.id).delete().then((snapshot) => {
+      query.get().then(subSnap=>{
+        console.log(subSnap.size);
+        document.getElementById(`showBtn-${currPost.id}`).innerHTML = subSnap.size;
+      });
+  });
+}
+
 
 /**
  * A callback function that handles all data returned by firestore about
