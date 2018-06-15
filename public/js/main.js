@@ -29,9 +29,7 @@ function activatePosting() {
         </form>
         <div>
         <input name="myFile" type="file" id="uploadControl">
-        <button id ="uploadedImg">
-        <img id="default" src="images/camera-icon.png" width="35" height="35">
-        </button>
+        <button id ="uploadedImg" class="mui-btn mui-btn--small mui-btn--primary mui-btn--raised">upload</button>
         <img id="uploadImg">
         </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
