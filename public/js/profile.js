@@ -37,7 +37,7 @@ function getUserUid(){
     return firebase.auth().currentUser.uid;
 }
 
-// This is for setting name and title on firebase
+// This is for setting user's name and title on firebase
 function setUserNameAndTitle(newName, newTitle){
     let uid = getUserUid();
     let userInfo = firestore.collection('users').doc(uid);
@@ -45,18 +45,20 @@ function setUserNameAndTitle(newName, newTitle){
         name : `${(newName != null && newName != "" ? newName: name)}`,
         title: `${(newTitle != null && newTitle != "" ? newTitle: title)}`    
     }).then(() => {
+      // When you edit, changed name and title will be shown right away
       profileName.innerHTML = newName;
       profileTitle.innerHTML = newTitle;
     });
 }
 
-// This is for setting description on firebase
+// This is for setting user's description on firebase
 function setUserDescription(newDescription) {
     let uid = getUserUid();
     let userInfo = firestore.collection('users').doc(uid);
     userInfo.update({
         description: `${(newDescription != null && newDescription != "" ? newDescription: description)}`
     }).then(() => {
+      // When you edit, description will be shown right away
       profileDesc.innerHTML = newDescription;
     });
 }
@@ -142,6 +144,7 @@ function editDescriptionForm() {
 
   document.getElementById('btnPostCancel').addEventListener('click', closeMui);
   document.getElementById('submitBtn').addEventListener('click', function() {
+    // Set user's Description on Firebase
     setUserDescription(document.getElementById('description').value);
     mui.overlay('off', editDescription);
   });
@@ -160,3 +163,16 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     });
   }
 });
+
+// This makes you log-out from profile page
+document.getElementById('btnLogout').addEventListener('click', function () {
+    const currentUser = firebase.auth().currentUser;
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+      console.log(currentUser + "signed out");
+  
+      window.location.href = "index.html";
+    }, function (error) {
+      // An error happened.
+    });
+  });

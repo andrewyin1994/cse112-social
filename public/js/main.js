@@ -64,18 +64,6 @@ function setButtonStatus(sender, target) {
     document.getElementById(target).disabled = false;
 }
 
-// function addPost(userRef, pt) {
-//   console.log('posting');
-//   const postText = document.getElementById('postText').value;
-//   let payload = new Post(userRef, postText);
-//   if (DEBUG) console.log(payload);
-//     firestore.collection('posts').add(payload.post);
-// }
-// var postBtn = document.getElementById('postBtn');
-// function postFunc(postBtn, pt) {
-//   postBtn.onclick = addPost(userRef, pt);
-// }
-
 document.getElementById('btnLogout').addEventListener('click', function () {
   const currentUser = firebase.auth().currentUser;
   firebase.auth().signOut().then(function () {
