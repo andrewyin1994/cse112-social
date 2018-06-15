@@ -65,6 +65,8 @@ function deletePost(postId) {
 
 /**
  * Edit post on firestore
+ * @param {*} postId ref to post being edited
+ * @param {*} editText ref to text you want to edit with
  */
 function editPost(postId, editText) {
   return new Promise((resolve,reject) => {
@@ -116,6 +118,11 @@ function getPostsByUserRef(userRef){
   });
 }
 
+
+/**
+ * create/Shows editing modal
+ * @param {*} postIdv postid value
+ */
 function editTest(postIdV) {
   modalEl.style.width = '28em';
   modalEl.style.height = '28em';
@@ -190,6 +197,11 @@ function getPostsFeedByUser(userRef, followingRefs){
   });
 }
 
+/**
+ * Orders post feed by post date (most recent first)
+ * @param {} postFeed the list of posts to sort by date
+ * @returns {*} newly sorted postFeed
+ */
 function orderPostFeedByDate(postFeed){
   return postFeed.sort((postA,postB)=>{
     return postB[Object.keys(postB)[0]].createDate - postA[Object.keys(postA)[0]].createDate;
@@ -225,6 +237,10 @@ function uploadFile() {
   });
 }
 
+/**
+ * Holds the event listeners/handlers for the page
+ * @param {*} userRef the reference to the user
+ */
 function registerPageHandlers(userRef) {
   console.log('register page handler');
   // Register listener for add post button
@@ -251,23 +267,38 @@ function registerPageHandlers(userRef) {
   });
 }
 
-//generates markup for post
+/**
+ * Makes the homepage post html
+ * @param {*} prop emulates react obj that renders a stream   
+ * @return {*} the post html
+ */
 function postMaker(prop){
   const currTime = (prop.editedFlag)?`${timeago().format(prop.updateTime)} (edited)`:`${timeago().format(prop.createDate)}`;
   console.log("prop_id:", prop.id);
   return `<div class="mui-row">
-  <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+  <div class="mui-col-md-6 mui-col-md-offset-3 mui-col-xs-7 mui-col-xs-offset-3 mui-panel">
+    <div>
+      <img id="default" src="images/default-pic.png" width="35" height="35" style="float: left">
+      <button id="trashcanBtn" style="float: right" style="border-radius: 50%">
+        <img id="trashcan" src="images/trashcan.png" width="40" height="40">
+      </button>
+      <p class = "mui-col-md-offset-1">User Name</p>
+      <p class = "mui-col-md-offset-1" style="font-size:75%">${currTime}</p>
+      <br>
+    </div>
   <p id="${prop.id}">${prop.postText}</p>
-  <p style="text-align:right;font-size:75%">${currTime}</p>
+  <br>
   <button class="mui-btn mui-btn--raised mui-btn--primary" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
-  <button class="mui-btn mui-btn--raised mui-btn--primary" id="likeBtn" onclick="editTest('${prop.id}')">Like</button>
-  <button class="mui-btn mui-btn--raised mui-btn--primary" id="showBtn" onclick="editTest('${prop.id}')">${prop.likedCnt}</button>
+  <button class="mui-btn mui-btn--raised mui-btn--primary" id="likeBtn-${prop.id}">Like</button>
+  <button class="mui-btn mui-btn--raised mui-btn--primary" id="showBtn-${prop.id}">${prop.likedCnt}</button>
 
   </div>
 </div>`;
 }
 
-//tests basic functionality for showing posts
+/**
+ * tests basic functionality for showing posts
+ */
 function showPostTest(){
   let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
   let followingRefs;
@@ -279,7 +310,11 @@ function showPostTest(){
   
 }
 
-//if you have friends, this will add their posts in too (may need fixing)
+/**
+ * If you have friends, this will add their posts in too 
+ * @param {*} userRef ref to user
+ * @param {*} followingRefs list of refs of friends you are following
+ */
 function showPost(userRef, followingRefs){
   // if (DEBUG) console.log('uid', userRef.id);
   // if (DEBUG) console.log(followingRefs);
@@ -292,11 +327,58 @@ function showPost(userRef, followingRefs){
     let postMarkup = "";
     postList.forEach(function(post){
       console.log(post[Object.keys(post)[0]].createDate);
+      const currPost = post[Object.keys(post)[0]];
       postMarkup += (postMaker(post[Object.keys(post)[0]]));
+      // document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', likePost(currPost));
     });
     document.querySelector('#post-container').innerHTML = postMarkup;
+
+    postList.forEach(function(post){
+      console.log(post[Object.keys(post)[0]].createDate);
+      const currPost = post[Object.keys(post)[0]];
+      let likeBtn = document.querySelector(`#likeBtn-${currPost.id}`);
+      likeBtn.addEventListener('click', (e)=>{
+        likePost(currPost, userRef);
+      });
+    });
   });
 }
+
+function likeHandler(){
+
+}
+
+function likePost(currPost, userRef){  
+  const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
+  query.doc(userRef.id).set({liked: true}).then((snapshot) => {
+      query.get().then(subSnap=>{
+        console.log(subSnap.size);
+        document.getElementById(`showBtn-${currPost.id}`).innerHTML = subSnap.size;
+      });
+  });
+  document.querySelector(`#likeBtn-${currPost.id}`).removeEventListener('click', (e)=>{
+    likePost(currPost, userRef);
+  });
+  document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', (e)=>{
+    unlikePost(currPost, userRef);
+  });
+}
+function unlikePost(currPost, userRef){  
+  const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
+  query.doc(userRef.id).delete().then((snapshot) => {
+      query.get().then(subSnap=>{
+        console.log(subSnap.size);
+        document.getElementById(`showBtn-${currPost.id}`).innerHTML = subSnap.size;
+      });
+  });
+  document.querySelector(`#likeBtn-${currPost.id}`).removeEventListener('click', (e)=>{
+    unlikePost(currPost, userRef);
+  });
+  document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', (e)=>{
+    likePost(currPost, userRef);
+  });
+}
+
 
 /**
  * A callback function that handles all data returned by firestore about
@@ -345,6 +427,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   }
 });
 
+/**
+ * tests firebase post deletion
+ * @param userRef ref to user
+ */
 function deleteTest(userRef) {
   console.log('begin test');
 

@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
   <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
+
   <!-- the manifest for download of icons. -->
-  <link rel="manifest" href="/manifest.json">
+
+  <link rel="manifest" href="manifest.json">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Lock Banner">
+  <meta name="apple-mobile-web-app-title" content="SafeBook">
   <link rel="apple-touch-icon" href="images/lock-icon2_152x152.png">
 
   <meta name="msapplication-TileImage" content="images/lock-icon2_152x152.png">
@@ -24,6 +26,13 @@
 </head>
 
 <body>
+
+  <!-- <header class="header">
+      <h1 class="header__title">SafeBook ... sto be styled with a visible refresh button.</h1>
+      <button id="butRefresh" class="headerButton" aria-label="Refresh"></button>
+
+  </header> -->
+
   <section id="login">
 
     <div class="mui-container-fluid">
@@ -31,6 +40,7 @@
         <div class="mui-col-xs-6 mui-col-xs-offset-2 mui-col-md-8 mui-col-md-offset-4 mui-col-lg-offset-4">
           <img class="icon" src="images/lock-icon2.png" alt="icon">
         </div>
+        <p class="loginHeader">SafeBook</p>
       </div>
     </div>
 
@@ -51,24 +61,20 @@
           </form>
 
 
-          <button class="mui-btn mui-btn--flat mui-btn--primary" id="btnLogin">Login</button>
-          <button class="mui-btn mui-btn--flat mui-btn--primary" id="googleLogin">Google-Login</button>
           <button class="mui-btn mui-btn--flat mui-btn--primary" id="btnSignUpForm">Sign up</button>
-          <button class="mui-btn mui-btn--accent" id="btnLogout">Log out</button>
-          <!-- <div id="testInsert">changes</div> -->
+          <button class="mui-btn mui-btn--raised mui-btn--primary" id="btnLogin">Login</button>
+          <button class="mui-btn mui-btn--raised mui-btn--danger" id="googleLogin">Sign in with Google</button>
+
         </div>
       </div>
     </div>
-
-
-    <a href="homepage.html">
-      <button class="mui-btn mui-btn--fab mui-btn--accent">+</button>
-    </a>
   </section>
 
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
   <script src="js/firebase.config.js"></script>
   <script src="js/authorize.js"></script>
+    <!-- points to the main app for running the  PWA, which will subsequently make use of the service worker.-->
+  <script src="js/app.js" async></script>
 </body>
 
 </html>
