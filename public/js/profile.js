@@ -1,5 +1,21 @@
 const editProfile = document.getElementById('editProfile');
 const editDescription = document.getElementById('editDescription');
+const profileName = document.getElementById('profileName');
+const profileTitle = document.getElementById('profileTitle');
+const profileDesc = document.getElementById('profileDesc')
+
+// This makes you log-out from profile page
+document.getElementById('btnLogout').addEventListener('click', function () {
+    const currentUser = firebase.auth().currentUser;
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+      console.log(currentUser + "signed out");
+  
+      window.location.href = "index.html";
+    }, function (error) {
+      // An error happened.
+    });
+});
 
 // This is for set UserName onAuth
 function setUserName(newName){
@@ -34,22 +50,29 @@ function getUserUid(){
     return firebase.auth().currentUser.uid;
 }
 
-// This is for setting name and title on firebase
+// This is for setting user's name and title on firebase
 function setUserNameAndTitle(newName, newTitle){
     let uid = getUserUid();
     let userInfo = firestore.collection('users').doc(uid);
     userInfo.update({
         name : `${(newName != null && newName != "" ? newName: name)}`,
         title: `${(newTitle != null && newTitle != "" ? newTitle: title)}`    
+    }).then(() => {
+      // When you edit, changed name and title will be shown right away
+      profileName.innerHTML = newName;
+      profileTitle.innerHTML = newTitle;
     });
 }
 
-// This is for setting description on firebase
+// This is for setting user's description on firebase
 function setUserDescription(newDescription) {
     let uid = getUserUid();
     let userInfo = firestore.collection('users').doc(uid);
     userInfo.update({
         description: `${(newDescription != null && newDescription != "" ? newDescription: description)}`
+    }).then(() => {
+      // When you edit, description will be shown right away
+      profileDesc.innerHTML = newDescription;
     });
 }
 
@@ -83,23 +106,25 @@ function editProfileForm() {
               <input type='text' id='title'>
               <label>Title</label>
             </div>
+            <p>Change profile picture: <input type="file" name="myFile"></p>
           </form>
           <button class='mui-btn mui-btn--primary mui-btn--flat' id='btnPostCancel'>Cancel</button>
           <button type='submit' class='mui-btn mui-btn--primary mui-btn--raised' id='submitBtn'>Submit</button>
         </div>
       </div>
-    </div>`;
+    </div>
+  </div>`;
 
-    // show modal
-    mui.overlay('on', modalEl);
+  // show modal
+  mui.overlay('on', modalEl);
 
     document.getElementById('btnPostCancel').addEventListener('click', closeMui);
     document.getElementById('submitBtn').addEventListener('click', function() {
         // Set Name on Firebase.auth()
-        setUserName(document.getElementById('name').value);
+        // setUserName(document.getElementById('name').value);
         // Set Name and title on Firebase Field
         setUserNameAndTitle(document.getElementById('name').value, document.getElementById('title').value);
-        mui.overlay('off', editDescription);
+        mui.overlay('off', editProfile);
     });
 }
 
@@ -133,8 +158,9 @@ function editDescriptionForm() {
 
   document.getElementById('btnPostCancel').addEventListener('click', closeMui);
   document.getElementById('submitBtn').addEventListener('click', function() {
+    // Set user's Description on Firebase
     setUserDescription(document.getElementById('description').value);
-    mui.overlay('off', editProfile);
+    mui.overlay('off', editDescription);
   });
 }
 
@@ -145,8 +171,10 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     userRef = firestore.doc(`users/${firebaseUser.uid}`);
     userRef.get().then(user => {
       console.log('user', user.data());
-      document.getElementById('profileName').innerHTML = user.data().name;
-      document.getElementById('profileTitle').innerHTML = user.data().title;
+      profileName.innerHTML = user.data().name;
+      profileTitle.innerHTML = user.data().title;
+      profileDesc.innerHTML = user.data().description;
     });
   }
 });
+
