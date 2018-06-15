@@ -1,8 +1,5 @@
 //homepage js
 
-function cancelFunc() {
-  mui.overlay('off');
-}
 
 // Post Modal event listener
 postModal.addEventListener('click', activatePosting);
@@ -59,7 +56,6 @@ function activatePosting() {
     uploadFile();
   });
 }
-
 
 
 function setButtonStatus(sender, target) {
