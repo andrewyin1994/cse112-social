@@ -73,7 +73,7 @@ function editProfileForm() {
     // initialize modal element
     var modalEl = document.createElement('div');
     modalEl.style.width = '40em';
-    modalEl.style.height = '30em';
+    modalEl.style.height = '25em';
     modalEl.style.margin = '10em auto';
     modalEl.style.backgroundColor = '#fff';
   
@@ -91,6 +91,7 @@ function editProfileForm() {
               <input type='text' id='title'>
               <label>Title</label>
             </div>
+            <p>Change profile picture: <input type="file" name="myFile"></p>
           </form>
           <button class='mui-btn mui-btn--primary mui-btn--flat' id='btnPostCancel'>Cancel</button>
           <button type='submit' class='mui-btn mui-btn--primary mui-btn--raised' id='submitBtn'>Submit</button>
