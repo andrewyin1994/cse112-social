@@ -1,5 +1,8 @@
 const editProfile = document.getElementById('editProfile');
 const editDescription = document.getElementById('editDescription');
+const profileName = document.getElementById('profileName');
+const profileTitle = document.getElementById('profileTitle');
+const profileDesc = document.getElementById('profileDesc')
 
 // This is for set UserName onAuth
 function setUserName(newName){
@@ -41,6 +44,9 @@ function setUserNameAndTitle(newName, newTitle){
     userInfo.update({
         name : `${(newName != null && newName != "" ? newName: name)}`,
         title: `${(newTitle != null && newTitle != "" ? newTitle: title)}`    
+    }).then(() => {
+      profileName.innerHTML = newName;
+      profileTitle.innerHTML = newTitle;
     });
 }
 
@@ -50,6 +56,8 @@ function setUserDescription(newDescription) {
     let userInfo = firestore.collection('users').doc(uid);
     userInfo.update({
         description: `${(newDescription != null && newDescription != "" ? newDescription: description)}`
+    }).then(() => {
+      profileDesc.innerHTML = newDescription;
     });
 }
 
@@ -88,15 +96,16 @@ function editProfileForm() {
           <button type='submit' class='mui-btn mui-btn--primary mui-btn--raised' id='submitBtn'>Submit</button>
         </div>
       </div>
-    </div>`;
+    </div>
+  </div>`;
 
-    // show modal
-    mui.overlay('on', modalEl);
+  // show modal
+  mui.overlay('on', modalEl);
 
     document.getElementById('btnPostCancel').addEventListener('click', closeMui);
     document.getElementById('submitBtn').addEventListener('click', function() {
         // Set Name on Firebase.auth()
-        setUserName(document.getElementById('name').value);
+        // setUserName(document.getElementById('name').value);
         // Set Name and title on Firebase Field
         setUserNameAndTitle(document.getElementById('name').value, document.getElementById('title').value);
         mui.overlay('off', editProfile);
@@ -145,8 +154,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     userRef = firestore.doc(`users/${firebaseUser.uid}`);
     userRef.get().then(user => {
       console.log('user', user.data());
-      document.getElementById('profileName').innerHTML = user.data().name;
-      document.getElementById('profileTitle').innerHTML = user.data().title;
+      profileName.innerHTML = user.data().name;
+      profileTitle.innerHTML = user.data().title;
+      profileDesc.innerHTML = user.data().description;
     });
   }
 });

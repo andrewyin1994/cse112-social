@@ -9,30 +9,30 @@ admin.initializeApp();
 //  response.send("Hello from Firebase!");
 // });
 
-class Friends {
+class User {
   constructor(user) {
-    //firestore's set() needs an object to do so
-    this.follow = {
+    //firestore's set() will only accept an Object 
+    this.info = {
       followerRefs: [],
       followingRefs: [],
       followerCount: 0,
       openToSearch: false,
-      name: user.name,
+      name: 'Anonymous User',
       email: user.email,
-      title: '',
+      title: 'New User',
       description: '',
       avatarUrl: ''
     }
   }
 }
 
-exports.onUserCreate = functions.auth.user().onCreate((user) => {
-  console.log('User Created', user.uid);
+exports.onUserCreate = functions.auth.user().onCreate((firebaseUser) => {
+  console.log('User Created', firebaseUser.uid);
   return new Promise((resolve,reject) => {
-    const friends = new Friends(user);
+    const newUser = new User(firebaseUser);
     // firestore.collection('users').doc(user.uid).set(  friends);
-    return admin.firestore().collection('users').doc(user.uid)
-      .set( friends.follow )
+    return admin.firestore().collection('users').doc(firebaseUser.uid)
+      .set( newUser.info )
       .then(e => { resolve(); }, e => { reject(); });
   });
 });
