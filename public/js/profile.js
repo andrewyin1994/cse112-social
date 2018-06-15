@@ -99,7 +99,7 @@ function editProfileForm() {
         setUserName(document.getElementById('name').value);
         // Set Name and title on Firebase Field
         setUserNameAndTitle(document.getElementById('name').value, document.getElementById('title').value);
-        mui.overlay('off', editDescription);
+        mui.overlay('off', editProfile);
     });
 }
 
@@ -134,7 +134,7 @@ function editDescriptionForm() {
   document.getElementById('btnPostCancel').addEventListener('click', closeMui);
   document.getElementById('submitBtn').addEventListener('click', function() {
     setUserDescription(document.getElementById('description').value);
-    mui.overlay('off', editProfile);
+    mui.overlay('off', editDescription);
   });
 }
 
