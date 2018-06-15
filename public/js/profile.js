@@ -93,6 +93,7 @@ function editProfileForm() {
               <input type='text' id='title'>
               <label>Title</label>
             </div>
+            <p>Change profile picture: <input type="file" name="myFile"></p>
           </form>
           <button class='mui-btn mui-btn--primary mui-btn--flat' id='btnPostCancel'>Cancel</button>
           <button type='submit' class='mui-btn mui-btn--primary mui-btn--raised' id='submitBtn'>Submit</button>
