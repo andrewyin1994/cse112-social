@@ -342,43 +342,55 @@ function showPost(userRef, followingRefs){
       console.log(post[Object.keys(post)[0]].createDate);
       const currPost = post[Object.keys(post)[0]];
       let likeBtn = document.querySelector(`#likeBtn-${currPost.id}`);
-      likeBtn.addEventListener('click', (e)=>{
+      // firestore.doc(`posts/${currPost.id}`).collection('likedBy').get((snap)=>{
+
+      // });
+      likeBtn.onclick = (e)=>{
         likePost(currPost, userRef);
-      });
+      };
     });
   });
 }
 
+function updateField(fbRef, field, newVal){
+  firestore.doc(fbRef).update({[field]: newVal});
+}
 
 function likePost(currPost, userRef){  
+  if (DEBUG) console.log("currPost: ", currPost);
   const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
   query.doc(userRef.id).set({liked: true}).then((snapshot) => {
       query.get().then(subSnap=>{
-        console.log(subSnap.size);
+        if(DEBUG) console.log(subSnap.size);
         document.getElementById(`showBtn-${currPost.id}`).innerHTML = subSnap.size;
+
+        updateField(`posts/${currPost.id}`, 'likedCnt', subSnap.size);
       });
   });
-  document.querySelector(`#likeBtn-${currPost.id}`).removeEventListener('click', (e)=>{
+  document.querySelector(`#likeBtn-${currPost.id}`).onclick = (e)=>{
     likePost(currPost, userRef);
-  });
-  document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', (e)=>{
+  };
+  document.querySelector(`#likeBtn-${currPost.id}`).onclick =  (e)=>{
     unlikePost(currPost, userRef);
-  });
+  };
 }
 function unlikePost(currPost, userRef){  
+  if (DEBUG) console.log("currPost: ", currPost);
   const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
   query.doc(userRef.id).delete().then((snapshot) => {
       query.get().then(subSnap=>{
-        console.log(subSnap.size);
+        if(DEBUG) console.log(subSnap.size);
         document.getElementById(`showBtn-${currPost.id}`).innerHTML = subSnap.size;
+
+        updateField(`posts/${currPost.id}`, 'likedCnt', subSnap.size);
       });
   });
-  document.querySelector(`#likeBtn-${currPost.id}`).removeEventListener('click', (e)=>{
+  document.querySelector(`#likeBtn-${currPost.id}`).onclick = (e)=>{
     unlikePost(currPost, userRef);
-  });
-  document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', (e)=>{
+  };
+  document.querySelector(`#likeBtn-${currPost.id}`).onclick = (e)=>{
     likePost(currPost, userRef);
-  });
+  };;
 }
 
 
