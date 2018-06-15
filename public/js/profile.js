@@ -1,14 +1,61 @@
 const editProfile = document.getElementById('editProfile');
 const editDescription = document.getElementById('editDescription');
 
-editProfile.addEventListener('click', editProfileForm);
-editDescription.addEventListener('click', editDescriptionForm);
-
-function getUserName(){
-    firestore.collection('users').doc(firebase.auth().currentUser.uid).get().then(function(snapshot){
-        console.log(snapshot.data().name);
+// This is for set UserName onAuth
+function setUserName(newName){
+    firebase.auth().currentUser.updateProfile({
+       displayName: newName
+    }).then(function() {
+        // Update successful.
+        firebase.auth().currentUser.name = newName;
+        console.log('ssuccessfully changed');
+    }).catch(function(error) {
+        // An error happened.
+        console.log('could not changed');
     });
 }
+
+// This is for get Username onAuth
+function getUserName(){
+    if(firebase.auth().currentUser.name != null){
+        return firebase.auth().currentUser.name;
+    }else{
+        console.log('Need to put name');
+    }
+}
+
+// This is for getting email
+function getUserEmail(){
+    return firebase.auth().currentUser.email;
+}
+
+// This is for getting uid
+function getUserUid(){
+    return firebase.auth().currentUser.uid;
+}
+
+// This is for setting name and title on firebase
+function setUserNameAndTitle(newName, newTitle){
+    let uid = getUserUid();
+    let userInfo = firestore.collection('users').doc(uid);
+    userInfo.update({
+        name : `${(newName != null && newName != "" ? newName: name)}`,
+        title: `${(newTitle != null && newTitle != "" ? newTitle: title)}`    
+    });
+}
+
+// This is for setting description on firebase
+function setUserDescription(newDescription) {
+    let uid = getUserUid();
+    let userInfo = firestore.collection('users').doc(uid);
+    userInfo.update({
+        description: `${(newDescription != null && newDescription != "" ? newDescription: description)}`
+    });
+}
+
+// EventListeners
+editProfile.addEventListener('click', editProfileForm);
+editDescription.addEventListener('click', editDescriptionForm);
 
 function closeMui() {
   mui.overlay('off');
@@ -29,11 +76,11 @@ function editProfileForm() {
           <form class="mui-form">
             <legend>Edit Profile</legend>
             <div class='mui-textfield mui-textfield--float-label'>
-              <input type='text'>
+              <input type='text' id='name'>
               <label>Name</label>
             </div>
             <div class='mui-textfield mui-textfield--float-label'>
-              <input type='text'>
+              <input type='text' id='title'>
               <label>Title</label>
             </div>
           </form>
@@ -47,8 +94,14 @@ function editProfileForm() {
   // show modal
   mui.overlay('on', modalEl);
 
-  document.getElementById('btnPostCancel').addEventListener('click', closeMui);
-  document.getElementById('submitBtn').addEventListener('click', submitEdit);
+    document.getElementById('btnPostCancel').addEventListener('click', closeMui);
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        // Set Name on Firebase.auth()
+        setUserName(document.getElementById('name').value);
+        // Set Name and title on Firebase Field
+        setUserNameAndTitle(document.getElementById('name').value, document.getElementById('title').value);
+        mui.overlay('off', editDescription);
+    });
 }
 
 function editDescriptionForm() {
@@ -66,7 +119,7 @@ function editDescriptionForm() {
         <form class="mui-form">
           <legend>Edit Description</legend>
           <div class='mui-textfield mui-textfield--float-label'>
-          <textarea></textarea>
+          <textarea id = 'description'></textarea>
           <label>Tell us about yourself</label>
           </div>
         </form>
@@ -80,7 +133,10 @@ function editDescriptionForm() {
   mui.overlay('on', modalEl);
 
   document.getElementById('btnPostCancel').addEventListener('click', closeMui);
-  document.getElementById('submitBtn').addEventListener('click', submitEdit);
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    setUserDescription(document.getElementById('description').value);
+    mui.overlay('off', editProfile);
+  });
 }
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
