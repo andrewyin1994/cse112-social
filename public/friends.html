@@ -119,7 +119,15 @@
       <div class="mui-tabs__pane" id="pane-justified-3"></div>
       <br><br>
       <!-- Friend component sample-->
-      <div class="users-container" id="find-container"></div>
+      <div class="users-container" id="find-container">
+        <form class="mui-form" id="search-form">
+          <div class="mui-textfield">
+            <input id="search-input" type="text" placeholder="Search By User Email">
+          </div>
+          <button type="submit" id="search-submit" class="mui-btn mui-btn--raised">Search</button>
+        </form>
+        <div id="qresult"></div>
+      </div>
       <div class="users-container" id="flwing-container"></div>
       <div class="users-container" id="flwer-container"></div>
 
