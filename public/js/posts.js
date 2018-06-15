@@ -336,12 +336,9 @@ function showPost(userRef, followingRefs){
     postList.forEach(function(post){
       console.log(post[Object.keys(post)[0]].createDate);
       const currPost = post[Object.keys(post)[0]];
-      let likeBtn = document.querySelector(`#likeBtn-${currPost.id}`)
+      let likeBtn = document.querySelector(`#likeBtn-${currPost.id}`);
       likeBtn.addEventListener('click', (e)=>{
         likePost(currPost, userRef);
-        likeBtn.addEventListener('click', (e)=>{
-          unlikePost(currPost, userRef);
-        });
       });
     });
   });
@@ -359,6 +356,12 @@ function likePost(currPost, userRef){
         document.getElementById(`showBtn-${currPost.id}`).innerHTML = subSnap.size;
       });
   });
+  document.querySelector(`#likeBtn-${currPost.id}`).removeEventListener('click', (e)=>{
+    likePost(currPost, userRef);
+  });
+  document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', (e)=>{
+    unlikePost(currPost, userRef);
+  });
 }
 function unlikePost(currPost, userRef){  
   const query = firestore.doc(`posts/${currPost.id}`).collection('likedBy');
@@ -367,6 +370,12 @@ function unlikePost(currPost, userRef){
         console.log(subSnap.size);
         document.getElementById(`showBtn-${currPost.id}`).innerHTML = subSnap.size;
       });
+  });
+  document.querySelector(`#likeBtn-${currPost.id}`).removeEventListener('click', (e)=>{
+    unlikePost(currPost, userRef);
+  });
+  document.querySelector(`#likeBtn-${currPost.id}`).addEventListener('click', (e)=>{
+    likePost(currPost, userRef);
   });
 }
 
