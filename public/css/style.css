@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
 #login {
 
   background: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
@@ -11,8 +13,18 @@
   height: 15em;
   width: 15em;
   align-content: center;
-  padding-left: 4em;
+  padding-left: 4.4em;
 }
+
+ /**
+  * Homepage header
+  */
+  .loginHeader {
+    text-align: center;
+    margin: 0;
+    font-family: 'Karla', sans-serif;
+    font-size: 3.75em;
+ }
 
 @media screen and (max-width: 991px) {
   .icon {
