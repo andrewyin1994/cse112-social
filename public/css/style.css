@@ -12,8 +12,10 @@
 .icon {
   height: 15em;
   width: 15em;
-  align-content: center;
-  padding-left: 4.4em;
+  /* align-content: center; */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
  /**
