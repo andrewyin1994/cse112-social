@@ -34,17 +34,26 @@ function getUserUid(){
     return firebase.auth().currentUser.uid;
 }
 
-// This is for setting name, title, and description on the firebase
-function setUserUpdate(newName, newTitle, newDescription){
+// This is for setting name and title on firebase
+function setUserNameAndTitle(newName, newTitle){
     let uid = getUserUid();
     let userInfo = firestore.collection('users').doc(uid);
     userInfo.update({
         name : `${(newName != null && newName != "" ? newName: name)}`,
-        title: `${(newTitle != null && newTitle != "" ? newTitle: title)}`,
-        description: `${(newDescription != null && newDescription != "" ? newDescription: description)}`,
+        title: `${(newTitle != null && newTitle != "" ? newTitle: title)}`    
     });
 }
 
+// This is for setting description on firebase
+function setUserDescription(newDescription) {
+    let uid = getUserUid();
+    let userInfo = firestore.collection('users').doc(uid);
+    userInfo.update({
+        description: `${(newDescription != null && newDescription != "" ? newDescription: description)}`
+    });
+}
+
+// EventListeners
 editProfile.addEventListener('click', editProfileForm);
 editDescription.addEventListener('click', editDescriptionForm);
 
@@ -67,11 +76,11 @@ function editProfileForm() {
           <form class="mui-form">
             <legend>Edit Profile</legend>
             <div class='mui-textfield mui-textfield--float-label'>
-              <input type='text'>
+              <input type='text' id='name'>
               <label>Name</label>
             </div>
             <div class='mui-textfield mui-textfield--float-label'>
-              <input type='text'>
+              <input type='text' id='title'>
               <label>Title</label>
             </div>
           </form>
@@ -85,7 +94,13 @@ function editProfileForm() {
     mui.overlay('on', modalEl);
 
     document.getElementById('btnPostCancel').addEventListener('click', closeMui);
-    document.getElementById('submitBtn').addEventListener('click', submitEdit);
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        // Set Name on Firebase.auth()
+        setUserName(document.getElementById('name').value);
+        // Set Name and title on Firebase Field
+        setUserNameAndTitle(document.getElementById('name').value, document.getElementById('title').value);
+        mui.overlay('off', editDescription);
+    });
 }
 
 function editDescriptionForm() {
@@ -103,7 +118,7 @@ function editDescriptionForm() {
         <form class="mui-form">
           <legend>Edit Description</legend>
           <div class='mui-textfield mui-textfield--float-label'>
-          <textarea></textarea>
+          <textarea id = 'description'></textarea>
           <label>Tell us about yourself</label>
           </div>
         </form>
@@ -117,7 +132,10 @@ function editDescriptionForm() {
   mui.overlay('on', modalEl);
 
   document.getElementById('btnPostCancel').addEventListener('click', closeMui);
-  document.getElementById('submitBtn').addEventListener('click', submitEdit);
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    setUserDescription(document.getElementById('description').value);
+    mui.overlay('off', editProfile);
+  });
 }
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
