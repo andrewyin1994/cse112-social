@@ -32,7 +32,7 @@ function activatePosting() {
         <button id ="uploadedImg">
         <img id="default" src="images/camera-icon.png" width="35" height="35">
         </button>
-        <img id="uploadImg"
+        <img id="uploadImg">
         </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="postBtn" "style="float: right">POST</button>
@@ -56,7 +56,6 @@ function activatePosting() {
     uploadFile();
   });
 }
-
 
 function setButtonStatus(sender, target) {
   if (sender.value.length == 0)
