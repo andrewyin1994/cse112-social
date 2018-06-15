@@ -15,5 +15,5 @@ try {
 }
 
 const firestore = firebase.firestore();
-const fbauth = firebase.auth
-const fbref = firebase.database().ref()
+const fbauth = firebase.auth;
+const fbref = firebase.database().ref();

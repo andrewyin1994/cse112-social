@@ -1,6 +1,5 @@
 //homepage js
 
-
 // Post Modal event listener
 postModal.addEventListener('click', activatePosting);
 

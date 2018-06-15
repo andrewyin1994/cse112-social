@@ -1,8 +1,20 @@
 module.exports = function(config) {
     config.set({
       frameworks: ['mocha', 'chai'],
-      files: ['public/js/*.js', 'public/test/*.js'],
-      exclude: ['public/js/app.js', 'public/js/*.config.js', 'public/js/*.min.js'],
+      plugins: [
+        'karma-mocha',
+        'karma-chai',
+        'karma-firebase',
+        'karma-chrome-launcher'
+      ],
+      files: [
+        'public/js/firebase.js',
+        'public/js/firebase.config.js',
+        'public/js/mui.min.js',
+        'public/js/authorize.js',
+        'tests/*.js'
+      ],
+      exclude: ['public/js/app.js'],
       reporters: ['progress'],
       port: 9876,  // karma web server port
       colors: true,

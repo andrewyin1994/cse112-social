@@ -1,63 +1,68 @@
-const txtEmail = document.getElementById('username');
-const txtPassword = document.getElementById('password');
-const btnLogin = document.getElementById('btnLogin');
-const btnSignUpForm = document.getElementById('btnSignUpForm');
-const btnLogout = document.getElementById('btnLogout');
-const googleLogin = document.getElementById('googleLogin');
-const testInsert = document.getElementById('testInsert');
-
-const follow = document.getElementById('follow');
-
 const DEBUG = true;
 
-// Login button
-btnLogin.addEventListener('click', e => {
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
-  const auth = firebase.auth();
+document.addEventListener('DOMContentLoaded', () => {
+  const txtEmail = document.getElementById('username');
+  const txtPassword = document.getElementById('password');
+  const btnLogin = document.getElementById('btnLogin');
+  const btnSignUpForm = document.getElementById('btnSignUpForm');
+  // const btnLogout = document.getElementById('btnLogout');
+  const googleLogin = document.getElementById('googleLogin');
+  // const testInsert = document.getElementById('testInsert');
+  // const follow = document.getElementById('follow');
 
-  const promise = auth.signInWithEmailAndPassword(email, pass);
-  promise.catch(e => console.log(e.message));
+  // Login button
+  btnLogin.addEventListener('click', e => {
+    const email = txtEmail.value;
+    const pass = txtPassword.value;
+    const auth = firebase.auth();
 
-  // testInsert.innerHTML = "login works";
-});
+    const promise = auth.signInWithEmailAndPassword(email, pass);
+    promise.catch(e => console.log(e.message));
 
-// Google Login function
-googleLogin.addEventListener('click', e => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
+    // testInsert.innerHTML = "login works";
   });
-});
 
-// Activate sign-up function
-btnSignUpForm.addEventListener('click', activateSignUp);
+  // Google Login function
+  googleLogin.addEventListener('click', e => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
 
-btnLogout.addEventListener('click', function () {
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
-  const auth = firebase.auth();
-  const currentUser = firebase.auth().currentUser;
-  firebase.auth().signOut().then(function () {
-    // Sign-out successful.
-    console.log(currentUser + "signed out");
+      console.log(token, user);
+      
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
 
-    // testInsert.innerHTML = "sign out works";
-  }).catch(function (error) {
-    console.log(error.message);
+      if(DEBUG) console.log(errorCode, errorMessage, email, credential);
+    });
   });
+
+  // Activate sign-up function
+  btnSignUpForm.addEventListener('click', activateSignUp);
+
+  // btnLogout.addEventListener('click', function () {
+  //   const email = txtEmail.value;
+  //   const pass = txtPassword.value;
+  //   const auth = firebase.auth();
+  //   const currentUser = firebase.auth().currentUser;
+  //   firebase.auth().signOut().then(function () {
+  //     // Sign-out successful.
+  //     console.log(currentUser + "signed out");
+
+  //     // testInsert.innerHTML = "sign out works";
+  //   }).catch(function (error) {
+  //     console.log(error.message);
+  //   });
+  // });
 });
 
 // Cancel Function
