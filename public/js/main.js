@@ -32,7 +32,7 @@ function activatePosting() {
         <button id ="uploadedImg">
         <img id="default" src="images/camera-icon.png" width="35" height="35">
         </button>
-        <img id="uploadImg"
+        <img id="uploadImg">
         </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
         <button class="mui-btn mui-btn--primary" disabled id="postBtn" "style="float: right">POST</button>
@@ -57,25 +57,12 @@ function activatePosting() {
   });
 }
 
-
 function setButtonStatus(sender, target) {
   if (sender.value.length == 0)
     document.getElementById(target).disabled = true;
   else
     document.getElementById(target).disabled = false;
 }
-
-// function addPost(userRef, pt) {
-//   console.log('posting');
-//   const postText = document.getElementById('postText').value;
-//   let payload = new Post(userRef, postText);
-//   if (DEBUG) console.log(payload);
-//     firestore.collection('posts').add(payload.post);
-// }
-// var postBtn = document.getElementById('postBtn');
-// function postFunc(postBtn, pt) {
-//   postBtn.onclick = addPost(userRef, pt);
-// }
 
 document.getElementById('btnLogout').addEventListener('click', function () {
   const currentUser = firebase.auth().currentUser;
