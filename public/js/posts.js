@@ -22,7 +22,9 @@ class Post {
       favorRefs: [],
       imageUrl: "",
       editedFlag: false,
-      updateTime: new Date().getTime()
+      updateTime: new Date().getTime(),
+      likedBy:{},
+      likedCnt:0
     }
   }
 }
@@ -258,6 +260,9 @@ function postMaker(prop){
   <p id="${prop.id}">${prop.postText}</p>
   <p style="text-align:right;font-size:75%">${currTime}</p>
   <button class="mui-btn mui-btn--accent" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
+  <button class="mui-btn mui-btn--accent" id="likeBtn" onclick="editTest('${prop.id}')">Like</button>
+  <button class="mui-btn mui-btn--accent" id="showBtn" onclick="editTest('${prop.id}')">${prop.likedCnt}</button>
+
   </div>
 </div>`;
 }
@@ -322,13 +327,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
   // checks if user exists
   if (firebaseUser) {
-
     // Firebase doesn't check userRef validity
     userRef = firestore.doc(`users/${firebaseUser.uid}`);
     // console.log('uid:', userRef.id);
     // Get data from this user
     userRef.get().then(snapshot=>{
-
       followingRefs = snapshot.data().followingRefs;
       followerRefs = snapshot.data().followerRefs;
       initPage(userRef,followingRefs,followerRefs);
@@ -353,4 +356,3 @@ function deleteTest(userRef) {
       deletePost('test');
   });
 }
-
