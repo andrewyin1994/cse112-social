@@ -23,7 +23,8 @@ class Post {
       imageUrl: "",
       editedFlag: false,
       updateTime: new Date().getTime(),
-      likedCnt:0
+      likedCnt:0,
+      name: `${userRef.name}`
     }
   }
 }
@@ -33,6 +34,8 @@ class Post {
  * @param {*} userRef ref to current logged in user
  */
 function addPost(userRef) {
+  console.log('user', userRef, userRef.name);
+
   const postText = document.getElementById('postText').value;
     
   let payload = new Post(userRef, postText);
@@ -287,7 +290,7 @@ function postMaker(prop){
       <button id="trashcanBtn" style="float: right" style="border-radius: 50%">
         <img id="trashcan" src="images/trashcan.png" width="40" height="40">
       </button>
-      <p class = "mui-col-md-offset-1">User Name</p>
+      <p class = "mui-col-md-offset-1">${prop.name}</p>
       <p class = "mui-col-md-offset-1" style="font-size:75%">${currTime}</p>
       <br>
     </div>
