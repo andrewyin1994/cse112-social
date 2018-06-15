@@ -73,7 +73,7 @@ function editProfileForm() {
     // initialize modal element
     var modalEl = document.createElement('div');
     modalEl.style.width = '40em';
-    modalEl.style.height = '30em';
+    modalEl.style.height = '25em';
     modalEl.style.margin = '10em auto';
     modalEl.style.backgroundColor = '#fff';
   
