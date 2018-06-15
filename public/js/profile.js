@@ -4,6 +4,19 @@ const profileName = document.getElementById('profileName');
 const profileTitle = document.getElementById('profileTitle');
 const profileDesc = document.getElementById('profileDesc')
 
+// This makes you log-out from profile page
+document.getElementById('btnLogout').addEventListener('click', function () {
+    const currentUser = firebase.auth().currentUser;
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+      console.log(currentUser + "signed out");
+  
+      window.location.href = "index.html";
+    }, function (error) {
+      // An error happened.
+    });
+});
+
 // This is for set UserName onAuth
 function setUserName(newName){
     firebase.auth().currentUser.updateProfile({
@@ -165,15 +178,3 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   }
 });
 
-// This makes you log-out from profile page
-document.getElementById('btnLogout').addEventListener('click', function () {
-    const currentUser = firebase.auth().currentUser;
-    firebase.auth().signOut().then(function () {
-      // Sign-out successful.
-      console.log(currentUser + "signed out");
-  
-      window.location.href = "index.html";
-    }, function (error) {
-      // An error happened.
-    });
-  });
