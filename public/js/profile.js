@@ -2,6 +2,7 @@ const editProfile = document.getElementById('editProfile');
 const editDescription = document.getElementById('editDescription');
 const profileName = document.getElementById('profileName');
 const profileTitle = document.getElementById('profileTitle');
+const profileDesc = document.getElementById('profileDesc')
 
 // This is for set UserName onAuth
 function setUserName(newName){
@@ -55,6 +56,8 @@ function setUserDescription(newDescription) {
     let userInfo = firestore.collection('users').doc(uid);
     userInfo.update({
         description: `${(newDescription != null && newDescription != "" ? newDescription: description)}`
+    }).then(() => {
+      profileDesc.innerHTML = newDescription;
     });
 }
 
@@ -153,6 +156,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
       console.log('user', user.data());
       profileName.innerHTML = user.data().name;
       profileTitle.innerHTML = user.data().title;
+
     });
   }
 });
