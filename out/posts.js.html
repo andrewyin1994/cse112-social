@@ -1,4 +1,32 @@
-const postBtn = document.getElementById('postBtn');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: posts.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: posts.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const postBtn = document.getElementById('postBtn');
 const testInsert = document.getElementById('testInsert');
 const uploadBtn = document.getElementById('uploadBtn');
 const testBtn = document.getElementById('testBtn');
@@ -22,9 +50,7 @@ class Post {
       favorRefs: [],
       imageUrl: "",
       editedFlag: false,
-      updateTime: new Date().getTime(),
-      likedBy:{},
-      likedCnt:0
+      updateTime: new Date().getTime()
     }
   }
 }
@@ -125,25 +151,25 @@ function editTest(postIdV) {
   let postIdVal = (postIdV != null) ? postIdV : "";
   console.log("postId: ", postIdV,"postIdVal: ", postIdVal)
 
-  modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` +
-    `<form class='mui-form'>
-  <legend>Edit Post</legend>
-  <div class='mui-textfield mui-textfield--float-label'>
-    <input type='text' name='postIdVal' id='postIdVal' value=${postIdVal}>
-    <label for='postIdVal'>postId</label>
-  </div>
+  modalEl.innerHTML = `&lt;div class='mui-container-fluid' style='padding-top: 3em;'>` + `&lt;div class='mui-row'>` + `&lt;div class='mui-col-md-8 mui-col-md-offset-2'>` +
+    `&lt;form class='mui-form'>
+  &lt;legend>Edit Post&lt;/legend>
+  &lt;div class='mui-textfield mui-textfield--float-label'>
+    &lt;input type='text' name='postIdVal' id='postIdVal' value=${postIdVal}>
+    &lt;label for='postIdVal'>postId&lt;/label>
+  &lt;/div>
 
-  <div class='mui-textfield mui-textfield--float-label'>
-  <input type='text' name='editText' id='editText'>
-  <label for='editText'>text</label>
-  </div>
+  &lt;div class='mui-textfield mui-textfield--float-label'>
+  &lt;input type='text' name='editText' id='editText'>
+  &lt;label for='editText'>text&lt;/label>
+  &lt;/div>
 
-</form> 
+&lt;/form> 
 
-<button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='editPost(document.getElementById("postIdVal").value, document.getElementById("editText").value)'>Submit</button>
-<p id="postUpdateStatus"></p>
-</div>
-</div></div>`;
+&lt;button type='submit' class='mui-btn mui-btn--raised' id='btnSignUp' onclick='editPost(document.getElementById("postIdVal").value, document.getElementById("editText").value)'>Submit&lt;/button>
+&lt;p id="postUpdateStatus">&lt;/p>
+&lt;/div>
+&lt;/div>&lt;/div>`;
 
   // show modal
   mui.overlay('on', modalEl);
@@ -152,7 +178,7 @@ function editTest(postIdV) {
 /**
  * Get all posts by userRef and users that userRef is following
  * @param {Reference} userRef ref to current logged in user
- * @param {Array<Reference>} followingRefs list of refs to followings
+ * @param {Array&lt;Reference>} followingRefs list of refs to followings
  * @returns {Promise} promise.then(postsContents=>{...})
  */
 function getPostsFeedByUser(userRef, followingRefs){
@@ -255,16 +281,13 @@ function registerPageHandlers(userRef) {
 function postMaker(prop){
   const currTime = (prop.editedFlag)?`${timeago().format(prop.updateTime)} (edited)`:`${timeago().format(prop.createDate)}`;
   console.log("prop_id:", prop.id);
-  return `<div class="mui-row">
-  <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-  <p id="${prop.id}">${prop.postText}</p>
-  <p style="text-align:right;font-size:75%">${currTime}</p>
-  <button class="mui-btn mui-btn--accent" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
-  <button class="mui-btn mui-btn--accent" id="likeBtn" onclick="editTest('${prop.id}')">Like</button>
-  <button class="mui-btn mui-btn--accent" id="showBtn" onclick="editTest('${prop.id}')">${prop.likedCnt}</button>
-
-  </div>
-</div>`;
+  return `&lt;div class="mui-row">
+  &lt;div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+  &lt;p id="${prop.id}">${prop.postText}&lt;/p>
+  &lt;p style="text-align:right;font-size:75%">${currTime}&lt;/p>
+  &lt;button class="mui-btn mui-btn--accent" id="editBtn" onclick="editTest('${prop.id}')">Edit&lt;/button>
+  &lt;/div>
+&lt;/div>`;
 }
 
 //tests basic functionality for showing posts
@@ -283,7 +306,7 @@ function showPostTest(){
 function showPost(userRef, followingRefs){
   // if (DEBUG) console.log('uid', userRef.id);
   // if (DEBUG) console.log(followingRefs);
-  let refListReq = (followingRefs != null && followingRefs.length > 0) ? getPostsFeedByUser(userRef, followingRefs)
+  let refListReq = (followingRefs != null &amp;&amp; followingRefs.length > 0) ? getPostsFeedByUser(userRef, followingRefs)
                                               :getPostsByUserRef(userRef);
   refListReq.then(function(postList){
     let sortedFeed = orderPostFeedByDate(postList);
@@ -302,8 +325,8 @@ function showPost(userRef, followingRefs){
  * A callback function that handles all data returned by firestore about
  * current user
  * @param {Reference} userRef reference to the current logged in user
- * @param {Array<Reference>} followingRefs list of refs to followings
- * @param {Array<Reference>} followerRefs list of refs to followers
+ * @param {Array&lt;Reference>} followingRefs list of refs to followings
+ * @param {Array&lt;Reference>} followerRefs list of refs to followers
  */
 function initPage(userRef, followingRefs, followerRefs){
 
@@ -359,3 +382,26 @@ function deleteTest(userRef) {
   });
 }
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Post.html">Post</a></li><li><a href="Roster.html">Roster</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addFollowingById">addFollowingById</a></li><li><a href="global.html#addFollowingByRefToFB">addFollowingByRefToFB</a></li><li><a href="global.html#addPost">addPost</a></li><li><a href="global.html#createUserDOM">createUserDOM</a></li><li><a href="global.html#deletePost">deletePost</a></li><li><a href="global.html#delFollowerById">delFollowerById</a></li><li><a href="global.html#delFollowerByIdxFromFB">delFollowerByIdxFromFB</a></li><li><a href="global.html#delFollowingById">delFollowingById</a></li><li><a href="global.html#delFollowingByIdxFromFB">delFollowingByIdxFromFB</a></li><li><a href="global.html#editPost">editPost</a></li><li><a href="global.html#getPostsByUserRef">getPostsByUserRef</a></li><li><a href="global.html#getPostsFeedByUser">getPostsFeedByUser</a></li><li><a href="global.html#getRcmdUsersInfo">getRcmdUsersInfo</a></li><li><a href="global.html#getUserDOMsByUid">getUserDOMsByUid</a></li><li><a href="global.html#getUserInfoById">getUserInfoById</a></li><li><a href="global.html#getUserInfoByRef">getUserInfoByRef</a></li><li><a href="global.html#getUsersInfoByRefs">getUsersInfoByRefs</a></li><li><a href="global.html#initPage">initPage</a></li><li><a href="global.html#refsHasId">refsHasId</a></li><li><a href="global.html#registerPageHandlers">registerPageHandlers</a></li><li><a href="global.html#uploadFile">uploadFile</a></li><li><a href="global.html#userRef">userRef</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jun 14 2018 17:07:36 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
