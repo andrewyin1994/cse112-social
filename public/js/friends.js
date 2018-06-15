@@ -99,7 +99,7 @@ function delFollowingById(selfRef, followingRefs, targetFollowingId) {
     let delIdx = -1
     for (let i = 0; i < followingRefs.length; i++) {
       if (followingRefs[i].id === targetFollowingId) {
-        delIdx = followingRefs[i].id
+        delIdx = i
       }
     }
 
@@ -146,7 +146,7 @@ function delFollowerById(selfRef, followerRefs, targetFollowerId) {
     let delIdx = -1
     for (let i = 0; i < followerRefs.length; i++) {
       if (followerRefs[i].id === targetFollowerId) {
-        delIdx = followerRefs[i].id
+        delIdx = i
       }
     }
 
@@ -318,7 +318,7 @@ function createUserDOM(userInfo, following) {
 
 
 function followBtnHandler(e) {
-  let btnElement = e.currentTarget
+
   if (DEBUG)
     console.log(followingRefs)
   addFollowingById(userRef, followingRefs, this.uid).then((addedUserInfo) => {
@@ -328,15 +328,17 @@ function followBtnHandler(e) {
       setBtnTextFollowed(this.uid, document)
       if(!existsUserDOMIn(addedUserInfo, flwingCtnr)) addUserTileTo(addedUserInfo,true, flwingCtnr)
 
-      btnElement.onclick = unfollowBtnHandler.bind({
-        uid: this.uid // continue to pass the target user id around
+      getUserDOMsByUid(this.uid,document).forEach(dom=>{
+        dom.querySelector('button').onclick=unfollowBtnHandler.bind({
+          uid: this.uid // continue to pass the target user id around
+        })
       })
     }
   })
 }
 
 function unfollowBtnHandler(e) {
-  let btnElement = e.currentTarget
+
   if (DEBUG)
     console.log(followingRefs)
   delFollowingById(userRef, followingRefs, this.uid).then((deletedUserInfo) => {
@@ -344,8 +346,10 @@ function unfollowBtnHandler(e) {
       if (DEBUG)
         console.log(followingRefs)
 
-      btnElement.onclick = followBtnHandler.bind({
-        uid: this.uid // continue to pass the target user id around
+      getUserDOMsByUid(this.uid,document).forEach(dom=>{
+        dom.querySelector('button').onclick = followBtnHandler.bind({
+          uid: this.uid // continue to pass the target user id around
+        })
       })
 
       setBtnTextUnfollowed(this.uid, document)
@@ -354,16 +358,16 @@ function unfollowBtnHandler(e) {
       if(existsUserDOMIn(deletedUserInfo, flwingCtnr)) delUserTileFrom(deletedUserInfo, flwingCtnr)
 
       // replace existing dom in follower container
-      if(existsUserDOMIn(deletedUserInfo, flwerCtnr)) {
-        delUserTileFrom(deletedUserInfo, flwerCtnr)
-        addUserTileTo(deletedUserInfo, false, flwerCtnr)
-      }
+      // if(existsUserDOMIn(deletedUserInfo, flwerCtnr)) {
+      //   delUserTileFrom(deletedUserInfo, flwerCtnr)
+      //   addUserTileTo(deletedUserInfo, false, flwerCtnr)
+      // }
 
       // replace existing dom in query result container
-      if(existsUserDOMIn(deletedUserInfo, qresultCtnr)) {
-        delUserTileFrom(deletedUserInfo, qresultCtnr)
-        addUserTileTo(deletedUserInfo, false, qresultCtnr)
-      }
+      // if(existsUserDOMIn(deletedUserInfo, qresultCtnr)) {
+      //   delUserTileFrom(deletedUserInfo, qresultCtnr)
+      //   addUserTileTo(deletedUserInfo, false, qresultCtnr)
+      // }
     }
   })
 }
