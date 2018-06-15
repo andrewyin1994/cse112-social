@@ -259,9 +259,9 @@ function postMaker(prop){
   <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
   <p id="${prop.id}">${prop.postText}</p>
   <p style="text-align:right;font-size:75%">${currTime}</p>
-  <button class="mui-btn mui-btn--accent" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
-  <button class="mui-btn mui-btn--accent" id="likeBtn" onclick="editTest('${prop.id}')">Like</button>
-  <button class="mui-btn mui-btn--accent" id="showBtn" onclick="editTest('${prop.id}')">${prop.likedCnt}</button>
+  <button class="mui-btn mui-btn--raised mui-btn--primary" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
+  <button class="mui-btn mui-btn--raised mui-btn--primary" id="likeBtn" onclick="editTest('${prop.id}')">Like</button>
+  <button class="mui-btn mui-btn--raised mui-btn--primary" id="showBtn" onclick="editTest('${prop.id}')">${prop.likedCnt}</button>
 
   </div>
 </div>`;
