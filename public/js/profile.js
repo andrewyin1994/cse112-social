@@ -156,7 +156,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
       console.log('user', user.data());
       profileName.innerHTML = user.data().name;
       profileTitle.innerHTML = user.data().title;
-
+      profileDesc.innerHTML = user.data().description;
     });
   }
 });
