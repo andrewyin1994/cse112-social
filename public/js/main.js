@@ -1,91 +1,11 @@
-// import PostComponent from '../js/PostComponent.js';
-const DEBUG = true;
+//homepage js
 
-//Getting IDs from homepage.html
-const postModal = document.getElementById('postModal')
-const post = document.getElementById('post');
-
-/**
- * Post class, what will be added to Firestore
- * @param {*} userRef ref to current logged in user
- * @param {*} postText text that user wishes to post
- */
-class Post {
-  constructor(userRef, postText) {
-    this.post = {
-      ownRef: userRef,
-      ownerId: userRef.id,
-      postText: postText,
-      createDate: new Date().getTime(),
-      favorRefs: [],
-      imageUrl: []
-    }
-  }
-}
-
-// homepage js
-jQuery(function ($) {
-  var $bodyEl = $('body'),
-    $sidedrawerEl = $('#sidedrawer');
-
-  function showSidedrawer() {
-    // show overlay
-    var options = {
-      onclose: function () {
-        $sidedrawerEl
-          .removeClass('active')
-          .appendTo(document.body);
-      }
-    };
-
-    var $overlayEl = $(mui.overlay('on', options));
-
-    // show element
-    $sidedrawerEl.appendTo($overlayEl);
-    setTimeout(function () {
-      $sidedrawerEl.addClass('active');
-    }, 20);
-  }
-
-  function abc(prop) {
-    return `<div class="mui-row">
-    <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-    <p>${prop.content}</p>
-    </div>
-  </div>`;
-  }
-
-  $('#post-container').append(abc({ content: 'first' }))
-
-  function hideSidedrawer() {
-    $bodyEl.toggleClass('hide-sidedrawer');
-  }
-
-  $('.js-show-sidedrawer').on('click', showSidedrawer);
-  $('.js-hide-sidedrawer').on('click', hideSidedrawer);
-
-  var $titleEls = $('strong', $sidedrawerEl);
-
-  $titleEls
-    .next()
-    .hide();
-
-  $titleEls.on('click', function () {
-    $(this)
-      .next()
-      .slideToggle(200);
-  });
-});
-
-function cancelFunc() {
-  mui.overlay('off');
-}
 
 // Post Modal event listener
 postModal.addEventListener('click', activatePosting);
 
 // Activate post modal
-function activatePosting(){
+function activatePosting() {
   var modalEl = document.createElement('div');
   modalEl.style.width = '800px';
   modalEl.style.height = '500px';
@@ -104,21 +24,39 @@ function activatePosting(){
             </td>
           </table>
           <div class="mui-textfield mui-textfield--float-label">
-          <textarea type="text" name="post" id="postText" onkeyup="setButtonStatus(this, 'btnPost')"></textarea>
+          <textarea type="text" name="post" id="postText" onkeyup="setButtonStatus(this, 'postBtn')"></textarea>
           </div>
         </form>
         <div>
+        <input name="myFile" type="file" id="uploadControl">
+        <button id ="uploadedImg">
         <img id="default" src="images/camera-icon.png" width="35" height="35">
+        </button>
+        <img id="uploadImg"
         </div>
         <button class="mui-btn mui-btn--primary" id="btnPostCancel" onclick="mui.overlay('off')">CANCEL</button>
-        <button class="mui-btn mui-btn--primary" disabled id="btnPost" onclick = "postFunc(postBtn, postText)"style="float: right">POST</button>
+        <button class="mui-btn mui-btn--primary" disabled id="postBtn" "style="float: right">POST</button>
       </div>
     </div>
   </div>`;
 
   // show modal
   mui.overlay('on', modalEl);
+
+  document.getElementById('postBtn').addEventListener('click', () => {
+    if(firebase.auth()) {
+      let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+      addPost(userRef);
+    }
+    mui.overlay('off', modalEl);
+    showPostTest();
+  });
+
+  document.getElementById("uploadedImg").addEventListener('click', function(){
+    uploadFile();
+  });
 }
+
 
 function setButtonStatus(sender, target) {
   if (sender.value.length == 0)
@@ -127,18 +65,17 @@ function setButtonStatus(sender, target) {
     document.getElementById(target).disabled = false;
 }
 
-function addPost(userRef, pt) {
-  console.log('posting');
-  const postText = document.getElementById('postText').value;
-  let payload = new Post(userRef, postText);
-  if (DEBUG) console.log(payload);
-    firestore.collection('posts').add(payload.post);
-}
-var postBtn = document.getElementById('btnPost');
-function postFunc(postBtn, pt) {
-  postBtn.onclick = addPost(userRef, pt);
-}
-
+// function addPost(userRef, pt) {
+//   console.log('posting');
+//   const postText = document.getElementById('postText').value;
+//   let payload = new Post(userRef, postText);
+//   if (DEBUG) console.log(payload);
+//     firestore.collection('posts').add(payload.post);
+// }
+// var postBtn = document.getElementById('postBtn');
+// function postFunc(postBtn, pt) {
+//   postBtn.onclick = addPost(userRef, pt);
+// }
 
 document.getElementById('btnLogout').addEventListener('click', function () {
   const currentUser = firebase.auth().currentUser;
@@ -154,5 +91,7 @@ document.getElementById('btnLogout').addEventListener('click', function () {
 
 // PRELOADER
 $(window).load(function () {
+  let ref = document.referrer;
+  console.log('ref', ref);
   $('.loader').fadeOut(2000);
 });
