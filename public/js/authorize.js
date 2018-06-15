@@ -22,6 +22,7 @@ btnLogin.addEventListener('click', e => {
   // testInsert.innerHTML = "login works";
 });
 
+// Google Login function
 googleLogin.addEventListener('click', e => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider).then(function(result) {
