@@ -322,13 +322,11 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
   // checks if user exists
   if (firebaseUser) {
-
     // Firebase doesn't check userRef validity
     userRef = firestore.doc(`users/${firebaseUser.uid}`);
     // console.log('uid:', userRef.id);
     // Get data from this user
     userRef.get().then(snapshot=>{
-
       followingRefs = snapshot.data().followingRefs;
       followerRefs = snapshot.data().followerRefs;
       initPage(userRef,followingRefs,followerRefs);
@@ -353,4 +351,3 @@ function deleteTest(userRef) {
       deletePost('test');
   });
 }
-
