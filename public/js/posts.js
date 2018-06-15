@@ -41,7 +41,7 @@ function addPost(userRef) {
   let payload = new Post(userRef, postText);
   
   const currImg = document.querySelector('#uploadImg').dataset.imgref;
-  if(currImg != null) payload.imageUrl = currImg;
+  if(currImg != "") payload.imageUrl = currImg;
 
   if (DEBUG) console.log("payload:", payload);
 
