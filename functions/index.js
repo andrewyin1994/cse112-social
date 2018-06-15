@@ -10,18 +10,18 @@ admin.initializeApp();
 // });
 
 class Friends {
-  constructor() {
+  constructor(user) {
     //firestore's set() needs an object to do so
     this.follow = {
       followerRefs: [],
       followingRefs: [],
       followerCount: 0,
       openToSearch: false,
-      name:"",
-      email:"",
-      city:"",
-      description:"",
-      avatarUrl:""
+      name: user.name,
+      email: user.email,
+      title: '',
+      description: '',
+      avatarUrl: ''
     }
   }
 }
@@ -29,7 +29,7 @@ class Friends {
 exports.onUserCreate = functions.auth.user().onCreate((user) => {
   console.log('User Created', user.uid);
   return new Promise((resolve,reject) => {
-    const friends = new Friends();
+    const friends = new Friends(user);
     // firestore.collection('users').doc(user.uid).set(  friends);
     return admin.firestore().collection('users').doc(user.uid)
       .set( friends.follow )
