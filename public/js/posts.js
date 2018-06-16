@@ -315,7 +315,7 @@ function postMaker(prop){
       <p class = "mui-col-md-offset-1" style="font-size:75%">${currTime}</p>
       <br>
     </div>
-  <img src="${prop.imageUrl}">
+  <img style="height: 20em; width: 15em;" src="${prop.imageUrl}">
   <p id="${prop.id}">${prop.postText}</p>
   
   <br>
