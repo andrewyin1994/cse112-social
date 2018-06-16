@@ -6,21 +6,26 @@ postModal.addEventListener('click', activatePosting);
 
 // Activate post modal
 function activatePosting() {
-  var modalEl = document.createElement('div');
-  modalEl.style.width = '800px';
-  modalEl.style.height = '500px';
-  modalEl.style.margin = '300px auto';
-  modalEl.innerHTML = 
-  `<div class="mui-container-fluid" id="post">
-    <div class="mui-row">
-      <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
-        <form class="mui-form">
-          <table class="mui-table--bordered">
+  const userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+  let userName;
+  userRef.get().then(snapshot => {
+    userName = snapshot.data().name;
+
+    var modalEl = document.createElement('div');
+    modalEl.style.width = '800px';
+    modalEl.style.height = '500px';
+    modalEl.style.margin = '300px auto';
+    modalEl.innerHTML =
+      `<div class="mui-container-fluid" id="post">
+      <div class="mui-row">
+        <div class="mui-col-md-6 mui-col-md-offset-3 mui-panel">
+          <form class="mui-form">
+            <table class="mui-table--bordered">
+              <td>
+                <img id="default" src="images/default-pic.png" width="35" height="35">
+              </td>
             <td>
-              <img id="default" src="images/default-pic.png" width="35" height="35">
-            </td>
-            <td>
-              <div>user name</div>
+              <div>${userName}</div>
             </td>
           </table>
           <div class="mui-textfield mui-textfield--float-label">
@@ -38,24 +43,27 @@ function activatePosting() {
     </div>
   </div>`;
 
-  // show modal
-  mui.overlay('on', modalEl);
+    // show modal
+    mui.overlay('on', modalEl);
 
-  document.getElementById('postBtn').addEventListener('click', () => {
-    if(firebase.auth()) {
-      let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
-      addPost(userRef);
-    }
-    mui.overlay('off', modalEl);
-    showPostTest();
+    document.getElementById('postBtn').addEventListener('click', () => {
+      if (firebase.auth()) {
+        let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+        addPost(userRef);
+      }
+      mui.overlay('off', modalEl);
+      showPostTest();
+    });
+
+    document.getElementById("uploadedImg").addEventListener('click', function () {
+      if (firebase.auth()) {
+        let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
+        uploadFile(userRef);
+      }
+    });
   });
 
-  document.getElementById("uploadedImg").addEventListener('click', function(){
-    if(firebase.auth()) {
-      let userRef = firestore.doc(`users/${firebase.auth().currentUser.uid}`);
-      uploadFile(userRef);
-    }
-  });
+
 }
 
 function setButtonStatus(sender, target) {
