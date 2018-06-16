@@ -52,14 +52,12 @@ function cancelFunc() {
 
 // Sign Up Function
 function submitFunc() {
-  const mname = document.getElementById('mname').value;
   const muser = document.getElementById('muser').value;
   const mpass = document.getElementById('mpass').value;
   const cpass = document.getElementById('cpass').value;
   const emailerr = document.getElementById('emailerr');
   const passerr = document.getElementById('passerr');
   const matcherr = document.getElementById('matcherr');
-  // const auth = firebase.auth();
 
   // clear any warning messages
   emailerr.innerHTML = passerr.innerHTML = matcherr.innerHTML = '';
@@ -71,18 +69,26 @@ function submitFunc() {
   else {
     firebase.auth().createUserWithEmailAndPassword(muser, mpass).then(
       function(currentUser) {
-        console.log(mname);
-        // Sign-up successful.
-        console.log(currentUser,  "signed Up");
-        // Set up the user's name
-        currentUser.name = mname;
-        console.log(currentUser.name);
+        /*const query = firestore.collections('users').doc(currentUser.uid);
+        query.update({
+          email: muser,
+          name : mname
+        }).then(
+          () => {
+            console.log('putting name successfully');
+          },(e) => { //fail
+            console.log('Error putting name: ', e);
+          });
+        currentUser.updateProfile({
+          displayName: mname
+        }).then(function() {
+          console.log('wanna do name thing');
+        }, function(error) {
+          console.log('error occured foor updateProfile', error);
+        });*/
         // close the dialog box upon successful sign-up
         mui.overlay('off');
-
-        // testInsert.innerHTML = "sign up works";
-      },
-      function (error) {
+      },function (error) {
         let errorCode = error.code;
         let errorMessage = error.message;
 
@@ -105,7 +111,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log('fbUser', firebaseUser, '.');
     // testInsert.innerHTML = "signed in as: " + firebaseUser.email;
     if(firebaseUser.metadata.a === firebaseUser.metadata.b) {
-      //window.location.href = 'profile.html';
+      window.location.href = 'profile.html';
     }
     else {
       window.location.href = "homepage.html";
@@ -115,6 +121,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   }
 });
 
+// Button listener for 
 btnLogout.addEventListener('click', function () {
   const email = txtEmail.value;
   const pass = txtPassword.value;
@@ -137,19 +144,13 @@ function activateSignUp() {
   // initialize modal element
   var modalEl = document.createElement('div');
   modalEl.style.width = '28em';
-  modalEl.style.height = '32em';
+  modalEl.style.height = '28em';
   modalEl.style.margin = '100px auto';
   modalEl.style.backgroundColor = '#fff';
   
   modalEl.innerHTML = `<div class='mui-container-fluid' style='padding-top: 3em;'>` + `<div class='mui-row'>` + `<div class='mui-col-md-8 mui-col-md-offset-2'>` +
     `<form class='mui-form'>
   <legend>Sign Up</legend>
-  <div class='mui-textfield mui-textfield--float-label'>
-    <input type='name' name='mname' id='mname'>
-    <label for='mname'>Name</label>
-  </div>
-  <p id='passerr' style='color:red;'></p>
-
   <div class='mui-textfield mui-textfield--float-label'>
     <input type='text' name='muser' id='muser'>
     <label for='muser'>Email</label>
