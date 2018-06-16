@@ -257,7 +257,7 @@ function uploadFile(userRef) {
       //urlSnapshot is the link to the content just added to storage
       if (DEBUG) console.log(urlSnapshot); 
       document.querySelector('#uploadImg').src = urlSnapshot;
-      document.querySelector('#uploadImg').dataset.imgref = name;
+      document.querySelector('#uploadImg').dataset.imgref = urlSnapshot;
       //query.doc(`posts/${userRef.id}`).update({imageUrl:`${name}`});
     });
   }).catch((error) => {
@@ -315,7 +315,9 @@ function postMaker(prop){
       <p class = "mui-col-md-offset-1" style="font-size:75%">${currTime}</p>
       <br>
     </div>
+  <img src="${prop.imageUrl}">
   <p id="${prop.id}">${prop.postText}</p>
+  
   <br>
   <button class="mui-btn mui-btn--raised mui-btn--primary" id="editBtn" onclick="editTest('${prop.id}')">Edit</button>
   <button class="mui-btn mui-btn--raised mui-btn--primary" id="likeBtn-${prop.id}">Like</button>
