@@ -1,4 +1,4 @@
-var postModal = document.getElementById('postModal');
+ccccvar postModal = document.getElementById('postModal');
 var post = document.getElementById('post');
 postModal.addEventListener('click', activatePost);
 
