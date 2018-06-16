@@ -59,18 +59,35 @@ function addPost(userRef) {
  * @param {*} userRef ref to the user currently logged in
  * @param {*} postId ref to post being deleted
  */
-function deletePost(postId) {
+function deletePostFromDB(postId) {
   return new Promise((resolve,reject) => {
     let query = firestore.collection('posts').doc(postId);
     query.delete().then(
       () => { //success
       if(DEBUG) console.log('Post deleted!');
+      resolve(postId)
     },(e) => { //fail
       if(DEBUG) console.log('Error removing post: ', e);
+      resolve(false)
     });
   });
 }
 
+/**
+ * 
+ * @param {*} id 
+ */
+function deletePost(id){
+  deletePostFromDB(id).then((pid)=>{
+    if(pid){
+      console.log(pid)
+      console.log(document.querySelector(`div[data-pid="${id}"]`))
+      let dom=document.querySelector(`div[data-pid="${id}"]`)
+      console.log(dom)
+      dom.remove();
+    }
+  })
+}
 /**
  * Edit post on firestore
  * @param {*} postId ref to post being edited
@@ -278,6 +295,7 @@ function registerPageHandlers(userRef) {
   });
 }
 
+
 /**
  * Makes the homepage post html
  * @param {*} prop emulates react obj that renders a stream   
@@ -287,10 +305,10 @@ function postMaker(prop){
   const currTime = (prop.editedFlag)?`${timeago().format(prop.updateTime)} (edited)`:`${timeago().format(prop.createDate)}`;
   console.log("prop_id:", prop);
   return `<div class="mui-row">
-  <div class="mui-col-md-6 mui-col-md-offset-3 mui-col-xs-7 mui-col-xs-offset-3 mui-panel">
+  <div class="mui-col-md-6 mui-col-md-offset-3 mui-col-xs-7 mui-col-xs-offset-3 mui-panel" data-pid="${prop.id}" >
     <div>
       <img id="default" src="images/default-pic.png" width="35" height="35" style="float: left">
-      <button id="trashcanBtn" style="float: right" style="border-radius: 50%">
+      <button onclick="deletePost('${prop.id}')" id="trashcanBtn" style="float: right" style="border-radius: 50%">
         <img id="trashcan" src="images/trashcan.png" width="40" height="40">
       </button>
       <p class = "mui-col-md-offset-1">${prop.name}</p>
@@ -461,6 +479,6 @@ function deleteTest(userRef) {
   console.log('payload', payload);
 
   firestore.collection('posts').doc('test').set(payload.post).then(() => {
-      deletePost('test');
+      deletePostFromDB('test');
   });
 }

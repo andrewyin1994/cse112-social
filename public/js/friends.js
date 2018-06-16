@@ -163,9 +163,9 @@ class UserInfo {
 */
   constructor(userSnapshot) {
     /************* Don't forget to change createUserDOM() with changes to this ctor ****************/
-    // this.name = snapshot.data().name,
+    this.name = userSnapshot.data().name;
     this.uid = userSnapshot.id;
-    // this.avatarUrl:snapshot.avatarUrl
+    this.avatarUrl = userSnapshot.data().avatarUrl;
   }
 }
 
@@ -294,8 +294,8 @@ function createUserDOM(userInfo, following) {
         let d = document.createElement('div');
         d.innerHTML = `
       <div class="mui-panel mui--text-center user-tile" data-uid=${userInfo.uid}>
-        <div><img class="user-tile-avatar" src="images/default-pic.png"></div>
-        <div class="user-tile-name">${userInfo.uid}</div>
+        <div><img class="user-tile-avatar" src="${userInfo.avatarUrl}"></div>
+        <div class="user-tile-name">${userInfo.name}</div>
         <button class="user-tile-btn mui-btn mui-btn--flat mui-btn--danger" >${following
       ? 'UNFOLLOW'
       : 'FOLLOW'}</button>
