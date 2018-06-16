@@ -24,7 +24,7 @@ class Post {
       editedFlag: false,
       updateTime: new Date().getTime(),
       likedCnt:0,
-      name: `${userRef.name}`
+      name:""
     }
   }
 }
@@ -41,13 +41,16 @@ function addPost(userRef) {
   let payload = new Post(userRef, postText);
   
   const currImg = document.querySelector('#uploadImg').dataset.imgref;
-  if(currImg != "") payload.imageUrl = currImg;
+
+  if(currImg != "") payload.post.imageUrl = currImg;
 
   if (DEBUG) console.log("payload:", payload);
-
-  firestore.collection('posts').add(payload.post).then(() => {
-    mui.overlay('off', modalEl);
-    showPostTest();
+  firestore.doc(`users/${firebase.auth().currentUser.uid}`).get().then(e=>{
+     payload.post.name = e.data().name;
+     firestore.collection('posts').add(payload.post).then(() => {
+      mui.overlay('off', modalEl);
+      showPostTest();
+    });
   });
 };
 
@@ -282,7 +285,7 @@ function registerPageHandlers(userRef) {
  */
 function postMaker(prop){
   const currTime = (prop.editedFlag)?`${timeago().format(prop.updateTime)} (edited)`:`${timeago().format(prop.createDate)}`;
-  console.log("prop_id:", prop.id);
+  console.log("prop_id:", prop);
   return `<div class="mui-row">
   <div class="mui-col-md-6 mui-col-md-offset-3 mui-col-xs-7 mui-col-xs-offset-3 mui-panel">
     <div>
